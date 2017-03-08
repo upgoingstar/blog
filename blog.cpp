@@ -218,10 +218,10 @@ string get_nickname(){
 		error_message();
 
 		cout << "Username: ";
-		cin >> nickname;
+		getline(cin, nickname);
 
 		error = NICK_E;
-	}while(!User::valid_nickname(nickname));
+	}while(!User::valid_nickname(nickname) || users_Informations.count(nickname));
 	
 	error = NO_MSG;
 	
@@ -237,7 +237,7 @@ string get_password(){
 		error_message();
 
 		cout << "Password: ";
-		cin >> password;
+		getline(cin, password);
 
 		error = PASS_E;
 	}while(!User::valid_password(password));
@@ -256,7 +256,7 @@ string get_email(){
 		error_message();
 
 		cout << "Email: ";
-		cin >> email;
+		getline(cin, email);
 
 		error = MAIL_E;
 	}while(!User::valid_email(email));
@@ -299,15 +299,16 @@ void render_login_page(){
 		error_message();
 
 		cout << "Username: ";
-		cin >> nick;
+		getline(cin, nick);
 
 		cout << "Password: ";
-		cin >> password;
+		getline(cin, password);
 
 		cout << "1 - Login" << endl;
 		cout << "2 - Exit" << endl;
 		cin >> op;
-
+		getchar();
+		
 		error = N_USER;
 	}while(op == LOGIN && !users_Informations.count(nick) && !(users_Informations[nick]->password == password));
 	
@@ -329,7 +330,8 @@ void render_initial_page(){
 		error_message();
 
 		cin >> op;
-
+		getchar();
+		
 		switch(op){
 			case LOGIN:
 				render_login_page();
