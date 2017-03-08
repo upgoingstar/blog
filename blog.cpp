@@ -145,6 +145,10 @@ class Post{
 	}
 };
 
+//TODO: create a class to deal with db queries
+vector<User> registred_Users;
+map<string,User*> users_Informations; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME
+
 void get_enter(){
 	char a;
 	
@@ -176,9 +180,6 @@ void get_input(char* ch) {
   tcsetattr(STDIN_FILENO, TCSANOW, &oldt); /*reapply the old settings */
 }
 
-//TODO: create a class to deal with db queries
-vector<User> registred_Users;
-map<string,User*> users_Informations; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME
 
 void error_message(){
 	switch(error){
@@ -341,7 +342,7 @@ void render_initial_page(){
 				render_signup_page();
 				break;
 			case VISITOR:
-				User visitor;
+				//User visitor;
 				//render_blog(visitor);
 				break;
 			case EXIT:
@@ -353,14 +354,27 @@ void render_initial_page(){
 	}
 }
 
-// void set_db(){
-// 	if(db_exist()){
-// 		read_db();
-// 	}
-// 	else{
-// 		create_db();
-// 	}
-// }
+
+void get_users(FILE *fp){
+    int num_users;
+    
+}
+
+void read_db(FILE *fp){
+    get_users(fp);
+    //get_blogs();
+}
+
+void set_db(){
+    FILE *fp = fopen("users.txt", "r");
+    if(fp == NULL){
+        //create_db();
+        fclose(fp);
+        return;
+    }
+    read_db(fp);
+    fclose(fp);
+}
 
 int main(){
 	//set_db(); // le os arquivos
