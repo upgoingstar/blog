@@ -1,15 +1,32 @@
-//#include <iostream>
-//#include <string>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <termios.h>
+#include <unistd.h>
+#include <string>
+#include <vector>
+#include <map>
+// #include <bits/stdc++.h>
 using namespace std;
+
+// Colors
+#define KNRM  "\x1b[0m"
+#define KRED  "\x1b[31m"
+#define KGRN  "\x1b[32m"
+#define KYEL  "\x1b[33m"
+#define KBLU  "\x1b[34m"
+#define KMAG  "\x1b[35m"
+#define KCYN  "\x1b[36m"
+#define KWHT  "\x1b[37m"
+#define RESET "\x1b[0m"
 
 #define LOGIN   '1'
 #define SIGNUP  '2'
 #define VISITOR '3'
 #define EXIT    '4'
-#define PASS_E  4
-#define MAIL_E  3
+
+#define INV_OP  1
 #define NICK_E  2
+#define MAIL_E  3
+#define PASS_E  4
 
 #define NICKNAME_SIZE_LIMIT 20
 #define PASSWORD_SIZE 5
@@ -27,52 +44,61 @@ public:
 	string nickname;
 	string password;
 	string email;
-	
+
 	bool anonymous;
 
 	User(string u_nickname, string u_password, string u_email){
 		nickname = u_nickname;
 		password = u_password;
 		email = u_email;
+		anonymous = false;
 	}
-	
-	bool valid_nickname(string u_nickname){
+
+	User(){
+		anonymous = true;
+	}
+
+	static bool valid_nickname(string u_nickname){
 		if(u_nickname.size() > NICKNAME_SIZE_LIMIT){
 			return false;
 		}
-		
+
 		for(auto c : u_nickname){
 			if(!isalpha(c)){
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
-	bool valid_password(string u_password){
+
+	static bool valid_password(string u_password){
 		if(u_password.size() != PASSWORD_SIZE){
 			return false;
 		}
-		
+
 		map<char,int> repeat;
 
 		for(auto c : u_password){
-			
+
 			repeat[c]++;
 
 			if(repeat[c] > PASSWORD_REPETICION_LIMIT){
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
 
-	//TODO: do this in an efficient way
+
+	//TODO: redo this in an efficient way
 	//TODO: test later with a lot of cases
-	bool valid_email(string u_email){
+	// a@a.a -> passa
+	// @a.a  -> nao pode passar
+	// a@.a  -> nao pode passar
+	// a@a.  -> nao pode passar
+	static bool valid_email(string u_email){
 		char valid[3];
 		int i = 0;
 		valid[0] = '@';
@@ -88,6 +114,7 @@ public:
 		}
 		return true;
 	}
+
 	void anonymous_user(){
 		anonymous = true;
 	}
@@ -104,7 +131,7 @@ class Post{
 		author = u_author;
 		post = u_post;
 	}
-	
+
 	//TODO: find a way to count how many way a person already comment, a person can only comment 5 times
 	void add_comment(){}
 
@@ -126,79 +153,136 @@ class Post{
 	}
 };
 
+void get_input(int* ch) {
+  struct termios oldt;
+  struct termios newt;
+  tcgetattr(STDIN_FILENO, &oldt); /*store old settings */
+  newt = oldt; /* copy old settings to new settings */
+  newt.c_lflag &= ~(ICANON | ECHO); /* make one change to old settings in new settings */
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt); /*apply the new settings immediatly */
+  (*ch) = getchar(); /* standard getchar call */
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt); /*reapply the old settings */
+  (*ch) -= 48; /*return received char */
+}
+
+void get_input(char* ch) {
+  struct termios oldt;
+  struct termios newt;
+  tcgetattr(STDIN_FILENO, &oldt); /*store old settings */
+  newt = oldt; /* copy old settings to new settings */
+  newt.c_lflag &= ~(ICANON | ECHO); /* make one change to old settings in new settings */
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt); /*apply the new settings immediatly */
+  (*ch) = getchar(); /* standard getchar call */
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt); /*reapply the old settings */
+}
 
 vector<User> registred_Users;
-map<string,User*> users_Informations; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME 
+map<string,User*> users_Informations; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME
 
-//TODO: print this message red
+//TODO: essa prórpia função tornar error nulo
 void error_message(int error){
-	if(error == 1)
-		cout << "Invalid option\n";
-	else if(error == NICK_E)
-		cout << "The username must contain only letters and at most 20 characters\n";
-	else if(error == PASS_E)
-		cout << "The password must contain 5 characters whitout repetition\n";
-	else if(error == MAIL_E)
-		cout << "The e-mail must contain only letters in the format: paradinhas@paradinhas.paradnhas\n";
-
+	switch(error){
+		case INV_OP:
+			printf(KRED "Invalid option\n" RESET);
+			break;
+		case NICK_E:
+			printf(KRED "The username must contain only letters and at most 20 characters\n" RESET);
+			break;
+		case PASS_E:
+			printf(KRED "The password must contain 5 characters whitout repetition\n" RESET);
+			break;
+		case MAIL_E:
+			printf(KRED "The e-mail must contain only letters in the format: paradinhas@paradinhas.paradnhas\n" RESET);
+			break;
+	}
 }
 
 void render_start_page(){
 	system(CLEAR);
 	cout << "Escolha uma opcao bacana\n";
-	cout << "1 - Sing in.\n";
-	cout << "2 - Sing up.\n";
+	cout << "1 - Sign In.\n";
+	cout << "2 - Sign Up.\n";
 	cout << "3 - Visitant mode.\n";
-	cout << "4 - EXIT.\n";
+	cout << "4 - Exit.\n";
 }
 
-void render_signup_page(){
-	system(CLEAR);
+//TODO: refatorar
+string get_nickname(){
+	string nickname;
 
-	string nick, password, email;
-	User new_user(nick,password,email);
+	system(CLEAR);
 
 	cout << "Username: ";
-	cin >> nick;
-	while(!new_user.valid_nickname(nick)){
+	cin >> nickname;
+
+	while(!User::valid_nickname(nickname)){
 		system(CLEAR);
+
 		error_message(NICK_E);
+
 		cout << "Username: ";
-		cin >> nick;
+
+		cin >> nickname;
 	}
 
+	return nickname;
+}
+//TODO: refatorar
+string get_password(){
 	system(CLEAR);
+
+	string password;
 
 	cout << "Password: ";
 	cin >> password;
-	while(!new_user.valid_password(password)){
+
+	while(!User::valid_password(password)){
 		system(CLEAR);
 		error_message(PASS_E);
 		cout << "Password: ";
 		cin >> password;
 	}
 
+	return password;
+}
+//TODO: refatorar
+string get_email(){
 	system(CLEAR);
+
+	string email;
 
 	cout << "E-mail: ";
 	cin >> email;
-	while(!new_user.valid_email(email)){
+	while(!User::valid_email(email)){
 		system(CLEAR);
 		error_message(MAIL_E);
 		cout << "E-mail: ";
 		cin >> email;
 	}
 
+	return email;
+}
+//TODO: refatorar
+void successful_sign_up_message(string nickname){
 	system(CLEAR);
 
-	User valid_user(nick,password,email);
-	registred_Users.push_back(valid_user);
-	users_Informations.insert(make_pair(nick,&registred_Users[registred_Users.size()-1]));
-	cout << "Congratulations " << valid_user.nickname << "! You are now a member of the blog BLOG!\n";
+	cout << "Congratulations " << nickname << "! You are now a member of the blog BLOG!\n";
 	cout << "Press ENTER to return to the initial menu and Sing In\n";
-	getchar();
-	getchar();
 
+	getchar();
+	getchar();
+}
+
+void render_signup_page(){
+	string nickname = get_nickname();
+	string password = get_password();
+	string email = get_email();
+
+	User valid_user(nickname, password, email);
+	registred_Users.push_back(valid_user);
+	users_Informations.insert(make_pair(nickname,&registred_Users[registred_Users.size()-1]));
+
+	successful_sign_up_message(nickname);
 }
 
 void render_login_page(){
@@ -219,7 +303,7 @@ void render_login_page(){
 		cout << "Username: ";
 		cin >> nick;
 	}
-	
+
 	system(CLEAR);
 
 	cout << "Password: ";
@@ -236,37 +320,42 @@ void render_login_page(){
 	}
 
 	User current_user = *users_Informations[nick];
-	//render_initial_page(current_user);
+	//render_blog(current_user);
 
 }
 
-void initial_menu(){
+void render_initial_page(){
 	int error = 0;
+	bool not_leave = true;
 
-	while(true){
+	while(not_leave){
 		char op;
-		
+
 		render_start_page();
 		error_message(error);
-		error = 0;
-		cin >> op;
-		//get_input(op);
 
-		if(op == LOGIN){
-			render_login_page();
+		error = 0;
+
+		get_input(&op);
+
+		switch(op){
+			case LOGIN:
+				render_login_page();
+				break;
+			case SIGNUP:
+				render_signup_page();
+				break;
+			case VISITOR:
+				User visitor;
+				//render_blog(visitor);
+				break;
+			case EXIT:
+				not_leave = false;
+				break;
+			default:
+				error = 1;
+				break;
 		}
-		else if(op == SIGNUP){
-			render_signup_page();
-		}
-		else if(op == VISITOR){
-			User current_user("0","9","1");
-			current_user.anonymous_user();
-			//render_initial_page(current_user);
-		}
-		else if(op ==  EXIT)
-			break;
-		else
-			error = 1;
 	}
 }
 
@@ -281,5 +370,5 @@ void initial_menu(){
 
 int main(){
 	//set_db(); // le os arquivos
-	initial_menu();
+	render_initial_page();
 }
