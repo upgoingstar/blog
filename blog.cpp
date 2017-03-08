@@ -201,6 +201,45 @@ void render_signup_page(){
 
 }
 
+void render_login_page(){
+	string nick, password;
+	bool retry;
+
+	system(CLEAR);
+
+	cout << "Username: ";
+	cin >> nick;
+	while(!users_Informations.count(nick)){
+		cout << "Invalid Username!\n";
+		cout << "0 - EXIT\n";
+		cout << "1 - Try again\n";
+		cin >> retry;
+		if(!retry) return;
+		system(CLEAR);
+		cout << "Username: ";
+		cin >> nick;
+	}
+	
+	system(CLEAR);
+
+	cout << "Password: ";
+	cin >> password;
+	while(!(users_Informations[nick]->password == password)){
+		cout << "Invalid Password!\n";
+		cout << "0 - EXIT\n";
+		cout << "1 - Try again\n";
+		cin >> retry;
+		if(!retry) return;
+		system(CLEAR);
+		cout << "Password: ";
+		cin >> password;
+	}
+
+	User current_user = *users_Informations[nick];
+	//render_initial_page(current_user);
+
+}
+
 void initial_menu(){
 	int error = 0;
 
@@ -214,7 +253,7 @@ void initial_menu(){
 		//get_input(op);
 
 		if(op == LOGIN){
-			//render_login_page();
+			render_login_page();
 		}
 		else if(op == SIGNUP){
 			render_signup_page();
