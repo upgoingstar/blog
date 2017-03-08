@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <fstream>
 //#include <bits/stdc++.h>
 using namespace std;
 
@@ -110,6 +111,7 @@ public:
 
 		return true;
 	}
+	
 };
 
 //TODO: add comment structure
@@ -354,29 +356,47 @@ void render_initial_page(){
 	}
 }
 
+void create_db(){
+    ofstream new_file("users.txt");
+    new_file << "0\n";
+    new_file.close();
+}
 
-void get_users(FILE *fp){
-    int num_users;
+void set_users_db(){
+    ifstream users_file("users.txt");    
     
-}
-
-void read_db(FILE *fp){
-    get_users(fp);
-    //get_blogs();
-}
-
-void set_db(){
-    FILE *fp = fopen("users.txt", "r");
-    if(fp == NULL){
-        //create_db();
-        fclose(fp);
+    if(!users_file.is_open()){
+        create_db();
         return;
     }
-    read_db(fp);
-    fclose(fp);
+    
+    string user_info;
+    
+    while(getline(users_file, user_info)){
+        string nick;
+        string password;
+        string email;
+        
+        int i = 0;
+    
+        for(; user_info[i] != '|'; i++){
+            nick += user_info[i];
+        }
+        
+        for(i++; user_info[i] != '|'; i++){
+            password += user_info[i];
+        }
+        
+        for(i++; i < (int)user_info.size(); i++){
+            email += user_info[i];
+        }
+        
+        registred_Users.push_back(User(nick, password, email));
+        users_Informations.insert(make_pair(nick,&registred_Users[registred_Users.size()-1]));
+    }
 }
 
 int main(){
-	//set_db(); // le os arquivos
+	set_users_db(); // le os arquivos
 	render_initial_page();
 }
