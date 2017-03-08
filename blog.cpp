@@ -126,7 +126,9 @@ class Post{
 	}
 };
 
-map<string,User> users_informations; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME 
+
+vector<User> registred_Users;
+map<string,User*> users_Informations; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME 
 
 //TODO: print this message red
 void error_message(int error){
@@ -190,7 +192,8 @@ void render_signup_page(){
 	system(CLEAR);
 
 	User valid_user(nick,password,email);
-	//users_informations[nick] = valid_user;
+	registred_Users.push_back(valid_user);
+	users_Informations.insert(make_pair(nick,&registred_Users[registred_Users.size()-1]));
 	cout << "Congratulations " << valid_user.nickname << "! You are now a member of the blog BLOG!\n";
 	cout << "Press ENTER to return to the initial menu and Sing In\n";
 	getchar();
