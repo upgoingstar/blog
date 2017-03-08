@@ -310,7 +310,8 @@ void render_login_page(){
 		getchar();
 		
 		error = N_USER;
-	}while(op == LOGIN && !users_Informations.count(nick) && !(users_Informations[nick]->password == password));
+		if(op == LOGIN && !users_Informations.count(nick)) continue;
+	}while(op == LOGIN && users_Informations[nick]->password != password);
 	
 	error = NO_MSG;
 
