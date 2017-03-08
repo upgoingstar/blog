@@ -112,6 +112,12 @@ public:
 		return true;
 	}
 	
+	vector<string> blogs;
+    
+    void add_blog(string new_blog){
+        blogs.push_back(new_blog);
+    }
+	
 };
 
 //TODO: add comment structure
@@ -290,7 +296,7 @@ void render_signup_page(){
 	successful_sign_up_message(nickname);
 }
 
-void render_login_page(){
+void render_login_page(){ //TODO: Arrumar caso da string vazia
 	char op;
 	
 	string nick;
@@ -387,13 +393,26 @@ void set_users_db(){
             password += user_info[i];
         }
         
-        for(i++; i < (int)user_info.size(); i++){
+        for(i++; user_info[i] != '|'; i++){
             email += user_info[i];
         }
         
-        registred_Users.push_back(User(nick, password, email));
+        User new_user(nick,password,email);
+                
+        while(i < (int)user_info.size() - 1){
+            string blog;
+            
+            for(i++; user_info[i] != '|'; i++){
+                blog += user_info[i];
+            }
+            
+            new_user.add_blog(blog);
+        }
+        
+        registred_Users.push_back(new_user);
         users_Informations.insert(make_pair(nick,&registred_Users[registred_Users.size()-1]));
     }
+
 }
 
 int main(){
