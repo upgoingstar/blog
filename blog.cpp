@@ -135,7 +135,7 @@ void error_message(int error){
 	if(error == 1)
 		cout << "Invalid option\n";
 	else if(error == NICK_E)
-		cout << "The username must contain only letters and at most 20 characters\n";
+		cout << "The username must be unic, contain only letters and at most 20 characters\n";
 	else if(error == PASS_E)
 		cout << "The password must contain 5 characters whitout repetition\n";
 	else if(error == MAIL_E)
@@ -159,34 +159,34 @@ void render_signup_page(){
 	User new_user(nick,password,email);
 
 	cout << "Username: ";
-	cin >> nick;
-	while(!new_user.valid_nickname(nick)){
+	getline(cin,nick);
+	while(!new_user.valid_nickname(nick) || users_Informations.count(nick)){
 		system(CLEAR);
 		error_message(NICK_E);
 		cout << "Username: ";
-		cin >> nick;
+		getline(cin,nick);
 	}
 
 	system(CLEAR);
 
 	cout << "Password: ";
-	cin >> password;
+	getline(cin,password);
 	while(!new_user.valid_password(password)){
 		system(CLEAR);
 		error_message(PASS_E);
 		cout << "Password: ";
-		cin >> password;
+		getline(cin,password);
 	}
 
 	system(CLEAR);
 
 	cout << "E-mail: ";
-	cin >> email;
+	getline(cin,email);
 	while(!new_user.valid_email(email)){
 		system(CLEAR);
 		error_message(MAIL_E);
 		cout << "E-mail: ";
-		cin >> email;
+		getline(cin,email);
 	}
 
 	system(CLEAR);
@@ -196,7 +196,6 @@ void render_signup_page(){
 	users_Informations.insert(make_pair(nick,&registred_Users[registred_Users.size()-1]));
 	cout << "Congratulations " << valid_user.nickname << "! You are now a member of the blog BLOG!\n";
 	cout << "Press ENTER to return to the initial menu and Sing In\n";
-	getchar();
 	getchar();
 
 }
@@ -250,6 +249,7 @@ void initial_menu(){
 		error_message(error);
 		error = 0;
 		cin >> op;
+		getchar();
 		//get_input(op);
 
 		if(op == LOGIN){
@@ -260,6 +260,7 @@ void initial_menu(){
 		}
 		else if(op == VISITOR){
 			User current_user("0","9","1");
+		getchar();
 			current_user.anonymous_user();
 			//render_initial_page(current_user);
 		}
