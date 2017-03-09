@@ -7,7 +7,7 @@
 #include <vector>
 #include <map>
 #include <fstream>
-//#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 using namespace std;
 
 // Colors
@@ -46,7 +46,7 @@ using namespace std;
 int error;
 
 class User{
-public:
+	public:
 	string nickname;
 	string password;
 	string email;
@@ -60,7 +60,9 @@ public:
 		anonymous = false;
 	}
 
-	User(){ anonymous = true; };
+	User(){ 
+		anonymous = true;
+	}
 
 	static bool valid_nickname(string u_nickname){
 		if(u_nickname.size() > NICKNAME_SIZE_LIMIT){
@@ -155,7 +157,7 @@ class Post{
 
 //TODO: create a class to deal with db queries
 vector<User> registred_Users;
-map<string,User*> users_Informations; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME
+map<string,int> users_id; //OBTER TODOS OS DADOS DO USUARIO APARTIR DO NOME
 
 void get_enter(){
 	char a;
@@ -174,7 +176,7 @@ void get_input(int* ch) {
   tcsetattr(STDIN_FILENO, TCSANOW, &newt); /*apply the new settings immediatly */
   (*ch) = getchar(); /* standard getchar call */
   tcsetattr(STDIN_FILENO, TCSANOW, &oldt); /*reapply the old settings */
-  (*ch) -= 48; /*return received char */
+  (*ch) -= 48; return received char 
 }
 
 void get_input(char* ch) {
@@ -230,7 +232,7 @@ string get_nickname(){
 		getline(cin, nickname);
 
 		error = NICK_E;
-	}while(!User::valid_nickname(nickname) || users_Informations.count(nickname));
+	}while(!User::valid_nickname(nickname) || users_id.count(nickname));
 	
 	error = NO_MSG;
 	
@@ -291,12 +293,16 @@ void render_signup_page(){
 
 	User valid_user(nickname, password, email);
 	registred_Users.push_back(valid_user);
-	users_Informations.insert(make_pair(nickname,&registred_Users[registred_Users.size()-1]));
+	users_id.insert(make_pair(nickname,registred_Users.size()-1));
 
 	successful_sign_up_message(nickname);
 }
 
-void render_login_page(){ //TODO: Arrumar caso da string vazia
+void render_blog(User current_user){
+
+}
+
+void render_login_page(){
 	char op;
 	
 	string nick;
@@ -307,25 +313,30 @@ void render_login_page(){ //TODO: Arrumar caso da string vazia
 		
 		error_message();
 
+		cout << "1 - Login" << endl;
+		cout << "2 - Exit" << endl;
+		cin >> op;
+		getchar();
+
+		if(op == '2') return;
+		else if(op != LOGIN){
+			error = INV_OP;
+			continue;
+		}
+		
 		cout << "Username: ";
 		getline(cin, nick);
 
 		cout << "Password: ";
 		getline(cin, password);
 
-		cout << "1 - Login" << endl;
-		cout << "2 - Exit" << endl;
-		cin >> op;
-		getchar();
-		
+
 		error = N_USER;
-		if(op == LOGIN && !users_Informations.count(nick)) continue;
-	}while(op == LOGIN && users_Informations[nick]->password != password);
+	}while(!users_id.count(nick) ? 1 : registred_Users[users_id[nick]].password != password);
 	
 	error = NO_MSG;
 
-	User current_user = *users_Informations[nick];
-	//render_blog(current_user);
+	render_blog(registred_Users[users_id[nick]]);
 }
 
 void render_initial_page(){
@@ -338,7 +349,6 @@ void render_initial_page(){
 
 		render_start_page();
 		error_message();
-
 		cin >> op;
 		getchar();
 		
@@ -349,10 +359,10 @@ void render_initial_page(){
 			case SIGNUP:
 				render_signup_page();
 				break;
-			case VISITOR:
-				//User visitor;
-				//render_blog(visitor);
-				break;
+			case VISITOR:{
+				User visitor;
+				render_blog(visitor);
+			}break;
 			case EXIT:
 				not_leave = false;
 				break;
@@ -363,59 +373,67 @@ void render_initial_page(){
 }
 
 void create_db(){
+	remove("users.txt");
     ofstream new_file("users.txt");
-    new_file << "0\n";
+    for(int i = 0; i < (int)registred_Users.size(); i++){
+    	new_file << registred_Users[i].nickname + "|";
+    	new_file << registred_Users[i].password + "|";
+    	new_file << registred_Users[i].email + "|";
+    	for(int j = 0; j < (int)registred_Users[i].blogs.size(); j++)
+    		new_file << registred_Users[i].blogs[j] + "|";
+    	new_file << '\n';
+    }
     new_file.close();
 }
 
 void set_users_db(){
     ifstream users_file("users.txt");    
     
-    if(!users_file.is_open()){
-        create_db();
-        return;
-    }
-    
-    string user_info;
-    
-    while(getline(users_file, user_info)){
-        string nick;
-        string password;
-        string email;
-        
-        int i = 0;
-    
-        for(; user_info[i] != '|'; i++){
-            nick += user_info[i];
-        }
-        
-        for(i++; user_info[i] != '|'; i++){
-            password += user_info[i];
-        }
-        
-        for(i++; user_info[i] != '|'; i++){
-            email += user_info[i];
-        }
-        
-        User new_user(nick,password,email);
-                
-        while(i < (int)user_info.size() - 1){
-            string blog;
-            
-            for(i++; user_info[i] != '|'; i++){
-                blog += user_info[i];
-            }
-            
-            new_user.add_blog(blog);
-        }
-        
-        registred_Users.push_back(new_user);
-        users_Informations.insert(make_pair(nick,&registred_Users[registred_Users.size()-1]));
-    }
+    if(users_file.is_open()){
+	    
+	    string user_info;
+	    
+	    while(getline(users_file, user_info)){
+	        string nick;
+	        string password;
+	        string email;
+	        
+	        int i = 0;
+	    
+	        for(; user_info[i] != '|'; i++){
+	            nick += user_info[i];
+	        }
+	        
+	        for(i++; user_info[i] != '|'; i++){
+	            password += user_info[i];
+	        }
+	        
+	        for(i++; user_info[i] != '|'; i++){
+	            email += user_info[i];
+	        }
+	        
+	        User new_user(nick,password,email);
+	                
+	        while(i < (int)user_info.size() - 1){
+	            string blog;
+	            
+	            for(i++; user_info[i] != '|'; i++){
+	                blog += user_info[i];
+	            }
+	            
+	            new_user.add_blog(blog);
+	        }
+	        
+	        registred_Users.push_back(new_user);
+	        users_id[nick] = registred_Users.size()-1;
+	    }
 
+	    users_file.close();
+	}
 }
 
 int main(){
 	set_users_db(); // le os arquivos
 	render_initial_page();
+	create_db();
 }
