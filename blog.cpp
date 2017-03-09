@@ -11,10 +11,6 @@ using namespace std;
 #define MAIL_E  3
 #define NICK_E  2
 
-#define NICKNAME_SIZE_LIMIT 20
-#define PASSWORD_SIZE 5
-#define PASSWORD_REPETICION_LIMIT 1
-
 #ifdef _WIN32
 #define CLEAR "cls"
 #else
@@ -24,30 +20,16 @@ using namespace std;
 
 class User{
 public:
-	string nickname;
-	string password;
-	string email;
+	Nick nickname;
+	Keys password;
+	Mail email;
 	
 	bool anonymous;
 
 	User(string u_nickname, string u_password, string u_email){
-		nickname = u_nickname;
-		password = u_password;
-		email = u_email;
-	}
-	
-	bool valid_nickname(string u_nickname){
-		if(u_nickname.size() > NICKNAME_SIZE_LIMIT){
-			return false;
-		}
-		
-		for(auto c : u_nickname){
-			if(!isalpha(c)){
-				return false;
-			}
-		}
-		
-		return true;
+		nickname(u_nickname);
+		password(u_password);
+		email(u_email);
 	}
 	
 	bool valid_password(string u_password){
@@ -69,9 +51,6 @@ public:
 		return true;
 	}
 	
-
-	//TODO: do this in an efficient way
-	//TODO: test later with a lot of cases
 	bool valid_email(string u_email){
 		char valid[3];
 		int i = 0;
