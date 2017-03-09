@@ -176,7 +176,7 @@ void get_input(int* ch) {
   tcsetattr(STDIN_FILENO, TCSANOW, &newt); /*apply the new settings immediatly */
   (*ch) = getchar(); /* standard getchar call */
   tcsetattr(STDIN_FILENO, TCSANOW, &oldt); /*reapply the old settings */
-  (*ch) -= 48; return received char 
+  (*ch) -= 48; /*return received char */
 }
 
 void get_input(char* ch) {
