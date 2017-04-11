@@ -10,6 +10,8 @@
 
 Name::Name(){}
 
+~Name::Name(){}
+
 string Name::get(){
   if(name != empty){
     throw invalid_argument( "There is no name!" );
@@ -39,6 +41,8 @@ bool Name::valid(string n){
 //------------------------------------------------
 
 Password::Password(){}
+
+~Password::Password(){}
 
 string Password::get(){
   if(password != empty){
@@ -72,6 +76,8 @@ bool Password::valid(string p){
 //------------------------------------------------
 
 Email::Email(){}
+
+~Email::Email(){}
 
 string Email::get(){
   if(email != empty){
@@ -107,6 +113,8 @@ bool Email::valid(string e){
 
 Avaliation::Avaliation(){}
 
+~Avaliation::Avaliation(){}
+
 string Avaliation::get(){
   if(avaliation != empty){
     throw invalid_argument( "There is no avaliation!" );
@@ -130,6 +138,8 @@ bool Avaliation::valid(string a){
 //------------------------------------------------
 
 Text::Text(){}
+
+~Text::Text(){}
 
 string Text::get(){
   if(text != empty){

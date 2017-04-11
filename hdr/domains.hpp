@@ -18,11 +18,12 @@ using namespace std;
 // Abstract Class Domain
 //------------------------------------------------
 
+//TODO: como ficaria para colocar o throw nesse caso
 class Domain {
 public:
-  virtual string get(){} = 0;
-  virtual void set(string){} = 0;
-  virtual bool valid(string){} = 0;
+  virtual string get() = 0;
+  virtual void set(string) = 0;
+  virtual bool valid(string) throw(invalid_argument) = 0;
 }
 
 //------------------------------------------------
@@ -35,10 +36,11 @@ private:
   string name;
 
 public:
-  Name(){};
-  virtual string get(){};
-  virtual void set(string){};
-  virtual bool valid(string){};
+  Name();
+  ~Name();
+  virtual string get();
+  virtual void set(string);
+  virtual bool valid(string);
 };
 
 //------------------------------------------------
@@ -52,10 +54,11 @@ private:
   string password;
 
 public:
-  Password(){};
-  virtual string get(){};
-  virtual void set(string){};
-  virtual bool valid(string){};
+  Password();
+  ~Password();
+  virtual string get();
+  virtual void set(string);
+  virtual bool valid(string);
 };
 
 //------------------------------------------------
@@ -67,10 +70,11 @@ private:
   string email;
 
 public:
-  Email(){};
-  virtual string get(){};
-  virtual void set(string){};
-  virtual bool valid(string){};
+  Email();
+  ~Email();
+  virtual string get();
+  virtual void set(string);
+  virtual bool valid(string);
 };
 
 //------------------------------------------------
@@ -82,10 +86,11 @@ private:
   string avaliation;
 
 public:
-  Avaliation(){};
-  virtual string get(){};
-  virtual void set(string){};
-  virtual bool valid(string){};
+  Avaliation();
+  ~Avaliation();
+  virtual string get();
+  virtual void set(string);
+  virtual bool valid(string);
 };
 
 //------------------------------------------------
@@ -97,10 +102,11 @@ private:
   string text;
 
 public:
-  Text(){};
-  virtual string get(){};
-  virtual void set(string){};
-  virtual bool valid(string){};
+  Text();
+  ~Text();
+  virtual string get();
+  virtual void set(string);
+  virtual bool valid(string);
 };
 
 #endif

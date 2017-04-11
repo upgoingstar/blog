@@ -27,11 +27,12 @@ private:
 
 public:
   // set anonymous to true
-  void set();
+  User(){};
+	~User(){};
   // set anonymous to false
 	void set(Name, Password, Email){};
-  Name getName(){};
-  bool checkUser(Email, Password){};
+  Name get_name(){};
+  bool check_user(Email, Password){};
 };
 
 //------------------------------------------------
@@ -41,45 +42,47 @@ public:
 class Post {
 private:
   Name author;
-	Text postContent;
+	Text content;
   vector<Avaliation> avaliations;
   vector<Comment> comments;
 
 public:
   Post(){};
+	~Post(){};
   Post get(){};
-  Name getAuthor(){};
-  Text getPostContent(){};
-  Avaliation getFinalAvaliation(){};
-  vector<Comment> getComments();
+  Name get_author(){};
+  Text get_content(){};
+  Avaliation get_final_avaliation(){};
+  vector<Comment> get_comments();
   // Name of the user who is adding a post
   void set(Name, Text){};
   // Name of the user who is adding a avaliation
-  void addAvaliation(Name, Avaliation){};
+  void add_avaliation(Avaliation){};
   // Name of the user who is adding a comment
-  void addComment(Name, Comment){};
+  void add_comment(Comment){};
 };
 
 //------------------------------------------------
 // Class Comment
 //------------------------------------------------
 
+//TODO: herdar Post
 class Comment {
 private:
   Name author;
-	Text commentContent;
+	Text content;
   vector<Avaliation> avaliations;
 
 public:
   Comment(){};
-  Comment get(){};
-  Name getAuthor(){};
-  Text getPostContent(){};
-  Avaliation getFinalAvaliation(){};
+	~Comment(){};
+  Name Post::get_author(){};
+  Text Post::get_content(){};
+  Avaliation Post::get_final_avaliation(){};
   // Name of the user who is adding a post
-  void set(Name, Text){};
+  void Post::set(Name, Text){};
   // Name of the user who is adding a avaliation
-  void addAvaliation(Name, Avaliation){};
+  void Post::add_avaliation(Avaliation){};
 };
 
 #endif
