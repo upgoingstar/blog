@@ -9,9 +9,7 @@
 // INCLUDES
 //------------------------------------------------
 
-#include <iostream>
-#include <string>
-#include <map>
+#include <bits/stdc++.h>
 using namespace std;
 
 //------------------------------------------------
@@ -20,11 +18,12 @@ using namespace std;
 
 //TODO: como ficaria para colocar o throw nesse caso
 class Domain {
+private:
+  virtual void valid(string) throw(invalid_argument) = 0;
 public:
   virtual string get() = 0;
   virtual void set(string) = 0;
-  virtual bool valid(string) throw(invalid_argument) = 0;
-}
+};
 
 //------------------------------------------------
 // Class Name
@@ -34,13 +33,13 @@ class Name : public Domain {
 private:
   const int size_limit = 20;
   string name;
+  void valid(string) throw(invalid_argument);
 
 public:
   Name();
   ~Name();
-  virtual string get();
-  virtual void set(string);
-  virtual bool valid(string);
+  string get();
+  void set(string);
 };
 
 //------------------------------------------------
@@ -52,13 +51,13 @@ private:
   const int allowed_size = 5;
   const int repetition_limit = 1;
   string password;
+  void valid(string) throw(invalid_argument);
 
 public:
   Password();
   ~Password();
-  virtual string get();
-  virtual void set(string);
-  virtual bool valid(string);
+  string get();
+  void set(string);
 };
 
 //------------------------------------------------
@@ -68,13 +67,13 @@ public:
 class Email : public Domain {
 private:
   string email;
+  void valid(string) throw(invalid_argument);
 
 public:
   Email();
   ~Email();
-  virtual string get();
-  virtual void set(string);
-  virtual bool valid(string);
+  string get();
+  void set(string);
 };
 
 //------------------------------------------------
@@ -84,13 +83,13 @@ public:
 class Avaliation : public Domain {
 private:
   string avaliation;
+  void valid(string) throw(invalid_argument);
 
 public:
   Avaliation();
   ~Avaliation();
-  virtual string get();
-  virtual void set(string);
-  virtual bool valid(string);
+  string get();
+  void set(string);
 };
 
 //------------------------------------------------
@@ -100,13 +99,13 @@ public:
 class Text : public Domain {
 private:
   string text;
+  void valid(string) throw(invalid_argument);
 
 public:
   Text();
   ~Text();
-  virtual string get();
-  virtual void set(string);
-  virtual bool valid(string);
+  string get();
+  void set(string);
 };
 
 #endif
