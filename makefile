@@ -1,25 +1,31 @@
 IDIR = hdr
 DIR = src
+ODIR = src
 CC = g++
 CPPFLAGS = -std=c++11 -O2 -Wall -I$(IDIR)
-
-ODIR=src
 
 LIBS=-lm
 
 _DEPS = domains.hpp entities.hpp
 DEPS = $(patsubst %,$(DIR)/%,$(_DEPS))
 
-_OBJ = entities.o domains.o
+_OBJ = main.o domains.o entities.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
+# TODO: make this echo works
 $(ODIR)/%.o: $*.cpp $(DEPS)
-	$(CC) -c -o $@ $< $(CPPFLAGS)
+	@echo Compilando arquivo objeto: $@
+	@$(CC) -c -o $@ $< $(CPPFLAGS)
 
 blog: $(OBJ)
-	$(CC) -o $@ $^ $(CPPFLAGS) $(LIBS)
+	@echo Compilando todos os arquivos objetos
+	@$(CC) -o $@ $^ $(CPPFLAGS) $(LIBS)
+
+all: blog clean
 
 .PHONY: clean
 
 clean:
-	rm $(ODIR)/*.o *~ core $(INCDIR)/*~
+	@echo Cleaning directory...
+	@rm $(ODIR)/*.o
+	@echo Directory cleaned!
