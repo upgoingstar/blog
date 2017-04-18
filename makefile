@@ -18,7 +18,7 @@ $(ODIR)/%.o: $*.cpp $(DEPS)
 	@$(CC) -c -o $@ $< $(CPPFLAGS)
 
 blog: $(OBJ)
-	@echo Compilando todos os arquivos objetos
+	@echo Compilando todos os arquivos objetos...
 	@$(CC) -o $@ $^ $(CPPFLAGS) $(LIBS)
 
 all: blog clean
@@ -28,4 +28,3 @@ all: blog clean
 clean:
 	@echo Cleaning directory...
 	@rm $(ODIR)/*.o
-	@echo Directory cleaned!
