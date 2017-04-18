@@ -4,3 +4,6 @@
 # Ignore compilation
 a.out
 a.out.dSYM
+
+# Ignore objects
+*.o
