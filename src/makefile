@@ -1,19 +1,18 @@
-IDIR = hdr
-DIR = src
-ODIR = src
+IDIR = ../hdr
+DIR = ../src
+ODIR = obj
 CC = g++
 CPPFLAGS = -std=c++11 -O2 -Wall -I$(IDIR)
 
 LIBS=-lm
 
 _DEPS = domains.hpp entities.hpp
-DEPS = $(patsubst %,$(DIR)/%,$(_DEPS))
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = main.o domains.o entities.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-# TODO: make this echo works
-$(ODIR)/%.o: $*.cpp $(DEPS)
+$(ODIR)/%.o: %.cpp $(DEPS)
 	@echo Compilando arquivo objeto: $@
 	@$(CC) -c -o $@ $< $(CPPFLAGS)
 
