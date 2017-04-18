@@ -25,62 +25,62 @@ private:
 
 public:
   // set anonymous to true
-  User(){};
-	~User(){};
+  User();
+	~User();
   // set anonymous to false
-	void set(Name, Password, Email){};
-  Name get_name(){};
-  bool check_user(Email, Password){};
+	void set(Name, Password, Email);
+  Name get_name();
+  bool check_user(Email, Password);
 };
 
 //------------------------------------------------
-// Class Post
+// Class Content
 //------------------------------------------------
 
-class Post {
-private:
-  Name author;
+class Content {
+protected:
+	Name author;
 	Text content;
-  vector<Avaliation> avaliations;
-  vector<Comment> comments;
-
+	vector<Avaliation> avaliations;
 public:
-  Post(){};
-	~Post(){};
-  Post get(){};
-  Name get_author(){};
-  Text get_content(){};
-  Avaliation get_final_avaliation(){};
-  vector<Comment> get_comments();
-  // Name of the user who is adding a post
-  void set(Name, Text){};
+	Name get_author();
+  Text get_content();
+	Avaliation get_avaliation();
+	// Name of the user who is adding a post
+  void set(Name, Text);
   // Name of the user who is adding a avaliation
-  void add_avaliation(Avaliation){};
-  // Name of the user who is adding a comment
-  void add_comment(Comment){};
+  void add_avaliation(Avaliation);
 };
 
 //------------------------------------------------
 // Class Comment
 //------------------------------------------------
 
-//TODO: herdar Post
-class Comment {
+class Comment : public Content {
 private:
-  Name author;
-	Text content;
-  vector<Avaliation> avaliations;
+	// how much comments each user did
+	map<Name, int> authorCnt;
 
 public:
-  Comment(){};
-	~Comment(){};
-  Name Post::get_author(){};
-  Text Post::get_content(){};
-  Avaliation Post::get_final_avaliation(){};
-  // Name of the user who is adding a post
-  void Post::set(Name, Text){};
-  // Name of the user who is adding a avaliation
-  void Post::add_avaliation(Avaliation){};
+  Comment();
+	~Comment();
 };
+
+//------------------------------------------------
+// Class Post
+//------------------------------------------------
+
+class Post : public Content {
+private:
+  vector<Comment> comments;
+
+public:
+  Post();
+	~Post();
+  vector<Comment> get_comments();
+  // Name of the user who is adding a comment
+  void add_comment(Comment);
+};
+
 
 #endif

@@ -15,14 +15,6 @@
 #define KWHT  "\x1b[37m"
 #define RESET "\x1b[0m"
 
-// Error code
-#define NO_MSG  0
-#define INV_OP  1
-#define NICK_E  2
-#define MAIL_E  3
-#define PASS_E  4
-#define N_USER  5
-
 // Clean Screen Multiplataform Support
 #ifdef _WIN32
 #define CLEAR "cls"

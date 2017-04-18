@@ -31,49 +31,41 @@ bool check_user(Email e, Password p){
 };
 
 //------------------------------------------------
-// Method Implementation of Class Post
+// Method Implementation of Class Content
 //------------------------------------------------
 
-Post::Post(){}
+Content::Content(){}
 
-~Post::Post(){}
+~Content::Content(){}
 
-void Post::set(Name n, Text t){
-  author = n;
-  content = t;
+void Content::set(Name n, Text t){
+  this->author = n;
+  this->content = t;
 }
 
-void Post::add_avaliation(Avaliation a){
-  avaliations.push_back(a);
+void Content::add_avaliation(Avaliation a){
+  this->avaliations.push_back(a);
 }
 
-void Post::add_comment(Comment c){
-  comments.push_back(c);
+Name Content::get_author(){
+  return this->author;
 }
 
-Name Post::get_author(){
-  return author;
+Text Content::get_content(){
+  return this->content;
 }
 
-Text Post::get_content(){
-  return content;
-}
-
-Avaliation Post::get_final_avaliation(){
+Avaliation Content::get_final_avaliation(){
   int total_sum = '0';
-  int total_size = avaliations.size();
+  int total_size = this->avaliations.size();
 
-  for(auto a : avaliations){
-    total_sum += avaliations;
+  for(auto a : this->avaliations){
+    total_sum += this->avaliations;
   }
 
-  Avaliation ans = total_sum / total_size
+  Avaliation ans = total_sum / total_size;
 
   return ans;
-}
-
-vector<Comment> Post::get_comments(){
-  return comments;
 }
 
 //------------------------------------------------
@@ -83,3 +75,19 @@ vector<Comment> Post::get_comments(){
 Comment(){}
 
 ~Comment(){}
+
+//------------------------------------------------
+// Method Implementation of Class Post
+//------------------------------------------------
+
+Post::Post(){}
+
+~Post::Post(){}
+
+void Post::add_comment(Comment c){
+  comments.push_back(c);
+}
+
+vector<Comment> Post::get_comments(){
+  return comments;
+}

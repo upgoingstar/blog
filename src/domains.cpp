@@ -5,24 +5,28 @@
   #include "domains.hpp"
 
 //------------------------------------------------
+// Method Implementation of Class Domain
+//------------------------------------------------
+
+string Domain::get() {
+  if(this->value.empty()) {
+    throw invalid_argument( "String is empty!" );
+  }
+  return this->value;
+}
+
+void Domain::set(string v) {
+  this->valid(v);
+  this->value = v;
+}
+
+//------------------------------------------------
 // Method Implementation of Class Name
 //------------------------------------------------
 
   Name::Name() {}
 
   Name::~Name() {}
-
-  string Name::get() {
-    if(name.empty()) {
-      throw invalid_argument( "There is no name!" );
-    }
-    return name;
-  }
-
-  void Name::set(string n) {
-    Name::valid(n);
-    name = n;
-  }
 
   void Name::valid(string n) throw(invalid_argument) {
     if(n.size() > size_limit) {
@@ -43,18 +47,6 @@
   Password::Password() {}
 
   Password::~Password() {}
-
-  string Password::get() {
-    if(password.empty()) {
-      throw invalid_argument( "There is no password!" );
-    }
-    return password;
-  }
-
-  void Password::set(string p) {
-    Password::valid(p);
-    password = p;
-  }
 
   void Password::valid(string p) throw(invalid_argument) {
     if(p.size() != allowed_size) {
@@ -78,18 +70,6 @@
   Email::Email() {}
 
   Email::~Email() {}
-
-  string Email::get() {
-    if(email.empty()) {
-      throw invalid_argument( "There is no email!" );
-    }
-    return email;
-  }
-
-  void Email::set(string e) {
-    Email::valid(e);
-    email = e;
-  }
 
   void Email::valid(string e) throw(invalid_argument) {
     for(int i = 0; i < e.size(); i++) {
@@ -115,21 +95,9 @@
 
   Avaliation::~Avaliation() {}
 
-  string Avaliation::get() {
-    if(avaliation.empty()) {
-      throw invalid_argument( "There is no avaliation!" );
-    }
-    return avaliation;
-  }
-
-  void Avaliation::set(string a) {
-    Avaliation::valid(a);
-    avaliation = a;
-  }
-
   void Avaliation::valid(string a) throw(invalid_argument){
     if(a.size() != 1 || a[0] > '5' || a[0] < '0'){
-      throw invalid_argument( "Wrong avaliation!" );
+      throw invalid_argument( "Invalid number!" );
     }
   }
 
@@ -140,18 +108,6 @@
   Text::Text() {}
 
   Text::~Text() {}
-
-  string Text::get() {
-    if(text.empty()) {
-      throw invalid_argument( "There is no text!" );
-    }
-    return text;
-  }
-
-  void Text::set(string t) {
-    Text::valid(t);
-    text = t;
-  }
 
   void Text::valid(string t) throw(invalid_argument) {
     if(t.size() > 50) {
