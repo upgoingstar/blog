@@ -2,11 +2,17 @@
 // INCLUDES
 //------------------------------------------------
 
-  #include "domains.hpp"
+  #include "../hdr/domains.hpp"
+  #include <bits/stdc++.h>
+  using namespace std;
 
 //------------------------------------------------
 // Method Implementation of Class Domain
 //------------------------------------------------
+
+Domain::Domain() {}
+
+Domain::~Domain() {}
 
 string Domain::get() {
   if(this->value.empty()) {
@@ -15,9 +21,17 @@ string Domain::get() {
   return this->value;
 }
 
-void Domain::set(string v) {
-  this->valid(v);
-  this->value = v;
+void Domain::set(string value) {
+  this->valid(value);
+  this->value = value;
+}
+
+bool Domain::operator!=(const Domain &other) const {
+  return !(this->value == other.value);
+}
+
+bool Domain::operator==(const Domain &other) const {
+  return this->value == other.value;
 }
 
 //------------------------------------------------
@@ -55,7 +69,7 @@ void Domain::set(string v) {
 
     map<char,int> repeat;
 
-    for(auto c : p) {
+    for(char c : p) {
       repeat[c]++;
       if(repeat[c] > repetition_limit) {
         throw invalid_argument( "There is repeated caracters!" );
@@ -91,12 +105,22 @@ void Domain::set(string v) {
 // Method Implementation of Class Avaliation
 //------------------------------------------------
 
-  Avaliation::Avaliation() {}
+  Avaliation::Avaliation() {
+    this->value = 0;
+  }
 
   Avaliation::~Avaliation() {}
 
-  void Avaliation::valid(string a) throw(invalid_argument){
-    if(a.size() != 1 || a[0] > '5' || a[0] < '0'){
+  int Avaliation::get() {
+    return value;
+  }
+
+  void Avaliation::set(int avaliation = 0) {
+    this->value = avaliation;
+  }
+
+  void Avaliation::valid(int a) throw(invalid_argument) {
+    if(a > 5 || a < 0){
       throw invalid_argument( "Invalid number!" );
     }
   }

@@ -1,31 +1,34 @@
 //------------------------------------------------
-// INCLUDES
+// Includes
 //------------------------------------------------
 
-#include "entities.hpp"
+  #include "../hdr/entities.hpp"
+  #include <bits/stdc++.h>
+  using namespace std;
 
 //------------------------------------------------
 // Method Implementation of Class User
 //------------------------------------------------
 
 User::User(){
-    anonymous = true;
+    this->anonymous = true;
 }
 
-~User::User(){}
+User::~User(){}
 
-void User::set(Name n, Email e, Password p){
-  name = n;
-  password = p;
-  email = e;
+void User::set(Name name, Email email, Password password){
+  this->name = name;
+  this->password = password;
+  this->email = email;
+  this->anonymous = false;
 }
 
 Name User::get_name(){
-  return name;
+  return this->name;
 }
 
-bool check_user(Email e, Password p){
-  if(email != e || password != p){
+void User::check_user(Email email, Password password){
+  if(this->email != email || this->password != password){
     throw invalid_argument( "That is not yout email or password!" );
   }
 };
@@ -36,15 +39,15 @@ bool check_user(Email e, Password p){
 
 Content::Content(){}
 
-~Content::Content(){}
+Content::~Content(){}
 
-void Content::set(Name n, Text t){
-  this->author = n;
-  this->content = t;
+void Content::set(Name name, Text text){
+  this->author = name;
+  this->content = text;
 }
 
-void Content::add_avaliation(Avaliation a){
-  this->avaliations.push_back(a);
+void Content::add_avaliation(Avaliation avaliation){
+  this->avaliations.push_back(avaliation);
 }
 
 Name Content::get_author(){
@@ -55,15 +58,16 @@ Text Content::get_content(){
   return this->content;
 }
 
-Avaliation Content::get_final_avaliation(){
-  int total_sum = '0';
+Avaliation Content::get_avaliation(){
+  int total_sum = 0;
   int total_size = this->avaliations.size();
 
-  for(auto a : this->avaliations){
-    total_sum += this->avaliations;
+  for(Avaliation avaliation : this->avaliations){
+    total_sum += avaliation.get();
   }
 
-  Avaliation ans = total_sum / total_size;
+  Avaliation ans;
+  ans.set(total_sum / total_size);
 
   return ans;
 }
@@ -72,9 +76,9 @@ Avaliation Content::get_final_avaliation(){
 // Method Implementation of Class Comment
 //------------------------------------------------
 
-Comment(){}
+Comment::Comment(){}
 
-~Comment(){}
+Comment::~Comment(){}
 
 //------------------------------------------------
 // Method Implementation of Class Post
@@ -82,12 +86,12 @@ Comment(){}
 
 Post::Post(){}
 
-~Post::Post(){}
+Post::~Post(){}
 
-void Post::add_comment(Comment c){
-  comments.push_back(c);
+void Post::add_comment(Comment comment){
+  this->comments.push_back(comment);
 }
 
 vector<Comment> Post::get_comments(){
-  return comments;
+  return this->comments;
 }

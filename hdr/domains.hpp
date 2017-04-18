@@ -9,21 +9,24 @@
 // INCLUDES
 //------------------------------------------------
 
-#include <bits/stdc++.h>
-using namespace std;
+  #include <bits/stdc++.h>
+  using namespace std;
 
 //------------------------------------------------
 // Abstract Class Domain
 //------------------------------------------------
 
-//TODO: como ficaria para colocar o throw nesse caso
 class Domain {
 protected:
   string value;
   virtual void valid(string) throw(invalid_argument) = 0;
 public:
+  Domain();
+  ~Domain();
   string get();
   void set(string);
+  bool operator!=(const Domain &other) const;
+  bool operator==(const Domain &other) const;
 };
 
 //------------------------------------------------
@@ -32,7 +35,7 @@ public:
 
 class Name : public Domain {
 private:
-  const int size_limit = 20;
+  static const int size_limit = 20;
   void valid(string) throw(invalid_argument);
 
 public:
@@ -46,8 +49,8 @@ public:
 
 class Password : public Domain {
 private:
-  const int allowed_size = 5;
-  const int repetition_limit = 1;
+  static const int allowed_size = 5;
+  static const int repetition_limit = 1;
   void valid(string) throw(invalid_argument);
 
 public:
@@ -69,19 +72,6 @@ public:
 };
 
 //------------------------------------------------
-// Class Avaliation
-//------------------------------------------------
-
-class Avaliation : public Domain {
-private:
-  void valid(string) throw(invalid_argument);
-
-public:
-  Avaliation();
-  ~Avaliation();
-};
-
-//------------------------------------------------
 // Class Text
 //------------------------------------------------
 
@@ -92,6 +82,22 @@ private:
 public:
   Text();
   ~Text();
+};
+
+//------------------------------------------------
+// Class Avaliation
+//------------------------------------------------
+//TODO: verificar possibilidade de integrar com a classe domain
+class Avaliation {
+private:
+  int value;
+  void valid(int) throw(invalid_argument);
+
+public:
+  Avaliation();
+  ~Avaliation();
+  int get();
+  void set(int);
 };
 
 #endif

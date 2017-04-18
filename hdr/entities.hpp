@@ -2,15 +2,16 @@
 // GUARDS
 //------------------------------------------------
 
-#ifndef __POSTS_H_INCLUDED__
-#define __POSTS_H_INCLUDED__
+#ifndef __ENTITIES_H_INCLUDED__
+#define __ENTITIES_H_INCLUDED__
 
 //------------------------------------------------
 // INCLUDES
 //------------------------------------------------
 
-#include "domains.hpp"
-using namespace std;
+	#include "domains.hpp"
+	#include <bits/stdc++.h>
+	using namespace std;
 
 //------------------------------------------------
 // Class User
@@ -24,13 +25,11 @@ private:
 	bool anonymous;
 
 public:
-  // set anonymous to true
   User();
 	~User();
-  // set anonymous to false
-	void set(Name, Password, Email);
+	void set(Name, Email, Password);
   Name get_name();
-  bool check_user(Email, Password);
+  void check_user(Email, Password);
 };
 
 //------------------------------------------------
@@ -43,6 +42,8 @@ protected:
 	Text content;
 	vector<Avaliation> avaliations;
 public:
+	Content();
+	~Content();
 	Name get_author();
   Text get_content();
 	Avaliation get_avaliation();
@@ -58,8 +59,7 @@ public:
 
 class Comment : public Content {
 private:
-	// how much comments each user did
-	map<Name, int> authorCnt;
+	// how much comments each user did (see later how to use map with classes)
 
 public:
   Comment();
