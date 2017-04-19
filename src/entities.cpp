@@ -16,7 +16,13 @@ User::User(){
 
 User::~User(){}
 
+void User::valid(Name name, Email email, Password password){
+  if(!name.exist() || !email.exist() || !password.exist())
+    throw invalid_argument("Invalid informations to compose a user!");
+}
+
 void User::set(Name name, Email email, Password password){
+  User::valid(name,email,password);
   this->name = name;
   this->password = password;
   this->email = email;
@@ -24,7 +30,9 @@ void User::set(Name name, Email email, Password password){
 }
 
 Name User::get_name(){
-  return this->name;
+  if(anonymous) throw invalid_argument("This user don't have a name");
+  else
+    return this->name;
 }
 
 void User::check_user(Email email, Password password){
@@ -41,7 +49,13 @@ Content::Content(){}
 
 Content::~Content(){}
 
+void Content::valid(Name name, Text text){
+  if(!name.exist() || !text.exist())
+    throw invalid_argument("Invalid informations to compose a content!");
+}
+
 void Content::set(Name name, Text text){
+  Content::valid(name,text);
   this->author = name;
   this->content = text;
 }
@@ -76,7 +90,9 @@ Avaliation Content::get_avaliation(){
 // Method Implementation of Class Comment
 //------------------------------------------------
 
-Comment::Comment(){}
+Comment::Comment(Name author,Text comment_text){
+  Content::set(author,comment_text);
+}
 
 Comment::~Comment(){}
 
@@ -84,12 +100,24 @@ Comment::~Comment(){}
 // Method Implementation of Class Post
 //------------------------------------------------
 
-Post::Post(){}
+Post::Post(Name author,Text post_text,bool can_comment = 0){
+  Content::set(author,post_text);
+  comments_allowed = can_comment;
+}
 
 Post::~Post(){}
 
+void Post::allow_comments(){
+  comments_allowed = 1;
+}
+
 void Post::add_comment(Comment comment){
-  this->comments.push_back(comment);
+  if(comments_allowed && number_comments[comment.get_author()] < comments_limit){
+    number_comments[comment.get_author()]++;
+    this->comments.push_back(comment);
+  }
+  else
+    throw invalid_argument("This comment is not allowed!");
 }
 
 vector<Comment> Post::get_comments(){

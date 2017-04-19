@@ -10,18 +10,20 @@
 // Method Implementation of Class Domain
 //------------------------------------------------
 
-Domain::Domain() {}
+Domain::Domain() {
+  empty = 1;
+}
 
 Domain::~Domain() {}
 
 string Domain::get() {
-  if(this->value.empty()) {
+  if(empty)
     throw invalid_argument( "String is empty!" );
-  }
   return this->value;
 }
 
 void Domain::set(string value) {
+  empty = 0;
   this->valid(value);
   this->value = value;
 }
@@ -32,6 +34,10 @@ bool Domain::operator!=(const Domain &other) const {
 
 bool Domain::operator==(const Domain &other) const {
   return this->value == other.value;
+}
+
+bool Domain::operator<(const Domain &other) const {
+  return this->value < other.value;
 }
 
 //------------------------------------------------
