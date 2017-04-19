@@ -19,14 +19,19 @@
 class Domain {
 protected:
   string value;
+  bool empty;
   virtual void valid(string) throw(invalid_argument) = 0;
 public:
   Domain();
   ~Domain();
+  bool exist(){
+    return empty;
+  }
   string get();
   void set(string);
   bool operator!=(const Domain &other) const;
   bool operator==(const Domain &other) const;
+  bool operator<(const Domain &other) const;
 };
 
 //------------------------------------------------

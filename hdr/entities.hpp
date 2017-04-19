@@ -23,13 +23,14 @@ private:
 	Password password;
 	Email email;
 	bool anonymous;
+	void valid(Name,Email,Password);
 
 public:
   User();
-	~User();
-	void set(Name, Email, Password);
+  ~User();
+  void set(Name, Email, Password);
   Name get_name();
-  void check_user(Email, Password);
+  void check_user(Email, Password) ;
 };
 
 //------------------------------------------------
@@ -37,6 +38,8 @@ public:
 //------------------------------------------------
 
 class Content {
+private:
+	void valid(Name,Text);
 protected:
 	Name author;
 	Text content;
@@ -45,7 +48,7 @@ public:
 	Content();
 	~Content();
 	Name get_author();
-  Text get_content();
+ 	Text get_content();
 	Avaliation get_avaliation();
 	// Name of the user who is adding a post
   void set(Name, Text);
@@ -58,12 +61,9 @@ public:
 //------------------------------------------------
 
 class Comment : public Content {
-private:
-	// how much comments each user did (see later how to use map with classes)
-
 public:
-  Comment();
-	~Comment();
+  Comment(Name,Text);
+  ~Comment();
 };
 
 //------------------------------------------------
@@ -72,11 +72,15 @@ public:
 
 class Post : public Content {
 private:
+  static const int comments_limit = 5;
+  map<Name,int> number_comments;
   vector<Comment> comments;
+  bool comments_allowed;
 
 public:
-  Post();
-	~Post();
+  Post(Name,Text,bool);
+  ~Post();
+  void allow_comments();
   vector<Comment> get_comments();
   // Name of the user who is adding a comment
   void add_comment(Comment);
