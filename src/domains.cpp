@@ -54,7 +54,7 @@ bool Domain::operator<(const Domain &other) const {
     }
 
     for(char c : n) {
-      if(!isalpha(c)) {
+      if(!isalpha(c) && c != ' ') {
         throw invalid_argument( "There is unpermited caracters!" );
       }
     }
