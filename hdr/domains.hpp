@@ -21,9 +21,9 @@ protected:
   string value;
   bool empty;
   virtual void valid(string) throw(invalid_argument) = 0;
-public:
   Domain();
   ~Domain();
+public:
   bool exist(){
     return empty;
   }
