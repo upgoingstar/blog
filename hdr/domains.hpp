@@ -96,6 +96,7 @@ public:
 class Avaliation {
 private:
   int value;
+  bool empty;
   void valid(int) throw(invalid_argument);
 
 public:

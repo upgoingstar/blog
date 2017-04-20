@@ -23,14 +23,14 @@ private:
 	Password password;
 	Email email;
 	bool anonymous;
-	void valid(Name,Email,Password);
+	void valid(Name,Email,Password) throw(invalid_argument);
 
 public:
   User();
   ~User();
   void set(Name, Email, Password);
   Name get_name();
-  void check_user(Email, Password) ;
+  void check_user(Email, Password) throw(invalid_argument);
 };
 
 //------------------------------------------------
@@ -39,7 +39,7 @@ public:
 
 class Content {
 private:
-	void valid(Name,Text);
+	void valid(Name,Text) throw(invalid_argument);
 protected:
 	Name author;
 	Text content;
@@ -83,7 +83,7 @@ public:
   void allow_comments();
   vector<Comment> get_comments();
   // Name of the user who is adding a comment
-  void add_comment(Comment);
+  void add_comment(Comment) throw(invalid_argument);
 };
 
 
