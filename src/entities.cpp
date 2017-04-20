@@ -16,12 +16,12 @@ User::User(){
 
 User::~User(){}
 
-void User::valid(Name name, Email email, Password password){
+void User::valid(Name name, Email email, Password password) throw(invalid_argument) {
   if(!name.exist() || !email.exist() || !password.exist())
     throw invalid_argument("Invalid informations to compose a user!");
 }
 
-void User::set(Name name, Email email, Password password){
+void User::set(Name name, Email email, Password password) {
   User::valid(name,email,password);
   this->name = name;
   this->password = password;
