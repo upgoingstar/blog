@@ -35,7 +35,7 @@ Name User::get_name(){
     return this->name;
 }
 
-void User::check_user(Email email, Password password){
+void User::check_user(Email email, Password password) throw(invalid_argument){
   if(this->email != email || this->password != password){
     throw invalid_argument( "That is not yout email or password!" );
   }
@@ -49,7 +49,7 @@ Content::Content(){}
 
 Content::~Content(){}
 
-void Content::valid(Name name, Text text){
+void Content::valid(Name name, Text text) throw(invalid_argument){
   if(!name.exist() || !text.exist())
     throw invalid_argument("Invalid informations to compose a content!");
 }
@@ -111,7 +111,7 @@ void Post::allow_comments(){
   comments_allowed = 1;
 }
 
-void Post::add_comment(Comment comment){
+void Post::add_comment(Comment comment) throw(invalid_argument){
   if(comments_allowed && number_comments[comment.get_author()] < comments_limit){
     number_comments[comment.get_author()]++;
     this->comments.push_back(comment);

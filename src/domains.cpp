@@ -11,7 +11,7 @@
 //------------------------------------------------
 
 Domain::Domain() {
-  empty = 1;
+  empty = true;
 }
 
 Domain::~Domain() {}
@@ -23,9 +23,9 @@ string Domain::get() {
 }
 
 void Domain::set(string value) {
-  empty = 0;
   this->valid(value);
   this->value = value;
+  empty = false;
 }
 
 bool Domain::operator!=(const Domain &other) const {
@@ -92,7 +92,7 @@ bool Domain::operator<(const Domain &other) const {
   Email::~Email() {}
 
   void Email::valid(string e) throw(invalid_argument) {
-    for(int i = 0; i < e.size(); i++) {
+    for(int i = 0; i < (int)e.size(); i++) {
       if(!isalpha(e[i]) && e[i] != '@' && e[i] != '.') {
         throw invalid_argument( "There is unpermit caracters!" );
       }
@@ -113,16 +113,21 @@ bool Domain::operator<(const Domain &other) const {
 
   Avaliation::Avaliation() {
     this->value = 0;
+    empty = true;
   }
 
   Avaliation::~Avaliation() {}
 
   int Avaliation::get() {
+    if(empty)
+      throw invalid_argument("Avaliation is empty!" );
     return value;
   }
 
   void Avaliation::set(int avaliation = 0) {
+    valid(avaliation);
     this->value = avaliation;
+    empty = false;
   }
 
   void Avaliation::valid(int a) throw(invalid_argument) {
