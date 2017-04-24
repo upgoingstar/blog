@@ -108,7 +108,7 @@ Post::Post(Name author,Text post_text,bool can_comment = 0){
 Post::~Post(){}
 
 void Post::allow_comments(){
-  comments_allowed = 1;
+  comments_allowed = true;
 }
 
 void Post::add_comment(Comment comment) throw(invalid_argument){
