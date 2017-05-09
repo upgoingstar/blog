@@ -13,6 +13,11 @@
 #include "domains.hpp"
 using namespace std;
 
+
+//------------------------------------------------
+// Abstract Class TestDomain
+//------------------------------------------------
+
 class TestDomain{
 protected:
 	void success_scenario(string,Domain&);
@@ -21,6 +26,10 @@ public:
 	TestDomain();
 	~TestDomain();
 };
+
+//------------------------------------------------
+// Class TestName
+//------------------------------------------------
 
 class TestName : protected TestDomain{
 private:
@@ -32,6 +41,10 @@ public:
 	~TestName();
 };
 
+//------------------------------------------------
+// Class TestPassword
+//------------------------------------------------
+
 class TestPassword : protected TestDomain{
 private:
 	const string correct = "ab123";
@@ -41,6 +54,10 @@ public:
 	TestPassword();
 	~TestPassword();
 };
+
+//------------------------------------------------
+// Class TestEmail
+//------------------------------------------------
 
 class TestEmail : protected TestDomain{
 private:
@@ -52,6 +69,10 @@ public:
 	~TestEmail();
 };
 
+//------------------------------------------------
+// Class TestText
+//------------------------------------------------
+
 class TestText : protected TestDomain{
 private:
 	const string correct = "Valid text with less than 50 characters!";
@@ -61,6 +82,10 @@ public:
 	TestText();
 	~TestText();
 };
+
+//------------------------------------------------
+// Class TestAvaliation
+//------------------------------------------------
 
 class TestAvaliation{
 private:

@@ -26,7 +26,7 @@ public:
   Domain();
   ~Domain();
   bool exist(){
-    return empty;
+    return !empty;
   }
   string get();
   void set(string);
