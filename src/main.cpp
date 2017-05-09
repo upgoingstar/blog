@@ -8,58 +8,77 @@ int main(){
   TestName nome;
   try{
     nome.verify();
-    cout << "Nome certo\n";
+    cout << "Classe Nome certa\n";
   }
   catch(invalid_argument erro){
-    cout << "Nome errado\n";
+    cout << "Classe Nome errada\n";
   }
 
 
   TestPassword senha;
   try{
     senha.verify();
-    cout << "Senha certa\n";
+    cout << "Classe Senha certa\n";
   }
   catch(invalid_argument erro){
-    cout << "Senha errada\n";
+    cout << "Classe Senha errada\n";
   }
 
 
   TestEmail email;
   try{
     email.verify();
-    cout << "Email certo\n";
+    cout << "Classe Email certa\n";
   }
   catch(invalid_argument erro){
-    cout << "Email errado\n";
+    cout << "Classe Email errada\n";
   }
 
 
   TestText texto;
   try{
     texto.verify();
-    cout << "Texto certo\n";
+    cout << "Classe Texto certa\n";
   }
   catch(invalid_argument erro){
-    cout << "Texto errado\n";
+    cout << "Classe Texto errada\n";
   }
 
   TestAvaliation av;
   try{
     av.verify();
-    cout << "Avaliacao certa\n";
+    cout << "Classe Avaliacao certa\n";
   }
   catch(invalid_argument erro){
-    cout << "Avaliacao errada\n";
+    cout << "Classe Avaliacao errada\n";
   }
 
   TestUser user;
   try{
     user.verify();
-    cout << "Usuario certo\n";
+    cout << "Classe Usuario certa\n";
   }
   catch(invalid_argument erro){
-    cout << "Usuario errado\n";
+    cout << "Classe Usuario errada\n";
+  }
+
+  TestComment comentario;
+  try{
+    comentario.verify();
+    cout << "Classe Comentario certa\n";
+  }
+  catch(invalid_argument erro){
+    cout << "Classe Comentario errada\n";
+  }
+
+
+  TestPost post;
+  try{
+    post.verify();
+    cout << "Classe Post certa\n";
+  }
+  catch(invalid_argument erro){
+    cout << "Classe Post errada\n";
   }
   return 0;
 }

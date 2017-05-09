@@ -70,3 +70,107 @@ void TestUser::verify(){
 	success_scenario(correct_name,correct_email,correct_password);
 	failure_scenario(incorrect_name,incorrect_email,incorrect_password);
 }
+
+TestComment::TestComment(){}
+
+TestComment::~TestComment(){}
+
+void TestComment::success_scenario(Name name, Text text){
+	try{
+		Comment testAuxiliar(name,text);
+		if(name != testAuxiliar.get_author() || text != testAuxiliar.get_content())
+			throw invalid_argument("Invalid Class!");
+	}
+	catch(invalid_argument erro){
+		throw invalid_argument ("Invalid Class!");
+	}
+}
+
+void TestComment::failure_scenario(Name name, Text text){
+	bool daerro = false;
+	try{
+		Comment testAuxiliar(name,text);
+		daerro = true;
+	}
+	catch(invalid_argument erro){}
+	if(daerro)
+			throw invalid_argument ("Invalid Class!");
+}
+
+void TestComment::verify(){
+	Name correct_name, incorrect_name;
+	Text correct_text, incorrect_text;
+	correct_name.set("Batata");
+	correct_text.set("Batata de bermuda");
+	success_scenario(correct_name,correct_text);
+	failure_scenario(incorrect_name,incorrect_text);
+}
+
+TestPost::TestPost(){}
+
+TestPost::~TestPost(){}
+
+void TestPost::success_scenario(Name name, Text text){
+	try{
+		Post testAuxiliar(name,text,true);
+		if(name != testAuxiliar.get_author() || text != testAuxiliar.get_content())
+			throw invalid_argument("Invalid Class!");
+		Comment testAuxiliar2(name,text);
+		try{
+			testAuxiliar.add_comment(testAuxiliar2);
+		}
+		catch(invalid_argument erro){
+			throw invalid_argument ("Invalid Class!");
+		}
+	}
+	catch(invalid_argument erro){
+		throw invalid_argument ("Invalid Class!");
+	}
+}
+
+void TestPost::failure_scenario(Name name, Text text){
+	bool daerro = false;
+	try{
+		Post testAuxiliar(name,text);
+		daerro = true;
+	}
+	catch(invalid_argument erro){}
+	if(daerro)
+			throw invalid_argument ("Invalid Class!");
+}
+
+void TestPost::failure_scenario2(Name name, Text text){
+	bool daerro = false;
+	try{
+		Post testAuxiliar(name,text);
+		Comment testAuxiliar2(name,text);
+		testAuxiliar.add_comment(testAuxiliar2);
+		daerro = true;
+	}
+	catch(invalid_argument erro){}
+
+	try{
+		Post testAuxiliar(name,text,1);
+		Comment testAuxiliar2(name,text);
+		testAuxiliar.add_comment(testAuxiliar2);
+		testAuxiliar.add_comment(testAuxiliar2);
+		testAuxiliar.add_comment(testAuxiliar2);
+		testAuxiliar.add_comment(testAuxiliar2);
+		testAuxiliar.add_comment(testAuxiliar2);
+		testAuxiliar.add_comment(testAuxiliar2);
+		daerro = true;
+	}
+	catch(invalid_argument erro){}
+	if(daerro)
+			throw invalid_argument ("Invalid Class!");
+}
+
+void TestPost::verify(){
+	Name correct_name, incorrect_name;
+	Text correct_text, incorrect_text;
+	correct_name.set("Batata de bermuda");
+	correct_text.set("Queria uma calca muito chique pra minha batata");
+	success_scenario(correct_name,correct_text);
+	failure_scenario(incorrect_name,incorrect_text);
+	failure_scenario2(correct_name,correct_text);
+}

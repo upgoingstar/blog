@@ -12,15 +12,20 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJ = main.o domains.o entities.o test_domains.o test_entities.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
+all: criaPastaObj blog clean
+
+criaPastaObj:
+	@mkdir -p $(ODIR)
+
 $(ODIR)/%.o: %.cpp $(DEPS)
 	@echo Compilando arquivo objeto: $@
 	@$(CC) -c -o $@ $< $(CPPFLAGS)
 
+	
+
 blog: $(OBJ)
 	@echo Compilando todos os arquivos objetos...
 	@$(CC) -o $@ $^ $(CPPFLAGS) $(LIBS)
-
-all: blog clean
 
 .PHONY: clean
 

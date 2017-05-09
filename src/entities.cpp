@@ -100,7 +100,7 @@ Comment::~Comment(){}
 // Method Implementation of Class Post
 //------------------------------------------------
 
-Post::Post(Name author, Text post_text, bool can_comment = false){
+Post::Post(Name author, Text post_text, bool can_comment){
   Content::set(author,post_text);
   comments_allowed = can_comment;
 }
