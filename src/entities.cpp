@@ -29,14 +29,14 @@ void User::set(Name name, Email email, Password password) {
   this->anonymous = false;
 }
 
-Name User::get_name(){
+Name User::get_name() throw(invalid_argument){
   if(anonymous) throw invalid_argument("This user don't have a name");
   else
     return this->name;
 }
 
 void User::check_user(Email email, Password password) throw(invalid_argument){
-  if(this->email != email || this->password != password){
+  if(this->email != email || this->password != password || !email.exist() || !password.exist()){
     throw invalid_argument( "That is not yout email or password!" );
   }
 };
@@ -100,7 +100,7 @@ Comment::~Comment(){}
 // Method Implementation of Class Post
 //------------------------------------------------
 
-Post::Post(Name author,Text post_text,bool can_comment = 0){
+Post::Post(Name author, Text post_text, bool can_comment = false){
   Content::set(author,post_text);
   comments_allowed = can_comment;
 }

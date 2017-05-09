@@ -6,10 +6,10 @@ CPPFLAGS = -std=c++11 -O2 -Wall -I$(IDIR)
 
 LIBS=-lm
 
-_DEPS = domains.hpp entities.hpp test_domains.hpp
+_DEPS = domains.hpp entities.hpp test_domains.hpp test_entities.hpp
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o domains.o entities.o test_domains.o
+_OBJ = main.o domains.o entities.o test_domains.o test_entities.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.cpp $(DEPS)

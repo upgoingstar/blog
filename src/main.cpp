@@ -1,6 +1,7 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 #include "../hdr/domains.hpp"
 #include "../hdr/test_domains.hpp"
+#include "../hdr/test_entities.hpp"
 using namespace std;
 
 int main(){
@@ -50,6 +51,15 @@ int main(){
   }
   catch(invalid_argument erro){
     cout << "Avaliacao errada\n";
+  }
+
+  TestUser user;
+  try{
+    user.verify();
+    cout << "Usuario certo\n";
+  }
+  catch(invalid_argument erro){
+    cout << "Usuario errado\n";
   }
   return 0;
 }
