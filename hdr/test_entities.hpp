@@ -37,8 +37,9 @@ public:
 
 class TestPost{
 private:
-	void success_scenario(Name, Text, bool);
-	void failure_scenario(Name, Text, bool);
+	void success_scenario(Name, Text);
+	void failure_scenario(Name, Text);
+	void failure_scenario2(Name, Text);
 public:
 	TestPost();
 	~TestPost();

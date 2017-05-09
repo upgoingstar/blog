@@ -78,7 +78,7 @@ private:
   bool comments_allowed;
 
 public:
-  Post(Name,Text,bool);
+  Post(Name,Text,bool default_value = false);
   ~Post();
   void allow_comments();
   vector<Comment> get_comments();
