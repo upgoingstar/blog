@@ -82,7 +82,6 @@ public:
   ~Post();
   void allow_comments();
   vector<Comment> get_comments();
-  // Name of the user who is adding a comment
   void add_comment(Comment) throw(invalid_argument);
 };
 
@@ -98,7 +97,7 @@ public:
   Blog(Name,Text);
   ~Blog();
   vector<Post> get_posts();
-  void add_post(Post);
+  void add_post(Post) throw(invalid_argument);
 };
 
 #endif
