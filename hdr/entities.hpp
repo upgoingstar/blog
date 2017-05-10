@@ -87,4 +87,18 @@ public:
 };
 
 
+//------------------------------------------------
+// Class Post
+//------------------------------------------------
+
+class Blog : public Content{
+private:
+  vector<Post> posts;
+public:
+  Blog(Name,Text);
+  ~Blog();
+  vector<Post> get_posts();
+  void add_post(Post);
+};
+
 #endif

@@ -123,3 +123,21 @@ void Post::add_comment(Comment comment) throw(invalid_argument){
 vector<Comment> Post::get_comments(){
   return this->comments;
 }
+
+//------------------------------------------------
+// Method Implementation of Class Blog
+//------------------------------------------------
+
+Blog::Blog(Name author, Text blog_name){
+  Content::set(author,blog_name);
+}
+
+Blog::~Blog(){}
+
+void Blog::add_post(Post post){
+  this->posts.push_back(post);
+}
+
+vector<Post> Blog::get_posts(){
+  return this->posts;
+}

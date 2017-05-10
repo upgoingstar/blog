@@ -80,5 +80,14 @@ int main(){
   catch(invalid_argument erro){
     cout << "Classe Post errada\n";
   }
+
+  TestBlog blog;
+  try{
+    blog.verify();
+    cout << "Classe Blog certa\n";
+  }
+  catch(invalid_argument erro){
+    cout << "Classe Blog errada\n";
+  }
   return 0;
 }

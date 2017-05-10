@@ -58,4 +58,15 @@ public:
 	void verify();
 };
 
+class TestBlog{
+private:
+	void success_scenario(Name, Text);
+	void failure_scenario(Name, Text);
+public:
+	TestBlog();
+	~TestBlog();
+	void verify();
+};
+
+
 #endif

@@ -186,3 +186,45 @@ void TestPost::verify(){
 	failure_scenario(incorrect_name,incorrect_text);
 	failure_scenario2(correct_name,correct_text);
 }
+
+TestBlog::TestBlog(){}
+
+TestBlog::~TestBlog(){}
+
+void TestBlog::success_scenario(Name name, Text text){
+	try{
+		Blog testAuxiliar(name,text);
+		if(name != testAuxiliar.get_author() || text != testAuxiliar.get_content())
+			throw invalid_argument("Invalid Class!");
+			Post testAuxiliar2(name,text);
+		try{
+			testAuxiliar.add_post(testAuxiliar2);
+		}
+		catch(invalid_argument erro){
+			throw invalid_argument ("Invalid Class!");
+		}
+	}
+	catch(invalid_argument erro){
+		throw invalid_argument ("Invalid Class!");
+	}
+}
+
+void TestBlog::failure_scenario(Name name, Text text){
+	bool daerro = false;
+	try{
+		Blog testAuxiliar(name,text);
+		daerro = true;
+	}
+	catch(invalid_argument erro){}
+	if(daerro)
+			throw invalid_argument ("Invalid Class!");
+}
+
+void TestBlog::verify(){
+	Name correct_name, incorrect_name;
+	Text correct_text, incorrect_text;
+	correct_name.set("Batata de bermuda");
+	correct_text.set("Queria uma calca muito chique pra minha batata");
+	success_scenario(correct_name,correct_text);
+	failure_scenario(incorrect_name,incorrect_text);
+}
