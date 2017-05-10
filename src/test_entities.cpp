@@ -223,7 +223,7 @@ void TestBlog::failure_scenario(Name name, Text text){
 	name2.set("Calca chique");
 	Post testAuxiliar2(name2,text);
 	try{
-		testAuxiliar.add_comment(testAuxiliar2);
+		testAuxiliar.add_post(testAuxiliar2);
 		daerro = true;
 	}
 	catch(invalid_argument erro){}
