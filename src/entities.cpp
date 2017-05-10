@@ -134,8 +134,11 @@ Blog::Blog(Name author, Text blog_name){
 
 Blog::~Blog(){}
 
-void Blog::add_post(Post post){
-  this->posts.push_back(post);
+void Blog::add_post(Post post) throw(invalid_argument){
+  if(post.get_author() != this->author)
+    throw invalid_argument("This comment is not allowed!");
+  else
+    this->posts.push_back(post);
 }
 
 vector<Post> Blog::get_posts(){
