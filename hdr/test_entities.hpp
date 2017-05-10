@@ -13,6 +13,9 @@
 #include "domains.hpp"
 using namespace std;
 
+//------------------------------------------------
+// Class TestUser
+//------------------------------------------------
 
 class TestUser{
 private:
@@ -24,6 +27,11 @@ public:
 	void verify();
 };
 
+
+//------------------------------------------------
+// Class TestComment
+//------------------------------------------------
+
 class TestComment{
 private:
 	void success_scenario(Name, Text);
@@ -34,6 +42,10 @@ public:
 	void verify();
 };
 
+
+//------------------------------------------------
+// Class TestPost
+//------------------------------------------------
 
 class TestPost{
 private:
