@@ -216,6 +216,17 @@ void TestBlog::failure_scenario(Name name, Text text){
 		daerro = true;
 	}
 	catch(invalid_argument erro){}
+	name.set("Batata");
+	text.set("Calca chique");
+	Blog testAuxiliar(name,text);
+	Name name2;
+	name2.set("Calca chique");
+	Post testAuxiliar2(name2,text);
+	try{
+		testAuxiliar.add_comment(testAuxiliar2);
+		daerro = true;
+	}
+	catch(invalid_argument erro){}
 	if(daerro)
 			throw invalid_argument ("Invalid Class!");
 }
