@@ -4,6 +4,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// ------------------------------------------------
+// Method Implementation of Class TestUser
+// ------------------------------------------------
+
 TestUser::TestUser(){}
 
 TestUser::~TestUser(){}
@@ -71,6 +75,10 @@ void TestUser::verify(){
 	failure_scenario(incorrect_name,incorrect_email,incorrect_password);
 }
 
+// ------------------------------------------------
+// Method Implementation of Class TestComment
+// ------------------------------------------------
+
 TestComment::TestComment(){}
 
 TestComment::~TestComment(){}
@@ -105,6 +113,10 @@ void TestComment::verify(){
 	success_scenario(correct_name,correct_text);
 	failure_scenario(incorrect_name,incorrect_text);
 }
+
+// ------------------------------------------------
+// Method Implementation of Class TestPost
+// ------------------------------------------------
 
 TestPost::TestPost(){}
 

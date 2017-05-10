@@ -3,6 +3,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// ------------------------------------------------
+// Method Implementation of Class TestDomain
+// ------------------------------------------------
+
 TestDomain::TestDomain(){}
 
 TestDomain::~TestDomain(){}
@@ -42,6 +46,9 @@ void TestDomain::failure_scenario(string value,Domain &testAuxiliar){
 			throw invalid_argument ("Invalid Class!");
 }
 
+// ------------------------------------------------
+// Method Implementation of Class TestName
+// ------------------------------------------------
 
 TestName::TestName() {}
 
@@ -56,6 +63,10 @@ void TestName::verify(){
 	failure_scenario(incorrect,testAuxiliar);
 }
 
+// ------------------------------------------------
+// Method Implementation of Class TestPassword
+// ------------------------------------------------
+
 TestPassword::TestPassword() {}
 
 TestPassword::~TestPassword() {}
@@ -68,6 +79,10 @@ void TestPassword::verify(){
 	Password testAuxiliar;
 	failure_scenario(incorrect,testAuxiliar);
 }
+
+// ------------------------------------------------
+// Method Implementation of Class TestEmail
+// ------------------------------------------------
 
 TestEmail::TestEmail() {}
 
@@ -82,6 +97,10 @@ void TestEmail::verify(){
 	failure_scenario(incorrect,testAuxiliar);
 }
 
+// ------------------------------------------------
+// Method Implementation of Class TestText
+// ------------------------------------------------
+
 TestText::TestText() {}
 
 TestText::~TestText() {}
@@ -94,6 +113,10 @@ void TestText::verify(){
 	Text testAuxiliar;
 	failure_scenario(incorrect,testAuxiliar);
 }
+
+// ------------------------------------------------
+// Method Implementation of Class TestAvaliation
+// ------------------------------------------------
 
 TestAvaliation::TestAvaliation() {}
 
