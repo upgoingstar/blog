@@ -20,14 +20,14 @@
     Validate User by verifying if any of the arguments (name and email) already exists, so that there are no two users with the same name or email.
     TODO: Need refactoring!
   */
-  void User::valid(Name name, Email email) throw(invalid_argument) {
-    if(!name.empty() || !email.empty()) {
+  void User::valid(Name name, Email email, Password password) throw(invalid_argument) {
+    if(name.empty() || email.empty() || password.empty()) {
       throw invalid_argument("Invalid informations to compose a user!");
     }
   }
 
   void User::set(Name name, Email email, Password password) {
-    User::valid(name, email);
+    User::valid(name, email,password);
     this->name = name;
     this->password = password;
     this->email = email;
