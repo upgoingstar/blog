@@ -2,8 +2,8 @@
 // GUARDS
 //------------------------------------------------
 
-#ifndef __DOMAINS_H_INCLUDED__
-#define __DOMAINS_H_INCLUDED__
+  #ifndef __DOMAINS_H_INCLUDED__
+  #define __DOMAINS_H_INCLUDED__
 
 //------------------------------------------------
 // INCLUDES
@@ -19,16 +19,13 @@
 class Domain {
 protected:
   string value;
-  bool empty;
   virtual void valid(string) throw(invalid_argument) = 0;
 
 public:
   Domain();
   ~Domain();
-  bool exist(){
-    return !empty;
-  }
   string get();
+  bool empty();
   void set(string);
   bool operator!=(const Domain &other) const;
   bool operator==(const Domain &other) const;
@@ -93,11 +90,9 @@ public:
 //------------------------------------------------
 // Class Avaliation
 //------------------------------------------------
-//TODO: verificar possibilidade de integrar com a classe domain
 class Avaliation {
 private:
   int value;
-  bool empty;
   void valid(int) throw(invalid_argument);
 
 public:
