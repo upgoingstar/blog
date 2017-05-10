@@ -63,7 +63,7 @@ bool Domain::operator<(const Domain &other) const {
     Validate Name by verifying if the name is not bigger than the limit and see if all caracters are alphabetic or spaces.
   */
   void Name::valid(string n) throw(invalid_argument) {
-    if(n.size() > size_limit) {
+    if(n.size() > size_limit || n.empty()) {
       throw invalid_argument( "Name is to big!" );
     }
 
