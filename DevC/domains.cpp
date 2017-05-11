@@ -154,7 +154,7 @@ bool Domain::operator<(const Domain &other) const {
     return this->value;
   }
 
-  void Avaliation::set(int avaliation = 0) {
+  void Avaliation::set(int avaliation) {
     valid(avaliation);
     this->value = avaliation;
   }
@@ -183,7 +183,7 @@ bool Domain::operator<(const Domain &other) const {
     if(t.empty()) {
       throw invalid_argument( "There is no text!" );
     }
-    
+
     if(t.size() > 50) {
       throw invalid_argument( "This text is too big!" );
     }

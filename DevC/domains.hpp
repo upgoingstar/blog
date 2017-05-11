@@ -100,7 +100,7 @@
     Avaliation();
     ~Avaliation();
     int get();
-    void set(int);
+    void set(int avaliation = 0);
   };
 
 #endif
