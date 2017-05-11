@@ -1,0 +1,130 @@
+\hypertarget{class_content}{}\section{Content Class Reference}
+\label{class_content}\index{Content@{Content}}
+
+
+{\ttfamily \#include $<$entities.\+hpp$>$}
+
+Inheritance diagram for Content\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_content}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_content_af14b7b5ebc756686ecde73dc09b57c56}{Content} ()
+\item 
+\hyperlink{class_content_aa28dc7ed5866fb0c22dc13c2a1fdb495}{$\sim$\+Content} ()
+\item 
+\hyperlink{class_name}{Name} \hyperlink{class_content_a422f6d0fa9bbc258b4f2d2c32e825f73}{get\+\_\+author} ()
+\item 
+\hyperlink{class_text}{Text} \hyperlink{class_content_a855ce935e96e9c811ef84e0b20c38a59}{get\+\_\+content} ()
+\item 
+\hyperlink{class_avaliation}{Avaliation} \hyperlink{class_content_a82ec2dba39b5d5ac82ba3081e3a71548}{get\+\_\+avaliation} ()
+\item 
+void \hyperlink{class_content_a97a7150f5500238ca0de6f73073d8e71}{set} (\hyperlink{class_name}{Name}, \hyperlink{class_text}{Text})
+\item 
+void \hyperlink{class_content_a8dfaac49e63b4142dd68b30564838adf}{add\+\_\+avaliation} (\hyperlink{class_name}{Name}, \hyperlink{class_avaliation}{Avaliation})  throw (invalid\+\_\+argument)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_name}{Name} \hyperlink{class_content_a2b57299937210d9374f79624d44a4f33}{author}
+\item 
+\hyperlink{class_text}{Text} \hyperlink{class_content_a79390b6e1b8f81832a3b31bae4718148}{content}
+\item 
+map$<$ \hyperlink{class_name}{Name}, bool $>$ \hyperlink{class_content_a5203ffeb9ce422d8e8ea1d58dd44312a}{has\+\_\+avaliated}
+\item 
+vector$<$ \hyperlink{class_avaliation}{Avaliation} $>$ \hyperlink{class_content_aaa48d760bd18b48d17204c1532993c3b}{avaliations}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_content_af14b7b5ebc756686ecde73dc09b57c56}\label{class_content_af14b7b5ebc756686ecde73dc09b57c56}} 
+\index{Content@{Content}!Content@{Content}}
+\index{Content@{Content}!Content@{Content}}
+\subsubsection{\texorpdfstring{Content()}{Content()}}
+{\footnotesize\ttfamily Content\+::\+Content (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public constructor. \mbox{\Hypertarget{class_content_aa28dc7ed5866fb0c22dc13c2a1fdb495}\label{class_content_aa28dc7ed5866fb0c22dc13c2a1fdb495}} 
+\index{Content@{Content}!````~Content@{$\sim$\+Content}}
+\index{````~Content@{$\sim$\+Content}!Content@{Content}}
+\subsubsection{\texorpdfstring{$\sim$\+Content()}{~Content()}}
+{\footnotesize\ttfamily Content\+::$\sim$\+Content (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public destructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_content_a8dfaac49e63b4142dd68b30564838adf}\label{class_content_a8dfaac49e63b4142dd68b30564838adf}} 
+\index{Content@{Content}!add\+\_\+avaliation@{add\+\_\+avaliation}}
+\index{add\+\_\+avaliation@{add\+\_\+avaliation}!Content@{Content}}
+\subsubsection{\texorpdfstring{add\+\_\+avaliation()}{add\_avaliation()}}
+{\footnotesize\ttfamily void Content\+::add\+\_\+avaliation (\begin{DoxyParamCaption}\item[{\hyperlink{class_name}{Name}}]{name,  }\item[{\hyperlink{class_avaliation}{Avaliation}}]{avaliation }\end{DoxyParamCaption}) throw  invalid\+\_\+argument) }
+
+A public method. Add an avaliation, making sure that no user do more than one avaliation. It receives a the name of the current user and the avaliation. \mbox{\Hypertarget{class_content_a422f6d0fa9bbc258b4f2d2c32e825f73}\label{class_content_a422f6d0fa9bbc258b4f2d2c32e825f73}} 
+\index{Content@{Content}!get\+\_\+author@{get\+\_\+author}}
+\index{get\+\_\+author@{get\+\_\+author}!Content@{Content}}
+\subsubsection{\texorpdfstring{get\+\_\+author()}{get\_author()}}
+{\footnotesize\ttfamily \hyperlink{class_name}{Name} Content\+::get\+\_\+author (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method \begin{DoxyReturn}{Returns}
+Value of the author of the content. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_content_a82ec2dba39b5d5ac82ba3081e3a71548}\label{class_content_a82ec2dba39b5d5ac82ba3081e3a71548}} 
+\index{Content@{Content}!get\+\_\+avaliation@{get\+\_\+avaliation}}
+\index{get\+\_\+avaliation@{get\+\_\+avaliation}!Content@{Content}}
+\subsubsection{\texorpdfstring{get\+\_\+avaliation()}{get\_avaliation()}}
+{\footnotesize\ttfamily \hyperlink{class_avaliation}{Avaliation} Content\+::get\+\_\+avaliation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method \begin{DoxyReturn}{Returns}
+The arithmetic mean of all avaliations given the to content in question. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_content_a855ce935e96e9c811ef84e0b20c38a59}\label{class_content_a855ce935e96e9c811ef84e0b20c38a59}} 
+\index{Content@{Content}!get\+\_\+content@{get\+\_\+content}}
+\index{get\+\_\+content@{get\+\_\+content}!Content@{Content}}
+\subsubsection{\texorpdfstring{get\+\_\+content()}{get\_content()}}
+{\footnotesize\ttfamily \hyperlink{class_text}{Text} Content\+::get\+\_\+content (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method \begin{DoxyReturn}{Returns}
+Value of the content. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_content_a97a7150f5500238ca0de6f73073d8e71}\label{class_content_a97a7150f5500238ca0de6f73073d8e71}} 
+\index{Content@{Content}!set@{set}}
+\index{set@{set}!Content@{Content}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily void Content\+::set (\begin{DoxyParamCaption}\item[{\hyperlink{class_name}{Name}}]{author,  }\item[{\hyperlink{class_text}{Text}}]{content }\end{DoxyParamCaption})}
+
+A public method It receives the name of the author of the content and the content and valid them. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_content_a2b57299937210d9374f79624d44a4f33}\label{class_content_a2b57299937210d9374f79624d44a4f33}} 
+\index{Content@{Content}!author@{author}}
+\index{author@{author}!Content@{Content}}
+\subsubsection{\texorpdfstring{author}{author}}
+{\footnotesize\ttfamily \hyperlink{class_name}{Name} Content\+::author\hspace{0.3cm}{\ttfamily [protected]}}
+
+A protected variable of class \hyperlink{class_name}{Name}. Keeps the name of the author of the content. \mbox{\Hypertarget{class_content_aaa48d760bd18b48d17204c1532993c3b}\label{class_content_aaa48d760bd18b48d17204c1532993c3b}} 
+\index{Content@{Content}!avaliations@{avaliations}}
+\index{avaliations@{avaliations}!Content@{Content}}
+\subsubsection{\texorpdfstring{avaliations}{avaliations}}
+{\footnotesize\ttfamily vector$<$\hyperlink{class_avaliation}{Avaliation}$>$ Content\+::avaliations\hspace{0.3cm}{\ttfamily [protected]}}
+
+A protected variable of class Vector. Keeps the avaliations. \mbox{\Hypertarget{class_content_a79390b6e1b8f81832a3b31bae4718148}\label{class_content_a79390b6e1b8f81832a3b31bae4718148}} 
+\index{Content@{Content}!content@{content}}
+\index{content@{content}!Content@{Content}}
+\subsubsection{\texorpdfstring{content}{content}}
+{\footnotesize\ttfamily \hyperlink{class_text}{Text} Content\+::content\hspace{0.3cm}{\ttfamily [protected]}}
+
+A protected variable of class \hyperlink{class_text}{Text}. Keeps the content. \mbox{\Hypertarget{class_content_a5203ffeb9ce422d8e8ea1d58dd44312a}\label{class_content_a5203ffeb9ce422d8e8ea1d58dd44312a}} 
+\index{Content@{Content}!has\+\_\+avaliated@{has\+\_\+avaliated}}
+\index{has\+\_\+avaliated@{has\+\_\+avaliated}!Content@{Content}}
+\subsubsection{\texorpdfstring{has\+\_\+avaliated}{has\_avaliated}}
+{\footnotesize\ttfamily map$<$\hyperlink{class_name}{Name}, bool$>$ Content\+::has\+\_\+avaliated\hspace{0.3cm}{\ttfamily [protected]}}
+
+A protected variable of class Map. Keeps the name that everyone that has already avaliated. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{entities_8hpp}{entities.\+hpp}\item 
+\hyperlink{entities_8cpp}{entities.\+cpp}\end{DoxyCompactItemize}

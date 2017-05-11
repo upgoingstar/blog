@@ -1,0 +1,79 @@
+\hypertarget{class_post}{}\section{Post Class Reference}
+\label{class_post}\index{Post@{Post}}
+
+
+{\ttfamily \#include $<$entities.\+hpp$>$}
+
+Inheritance diagram for Post\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_post}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_post_ae548a55c0bfa09e805cd0a19b07db365}{Post} (\hyperlink{class_name}{Name}, \hyperlink{class_text}{Text})
+\item 
+\hyperlink{class_post_a6c1e585c0adb3220a154ba20d2144ae1}{$\sim$\+Post} ()
+\item 
+void \hyperlink{class_post_a8172722471012d2a6ede1a0b10c7f756}{allow\+\_\+comments} ()
+\item 
+void \hyperlink{class_post_ab2bf16185ad34d5cfca23785bc2a95e6}{disallow\+\_\+comments} ()
+\item 
+vector$<$ \hyperlink{class_comment}{Comment} $>$ \hyperlink{class_post_a026bd803b219f1cb373d3041c53261eb}{get\+\_\+comments} ()
+\item 
+void \hyperlink{class_post_a882ef59148fa556833a68fbdedce58da}{add\+\_\+comment} (\hyperlink{class_comment}{Comment})  throw (invalid\+\_\+argument)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_post_ae548a55c0bfa09e805cd0a19b07db365}\label{class_post_ae548a55c0bfa09e805cd0a19b07db365}} 
+\index{Post@{Post}!Post@{Post}}
+\index{Post@{Post}!Post@{Post}}
+\subsubsection{\texorpdfstring{Post()}{Post()}}
+{\footnotesize\ttfamily Post\+::\+Post (\begin{DoxyParamCaption}\item[{\hyperlink{class_name}{Name}}]{author,  }\item[{\hyperlink{class_text}{Text}}]{post\+\_\+content }\end{DoxyParamCaption})}
+
+A public constructor. \mbox{\Hypertarget{class_post_a6c1e585c0adb3220a154ba20d2144ae1}\label{class_post_a6c1e585c0adb3220a154ba20d2144ae1}} 
+\index{Post@{Post}!````~Post@{$\sim$\+Post}}
+\index{````~Post@{$\sim$\+Post}!Post@{Post}}
+\subsubsection{\texorpdfstring{$\sim$\+Post()}{~Post()}}
+{\footnotesize\ttfamily Post\+::$\sim$\+Post (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public destructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_post_a882ef59148fa556833a68fbdedce58da}\label{class_post_a882ef59148fa556833a68fbdedce58da}} 
+\index{Post@{Post}!add\+\_\+comment@{add\+\_\+comment}}
+\index{add\+\_\+comment@{add\+\_\+comment}!Post@{Post}}
+\subsubsection{\texorpdfstring{add\+\_\+comment()}{add\_comment()}}
+{\footnotesize\ttfamily void Post\+::add\+\_\+comment (\begin{DoxyParamCaption}\item[{\hyperlink{class_comment}{Comment}}]{comment }\end{DoxyParamCaption}) throw  invalid\+\_\+argument) }
+
+A public method Add a comment if possible (no user can comment more than 5 times and the post has to autorize comments). \mbox{\Hypertarget{class_post_a8172722471012d2a6ede1a0b10c7f756}\label{class_post_a8172722471012d2a6ede1a0b10c7f756}} 
+\index{Post@{Post}!allow\+\_\+comments@{allow\+\_\+comments}}
+\index{allow\+\_\+comments@{allow\+\_\+comments}!Post@{Post}}
+\subsubsection{\texorpdfstring{allow\+\_\+comments()}{allow\_comments()}}
+{\footnotesize\ttfamily void Post\+::allow\+\_\+comments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method Allow comments to be made by other users. \mbox{\Hypertarget{class_post_ab2bf16185ad34d5cfca23785bc2a95e6}\label{class_post_ab2bf16185ad34d5cfca23785bc2a95e6}} 
+\index{Post@{Post}!disallow\+\_\+comments@{disallow\+\_\+comments}}
+\index{disallow\+\_\+comments@{disallow\+\_\+comments}!Post@{Post}}
+\subsubsection{\texorpdfstring{disallow\+\_\+comments()}{disallow\_comments()}}
+{\footnotesize\ttfamily void Post\+::disallow\+\_\+comments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method Disallow comments. This excludes all current comments. \mbox{\Hypertarget{class_post_a026bd803b219f1cb373d3041c53261eb}\label{class_post_a026bd803b219f1cb373d3041c53261eb}} 
+\index{Post@{Post}!get\+\_\+comments@{get\+\_\+comments}}
+\index{get\+\_\+comments@{get\+\_\+comments}!Post@{Post}}
+\subsubsection{\texorpdfstring{get\+\_\+comments()}{get\_comments()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_comment}{Comment} $>$ Post\+::get\+\_\+comments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method \begin{DoxyReturn}{Returns}
+all the comments. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{entities_8hpp}{entities.\+hpp}\item 
+\hyperlink{entities_8cpp}{entities.\+cpp}\end{DoxyCompactItemize}

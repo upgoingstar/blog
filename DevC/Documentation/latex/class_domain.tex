@@ -1,0 +1,122 @@
+\hypertarget{class_domain}{}\section{Domain Class Reference}
+\label{class_domain}\index{Domain@{Domain}}
+
+
+{\ttfamily \#include $<$domains.\+hpp$>$}
+
+Inheritance diagram for Domain\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_domain}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_domain_a6adccae537e53d4fde2b70f875e6b8d0}{Domain} ()
+\item 
+\hyperlink{class_domain_a29cec9afb2e54c810ba1f3c1a49543a8}{$\sim$\+Domain} ()
+\item 
+string \hyperlink{class_domain_a265e5167062bf41ec78e4245af288c33}{get} ()
+\item 
+bool \hyperlink{class_domain_ae36e552d1a3bde70b7f448de345a3c9d}{empty} ()
+\item 
+void \hyperlink{class_domain_a629126b8c9a6a749d30745bde230c4ee}{set} (string)
+\item 
+bool \hyperlink{class_domain_a2791934de616d1bddcd93206b132c323}{operator!=} (const \hyperlink{class_domain}{Domain} \&other) const
+\item 
+bool \hyperlink{class_domain_acd0015ed9d54a761f7fca726fa53b541}{operator==} (const \hyperlink{class_domain}{Domain} \&other) const
+\item 
+bool \hyperlink{class_domain_ac165cf81dfabb07fbfdf0559525fc773}{operator$<$} (const \hyperlink{class_domain}{Domain} \&other) const
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{class_domain_a6a4590a4c94ae7be6f4f0da9703fb6d6}{valid} (string)=0  throw (invalid\+\_\+argument)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_domain_a9d15a9f2c19c5863fe863a7d2f53a7cc}{value}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An Abstract Class \hyperlink{class_domain}{Domain}. Keeps a string for all classes that inherit this class and implement the methods get and set (respectively, see and modify the value keeped). Also declares a virtual method \char`\"{}valid\char`\"{} for each class implement. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_domain_a6adccae537e53d4fde2b70f875e6b8d0}\label{class_domain_a6adccae537e53d4fde2b70f875e6b8d0}} 
+\index{Domain@{Domain}!Domain@{Domain}}
+\index{Domain@{Domain}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{Domain()}{Domain()}}
+{\footnotesize\ttfamily Domain\+::\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public constructor. \mbox{\Hypertarget{class_domain_a29cec9afb2e54c810ba1f3c1a49543a8}\label{class_domain_a29cec9afb2e54c810ba1f3c1a49543a8}} 
+\index{Domain@{Domain}!````~Domain@{$\sim$\+Domain}}
+\index{````~Domain@{$\sim$\+Domain}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{$\sim$\+Domain()}{~Domain()}}
+{\footnotesize\ttfamily Domain\+::$\sim$\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public destructor. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_domain_ae36e552d1a3bde70b7f448de345a3c9d}\label{class_domain_ae36e552d1a3bde70b7f448de345a3c9d}} 
+\index{Domain@{Domain}!empty@{empty}}
+\index{empty@{empty}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily bool Domain\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method Warn if the string is empty. \mbox{\Hypertarget{class_domain_a265e5167062bf41ec78e4245af288c33}\label{class_domain_a265e5167062bf41ec78e4245af288c33}} 
+\index{Domain@{Domain}!get@{get}}
+\index{get@{get}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily string Domain\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+A public method \begin{DoxyReturn}{Returns}
+Value of the keeped string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_domain_a2791934de616d1bddcd93206b132c323}\label{class_domain_a2791934de616d1bddcd93206b132c323}} 
+\index{Domain@{Domain}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool Domain\+::operator!= (\begin{DoxyParamCaption}\item[{const \hyperlink{class_domain}{Domain} \&}]{other }\end{DoxyParamCaption}) const}
+
+Make it possible to compare if one \hyperlink{class_domain}{Domain} object has different value than other. \mbox{\Hypertarget{class_domain_ac165cf81dfabb07fbfdf0559525fc773}\label{class_domain_ac165cf81dfabb07fbfdf0559525fc773}} 
+\index{Domain@{Domain}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool Domain\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{class_domain}{Domain} \&}]{other }\end{DoxyParamCaption}) const}
+
+Make it possible to compare if one \hyperlink{class_domain}{Domain} object has better value than other. \mbox{\Hypertarget{class_domain_acd0015ed9d54a761f7fca726fa53b541}\label{class_domain_acd0015ed9d54a761f7fca726fa53b541}} 
+\index{Domain@{Domain}!operator==@{operator==}}
+\index{operator==@{operator==}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Domain\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{class_domain}{Domain} \&}]{other }\end{DoxyParamCaption}) const}
+
+Make it possible to compare if one \hyperlink{class_domain}{Domain} object has igual value than other. \mbox{\Hypertarget{class_domain_a629126b8c9a6a749d30745bde230c4ee}\label{class_domain_a629126b8c9a6a749d30745bde230c4ee}} 
+\index{Domain@{Domain}!set@{set}}
+\index{set@{set}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily void Domain\+::set (\begin{DoxyParamCaption}\item[{string}]{value }\end{DoxyParamCaption})}
+
+A public method Modify the value of the keeped string. \mbox{\Hypertarget{class_domain_a6a4590a4c94ae7be6f4f0da9703fb6d6}\label{class_domain_a6a4590a4c94ae7be6f4f0da9703fb6d6}} 
+\index{Domain@{Domain}!valid@{valid}}
+\index{valid@{valid}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{valid()}{valid()}}
+{\footnotesize\ttfamily virtual void Domain\+::valid (\begin{DoxyParamCaption}\item[{string}]{ }\end{DoxyParamCaption}) throw  invalid\+\_\+argument) \hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+A virtual method. For all classes that inherit this implement their own validation. Utilized in method set. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_domain_a9d15a9f2c19c5863fe863a7d2f53a7cc}\label{class_domain_a9d15a9f2c19c5863fe863a7d2f53a7cc}} 
+\index{Domain@{Domain}!value@{value}}
+\index{value@{value}!Domain@{Domain}}
+\subsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily string Domain\+::value\hspace{0.3cm}{\ttfamily [protected]}}
+
+A protected string. Keep a value for all classes that inherit this one. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{domains_8hpp}{domains.\+hpp}\item 
+\hyperlink{domains_8cpp}{domains.\+cpp}\end{DoxyCompactItemize}

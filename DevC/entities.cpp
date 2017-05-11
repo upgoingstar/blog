@@ -16,10 +16,6 @@
 
   User::~User() {}
 
-  /*
-    Validate User by verifying if any of the arguments (name and email) already exists, so that there are no two users with the same name or email.
-    TODO: Need refactoring!
-  */
   void User::valid(Name name, Email email, Password password) throw(invalid_argument) {
     if(name.empty() || email.empty() || password.empty()) {
       throw invalid_argument("Invalid informations to compose a user!");
@@ -43,10 +39,6 @@
     }
   }
 
-  /*
-    Check if the email and password given correspond to a real User.
-    TODO: Need refactoring!
-  */
   void User::check_user(Email email, Password password) throw(invalid_argument) {
     if(this->email != email || this->password != password || email.empty() || password.empty()) {
       throw invalid_argument( "That is not your email or password!" );
@@ -61,28 +53,18 @@
 
   Content::~Content() {}
 
-  /*
-    Verify if the arguments are not empty.
-  */
   void Content::valid(Name author, Text content) throw(invalid_argument) {
     if(author.empty() || content.empty()) {
       throw invalid_argument("Invalid informations to compose a content!");
     }
   }
 
-  /*
-    It receives the name of the author of the content and the content.
-  */
   void Content::set(Name author, Text content) {
     Content::valid(author, content);
     this->author = author;
     this->content = content;
   }
 
-  /*
-    Add an avaliation, making sure that no user do more than one avaliation.
-    It receives a the name of the current user and the avaliation.
-  */
   void Content::add_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
     if(has_avaliated[name]) {
       throw invalid_argument("This user has already avaliated!");
@@ -107,9 +89,6 @@
     return this->content;
   }
 
-  /*
-    Gets the arithmetic mean of all avaliations given the to content in question.
-  */
   Avaliation Content::get_avaliation() {
     int total_sum = 0;
     int total_size = this->avaliations.size();
@@ -146,24 +125,15 @@
 
   Post::~Post() {}
 
-  /*
-    Allow comments to be made by other users.
-  */
   void Post::allow_comments() {
     comments_allowed = true;
   }
 
-  /*
-    Disallow comments. This excludes all current comments.
-  */
   void Post::disallow_comments() {
     comments_allowed = false;
     this->comments.clear();
   }
 
-  /*
-    Add a comment if possible (no user can comment more than 5 times and the post has to autorize comments).
-  */
   void Post::add_comment(Comment comment) throw(invalid_argument) {
     if(comments_allowed && number_comments[comment.get_author()] < comments_limit) {
       number_comments[comment.get_author()]++;

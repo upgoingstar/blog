@@ -30,23 +30,14 @@ bool Domain::empty() {
   return this->value.empty();
 }
 
-/*
-  Make it possible to compare if one Domain object has different value than other.
-*/
 bool Domain::operator!=(const Domain &other) const {
   return !(this->value == other.value);
 }
 
-/*
-  Make it possible to compare if one Domain object has igual value than other.
-*/
 bool Domain::operator==(const Domain &other) const {
   return this->value == other.value;
 }
 
-/*
-  Make it possible to compare if one Domain object has better value than other.
-*/
 bool Domain::operator<(const Domain &other) const {
   return this->value < other.value;
 }
@@ -59,9 +50,6 @@ bool Domain::operator<(const Domain &other) const {
 
   Name::~Name() {}
 
-  /*
-    Validate Name by verifying if the name is not bigger than the limit and see if all caracters are alphabetic or spaces.
-  */
   void Name::valid(string n) throw(invalid_argument) {
     if(n.size() > size_limit) {
       throw invalid_argument( "Name is to big!" );
@@ -87,9 +75,6 @@ bool Domain::operator<(const Domain &other) const {
 
   Password::~Password() {}
 
-  /*
-    Validate Password by verifying if the password is the determined size and if there are no repeated caracters.
-  */
   void Password::valid(string p) throw(invalid_argument) {
     if(p.empty()) {
       throw invalid_argument( "There is no password!" );
@@ -118,9 +103,6 @@ bool Domain::operator<(const Domain &other) const {
 
   Email::~Email() {}
 
-  /*
-    Validate Email by verifying if the email follow the pattern l@l.l (being l any string with only alphabetic caracters).
-  */
   void Email::valid(string e) throw(invalid_argument) {
     for(int i = 0; i < (int)e.size(); i++) {
       if(!isalpha(e[i]) && e[i] != '@' && e[i] != '.') {
@@ -142,15 +124,12 @@ bool Domain::operator<(const Domain &other) const {
 //------------------------------------------------
 
   Avaliation::Avaliation() {
-    this->value = -1;
+    this->value = 0;
   }
 
   Avaliation::~Avaliation() {}
 
   int Avaliation::get() {
-    if(this->value == -1) {
-      throw invalid_argument( "Invalid number!" );
-    }
     return this->value;
   }
 
@@ -159,9 +138,6 @@ bool Domain::operator<(const Domain &other) const {
     this->value = avaliation;
   }
 
-  /*
-    Validate Avaliation by verifying if the avaliation is a number in the interval [0, 5].
-  */
   void Avaliation::valid(int a) throw(invalid_argument) {
     if(a > 5 || a < 0) {
       throw invalid_argument( "Invalid number!" );
@@ -176,9 +152,6 @@ bool Domain::operator<(const Domain &other) const {
 
   Text::~Text() {}
 
-  /*
-    Validate Text by verifying if the text has a size less than 50 caracters.
-  */
   void Text::valid(string t) throw(invalid_argument) {
     if(t.empty()) {
       throw invalid_argument( "There is no text!" );
