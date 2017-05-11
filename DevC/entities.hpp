@@ -30,7 +30,6 @@
 	  ~User();
 	  void set(Name, Email, Password);
 	  Name get_name() throw(invalid_argument);
-	  Password get_password() throw(invalid_argument);
 	  void check_user(Email, Password) throw(invalid_argument);
 	};
 
