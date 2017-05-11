@@ -17,7 +17,7 @@
   User::~User() {}
 
   /*
-    Validate User by verifying if any of the arguments (name and email) already exists, so that there are no two users with the same name or email.
+    Validate User by verifying if any of the arguments (name, email and password) already exists, so that there are no two users with the same name or email and password.
     TODO: Need refactoring!
   */
   void User::valid(Name name, Email email, Password password) throw(invalid_argument) {
