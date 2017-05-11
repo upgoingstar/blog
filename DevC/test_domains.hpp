@@ -20,8 +20,8 @@ using namespace std;
 
 class TestDomain{
 protected:
-	void success_scenario(string,Domain&);
-	void failure_scenario(string,Domain&);
+	void success_scenario(string,Domain&) throw(invalid_argument);
+	void failure_scenario(string,Domain&) throw(invalid_argument);
 public:
 	TestDomain();
 	~TestDomain();
@@ -91,8 +91,8 @@ class TestAvaliation{
 private:
 	const int correct = 3;
 	const int incorrect = 7;
-	void success_scenario(int);
-	void failure_scenario(int);
+	void success_scenario(int) throw(invalid_argument);
+	void failure_scenario(int) throw(invalid_argument);
 public:
 	void verify();
 	TestAvaliation();

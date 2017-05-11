@@ -36,7 +36,7 @@
 
   Name User::get_name() throw(invalid_argument) {
     if(anonymous) {
-      throw invalid_argument("This user don't have a name");
+      throw invalid_argument("This user is anonymous, doesn't have a name");
     }
     else {
       return this->name;
@@ -51,7 +51,7 @@
     if(this->email != email || this->password != password || email.empty() || password.empty()) {
       throw invalid_argument( "That is not your email or password!" );
     }
-  };
+  }
 
 //------------------------------------------------
 // Method Implementation of Class Content

@@ -19,8 +19,8 @@ using namespace std;
 
 class TestUser{
 private:
-	void success_scenario(Name, Email, Password);
-	void failure_scenario(Name, Email, Password);
+	void success_scenario(Name, Email, Password) throw(invalid_argument);
+	void failure_scenario(Name, Email, Password) throw(invalid_argument);
 public:
 	TestUser();
 	~TestUser();
@@ -34,8 +34,8 @@ public:
 
 class TestComment{
 private:
-	void success_scenario(Name, Text);
-	void failure_scenario(Name, Text);
+	void success_scenario(Name, Text) throw(invalid_argument);
+	void failure_scenario(Name, Text) throw(invalid_argument);
 public:
 	TestComment();
 	~TestComment();
@@ -49,9 +49,9 @@ public:
 
 class TestPost{
 private:
-	void success_scenario(Name, Text);
-	void failure_scenario(Name, Text);
-	void failure_scenario2(Name, Text);
+	void success_scenario(Name, Text) throw(invalid_argument);
+	void failure_scenario(Name, Text) throw(invalid_argument);
+	void failure_scenario2(Name, Text) throw(invalid_argument);
 public:
 	TestPost();
 	~TestPost();
@@ -60,8 +60,8 @@ public:
 
 class TestBlog{
 private:
-	void success_scenario(Name, Name);
-	void failure_scenario(Name, Name);
+	void success_scenario(Name, Name) throw(invalid_argument);
+	void failure_scenario(Name, Name) throw(invalid_argument);
 public:
 	TestBlog();
 	~TestBlog();

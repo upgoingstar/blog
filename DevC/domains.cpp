@@ -63,8 +63,12 @@ bool Domain::operator<(const Domain &other) const {
     Validate Name by verifying if the name is not bigger than the limit and see if all caracters are alphabetic or spaces.
   */
   void Name::valid(string n) throw(invalid_argument) {
-    if(n.size() > size_limit || n.empty()) {
+    if(n.size() > size_limit) {
       throw invalid_argument( "Name is to big!" );
+    }
+
+    if(n.empty()) {
+      throw invalid_argument( "Name is empty!" );
     }
 
     for(int i = 0; i < n.size(); i++) {
@@ -87,6 +91,10 @@ bool Domain::operator<(const Domain &other) const {
     Validate Password by verifying if the password is the determined size and if there are no repeated caracters.
   */
   void Password::valid(string p) throw(invalid_argument) {
+    if(p.empty()) {
+      throw invalid_argument( "There is no password!" );
+    }
+
     if(p.size() != allowed_size) {
       throw invalid_argument( "Password size diferent from allowed!" );
     }
@@ -140,8 +148,9 @@ bool Domain::operator<(const Domain &other) const {
   Avaliation::~Avaliation() {}
 
   int Avaliation::get() {
-    if(this->value == -1)
-      throw invalid_argument("Avaliation is empty!" );
+    if(this->value == -1) {
+      throw invalid_argument( "Invalid number!" );
+    }
     return this->value;
   }
 
@@ -154,7 +163,7 @@ bool Domain::operator<(const Domain &other) const {
     Validate Avaliation by verifying if the avaliation is a number in the interval [0, 5].
   */
   void Avaliation::valid(int a) throw(invalid_argument) {
-    if(a > 5 || a < 0){
+    if(a > 5 || a < 0) {
       throw invalid_argument( "Invalid number!" );
     }
   }
@@ -171,6 +180,10 @@ bool Domain::operator<(const Domain &other) const {
     Validate Text by verifying if the text has a size less than 50 caracters.
   */
   void Text::valid(string t) throw(invalid_argument) {
+    if(t.empty()) {
+      throw invalid_argument( "There is no text!" );
+    }
+    
     if(t.size() > 50) {
       throw invalid_argument( "This text is too big!" );
     }

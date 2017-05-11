@@ -14,7 +14,6 @@ int main(){
     cout << "Classe Nome errada\n";
   }
 
-
   TestPassword senha;
   try{
     senha.verify();
@@ -24,7 +23,6 @@ int main(){
     cout << "Classe Senha errada\n";
   }
 
-
   TestEmail email;
   try{
     email.verify();
@@ -33,7 +31,6 @@ int main(){
   catch(invalid_argument erro){
     cout << "Classe Email errada\n";
   }
-
 
   TestText texto;
   try{
@@ -89,6 +86,8 @@ int main(){
   catch(invalid_argument erro){
     cout << "Classe Blog errada\n";
   }
+
+  cout << "Aperte [enter] para sair." << endl;
   
   getchar();
   return 0;

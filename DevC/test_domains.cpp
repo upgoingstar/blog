@@ -7,43 +7,44 @@ using namespace std;
 // Method Implementation of Class TestDomain
 // ------------------------------------------------
 
-TestDomain::TestDomain(){}
+TestDomain::TestDomain() {}
 
-TestDomain::~TestDomain(){}
+TestDomain::~TestDomain() {}
 
-void TestDomain::success_scenario(string value,Domain &testAuxiliar){
-	try{
+void TestDomain::success_scenario(string value,Domain &testAuxiliar) throw(invalid_argument) {
+	try {
 		testAuxiliar.set(value);
-		try{
+		try {
 			string testAuxiliar2 = testAuxiliar.get();
-			if(testAuxiliar2 != value){
+			if(testAuxiliar2 != value) {
 				throw invalid_argument ("Invalid Class!");
 			}
 		}
-		catch(invalid_argument erro){
+		catch(invalid_argument erro) {
 			throw invalid_argument ("Invalid Class!");
 		}
 	}
-	catch(invalid_argument erro){
+	catch(invalid_argument erro) {
 		throw invalid_argument ("Invalid Class!");
 	}
 }
 
-void TestDomain::failure_scenario(string value,Domain &testAuxiliar){
-	bool daerro = false;
-	try{
+void TestDomain::failure_scenario(string value,Domain &testAuxiliar) throw(invalid_argument) {
+	bool errorOcurred = false;
+	try {
 		testAuxiliar.set(value);
-		daerro = true;
+		errorOcurred = true;
 	}
-	catch(invalid_argument erro){
+	catch(invalid_argument erro) {
 		try{
 			testAuxiliar.get();
-			daerro = true;
+			errorOcurred = true;
 		}
-		catch(invalid_argument erro){}
+		catch(invalid_argument erro) {}
 	}
-	if(daerro)
-			throw invalid_argument ("Invalid Class!");
+	if(errorOcurred) {
+		throw invalid_argument ("Invalid Class!");
+	}
 }
 
 // ------------------------------------------------
@@ -54,11 +55,12 @@ TestName::TestName() {}
 
 TestName::~TestName() {}
 
-void TestName::verify(){
+void TestName::verify() {
 	{
 		Name testAuxiliar;
 		success_scenario(correct,testAuxiliar);
 	}
+
 	Name testAuxiliar;
 	failure_scenario(incorrect,testAuxiliar);
 }
@@ -71,11 +73,12 @@ TestPassword::TestPassword() {}
 
 TestPassword::~TestPassword() {}
 
-void TestPassword::verify(){
+void TestPassword::verify() {
 	{
 		Password testAuxiliar;
 		success_scenario(correct,testAuxiliar);
 	}
+
 	Password testAuxiliar;
 	failure_scenario(incorrect,testAuxiliar);
 }
@@ -88,11 +91,12 @@ TestEmail::TestEmail() {}
 
 TestEmail::~TestEmail() {}
 
-void TestEmail::verify(){
+void TestEmail::verify() {
 	{
 		Email testAuxiliar;
 		success_scenario(correct,testAuxiliar);
 	}
+
 	Email testAuxiliar;
 	failure_scenario(incorrect,testAuxiliar);
 }
@@ -105,11 +109,12 @@ TestText::TestText() {}
 
 TestText::~TestText() {}
 
-void TestText::verify(){
+void TestText::verify() {
 	{
 		Text testAuxiliar;
 		success_scenario(correct,testAuxiliar);
 	}
+
 	Text testAuxiliar;
 	failure_scenario(incorrect,testAuxiliar);
 }
@@ -122,44 +127,45 @@ TestAvaliation::TestAvaliation() {}
 
 TestAvaliation::~TestAvaliation() {}
 
-void TestAvaliation::success_scenario(int value){
+void TestAvaliation::success_scenario(int value) throw(invalid_argument) {
 	Avaliation testAuxiliar;
-	try{
+	try {
 		testAuxiliar.set(value);
-		try{
+		try {
 			int testAuxiliar2 = testAuxiliar.get();
 			if(testAuxiliar2 != value){
 				throw invalid_argument ("Invalid Class!");
 			}
 		}
-		catch(invalid_argument erro){
+		catch(invalid_argument erro) {
 			throw invalid_argument ("Invalid Class!");
 		}
 	}
-	catch(invalid_argument erro){
+	catch(invalid_argument erro) {
 		throw invalid_argument ("Invalid Class!");
 	}
 }
 
-void TestAvaliation::failure_scenario(int value){
+void TestAvaliation::failure_scenario(int value) throw(invalid_argument) {
 	Avaliation testAuxiliar;
-	bool daerro = false;
-	try{
+	bool errorOcurred = false;
+	try {
 		testAuxiliar.set(value);
-		daerro = true;
+		errorOcurred = true;
 	}
 	catch(invalid_argument erro){
-		try{
+		try {
 			testAuxiliar.get();
-			daerro = true;
+			errorOcurred = true;
 		}
-		catch(invalid_argument erro){}
+		catch(invalid_argument erro) {}
 	}
-	if(daerro)
-			throw invalid_argument ("Invalid Class!");
+	if(errorOcurred) {
+		throw invalid_argument ("Invalid Class!");
+	}
 }
 
-void TestAvaliation::verify(){
+void TestAvaliation::verify() {
 	success_scenario(correct);
 	failure_scenario(incorrect);
 }
