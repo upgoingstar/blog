@@ -23,7 +23,7 @@
 		Password password;
 		Email email;
 		bool anonymous;
-		void valid(Name, Email) throw(invalid_argument);
+		void valid(Name, Email,Password) throw(invalid_argument);
 
 	public:
 	  User();
