@@ -4,14 +4,14 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o app/controller/blog_controller.o app/controller/comment_controller.o app/controller/content_controller.o app/controller/post_controller.o app/controller/user_controller.o app/controller/welcome_controller.o app/domain/_domain.o app/domain/avaliation.o app/domain/email.o app/domain/name.o app/domain/password.o app/domain/text.o app/entity/blog.o app/entity/comment.o app/entity/content.o app/entity/post.o app/entity/user.o app/model/blog_model.o app/model/comment_model.o app/model/content_model.o app/model/post_model.o app/model/user_model.o app/model/welcome_model.o app/view/blog_view.o app/view/comment_view.o app/view/content_view.o app/view/post_view.o app/view/user_view.o app/view/welcome_view.o
-LINKOBJ  = main.o app/controller/blog_controller.o app/controller/comment_controller.o app/controller/content_controller.o app/controller/post_controller.o app/controller/user_controller.o app/controller/welcome_controller.o app/domain/_domain.o app/domain/avaliation.o app/domain/email.o app/domain/name.o app/domain/password.o app/domain/text.o app/entity/blog.o app/entity/comment.o app/entity/content.o app/entity/post.o app/entity/user.o app/model/blog_model.o app/model/comment_model.o app/model/content_model.o app/model/post_model.o app/model/user_model.o app/model/welcome_model.o app/view/blog_view.o app/view/comment_view.o app/view/content_view.o app/view/post_view.o app/view/user_view.o app/view/welcome_view.o
+OBJ      = main.o app/domain/_domain.o app/domain/avaliation.o app/domain/email.o app/domain/name.o app/domain/password.o app/domain/text.o app/entity/blog.o app/entity/comment.o app/entity/content.o app/entity/post.o app/entity/user.o app/view/welcome_view.o ../../../../Desktop/blog/app/controller/blog_controller.o ../../../../Desktop/blog/app/controller/comment_controller.o ../../../../Desktop/blog/app/controller/content_controller.o ../../../../Desktop/blog/app/controller/post_controller.o ../../../../Desktop/blog/app/controller/user_controller.o ../../../../Desktop/blog/app/controller/welcome_controller.o ../../../../Desktop/blog/app/model/blog_model.o ../../../../Desktop/blog/app/model/comment_model.o ../../../../Desktop/blog/app/model/content_model.o ../../../../Desktop/blog/app/model/post_model.o ../../../../Desktop/blog/app/model/user_model.o ../../../../Desktop/blog/app/model/welcome_model.o ../../../../Desktop/blog/app/view/blog_view.o ../../../../Desktop/blog/app/view/comment_view.o ../../../../Desktop/blog/app/view/content_view.o ../../../../Desktop/blog/app/view/post_view.o ../../../../Desktop/blog/app/view/user_view.o
+LINKOBJ  = main.o app/domain/_domain.o app/domain/avaliation.o app/domain/email.o app/domain/name.o app/domain/password.o app/domain/text.o app/entity/blog.o app/entity/comment.o app/entity/content.o app/entity/post.o app/entity/user.o app/view/welcome_view.o ../../../../Desktop/blog/app/controller/blog_controller.o ../../../../Desktop/blog/app/controller/comment_controller.o ../../../../Desktop/blog/app/controller/content_controller.o ../../../../Desktop/blog/app/controller/post_controller.o ../../../../Desktop/blog/app/controller/user_controller.o ../../../../Desktop/blog/app/controller/welcome_controller.o ../../../../Desktop/blog/app/model/blog_model.o ../../../../Desktop/blog/app/model/comment_model.o ../../../../Desktop/blog/app/model/content_model.o ../../../../Desktop/blog/app/model/post_model.o ../../../../Desktop/blog/app/model/user_model.o ../../../../Desktop/blog/app/model/welcome_model.o ../../../../Desktop/blog/app/view/blog_view.o ../../../../Desktop/blog/app/view/comment_view.o ../../../../Desktop/blog/app/view/content_view.o ../../../../Desktop/blog/app/view/post_view.o ../../../../Desktop/blog/app/view/user_view.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
 BIN      = blog.exe
-CXXFLAGS = $(CXXINCS) -ansi -Ofast -std=gnu++11 -Wall -Wextra -pedantic
-CFLAGS   = $(INCS) -ansi -Ofast -std=gnu++11 -Wall -Wextra -pedantic
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -26,24 +26,6 @@ $(BIN): $(OBJ)
 
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
-
-app/controller/blog_controller.o: app/controller/blog_controller.cpp
-	$(CPP) -c app/controller/blog_controller.cpp -o app/controller/blog_controller.o $(CXXFLAGS)
-
-app/controller/comment_controller.o: app/controller/comment_controller.cpp
-	$(CPP) -c app/controller/comment_controller.cpp -o app/controller/comment_controller.o $(CXXFLAGS)
-
-app/controller/content_controller.o: app/controller/content_controller.cpp
-	$(CPP) -c app/controller/content_controller.cpp -o app/controller/content_controller.o $(CXXFLAGS)
-
-app/controller/post_controller.o: app/controller/post_controller.cpp
-	$(CPP) -c app/controller/post_controller.cpp -o app/controller/post_controller.o $(CXXFLAGS)
-
-app/controller/user_controller.o: app/controller/user_controller.cpp
-	$(CPP) -c app/controller/user_controller.cpp -o app/controller/user_controller.o $(CXXFLAGS)
-
-app/controller/welcome_controller.o: app/controller/welcome_controller.cpp
-	$(CPP) -c app/controller/welcome_controller.cpp -o app/controller/welcome_controller.o $(CXXFLAGS)
 
 app/domain/_domain.o: app/domain/_domain.cpp
 	$(CPP) -c app/domain/_domain.cpp -o app/domain/_domain.o $(CXXFLAGS)
@@ -78,38 +60,56 @@ app/entity/post.o: app/entity/post.cpp
 app/entity/user.o: app/entity/user.cpp
 	$(CPP) -c app/entity/user.cpp -o app/entity/user.o $(CXXFLAGS)
 
-app/model/blog_model.o: app/model/blog_model.cpp
-	$(CPP) -c app/model/blog_model.cpp -o app/model/blog_model.o $(CXXFLAGS)
-
-app/model/comment_model.o: app/model/comment_model.cpp
-	$(CPP) -c app/model/comment_model.cpp -o app/model/comment_model.o $(CXXFLAGS)
-
-app/model/content_model.o: app/model/content_model.cpp
-	$(CPP) -c app/model/content_model.cpp -o app/model/content_model.o $(CXXFLAGS)
-
-app/model/post_model.o: app/model/post_model.cpp
-	$(CPP) -c app/model/post_model.cpp -o app/model/post_model.o $(CXXFLAGS)
-
-app/model/user_model.o: app/model/user_model.cpp
-	$(CPP) -c app/model/user_model.cpp -o app/model/user_model.o $(CXXFLAGS)
-
-app/model/welcome_model.o: app/model/welcome_model.cpp
-	$(CPP) -c app/model/welcome_model.cpp -o app/model/welcome_model.o $(CXXFLAGS)
-
-app/view/blog_view.o: app/view/blog_view.cpp
-	$(CPP) -c app/view/blog_view.cpp -o app/view/blog_view.o $(CXXFLAGS)
-
-app/view/comment_view.o: app/view/comment_view.cpp
-	$(CPP) -c app/view/comment_view.cpp -o app/view/comment_view.o $(CXXFLAGS)
-
-app/view/content_view.o: app/view/content_view.cpp
-	$(CPP) -c app/view/content_view.cpp -o app/view/content_view.o $(CXXFLAGS)
-
-app/view/post_view.o: app/view/post_view.cpp
-	$(CPP) -c app/view/post_view.cpp -o app/view/post_view.o $(CXXFLAGS)
-
-app/view/user_view.o: app/view/user_view.cpp
-	$(CPP) -c app/view/user_view.cpp -o app/view/user_view.o $(CXXFLAGS)
-
 app/view/welcome_view.o: app/view/welcome_view.cpp
 	$(CPP) -c app/view/welcome_view.cpp -o app/view/welcome_view.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/controller/blog_controller.o: ../../../../Desktop/blog/app/controller/blog_controller.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/controller/blog_controller.cpp -o ../../../../Desktop/blog/app/controller/blog_controller.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/controller/comment_controller.o: ../../../../Desktop/blog/app/controller/comment_controller.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/controller/comment_controller.cpp -o ../../../../Desktop/blog/app/controller/comment_controller.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/controller/content_controller.o: ../../../../Desktop/blog/app/controller/content_controller.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/controller/content_controller.cpp -o ../../../../Desktop/blog/app/controller/content_controller.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/controller/post_controller.o: ../../../../Desktop/blog/app/controller/post_controller.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/controller/post_controller.cpp -o ../../../../Desktop/blog/app/controller/post_controller.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/controller/user_controller.o: ../../../../Desktop/blog/app/controller/user_controller.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/controller/user_controller.cpp -o ../../../../Desktop/blog/app/controller/user_controller.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/controller/welcome_controller.o: ../../../../Desktop/blog/app/controller/welcome_controller.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/controller/welcome_controller.cpp -o ../../../../Desktop/blog/app/controller/welcome_controller.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/model/blog_model.o: ../../../../Desktop/blog/app/model/blog_model.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/model/blog_model.cpp -o ../../../../Desktop/blog/app/model/blog_model.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/model/comment_model.o: ../../../../Desktop/blog/app/model/comment_model.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/model/comment_model.cpp -o ../../../../Desktop/blog/app/model/comment_model.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/model/content_model.o: ../../../../Desktop/blog/app/model/content_model.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/model/content_model.cpp -o ../../../../Desktop/blog/app/model/content_model.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/model/post_model.o: ../../../../Desktop/blog/app/model/post_model.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/model/post_model.cpp -o ../../../../Desktop/blog/app/model/post_model.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/model/user_model.o: ../../../../Desktop/blog/app/model/user_model.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/model/user_model.cpp -o ../../../../Desktop/blog/app/model/user_model.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/model/welcome_model.o: ../../../../Desktop/blog/app/model/welcome_model.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/model/welcome_model.cpp -o ../../../../Desktop/blog/app/model/welcome_model.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/view/blog_view.o: ../../../../Desktop/blog/app/view/blog_view.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/view/blog_view.cpp -o ../../../../Desktop/blog/app/view/blog_view.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/view/comment_view.o: ../../../../Desktop/blog/app/view/comment_view.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/view/comment_view.cpp -o ../../../../Desktop/blog/app/view/comment_view.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/view/content_view.o: ../../../../Desktop/blog/app/view/content_view.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/view/content_view.cpp -o ../../../../Desktop/blog/app/view/content_view.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/view/post_view.o: ../../../../Desktop/blog/app/view/post_view.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/view/post_view.cpp -o ../../../../Desktop/blog/app/view/post_view.o $(CXXFLAGS)
+
+../../../../Desktop/blog/app/view/user_view.o: ../../../../Desktop/blog/app/view/user_view.cpp
+	$(CPP) -c ../../../../Desktop/blog/app/view/user_view.cpp -o ../../../../Desktop/blog/app/view/user_view.o $(CXXFLAGS)
