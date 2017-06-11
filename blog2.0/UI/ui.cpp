@@ -253,6 +253,32 @@ void BlogsUI::list(){
 }
 
 void BlogsUI::myBlogs(){
-	
+	cout << string(50, '\n');
+	vector<string> myBlogsList = UIController::getBlogs(Auth::get());		
+	for(auto blog : myBlogsList){
+		cout << blog.get_blog_name() << endl;
+	}
+	getchar();
+	getchar();
 }
 
+//------------------------------------------------
+// Method Implementation of Class Auth
+//------------------------------------------------
+// Metodo quase sem relacai com o final
+User Auth::get(){
+	Email registredEmail;
+	registredEmail.set("stub@stub.stub");
+	
+	Password registredPassword;
+	registredPassword.set("stubp");
+
+	Name registredName;
+	registredName.set("Stub");
+
+	User registredUser;
+	registredUser.set(registredName, registredEmail, registredPassword);
+
+	return registredUser;
+
+}

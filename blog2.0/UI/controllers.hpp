@@ -7,6 +7,7 @@
 //------------------------------------------------
 // Includes
 //------------------------------------------------
+#include <bits/stdc++.h>
 #include "domains.hpp"
 #include "entities.hpp"
 #include "stubs.hpp"
@@ -27,6 +28,10 @@ public:
 	
 	static void insertNewUser(User){
 		return;
+	}
+
+	static vector<string> getBlogs(User){
+		return Stub::getBlogs(User);
 	}
 };
 

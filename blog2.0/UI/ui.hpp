@@ -8,7 +8,16 @@
 // Class Includes
 //------------------------------------------------
 #include <bits/stdc++.h>
+#include "entities.hpp"
 using namespace std;
+
+//------------------------------------------------
+// Class Auth
+//------------------------------------------------
+class Auth{
+public:
+	static User get();
+}
 
 //------------------------------------------------
 // Class BlogsUI

@@ -17,6 +17,7 @@ class Stub{
 public:
 	static bool userAutenticate(Email, Password);
 	static bool userFind(Email);
+	static vector<string> getBlogs(User);
 };
 
 #endif
