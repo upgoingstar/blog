@@ -36,8 +36,8 @@ bool Stub::userFind(Email toCheckEmail){
 	}
 }
 
-vector<string> Stub::getBlogs(User stubUser){
-	vector<string> stubBlogs;
+vector<Blog> Stub::getBlogs(User stubUser){
+	vector<Blog> stubBlogs;
 	Blog stubBlog1,stubBlog2;
 	Name stubBlogName;
 	
@@ -50,5 +50,5 @@ vector<string> Stub::getBlogs(User stubUser){
 	stubBlogs.push_back(stubBlog1);	
 	stubBlogs.push_back(stubBlog2);
 	
-	return stubBlogs	
+	return stubBlogs;	
 }

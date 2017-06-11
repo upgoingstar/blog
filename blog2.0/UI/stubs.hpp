@@ -8,6 +8,7 @@
 // Includes
 //------------------------------------------------
 #include "domains.hpp"
+#include "entities.hpp"
 using namespace std;
 
 //------------------------------------------------
@@ -17,7 +18,7 @@ class Stub{
 public:
 	static bool userAutenticate(Email, Password);
 	static bool userFind(Email);
-	static vector<string> getBlogs(User);
+	static vector<Blog> getBlogs(User);
 };
 
 #endif

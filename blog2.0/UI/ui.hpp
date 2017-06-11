@@ -17,13 +17,15 @@ using namespace std;
 class Auth{
 public:
 	static User get();
-}
+};
 
 //------------------------------------------------
 // Class BlogsUI
 //------------------------------------------------
 class BlogsUI{
 private:
+	static const int LIST = 1;
+	static const int MYBLOGS = 2;
 	static void list();
 	static void myBlogs();
 

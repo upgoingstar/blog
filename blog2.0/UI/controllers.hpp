@@ -18,20 +18,20 @@ using namespace std;
 //------------------------------------------------
 class UIController{
 public:
-	static bool userAutenticate(Email, Password){
-		return Stub::userAutenticate(Email, Password);
+	static bool userAutenticate(Email e, Password p){
+		return Stub::userAutenticate(e, p);
 	}
 	
-	static bool userFind(Email){
-		return Stub::userFind(Email);
+	static bool userFind(Email e){
+		return Stub::userFind(e);
 	}
 	
 	static void insertNewUser(User){
 		return;
 	}
 
-	static vector<string> getBlogs(User){
-		return Stub::getBlogs(User);
+	static vector<Blog> getBlogs(User u){
+		return Stub::getBlogs(u);
 	}
 };
 

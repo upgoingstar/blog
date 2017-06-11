@@ -45,7 +45,7 @@ void MainMenu::execute(){
 								AccountUI::execute();
 		                        break;
 		            case LISTBLOGS: 
-								BlogsUI::execute();
+								BlogsUI::execute(userLogged);
 		                        break;
 		            case EXIT:   
 								exit = true; 
@@ -109,7 +109,6 @@ bool MainMenu::logIn(){
 		getchar();
 		return false;
 	}
-	
 	
 	if(UIController::userAutenticate(logEmail,logPassword)){
 		cout << "Log-in realizado com sucesso, aperte 'ENTER' para retonar ao menu principal" << endl;
@@ -231,20 +230,20 @@ void BlogsUI::execute(bool userLogged) throw(invalid_argument){
 	}
 
 	int option;
-	cin >> optinon;
+	cin >> option;
 
-	switch(optinon){
+	switch(option){
 		case LIST:
-				BlogsUI::listar();
+				BlogsUI::list();
 				break;
 		case MYBLOGS:
 			if(userLogged){
 				BlogsUI::myBlogs();
 				break;
-					throw invalid_argument("Invalid option!");
 			}
 		default:
-			
+			throw invalid_argument("Invalid option!");
+			break;
 	}
 }
 
@@ -254,9 +253,9 @@ void BlogsUI::list(){
 
 void BlogsUI::myBlogs(){
 	cout << string(50, '\n');
-	vector<string> myBlogsList = UIController::getBlogs(Auth::get());		
+	vector<Blog> myBlogsList = UIController::getBlogs(Auth::get());		
 	for(auto blog : myBlogsList){
-		cout << blog.get_blog_name() << endl;
+		cout << blog.get_blog_name().get() << endl;
 	}
 	getchar();
 	getchar();
