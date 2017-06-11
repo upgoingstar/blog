@@ -15,7 +15,8 @@ void Email::valid(string e) throw(invalid_argument) {
     }
 
     if(i > 0 && isalpha(e[i-1]) && isalpha(e[i])) {
-      e.erase(i);
+      e.erase(i,1);
+      i--;
     }
   }
 

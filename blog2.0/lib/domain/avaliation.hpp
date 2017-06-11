@@ -1,52 +1,52 @@
-  // GUARDS
-  #ifndef __AVALIATION_H_INCLUDED__
-  #define __AVALIATION_H_INCLUDED__
+// GUARDS
+#ifndef __AVALIATION_H_INCLUDED__
+#define __AVALIATION_H_INCLUDED__
 
-  // INCLUDES
-  #include "_domain.hpp"
-  #include <bits/stdc++.h>
-  using namespace std;
+// INCLUDES
+#include "_domain.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
+/**
+ * Class Avaliation. Inherit of class Domain.
+ * Valid avaliation. Verify if the avaliation is a number in the interval [0, 5].
+ */
+class Avaliation : public Domain {
+private:
+  /**
+   * A variable integer and protected.
+   * Keep the value of the avaliation.
+   */
+  int value;
 
   /**
-   * Class Avaliation. Inherit of class Domain.
-   * Valid avaliation. Verify if the avaliation is a number in the interval [0, 5].
+   * Validate Avaliation by verifying if the avaliation is a number in the interval [0, 5].
    */
-  class Avaliation : public Domain {
-  private:
-    /**
-     * A variable integer and protected.
-     * Keep the value of the avaliation.
-     */
-    int value;
+  void validate(int) throw(invalid_argument);
 
-    /**
-     * Validate Avaliation by verifying if the avaliation is a number in the interval [0, 5].
-     */
-    void validate(int) throw(invalid_argument);
+public:
+  /**
+   * A public constructor.
+   * Inicialize with minimum value.
+   */
+  Avaliation();
 
-  public:
-    /**
-     * A public constructor.
-     * Inicialize with minimum value.
-     */
-    Avaliation();
+  /**
+   * A public destructor.
+   */
+  ~Avaliation();
 
-    /**
-     * A public destructor.
-     */
-    ~Avaliation();
+  /**
+   * A public method
+   * @return Value of the keeped string.
+   */
+  int get();
 
-    /**
-     * A public method
-     * @return Value of the keeped string.
-     */
-    int get();
-
-    /**
-     * A public method
-     * Modify the value of the keeped string. If no value was given, it will consider that was given the minimum value.
-     */
-    void set(int avaliation = 0);
-  };
+  /**
+   * A public method
+   * Modify the value of the keeped string. If no value was given, it will consider that was given the minimum value.
+   */
+  void set(int avaliation = 0);
+};
 
 #endif

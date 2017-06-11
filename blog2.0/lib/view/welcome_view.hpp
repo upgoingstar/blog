@@ -1,3 +1,11 @@
+// GUARDS
+#ifndef __WELCOME_VIEW_H_INCLUDED__
+#define __WELCOME_VIEW_H_INCLUDED__
+
+// INCLUDES
+#include <bits/stdc++.h>
+using namespace std;
+
 /**
 * A view class that controls interface with user
 */
@@ -6,13 +14,15 @@ public:
 	/*
 	 * Render home page
 	 */
-	void home_page();
+	static void home_page();
 
 	/*
 	 * Renderiza tela de login
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
-	void login_page();
+	static void login_page();
 	
 };
+
+#endif
