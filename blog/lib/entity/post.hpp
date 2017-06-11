@@ -37,16 +37,16 @@ private:
 	bool comments_allowed;
 
 public:
-	/**
+/**
  * A public constructor.
  */
   Post(Name, Text);
 
-	/**
+/**
  * A public destructor.
  */
   ~Post();
-	/**
+/**
  * A public method
  * Allow comments to be made by other users.
  */

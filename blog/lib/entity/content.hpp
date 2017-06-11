@@ -44,7 +44,7 @@ protected:
 	 * Keeps the avaliations.
 	 */
 	vector<Avaliation> avaliations;
-
+	
 public:
 	/**
 	 * A public constructor.

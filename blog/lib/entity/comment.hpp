@@ -14,7 +14,7 @@ public:
 /**
  * A public constructor.
  */
-  Comment(Name,Text);
+  Comment(Name, Text);
 
 /**
  * A public destructor.

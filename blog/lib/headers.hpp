@@ -22,7 +22,6 @@
 #include "controller/content_controller.hpp"
 #include "controller/post_controller.hpp"
 #include "controller/user_controller.hpp"
-#include "controller/welcome_controller.hpp"
 
 // Include Models
 #include "model/blog_model.hpp"
@@ -30,7 +29,6 @@
 #include "model/content_model.hpp"
 #include "model/post_model.hpp"
 #include "model/user_model.hpp"
-#include "model/welcome_model.hpp"
 
 // Include Views
 #include "view/blog_view.hpp"

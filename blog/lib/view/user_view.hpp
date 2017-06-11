@@ -1,3 +1,13 @@
+// GUARDS
+#ifndef __USER_VIEW_H_INCLUDED__
+#define __USER_VIEW_H_INCLUDED__
+
+// INCLUDES
+#include "../domain/_domain.hpp"
+#include "../domain/name.hpp"
+#include "../domain/email.hpp"
+#include "../domain/password.hpp"
+
 /**
 * A view class that controls interface with user
 */
@@ -30,17 +40,19 @@ public:
 	 * Receives the id of user
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
-	void show_page(int);
+	void show_page(bool, unsigned int);
 	/*
 	 * Render edit profile page
 	 * Receives the id of user
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
-	void edit_page(int);
+	void edit_page(unsigned int);
 	/*
 	 * Render edit profile page
 	 * Receives the id of user
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
-	void delete_page(int);
+	void delete_page(unsigned int);
 };
+
+#endif

@@ -1,3 +1,13 @@
+// GUARDS
+#ifndef __BLOG_CONTROLLER_H_INCLUDED__
+#define __BLOG_CONTROLLER_H_INCLUDED__
+
+// INCLUDES
+#include "../domain/_domain.hpp"
+#include "../entity/blog.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
 /**
 * A class that controls Blog
 * Defines CRUD
@@ -25,3 +35,5 @@ private:
 	 */
 	void         destroy(Blog) throw(invalid_argument);
 };
+
+#endif

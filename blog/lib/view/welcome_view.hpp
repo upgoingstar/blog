@@ -7,7 +7,7 @@
 using namespace std;
 
 /**
-* A view class that controls interface with user
+* A view class that show home page
 */
 class WelcomeView {
 public:
@@ -19,7 +19,7 @@ public:
 	/*
 	 * Renderiza tela de login
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 * TODO: This funtion will be part of a class named Auth 
 	 */
 	static void login_page();
 	
