@@ -68,3 +68,5 @@
      */
     bool operator<(const Domain &other) const;
   };
+
+  #endif

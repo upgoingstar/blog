@@ -19,7 +19,7 @@ void Avaliation::set(int avaliation) {
   this->value = avaliation;
 }
 
-void Avaliation::valid(int a) throw(invalid_argument) {
+void Avaliation::validate(int a) throw(invalid_argument) {
   if(a > 5 || a < 0) {
     throw invalid_argument( "Invalid number!" );
   }

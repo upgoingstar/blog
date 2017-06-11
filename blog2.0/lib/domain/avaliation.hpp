@@ -22,7 +22,7 @@
     /**
      * Validate Avaliation by verifying if the avaliation is a number in the interval [0, 5].
      */
-    void valid(int) throw(invalid_argument);
+    void validate(int) throw(invalid_argument);
 
   public:
     /**

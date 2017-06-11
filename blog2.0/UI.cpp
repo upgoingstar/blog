@@ -61,7 +61,7 @@ void MainMenu::execute(){
 			}
 		}
 		catch(invalid_argument erro){
-			cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!";
+			cout << "Opcao invalida, escolha uma das opcoes listadas na tela!";
 		}
 	}
 }

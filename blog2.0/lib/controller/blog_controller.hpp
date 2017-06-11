@@ -2,7 +2,7 @@
 * A class that controls Blog
 * Defines CRUD
 */
-class BlogsController : public Controller, public Blog {
+class BlogsController : public Blog {
 private:
 	/*
 	 * Coloca todas os Blogs em alguma variável visivel a BlogView.index() para renderizar a página
@@ -24,4 +24,4 @@ private:
 	 * Recebe um objeto Blog e manda o BlogModel destruir
 	 */
 	void         destroy(Blog) throw(invalid_argument);
-}
+};

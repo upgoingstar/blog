@@ -5,6 +5,7 @@
 // INCLUDES
 #include "../domain/_domain.hpp"
 #include "content.hpp"
+#include "comment.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 

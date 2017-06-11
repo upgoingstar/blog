@@ -4,6 +4,7 @@
 
 // INCLUDES
 #include "../domain/_domain.hpp"
+#include "../entity/post.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
