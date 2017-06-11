@@ -1,33 +1,22 @@
 //------------------------------------------------
 // Guards
 //------------------------------------------------
-#ifndef CONTROLLERS_H_INCLUDED
-#define CONTROLLERS_H_INCLUDED
+#ifndef STUBS_H_INCLUDED
+#define STUBS_H_INCLUDED
 
 //------------------------------------------------
 // Includes
 //------------------------------------------------
 #include "domains.hpp"
-#include "entities.hpp"
-#include "stubs.hpp"
 using namespace std;
 
 //------------------------------------------------
-// Class UIController
+// Class Stub
 //------------------------------------------------
-class UIController{
+class Stub{
 public:
-	static bool userAutenticate(Email, Password){
-		return Stub::userAutenticate(Email, Password);
-	}
-	
-	static bool userFind(Email){
-		return Stub::userFind(Email);
-	}
-	
-	static void insertNewUser(User){
-		return;
-	}
+	static bool userAutenticate(Email, Password);
+	static bool userFind(Email);
 };
 
 #endif

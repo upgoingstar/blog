@@ -1,3 +1,6 @@
+//------------------------------------------------
+// Includes
+//------------------------------------------------
 #include <bits/stdc++.h>
 #include "ui.hpp"
 #include "controllers.hpp"
@@ -6,6 +9,9 @@
 
 using namespace std;
 
+//------------------------------------------------
+// Method Implementation of Class MainMenu
+//------------------------------------------------
 void MainMenu::execute(){
 	bool userLogged = false;
 	bool exit = false;
@@ -16,13 +22,13 @@ void MainMenu::execute(){
 	
 		if(userLogged){
 			cout << "1 - Deslogar" << endl;
-			cout << "2 - Editar conta" << endl;
+			cout << "2 - Gerenciar conta" << endl;
 		}	
 		else{
 			cout << "1 - Logar" << endl;
 			cout << "2 - Registrar" << endl;	
 		}
-		cout << "3 - Listar blogs" << endl;
+		cout << "3 - Blogs" << endl;
 		cout << "4 - Sair" << endl;
 		
 		cout << "Escolha uma opcao: ";
@@ -33,13 +39,13 @@ void MainMenu::execute(){
 			if(userLogged){
 				switch(option){
 		            case LOGOUT:
-								userLogged = LogOut::execute();
+								userLogged = MainMenu::logOut();
 		                        break;
 		            case ACCOUNT:
-								EditAccount::execute();
+								AccountUI::execute();
 		                        break;
 		            case LISTBLOGS: 
-								ListBlogs::execute();
+								BlogsUI::execute();
 		                        break;
 		            case EXIT:   
 								exit = true; 
@@ -51,13 +57,13 @@ void MainMenu::execute(){
 			else{
 				switch(option){
 		            case LOGIN:
-								userLogged = LogIn::execute();
+								userLogged = MainMenu::logIn();
 		                        break;
 		            case REGISTER:
-								CreateAccount::execute();
+								MainMenu::createAccount();
 		                        break;
 		            case LISTBLOGS: 
-								ListBlogs::execute();
+								BlogsUI::execute(userLogged);
 		                        break;
 		            case EXIT:    
 								exit = true; 
@@ -73,7 +79,7 @@ void MainMenu::execute(){
 	}
 }
 
-bool LogIn::execute(){
+bool MainMenu::logIn(){
 	cout << string(50, '\n');
 	cout << "Log-in" << endl;
 	
@@ -119,7 +125,7 @@ bool LogIn::execute(){
 	}
 }
 
-bool LogOut::execute() throw(invalid_argument){
+bool MainMenu::logOut() throw(invalid_argument){
 	cout << string(50, '\n');
 	cout << "Tem certeza que deseja deslogar de sua conta?" << endl;
 	cout << "1-Sim	2-Nao" << endl;
@@ -136,7 +142,7 @@ bool LogOut::execute() throw(invalid_argument){
 	
 }
 
-void CreateAccount::execute(){
+void MainMenu::createAccount(){
 	cout << string(50, '\n');
 	string newName;
 	cout << "Digite o nome de usuario desejado (deve conter apenas letras e espacos em branco e ate 20 caracteres): ";
@@ -168,7 +174,7 @@ void CreateAccount::execute(){
 	try{
 		userEmail.set(newEmail);
 		try{
-			if(UIController::userFind(newEmail)){
+			if(UIController::userFind(userEmail)){
 				throw invalid_argument("E-mail already in use");
 			}
 		}
@@ -206,10 +212,47 @@ void CreateAccount::execute(){
 	}
 }
 
-void EditAccount::execute(){
+//------------------------------------------------
+// Method Implementation of Class AccountUI
+//------------------------------------------------
+void AccountUI::execute(){
+
 }
 
-void ListBlogs::execute(){
+//------------------------------------------------
+// Method Implementation of Class BlogsUI
+//------------------------------------------------
+void BlogsUI::execute(bool userLogged) throw(invalid_argument){
+	cout << string(50, '\n');
+	cout << "Blogs" << endl;
+	cout << "1 - Listar blogs" << endl;
+	if(userLogged){
+		cout << "2 - Meus blogs" << endl;
+	}
+
+	int option;
+	cin >> optinon;
+
+	switch(optinon){
+		case LIST:
+				BlogsUI::listar();
+				break;
+		case MYBLOGS:
+			if(userLogged){
+				BlogsUI::myBlogs();
+				break;
+					throw invalid_argument("Invalid option!");
+			}
+		default:
+			
+	}
 }
 
+void BlogsUI::list(){
+
+}
+
+void BlogsUI::myBlogs(){
+	
+}
 

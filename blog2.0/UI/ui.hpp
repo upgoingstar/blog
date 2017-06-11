@@ -1,36 +1,38 @@
+//------------------------------------------------
+// Guards
+//------------------------------------------------
 #ifndef UI_H_INCLUDED
 #define UI_H_INCLUDED
 
-#include<bits/stdc++.h>
+//------------------------------------------------
+// Class Includes
+//------------------------------------------------
+#include <bits/stdc++.h>
 using namespace std;
 
-class LogIn{
+//------------------------------------------------
+// Class BlogsUI
+//------------------------------------------------
+class BlogsUI{
+private:
+	static void list();
+	static void myBlogs();
+
 public:
-	static bool execute();
+	static void execute(bool) throw(invalid_argument);
 };
 
-class LogOut{
-public:
-	const static int SIM = 1;
-	const static int NAO = 2;
-	static bool execute() throw(invalid_argument);
-};
-
-class ListBlogs{
-public:
-	static void execute();
-};
-
-class CreateAccount{
-public:
-	static	void execute();
-};
-
-class EditAccount{
+//------------------------------------------------
+// Class AccountUI
+//------------------------------------------------
+class AccountUI{
 public:
 	static void execute();
 };
 
+//------------------------------------------------
+// Class MainMenu
+//------------------------------------------------
 class MainMenu{
 private:
 	static const int LOGIN = 1;
@@ -40,11 +42,15 @@ private:
 	static const int LISTBLOGS = 3;
 	static const int EXIT = 4;
 	
-	//friend static void LogIn::execute();
-	//friend static bool LogOut::execute();
-	//friend class ListBlogs;
+	const static int SIM = 1;
+	const static int NAO = 2;
+	static bool logOut() throw(invalid_argument);
+	static bool logIn();
+	static void createAccount();
+
+	//friend class Blogs;
 	//friend class CreateAccount;
-	//friend class EditAccount;
+	//friend class Account;
 public:
 	static void execute(); 
 };
