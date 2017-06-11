@@ -4,12 +4,13 @@
 class WelcomeView {
 public:
 	/*
-	 * Render welcome page
+	 * Render home page
 	 */
-	void welcome_page();
+	void home_page();
 
 	/*
 	 * Renderiza tela de login
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
 	void login_page();

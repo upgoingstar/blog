@@ -2,7 +2,7 @@
 * A class that controls Blog
 * Defines CRUD
 */
-class BlogsController : public Blog {
+class BlogController : public Blog {
 private:
 	/*
 	 * Coloca todas os Blogs em alguma variável visivel a BlogView.index() para renderizar a página

@@ -3,7 +3,6 @@ using namespace srd;
 
 #define FINALIZAR 4
 
-
 void iniciate() {
 	int i = 0;
 	int s[0] = {'>', ' ', ' ', ' '};
