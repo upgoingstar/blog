@@ -60,7 +60,7 @@ void Name::valid(string n) throw(invalid_argument) {
   }
 
   for(int i = 0; i < n.size(); i++) {
-  	char c = n[i];
+    char c = n[i];
     if(!isalpha(c) && c != ' ') {
       throw invalid_argument( "There is unpermited caracters!" );
     }
@@ -87,7 +87,7 @@ void Password::valid(string p) throw(invalid_argument) {
   map<char,int> repeat;
 
   for(int i = 0; i < p.size(); i++) {
-  	char c = p[i];
+    char c = p[i];
     repeat[c]++;
     if(repeat[c] > repetition_limit) {
       throw invalid_argument( "There is repeated caracters!" );

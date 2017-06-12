@@ -94,7 +94,7 @@ Avaliation Content::get_avaliation() {
   int total_size = this->avaliations.size();
 
   for(int i = 0; i < avaliations.size(); i++) {
-  	Avaliation avaliation = avaliations[i];
+    Avaliation avaliation = avaliations[i];
     total_sum += avaliation.get();
   }
 
@@ -160,8 +160,8 @@ Blog::Blog(){}
 Blog::~Blog() {}
 
 void Blog::set(Name author, Name blog_name) throw(invalid_argument) {
-	if(author.empty() || blog_name.empty())
-		throw invalid_argument("Invalid blog name or author!");
+  if(author.empty() || blog_name.empty())
+    throw invalid_argument("Invalid blog name or author!");
   this->author = author;
   this->blog_name = blog_name;
 }

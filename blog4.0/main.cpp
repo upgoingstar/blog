@@ -7,6 +7,6 @@
 // TODO: it does need all this includes?
 
 int main() {
-	WelcomeView::home_page();
-	return 0;
+  WelcomeView::home_page();
+  return 0;
 }
