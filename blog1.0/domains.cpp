@@ -110,7 +110,8 @@ bool Domain::operator<(const Domain &other) const {
       }
 
       if(i > 0 && isalpha(e[i-1]) && isalpha(e[i])) {
-        e.erase(i);
+        e.erase(i,1);
+        i--;
       }
     }
 
