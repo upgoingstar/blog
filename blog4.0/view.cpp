@@ -1,9 +1,15 @@
+//------------------------------------------------
 // INCLUDES
+//------------------------------------------------
+
 #include "view.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
-// IMPLEMENTATION
+//------------------------------------------------
+// BLOG VIEW CLASS
+//------------------------------------------------
+
 void BlogView::create_page() {
 	cout << "create Blog page" << endl;
 }
@@ -20,7 +26,10 @@ void BlogView::delete_page(unsigned int) {
 	cout << "delete Blog page" << endl;
 }
 
-// IMPLEMENTATION
+//------------------------------------------------
+// COMMENT VIEW CLASS
+//------------------------------------------------
+
 void CommentView::create_page() {
 	cout << "create Comment page" << endl;
 }
@@ -37,7 +46,10 @@ void CommentView::delete_page(unsigned int) {
 	cout << "delete Comment page" << endl;
 }
 
-// IMPLEMENTATION
+//------------------------------------------------
+// POST VIEW CLASS
+//------------------------------------------------
+
 void PostView::create_page() {
 	cout << "create Post page" << endl;
 }
@@ -54,7 +66,10 @@ void PostView::delete_page(unsigned int) {
 	cout << "delete Post page" << endl;
 }
 
-// IMPLEMENTATION
+//------------------------------------------------
+// USER VIEW CLASS
+//------------------------------------------------
+
 Name UserView::field_name_page() {
 	cout << "field page name" << endl;
 	Name name;
@@ -158,8 +173,10 @@ void UserView::delete_page(unsigned int) {
 	cout << "delete user page" << endl;
 }
 
+//------------------------------------------------
+// WELCOME VIEW CLASS
+//------------------------------------------------
 
-// IMPLEMENTATION
 void WelcomeView::home_page() {
 	bool userLogged = false;
 	bool exit = false;
@@ -226,6 +243,10 @@ void WelcomeView::home_page() {
 		}
 	}
 }
+
+//------------------------------------------------
+// AUTH VIEW CLASS
+//------------------------------------------------
 
 void AuthView::login_page() {
 	cout << "login page" << endl;

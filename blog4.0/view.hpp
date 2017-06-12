@@ -1,10 +1,18 @@
+//------------------------------------------------
 // GUARDS
+//------------------------------------------------
 #ifndef VIEW_H_INCLUDED__
 #define VIEW_H_INCLUDED__
 
+//------------------------------------------------
 // INCLUDES
+//------------------------------------------------
 #include "domains.hpp"
 #include "entity.hpp"
+
+//------------------------------------------------
+// BLOG VIEW CLASS
+//------------------------------------------------
 
 /**
 * A view class that controls interface with blog
@@ -47,6 +55,10 @@ public:
 	void delete_page(unsigned int);
 };
 
+//------------------------------------------------
+// COMMENT VIEW CLASS
+//------------------------------------------------
+
 /**
 * A view class that controls interface with comment
 */
@@ -83,6 +95,9 @@ public:
 	void delete_page(unsigned int);
 };
 
+//------------------------------------------------
+// POST VIEW CLASS
+//------------------------------------------------
 
 /**
 * A view class that controls interface with post
@@ -120,6 +135,9 @@ public:
 	void delete_page(unsigned int);
 };
 
+//------------------------------------------------
+// USER VIEW CLASS
+//------------------------------------------------
 
 /**
 * A view class that controls interface with user
@@ -168,6 +186,10 @@ public:
 	void delete_page(unsigned int);
 };
 
+//------------------------------------------------
+// WELCOME VIEW CLASS
+//------------------------------------------------
+
 /**
 * A view class that show home page
 */
@@ -191,6 +213,10 @@ public:
 
 };
 
+//------------------------------------------------
+// AUTH VIEW CLASS
+//------------------------------------------------
+
 class AuthView {
 public:
 	/*
@@ -204,4 +230,9 @@ public:
 	 */	
 	static void logout_page();
 };
+
+//------------------------------------------------
+// END GUARD
+//------------------------------------------------
+
 #endif

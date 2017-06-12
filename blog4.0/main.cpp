@@ -1,12 +1,10 @@
-#include "headers.hpp"
+#include "domains.hpp"
+#include "entity.hpp"
+#include "controller.hpp"
+#include "model.hpp"
+#include "view.hpp"
 
-// some structure
-
-// each controller inherit from Controller class
-// each model inherit from Model class
-// each view inherit from View class
-
-// each controller, model and view are friends of each other
+// TODO: it does need all this includes?
 
 int main() {
 	WelcomeView::home_page();
