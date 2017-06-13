@@ -11,6 +11,11 @@
 */
 class BlogView {
 private:
+	static const int LIST = 1;
+	static const int MYBLOGS = 2;
+	
+	static void list_blogs_page();
+	static void my_blogs_page();
 	/*
 	 * Render field page
 	 * Just print 'Preencha seu nome:' and return
@@ -32,7 +37,7 @@ public:
 	 * Render show page
 	 * Receives the id of blog and a boolean (if boolean true, show all blogs)
 	 */
-	void show_page(bool, unsigned int);
+	static void show_page(bool);
 	/*
 	 * Render edit profile page
 	 * Receives the id of blog
@@ -147,13 +152,13 @@ public:
 	 * Render sign up page
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
-	void create_page();
+	static void create_page();
 	/*
 	 * Render profile page
 	 * Receives the id of user
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
-	void show_page(bool, unsigned int);
+	static void show_page();
 	/*
 	 * Render edit profile page
 	 * Receives the id of user
@@ -171,7 +176,7 @@ public:
 /**
 * A view class that show home page
 */
-class WelcomeView {]
+class WelcomeView {
 private:
 	static const int LOGIN = 1;
 	static const int LOGOUT = 1;
@@ -192,16 +197,17 @@ public:
 };
 
 class AuthView {
+private:
+	const static int SIM = 1;
+	const static int NAO = 2;
 public:
 	/*
 	 * Renderiza tela de login
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */	
-	static void login_page();
-	/*
-	 * Renderiza tela de logout(so uma confimarcao pro usuario)
-	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-	 */	
-	static void logout_page();
+	static bool login_page();
+	// Renderiza tela de logout(so uma confimarcao pro usuario)
+	static bool logout_page();
 };
+
 #endif
