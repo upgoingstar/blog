@@ -1,3 +1,5 @@
+// TODO: finish the new style of documentation
+
 //------------------------------------------------
 // GUARDS
 //------------------------------------------------
@@ -17,30 +19,25 @@ using namespace std;
 // USER CLASS
 //------------------------------------------------
 
+/**
+ * @class User
+ *
+ * @brief Defines the User
+ *
+ * Defines what information User has and how you can access it.
+ */
 class User{
 private:
-  /**
- * A private variable of class Name.
- * Keeps the name of the User.
- */
+  /// The name of the User
   Name name;
 
-  /**
- * A private variable of class Password.
- * Keeps the password of the User.
- */
+  /// The password of the User
   Password password;
 
-  /**
-   * A private variable of class Email.
-   * Keeps the email of the User.
-   */
+  /// The email of the User
   Email email;
 
-  /**
- * A private bolean variable.
- * Keeps the name of the User.
- */
+  /// If the current user is anonymous
   bool anonymous;
 
   /**
@@ -50,14 +47,10 @@ private:
   void valid(Name, Email,Password) throw(invalid_argument);
 
 public:
-  /**
- * A public constructor.
- */
+  /// Create a User
   User();
 
-  /**
- * A public destructor.
- */
+  /// Destroy a User
   ~User();
 
   /**
@@ -84,6 +77,13 @@ public:
 // CONTENT CLASS
 //------------------------------------------------
 
+/**
+ * @class Content
+ *
+ * @brief Defines the Content of Post and Comment
+ *
+ * Defines what information a Content has and how you can access it.
+ */
 class Content {
 private:
   /**
@@ -93,39 +93,23 @@ private:
   void valid(Name, Text) throw(invalid_argument);
 
 protected:
-  /**
- * A protected variable of class Name.
- * Keeps the name of the author of the content.
- */
+  /// The author of the Content
   Name author;
 
-  /**
- * A protected variable of class Text.
- * Keeps the content.
- */
+  /// The content of the Content
   Text content;
 
-  /**
- * A protected variable of class Map.
- * Keeps the name that everyone that has already avaliated.
- */
+  /// The name of every User that avaliated
   map<Name, bool> has_avaliated;
 
-  /**
- * A protected variable of class Vector.
- * Keeps the avaliations.
- */
+  /// All the avaliations given to this content
   vector<Avaliation> avaliations;
 
 public:
-  /**
- * A public constructor.
- */
+  /// Create a Content
   Content();
 
-  /**
- * A public destructor.
- */
+  /// Destroy a Content
   ~Content();
 
   /**
@@ -164,16 +148,20 @@ public:
 // COMMENT CLASS
 //------------------------------------------------
 
+/**
+ * @class Comment
+ *
+ * @brief Defines how a Comment should be.
+ *
+ * Inherit of class Content. Defines what information a Comment has and how you can access it.
+ */
+// TODO: Comment contructor should not receive anything. Create a Set that recieves a Content
 class Comment : public Content {
 public:
-  /**
- * A public constructor.
- */
+  /// Create a Comment
   Comment(Name,Text);
 
-  /**
- * A public destructor.
- */
+  /// Destroy a Comment
   ~Comment();
 };
 
@@ -181,42 +169,35 @@ public:
 // POST CLASS
 //------------------------------------------------
 
+/**
+ * @class Post
+ *
+ * @brief Defines how a Post should be.
+ *
+ * Inherit of class Content. Defines what information a Post has and how you can access it.
+ */
+// TODO: Post contructor should not receive anything. Create a Set that recieves a Content
 class Post : public Content {
 private:
-  /**
- * A private static constant integer variable.
- * Limits the number of times that a person can comment.
- */
+  /// Maximum number of times that a person can comment.
   static const int comments_limit = 5;
 
-  /**
- * A private variable of class Map.
- * Keeps the name that everyone that has already posted.
- */
+  /// The name of every User that has commented
   map<Name, int> number_comments;
 
-  /**
- * A private variable of class Vector.
- * Keep all the comments made for this post.
- */
+  /// All the Comments made for this Post
   vector<Comment> comments;
 
-  /**
- * A private boolean variable.
- * Defines if comments are allowed.
- */
+  /// If comments are allowed
   bool comments_allowed;
 
 public:
-  /**
- * A public constructor.
- */
+  /// Create a Post
   Post(Name, Text);
 
-  /**
- * A public destructor.
- */
+  /// Destroy a Post
   ~Post();
+
   /**
  * A public method
  * Allow comments to be made by other users.
@@ -246,35 +227,31 @@ public:
 // BLOG CLASS
 //------------------------------------------------
 
+/**
+ * @class Blog
+ *
+ * @brief Defines how a Blog should be.
+ *
+ * Inherit of class Domain. Defines what information a Blog has and how you can access it.
+ *
+ * @note The size is small for some reasons.
+ */
 class Blog {
 private:
-  /**
- * A private variable of class Name.
- * Keeps the name of the author.
- */
+  /// The author of the Blog
   Name author;
 
-  /**
- * A private variable of class Name.
- * Keeps the name of the blog.
- */
+  /// The name of the Blog
   Name blog_name;
 
-  /**
- * A private variable of class Name.
- * Keeps all the posts.
- */
+  /// All Posts made in this Blog
   vector<Post> posts;
 
 public:
-  /**
- * A public constructor.
- */
+  /// Create a Blog
   Blog();
 
-  /**
- * A public destructor.
- */
+  /// Destroy a Blog
   ~Blog();
 
   /**

@@ -150,6 +150,7 @@ class PostController : public Post {
  *
  * @note It is aware of both UserView and UserModel (but neither of them are aware of UserController).
  */
+// TODO: 2 users cannot have the same name of email
 class UserController : public User {
 public:
   static bool autenticate(Email e, Password p){
