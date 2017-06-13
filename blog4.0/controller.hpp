@@ -30,16 +30,14 @@ using namespace std;
  */
 class BlogController : public Blog {
   private:
-    
+
     /**
      * @name    Index
      * @brief   Show to User all Blogs.
      *
-     * Render a page that show all Blogs.
-     *
-     * @retval vector<Blog> If empty, the page will say there is no Blog. Else, show all Blogs.
+     * Render a page that show all Blogs. If there is no Blogs to show, it will tell the current user that there is no Blogs
      */
-    static vector<Blog> index() throw(invalid_argument);
+    static void index() throw(invalid_argument);
 
     /**
      * @name    Create
@@ -47,7 +45,7 @@ class BlogController : public Blog {
      *
      * Render a page to fill the information needed to create a new Blog and then save in the persistence.
      *
-     * @retval Blog The blog created
+     * @return The blog created
      */
     static Blog create() throw(invalid_argument);
 

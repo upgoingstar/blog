@@ -46,7 +46,7 @@ class BlogModel : public Blog {
      *
      * @param user The User thar has the Blogs
      *
-     * @retval vector<Blog> If empty, not a single Blog from that User. Else, all the blogs that the User has.
+     * @return A vector of Blogs. If empty, not a single Blog from that User. Else, all the blogs that the User has.
      */ 
     static vector<Blog> from_user(User user);
 };
@@ -84,7 +84,7 @@ class CommentModel : public Comment {
      *
      * @param user The User thar has the Comments
      *
-     * @retval vector<Comment> If empty, not a single Comment from that User. Else, all the Comments that the User has.
+     * @return  A vector of Comments. If empty, not a single Comment from that User. Else, all the Comments that the User has.
      */ 
     static vector<Comment> from_user(User user);
 };
@@ -139,7 +139,7 @@ class PostModel : public Post {
      *
      * @param user The User thar has the Posts
      *
-     * @retval vector<Post> If empty, not a single Post from that User. Else, all the Posts that the User has.
+     * @return A vector of Posts. If empty, not a single Post from that User. Else, all the Posts that the User has.
      */ 
     static vector<Post> from_user(User user);
 };
