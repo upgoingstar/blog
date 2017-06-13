@@ -19,6 +19,7 @@
 */
 class BlogView {
 private:
+<<<<<<< HEAD
   /*
    * Render field page
    * Just print 'Preencha seu nome:' and return
@@ -53,6 +54,47 @@ public:
    * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
    */
   void delete_page(unsigned int);
+=======
+	static const int LIST = 1;
+	static const int MYBLOGS = 2;
+	
+	static void list_blogs_page();
+	static void my_blogs_page();
+	/*
+	 * Render field page
+	 * Just print 'Preencha seu nome:' and return
+	 */
+	Name field_name_page();
+	/*
+	 * Render field page
+	 * Just print 'Preencha seu email:' and return
+	 */
+	Email field_email_page();
+	
+public:
+	/*
+	 * Render create blog page
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */
+	void create_page();
+	/*
+	 * Render show page
+	 * Receives the id of blog and a boolean (if boolean true, show all blogs)
+	 */
+	static void show_page(bool);
+	/*
+	 * Render edit profile page
+	 * Receives the id of blog
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */
+	void edit_page(unsigned int);
+	/*
+	 * Render edit profile page
+	 * Receives the id of blog
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */
+	void delete_page(unsigned int);
+>>>>>>> b26ef385c3a5df202d1d2597489b6207278522b8
 };
 
 //------------------------------------------------
@@ -161,6 +203,7 @@ private:
   Password field_password_page();
 
 public:
+<<<<<<< HEAD
   /*
    * Render sign up page
    * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -184,6 +227,31 @@ public:
    * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
    */
   void delete_page(unsigned int);
+=======
+	/*
+	 * Render sign up page
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */
+	static void create_page();
+	/*
+	 * Render profile page
+	 * Receives the id of user
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */
+	static void show_page();
+	/*
+	 * Render edit profile page
+	 * Receives the id of user
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */
+	void edit_page(unsigned int);
+	/*
+	 * Render edit profile page
+	 * Receives the id of user
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */
+	void delete_page(unsigned int);
+>>>>>>> b26ef385c3a5df202d1d2597489b6207278522b8
 };
 
 //------------------------------------------------
@@ -193,7 +261,7 @@ public:
 /**
 * A view class that show home page
 */
-class WelcomeView {]
+class WelcomeView {
 private:
   static const int LOGIN = 1;
   static const int LOGOUT = 1;
@@ -218,7 +286,11 @@ public:
 //------------------------------------------------
 
 class AuthView {
+private:
+	const static int SIM = 1;
+	const static int NAO = 2;
 public:
+<<<<<<< HEAD
   /*
    * Renderiza tela de login
    * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -235,4 +307,15 @@ public:
 // END GUARD
 //------------------------------------------------
 
+=======
+	/*
+	 * Renderiza tela de login
+	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+	 */	
+	static bool login_page();
+	// Renderiza tela de logout(so uma confimarcao pro usuario)
+	static bool logout_page();
+};
+
+>>>>>>> b26ef385c3a5df202d1d2597489b6207278522b8
 #endif

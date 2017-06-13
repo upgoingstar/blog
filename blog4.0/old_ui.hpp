@@ -27,14 +27,7 @@ public:
 //------------------------------------------------
 
 class BlogsUI{
-private:
-  static const int LIST = 1;
-  static const int MYBLOGS = 2;
-  static void list();
-  static void myBlogs();
 
-public:
-  static void execute(bool) throw(invalid_argument);
 };
 
 //------------------------------------------------

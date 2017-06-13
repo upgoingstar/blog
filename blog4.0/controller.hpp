@@ -10,6 +10,8 @@
 //------------------------------------------------
 
 #include "domains.hpp"
+#include "entity.hpp"
+#include "stubs.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,6 +45,11 @@ private:
    * Recebe um objeto Blog e manda o BlogModel destruir
    */
   void         destroy(Blog) throw(invalid_argument);
+
+public:
+  static vector<Blog> get_blogs(User u){
+    return Stub::getBlogs(u); 
+  }
 };
 
 
@@ -91,7 +98,42 @@ class PostController : public Post {
 * Defines CRUD
 */
 class UserController : public User {
+public:
+  static bool autenticate(Email e, Password p){
+    return Stub::userAutenticate(e, p);
+  }
+  
+  static bool find(Email e){
+    return Stub::userFind(e);
+  }
+  
+  static void insert_new_user(User){
+    return;
+  }
+};
 
+//------------------------------------------------
+// AUTH CONTROLLER CLASS
+//------------------------------------------------
+
+/**
+* A class that controls Auth
+* Responsible for authentication
+*/
+// TODO: make it inherit from Auth
+class AuthController {
+public:
+  static User get(){
+    User u;
+    Name nome;
+    Email email;
+    Password senha;
+    nome.set("stub");
+    email.set("stub@stub.stub");
+    senha.set("stubp");
+    u.set(nome,email,senha);
+    return u;
+  }
 };
 
 //------------------------------------------------
