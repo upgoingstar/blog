@@ -20,7 +20,9 @@ void BlogView::index(vector<Blog> allBlogs){
 }
 
 void BlogView::create_page() {
-  cout << "create Blog page" << endl;
+  system("clear || cls");
+  cout << "Create Blog" << endl;
+  
 }
 
 void BlogView::show_page() {
@@ -126,7 +128,7 @@ void UserView::create_page() {
   cout << "Digite um e-mail: ";
   cin >> newEmail;
   
-  cout << "Uma seha deve conter ate 5 caracteres sem repeticao." << endl;
+  cout << "Uma senha deve conter ate 5 caracteres sem repeticao." << endl;
   cout << "Digite uma senha: ";
   cin >> newPassword;
   
