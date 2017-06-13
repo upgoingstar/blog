@@ -19,6 +19,8 @@ public:
 	static bool userAutenticate(Email, Password);
 	static bool userFind(Email);
 	static vector<Blog> getBlogs(User);
+	static vector<Blog> get_all_blogs();
+	static User get_user(Email email);
 };
 
 #endif

@@ -52,3 +52,53 @@ vector<Blog> Stub::getBlogs(User stubUser){
 	
 	return stubBlogs;	
 }
+
+vector<Blog> Stub::get_all_blogs(){
+		Email registredEmail;
+	registredEmail.set("stub@stub.stub");
+	
+	Password registredPassword;
+	registredPassword.set("stubp");
+	
+	Name registredName;
+	registredName.set("stub");
+	
+	User stubUser;
+	stubUser.set(registredName, registredEmail, registredPassword);
+	
+	
+	vector<Blog> stubBlogs;
+	Blog stubBlog1, stubBlog2, stubBlog3;
+	Name stubBlogName;
+	
+	stubBlogName.set("Caludino Adventure");
+	stubBlog1.set(stubUser.get_name(),stubBlogName);
+		
+	stubBlogName.set("A batata");
+	stubBlog2.set(stubUser.get_name(),stubBlogName);
+	
+	stubBlogName.set("Outra coisa");
+	stubBlog3.set(stubUser.get_name(),stubBlogName);
+	
+	stubBlogs.push_back(stubBlog1);	
+	stubBlogs.push_back(stubBlog2);
+	stubBlogs.push_back(stubBlog3);
+	
+	return stubBlogs;	
+}
+
+User Stub::get_user(Email email){
+	Email registredEmail;
+	registredEmail.set("stub@stub.stub");
+	
+	Password registredPassword;
+	registredPassword.set("stubp");
+	
+	Name registredName;
+	registredName.set("stub");
+	
+	User registredUser;
+	registredUser.set(registredName, registredEmail, registredPassword);
+	
+	return registredUser;
+}

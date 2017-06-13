@@ -93,7 +93,7 @@ Avaliation Content::get_avaliation() {
   int total_sum = 0;
   int total_size = this->avaliations.size();
 
-  for(int i = 0; i < avaliations.size(); i++) {
+  for(int i = 0; i < (int)avaliations.size(); i++) {
     Avaliation avaliation = avaliations[i];
     total_sum += avaliation.get();
   }
@@ -198,3 +198,31 @@ vector<Post> Blog::get_posts() {
   return this->posts;
 }
 
+//------------------------------------------------
+// AUTH CLASS
+//------------------------------------------------
+
+
+bool Auth::userLogged = false;
+User Auth::currentUser;
+
+bool Auth::user_logged() { 
+	return userLogged;
+}
+
+User Auth::get_current_user() throw(invalid_argument) {
+	if(Auth::user_logged()) {
+		return currentUser;
+	} else {
+		throw invalid_argument ("Nenhum usuario esta logado");
+	}
+}
+
+void Auth::login(User user) {
+	userLogged = true;
+	currentUser = user;
+}
+
+void Auth::logout(){
+	userLogged = false;
+}

@@ -10,16 +10,24 @@ using namespace std;
 //------------------------------------------------
 // BLOG VIEW CLASS
 //------------------------------------------------
+void BlogView::index(vector<Blog> allBlogs){
+	system("clear || cls");    
+  for(auto blog : allBlogs){
+    cout << blog.get_blog_name().get() << endl;
+  }
+  getchar();
+  getchar();
+}
 
 void BlogView::create_page() {
   cout << "create Blog page" << endl;
 }
 
-void BlogView::show_page(bool userLogged, unsigned int id) {
-  cout << string(50, '\n');
+void BlogView::show_page() {
+  system("clear || cls");
   cout << "Blogs" << endl;
   cout << "1 - Listar blogs" << endl;
-  if(userLogged){
+  if(Auth::user_logged()){
     cout << "2 - Meus blogs" << endl;
   }
 
@@ -28,10 +36,10 @@ void BlogView::show_page(bool userLogged, unsigned int id) {
 
   switch(option){
     case LIST:
-        BlogView::list_blogs_page();
+        BlogController::index();
         break;
     case MYBLOGS:
-      if(userLogged){
+      if(Auth::user_logged()){
         BlogView::my_blogs_page();
         break;
       }
@@ -49,13 +57,9 @@ void BlogView::delete_page(unsigned int) {
   cout << "delete Blog page" << endl;
 }
 
-void BlogView::list_blogs_page(){
-
-}
-
 void BlogView::my_blogs_page(){
-  cout << string(50, '\n');
-  vector<Blog> myBlogsList = BlogController::get_blogs(AuthController::get());    
+  system("clear || cls");
+  vector<Blog> myBlogsList = BlogController::get_blogs(Auth::get_current_user());    
   for(auto blog : myBlogsList){
     cout << blog.get_blog_name().get() << endl;
   }
@@ -107,41 +111,24 @@ void PostView::delete_page(unsigned int) {
 // USER VIEW CLASS
 //------------------------------------------------
 
-Name UserView::field_name_page() {
-  cout << "field page name" << endl;
-  Name name;
-  name.set("Algum Exemplo");
-  return name;
-}
-
-Email UserView::field_email_page() {
-  cout << "field page email" << endl;
-  Email email;
-  email.set("exemplo@exemplo.com");
-  return email;
-}
-
-Password UserView::field_password_page() {
-  cout << "field page password" << endl;
-  Password password;
-  password.set("123456");
-  return password;
-}
-
 void UserView::create_page() {
-  cout << string(50, '\n');
   string newName;
-  cout << "Digite o nome de usuario desejado (deve conter apenas letras e espacos em branco e ate 20 caracteres): ";
+  string newEmail;
+  string newPassword;
+  
+  system("clear || cls");
+  
+  cout << "Um nome deve conter apenas letras e espacos. Alem disso, deve conter no maximo 20 caracteres." << endl;
+  cout << "Digite um nome: ";
   cin >> newName;
   
-  string newEmail;
-  cout << "Digite o e-mail desejado (deve estar no formato 'l(arroba)l.l'', onde 'l' sao palavras que contem apenas letras): ";
+  cout << "Um email deve estar no formato 'l(arroba)l.l'', onde 'l' sao palavras que contem apenas letras." << endl;
+  cout << "Digite um e-mail: ";
   cin >> newEmail;
   
-  string newPassword;
-  cout << "Digite a senha desejada (deve conter 5 caracters sem repeticao): ";
+  cout << "Uma seha deve conter ate 5 caracteres sem repeticao." << endl;
+  cout << "Digite uma senha: ";
   cin >> newPassword;
-  cout << endl;
   
   bool userAccepted = true;
   
@@ -151,8 +138,7 @@ void UserView::create_page() {
   
   try{
     userName.set(newName);
-  }
-  catch(invalid_argument erro){
+  } catch(invalid_argument erro) {
     cout << "Nome de usuario em formato incorreto." << endl;
     userAccepted = false;
   }
@@ -161,24 +147,20 @@ void UserView::create_page() {
     userEmail.set(newEmail);
     try{
       if(UserController::find(userEmail)){
-        throw invalid_argument("E-mail already in use");
+        throw invalid_argument("Email ja em uso.");
       }
-    }
-    catch(invalid_argument erro){
+    } catch(invalid_argument erro) {
       cout << "Email ja em uso." << endl;
       userAccepted = false;
     }
-    
-  }
-  catch(invalid_argument erro){
+  } catch(invalid_argument erro) {
     cout << "Email em formato incorreto." << endl;
     userAccepted = false;
   }
   
   try{
     userPassword.set(newPassword);
-  }
-  catch(invalid_argument erro){
+  } catch(invalid_argument erro) {
     cout << "Senha em formato incorreto." << endl;
     userAccepted = false;
   }
@@ -187,14 +169,11 @@ void UserView::create_page() {
     User newUser;
     newUser.set(userName, userEmail, userPassword);
     UserController::insert_new_user(newUser);
-    cout << "Nova conta criada com sucesso! Aperte 'ENTER' para retornar ao menu principal" << endl;
-    getchar();
-    getchar();
-  }
-  else{
-    cout << "Nao foi possivel criar a conta. Aperte 'ENTER' para retornar ao menu principal" << endl;
-    getchar();
-    getchar();
+    cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
+    getchar();getchar();
+  } else {
+    cout << "Houve um problema e nao foi possivel criar a conta. Tente novamente mais tarde." << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
+    getchar();getchar();
   }
 }
 
@@ -215,14 +194,26 @@ void UserView::delete_page(unsigned int) {
 //------------------------------------------------
 
 void WelcomeView::home_page() {
-  bool userLogged = false;
+  static const int LOGIN = 1;
+  static const int LOGOUT = 1;
+  static const int REGISTER = 2;
+  static const int ACCOUNT = 2;
+  static const int LISTBLOGS = 3;
+  static const int EXIT = 4;
+  
   bool exit = false;
+  bool error = false;
 
   while(!exit){
-    cout << string(50, '\n');
-    cout << "Bem-vindo a Blog - a platarfoma de blogs mais supimpa do mundo!\n" << endl;
+    system("clear || cls");
+    cout << "Bem-vindo a Blog - a platarfoma de blogs mais supimpa do mundo!" << endl << endl;
+    
+    if(error) {
+      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+      error = false;
+	}
 
-    if(userLogged){
+    if(Auth::user_logged()){
       cout << "1 - Deslogar" << endl;
       cout << "2 - Gerenciar conta" << endl;
     } else {
@@ -233,21 +224,21 @@ void WelcomeView::home_page() {
     cout << "3 - Blogs" << endl;
     cout << "4 - Sair" << endl;
 
-    cout << "Escolha uma opcao: ";
+    cout << endl << "> ";
     int option;
     cin >>  option;
 
     try{
-      if(userLogged){
+      if(Auth::user_logged()){
         switch(option){
           case LOGOUT:
-            userLogged = AuthView::logout_page();
+            AuthView::logout_page();
             break;
           case ACCOUNT:
             UserView::show_page();
             break;
           case LISTBLOGS: 
-            BlogView::show_page(userLogged);
+            BlogView::show_page();
             break;
           case EXIT:   
             exit = true; 
@@ -258,13 +249,13 @@ void WelcomeView::home_page() {
       } else {
         switch(option){
           case LOGIN:
-            userLogged = AuthView::login_page();
+            AuthView::login_page();
             break;
           case REGISTER:
             UserView::create_page();
             break;
           case LISTBLOGS: 
-            BlogView::show_page(userLogged);
+            BlogView::show_page();
             break;
           case EXIT:    
             exit = true; 
@@ -274,7 +265,7 @@ void WelcomeView::home_page() {
         }
       }
     } catch(invalid_argument erro){
-      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!";
+    	error = true;
     }
   }
 }
@@ -283,63 +274,65 @@ void WelcomeView::home_page() {
 // AUTH VIEW CLASS
 //------------------------------------------------
 
-bool AuthView::login_page() {
-  cout << string(50, '\n');
-  cout << "Log-in" << endl;
+void AuthView::login_page() {
+  bool error = false;
+	
+  system("clear || cls");
+  cout << "Log-in" << endl << endl;
   
   string input;
-  Password logPassword;
-  Email logEmail;
-  cout << "E-mail: " << endl;
+  Password password;
+  Email email;
+  
+  cout << "E-mail: ";
   cin >> input;
+  
   try{
-    logEmail.set(input);
-  }
-  catch(invalid_argument erro){
-    cout << "Email em formato incorreto." << endl;
-    getchar();
-    getchar();
-    return false;
+    email.set(input);
+  } catch(invalid_argument erro) {
+	error = true;
   }
   
-  cout << "Senha: " << endl;
+  cout << "Senha: ";
   cin >> input;
+  
   try{
-    logPassword.set(input);
-  }
-  catch(invalid_argument erro){
-    cout << "Senha em formato incorreto." << endl;
-    getchar();
-    getchar();
-    return false;
+    password.set(input);
+  } catch(invalid_argument erro) {
+	error = true;
   }
   
-  if(UserController::autenticate(logEmail,logPassword)){
-    cout << "Log-in realizado com sucesso, aperte 'ENTER' para retonar ao menu principal" << endl;
-    getchar();
-    getchar();
-    return true;
-  }
-  else{
-    cout << "E-mail ou senha incorretos, aperte 'ENTER' para retonar ao menu principal" << endl;
-    getchar();
-    getchar();
-    return false;
+  if(UserController::autenticate(email, password) and not error) {
+    system("clear || cls");
+    cout << "Log-in realizado com sucesso!" << endl << "Aperte 'ENTER' para continuar." << endl;
+    getchar(); getchar();
+    Auth::login(UserController::get_user(email)); 
+  } else {
+    system("clear || cls");
+    cout << "E-mail ou senha incorretos!" << endl << "Aperte 'ENTER' para retonar ao menu principal." << endl;
+    getchar(); getchar();
+    Auth::logout();
   }
 }
 
-bool AuthView::logout_page() {
-  cout << string(50, '\n');
+void AuthView::logout_page() {
+  const static int SIM = 1;
+  const static int NAO = 2;
+  
+  system("clear || cls");
   cout << "Tem certeza que deseja deslogar de sua conta?" << endl;
-  cout << "1-Sim  2-Nao" << endl;
+  cout << "1 - Sim" << endl;
+  cout << "2 - Nao" << endl;
+  
   int option;
   cin >> option;
+  
   switch(option){
-        case SIM:
-        return false;
-        case NAO:
-            return true;
+    case SIM:
+      Auth::logout();
+    case NAO:
+      return;
     default:
-        throw invalid_argument("Invalid option!");
+	    throw invalid_argument("Invalid option!");
   }
 }

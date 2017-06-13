@@ -3,6 +3,7 @@
 //------------------------------------------------
 
 #include "controller.hpp"
+#include "view.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -12,7 +13,9 @@ using namespace std;
 
 void BlogController::index() throw(invalid_argument) {
 	cout << "Blog Index Page" << endl;
-	// get all Blogs from model
+	
+	vector<Blog> blogs = Stub::get_all_blogs();// get all Blogs from model
+	BlogView::index(blogs);
 	// render page with all blogs
 	// return to last page
 }

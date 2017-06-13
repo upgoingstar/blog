@@ -310,6 +310,29 @@ class Blog {
 };
 
 //------------------------------------------------
+// AUTH CLASS
+//------------------------------------------------
+
+/**
+ * @class Auth
+ *
+ * @brief Defines info needed in authenication
+ *
+ * Keeps informaition of the current user and can tell if someone is logged or not.
+ */
+class Auth {
+	private:
+		static bool userLogged;
+		static User currentUser;
+		
+	public:
+		static bool user_logged();
+		static User get_current_user() throw(invalid_argument);
+		static void login(User);
+	    static void logout();
+};
+
+//------------------------------------------------
 // END GUARD
 //------------------------------------------------
 

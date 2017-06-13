@@ -29,15 +29,15 @@ using namespace std;
  * @note It is aware of both BlogView and BlogModel (but neither of them are aware of BlogController).
  */
 class BlogController : public Blog {
+	friend class BlogView;
   private:
-
     /**
      * @name    Index
      * @brief   Show to User all Blogs.
      *
      * Render a page that show all Blogs. If there is no Blogs to show, it will tell the current user that there is no Blogs
      */
-    static void index() throw(invalid_argument);
+    static void index();
 
     /**
      * @name    Create
@@ -152,18 +152,22 @@ class PostController : public Post {
  */
 // TODO: 2 users cannot have the same name of email
 class UserController : public User {
-public:
-  static bool autenticate(Email e, Password p){
-    return Stub::userAutenticate(e, p);
-  }
+  public:
+    static bool autenticate(Email e, Password p){
+      return Stub::userAutenticate(e, p);
+    }
   
-  static bool find(Email e){
-    return Stub::userFind(e);
-  }
+    static bool find(Email e){
+      return Stub::userFind(e);
+    }
   
-  static void insert_new_user(User){
-    return;
-  }
+    static void insert_new_user(User){
+      return;
+    }
+    
+    static User get_user(Email email){
+    	return Stub::get_user(email);
+		}
 };
 
 //------------------------------------------------
@@ -179,21 +183,8 @@ public:
  *
  * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
  */
-// TODO: make it inherit from Auth
-// TODO: make AuthModel friend with UserModel for the sake of verifying if the user exists
-class AuthController {
-public:
-  static User get(){
-    User u;
-    Name nome;
-    Email email;
-    Password senha;
-    nome.set("stub");
-    email.set("stub@stub.stub");
-    senha.set("stubp");
-    u.set(nome,email,senha);
-    return u;
-  }
+class AuthController : public Auth {
+	
 };
 
 //------------------------------------------------
