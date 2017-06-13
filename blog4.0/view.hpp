@@ -1,3 +1,5 @@
+// TODO: finish the new style of documentation
+
 //------------------------------------------------
 // GUARDS
 //------------------------------------------------
@@ -15,8 +17,12 @@
 //------------------------------------------------
 
 /**
-* A view class that controls interface with blog
-*/
+ * @class BlogView
+ *
+ * @brief Controls interface for blog with the user of the system 
+ *
+ * Has all the pages of CRUD
+ */
 class BlogView {
 
 friend class BlogController;
@@ -68,8 +74,12 @@ public:
 //------------------------------------------------
 
 /**
-* A view class that controls interface with comment
-*/
+ * @class CommentView
+ *
+ * @brief Controls interface for Comment with the user of the system 
+ *
+ * Has all the pages of CRUD
+ */
 class CommentView {
 
 friend class CommentController;
@@ -111,8 +121,12 @@ public:
 //------------------------------------------------
 
 /**
-* A view class that controls interface with post
-*/
+ * @class PostView
+ *
+ * @brief Controls interface for Post with the user of the system 
+ *
+ * Has all the pages of CRUD
+ */
 class PostView {
 
 friend class PostController;
@@ -154,8 +168,12 @@ public:
 //------------------------------------------------
 
 /**
-* A view class that controls interface with user
-*/
+ * @class UserView
+ *
+ * @brief Controls interface for User with the user of the system 
+ *
+ * Has all the pages of CRUD
+ */
 class UserView {
 
 friend class UserController;
@@ -208,39 +226,54 @@ public:
 //------------------------------------------------
 
 /**
-* A view class that show home page
-*/
+ * @class WelcomeView
+ *
+ * @brief Controles the home page
+ *
+ * Includes Home Page with menu for the program
+ */
+// TODO: put all this static const int inside the function where it is needed.
 class WelcomeView {
-private:
-  static const int LOGIN = 1;
-  static const int LOGOUT = 1;
-  static const int REGISTER = 2;
-  static const int ACCOUNT = 2;
-  static const int LISTBLOGS = 3;
-  static const int EXIT = 4;
-  
-  const static int SIM = 1;
-  const static int NAO = 2;
-public:
-  /*
-   * Render home page
-   */
-  static void home_page(); 
-
-
+  private:
+    static const int LOGIN = 1;
+    static const int LOGOUT = 1;
+    static const int REGISTER = 2;
+    static const int ACCOUNT = 2;
+    static const int LISTBLOGS = 3;
+    static const int EXIT = 4;
+    
+    const static int SIM = 1;
+    const static int NAO = 2;
+  public:
+    /*
+     * Render home page
+     */
+    static void home_page(); 
 };
 
 //------------------------------------------------
 // AUTH VIEW CLASS
 //------------------------------------------------
 
+/**
+ * @class AuthView
+ *
+ * @brief Controls the interface of authentication
+ *
+ * Includes Login Page and Logout Page
+ */
 class AuthView {
 
+  /// Permits AuthController to be aware of this class and use everything.
   friend class AuthController;
 
   private:
+    /// What?
   	const static int SIM = 1;
+
+    /// What?
   	const static int NAO = 2;
+
   public:
   	/*
   	 * Renderiza tela de login
