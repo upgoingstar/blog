@@ -236,19 +236,22 @@ public:
 
 class AuthView {
 
-friend class AuthController;
+  friend class AuthController;
 
-private:
-	const static int SIM = 1;
-	const static int NAO = 2;
-public:
-	/*
-	 * Renderiza tela de login
-	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-	 */	
-	static bool login_page();
-	// Renderiza tela de logout(so uma confimarcao pro usuario)
-	static bool logout_page();
+  private:
+  	const static int SIM = 1;
+  	const static int NAO = 2;
+  public:
+  	/*
+  	 * Renderiza tela de login
+  	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+  	 */	
+  	static bool login_page();
+    /*
+     * Renderiza tela de logout(so uma confimarcao pro usuario)
+     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     */
+  	static bool logout_page();
 };
 
 //------------------------------------------------

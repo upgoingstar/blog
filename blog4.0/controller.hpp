@@ -20,36 +20,71 @@ using namespace std;
 //------------------------------------------------
 
 /**
-* A class that controls Blog
-* Defines CRUD
-*/
+ * @class BlogController
+ *
+ * @brief Defines the CRUD (Create, Read, Update, Destroy)
+ *
+ * This class defines the logic necessary for CRUD to work properly in the system.
+ *
+ * @note It is aware of both BlogView and BlogModel (but neither of them are aware of BlogController).
+ */
 class BlogController : public Blog {
-private:
-  /*
-   * Coloca todas os Blogs em alguma variável visivel a BlogView.index() para renderizar a página
-   */
-  vector<Blog> index();
-  /*
-   * Chama BlogView.create(Blog()), usuário preenche as informações e ele pega devolta e returna o Blog
-   */
-  Blog         create()  throw(invalid_argument);
-  /*
-   * Chama BlogView.edit(Blog) como o Blog q recebeu, usuário preenche as informações e ele pega devolta envia para o update que válida e returna o Blog editado
-   */
-  Blog         edit(Blog)    throw(invalid_argument);
-  /*
-   * Chama BlogView.update() para adicionar um novo Post
-   */
-  Blog         update()  throw(invalid_argument);
-  /*
-   * Recebe um objeto Blog e manda o BlogModel destruir
-   */
-  void         destroy(Blog) throw(invalid_argument);
+  private:
+    
+    /**
+     * @name    Index
+     * @brief   Show to User all Blogs.
+     *
+     * Render a page that show all Blogs.
+     *
+     * @retval vector<Blog> If empty, the page will say there is no Blog. Else, show all Blogs.
+     */
+    static vector<Blog> index() throw(invalid_argument);
 
-public:
-  static vector<Blog> get_blogs(User u){
-    return Stub::getBlogs(u); 
-  }
+    /**
+     * @name    Create
+     * @brief   Create a new Blog
+     *
+     * Render a page to fill the information needed to create a new Blog and then save in the persistence.
+     *
+     * @retval Blog The blog created
+     */
+    static Blog create() throw(invalid_argument);
+
+    /**
+     * @name    Create
+     * @brief   Show a specific Blog
+     *
+     * Render a page with the Blog we want to read.
+     *
+     * @param blog The Blog that we want to read.
+     */
+    static void read(Blog blog) throw(invalid_argument);
+
+    /**
+     * @name    Update
+     * @brief   Permit edit a Blog
+     *
+     * Render a page with the information it can edit.
+     *
+     * @param blog The Blog that we want to update.
+     */
+    static void update(Blog blog) throw(invalid_argument);
+
+    /**
+     * @name    Destroy
+     * @brief   Delete a Blog
+     *
+     * Render a page of confirmation for erasing from persistence a specif Blog.
+     *
+     * @param blog The Blog that we want to delete.
+     */
+    static void destroy(Blog blog) throw(invalid_argument);
+
+  public:
+    static vector<Blog> get_blogs(User u){
+      return Stub::getBlogs(u); 
+    }
 };
 
 
@@ -58,9 +93,14 @@ public:
 //------------------------------------------------
 
 /**
-* A class that controls Comment
-* Defines CRUD
-*/
+ * @class CommentController
+ *
+ * @brief Defines the CRUD (Create, Read, Update, Destroy)
+ *
+ * This class defines the logic necessary for CRUD to work properly in the system.
+ *
+ * @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
+ */
 class CommentController : public Comment {
 
 };
@@ -70,9 +110,14 @@ class CommentController : public Comment {
 //------------------------------------------------
 
 /**
-* A class that controls Content
-* Defines CRUD
-*/
+ * @class ContentController
+ *
+ * @brief Defines the CRUD (Create, Read, Update, Destroy)
+ *
+ * This class defines the logic necessary for CRUD to work properly in the system.
+ *
+ * @note It is aware of both ContentView and ContentModel (but neither of them are aware of ContentController).
+ */
 class ContentController : public Content {
 
 };
@@ -82,9 +127,14 @@ class ContentController : public Content {
 //------------------------------------------------
 
 /**
-* A class that controls Post
-* Defines CRUD
-*/
+ * @class PostController
+ *
+ * @brief Defines the CRUD (Create, Read, Update, Destroy)
+ *
+ * This class defines the logic necessary for CRUD to work properly in the system.
+ *
+ * @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
+ */
 class PostController : public Post {
 
 };
@@ -94,9 +144,14 @@ class PostController : public Post {
 //------------------------------------------------
 
 /**
-* A class that controls User
-* Defines CRUD
-*/
+ * @class UserController
+ *
+ * @brief Defines the CRUD (Create, Read, Update, Destroy)
+ *
+ * This class defines the logic necessary for CRUD to work properly in the system.
+ *
+ * @note It is aware of both UserView and UserModel (but neither of them are aware of UserController).
+ */
 class UserController : public User {
 public:
   static bool autenticate(Email e, Password p){
@@ -117,10 +172,16 @@ public:
 //------------------------------------------------
 
 /**
-* A class that controls Auth
-* Responsible for authentication
-*/
+ * @class AuthController
+ *
+ * @brief Authenticate the User
+ *
+ * This class is responsible for verifying if the User exists.
+ *
+ * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
+ */
 // TODO: make it inherit from Auth
+// TODO: make AuthModel friend with UserModel for the sake of verifying if the user exists
 class AuthController {
 public:
   static User get(){
