@@ -19,11 +19,11 @@ void iniciate() {
 		}
 		printf("%c Finalizar\n\n", s[3]);
 		char op = getch();
-		if(op == 'w' || op == 'W') {
+		if(op == 'w' or op == 'W') {
 			swap(s[i], s[(i+3)%4]);
 			i = (i+3)%4;
 		}
-		if(op == 's' || op == 'S') {
+		if(op == 's' or op == 'S') {
 			swap(s[i], s[(i+1)%4]);
 			i = (i+1)%4;
 		}

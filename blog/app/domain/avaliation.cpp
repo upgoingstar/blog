@@ -20,7 +20,7 @@ void Avaliation::set(int avaliation) {
 }
 
 void Avaliation::valid(int a) throw(invalid_argument) {
-  if(a > 5 || a < 0) {
+  if(a > 5 or a < 0) {
     throw invalid_argument( "Invalid number!" );
   }
 }

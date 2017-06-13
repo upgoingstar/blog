@@ -21,7 +21,7 @@ void Post::disallow_comments() {
 }
 
 void Post::add_comment(Comment comment) throw(invalid_argument) {
-  if(comments_allowed && number_comments[comment.get_author()] < comments_limit) {
+  if(comments_allowed and number_comments[comment.get_author()] < comments_limit) {
     number_comments[comment.get_author()]++;
     this->comments.push_back(comment);
   }

@@ -9,7 +9,7 @@ Blog::Blog(){}
 Blog::~Blog() {}
 
 void Blog::set(Name author, Name blog_name) throw(invalid_argument) {
-	if(author.empty() || blog_name.empty())
+	if(author.empty() or blog_name.empty())
 		throw invalid_argument("Invalid blog name or author!");
   this->author = author;
   this->blog_name = blog_name;

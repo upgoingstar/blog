@@ -19,7 +19,7 @@ void Name::valid(string n) throw(invalid_argument) {
 
   for(int i = 0; i < n.size(); i++) {
   	char c = n[i];
-    if(!isalpha(c) && c != ' ') {
+    if(!isalpha(c) and c != ' ') {
       throw invalid_argument( "There is unpermited caracters!" );
     }
   }

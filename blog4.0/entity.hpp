@@ -27,50 +27,50 @@ using namespace std;
  * Defines what information User has and how you can access it.
  */
 class User{
-private:
-  /// The name of the User
-  Name name;
+  private:
+    /// The name of the User
+    Name name;
 
-  /// The password of the User
-  Password password;
+    /// The password of the User
+    Password password;
 
-  /// The email of the User
-  Email email;
+    /// The email of the User
+    Email email;
 
-  /// If the current user is anonymous
-  bool anonymous;
+    /// If the current user is anonymous
+    bool anonymous;
 
-  /**
-   * A private method.
-   * Validate User by verifying if any of the arguments (name, email and password) already exists, so that there are no two users with the same name or email or password.
+    /**
+     * A private method.
+     * Validate User by verifying if any of the arguments (name, email and password) already exists, so that there are no two users with the same name or email or password.
+     */
+    void valid(Name, Email, Password) throw(invalid_argument);
+
+  public:
+    /// Create a User
+    User();
+
+    /// Destroy a User
+    ~User();
+
+    /**
+   * A public method
+   * Modify the value of the Name, Email and Password of this User.
    */
-  void valid(Name, Email,Password) throw(invalid_argument);
+    void set(Name, Email, Password);
 
-public:
-  /// Create a User
-  User();
+    /**
+   * A public method
+   * @return Value of the Name of the User.
+   */
+    Name get_name() throw(invalid_argument);
 
-  /// Destroy a User
-  ~User();
-
-  /**
- * A public method
- * Modify the value of the Name, Email and Password of this User.
- */
-  void set(Name, Email, Password);
-
-  /**
- * A public method
- * @return Value of the Name of the User.
- */
-  Name get_name() throw(invalid_argument);
-
-  /**
- * A public method.
-   * Check if the email and password given correspond to a real User.
-   * TODO: Need refactoring!
- */
-  void check_user(Email, Password) throw(invalid_argument);
+    /**
+   * A public method.
+     * Check if the email and password given correspond to a real User.
+     * TODO: Need refactoring!
+   */
+    void check_user(Email, Password) throw(invalid_argument);
 };
 
 //------------------------------------------------
@@ -85,63 +85,72 @@ public:
  * Defines what information a Content has and how you can access it.
  */
 class Content {
-private:
-  /**
- * A private method
- * Checks if any of the value is empty.
- */
-  void valid(Name, Text) throw(invalid_argument);
-
-protected:
-  /// The author of the Content
-  Name author;
-
-  /// The content of the Content
-  Text content;
-
-  /// The name of every User that avaliated
-  map<Name, bool> has_avaliated;
-
-  /// All the avaliations given to this content
-  vector<Avaliation> avaliations;
-
-public:
-  /// Create a Content
-  Content();
-
-  /// Destroy a Content
-  ~Content();
-
-  /**
- * A public method
- * @return Value of the author of the content.
- */
-  Name get_author();
-
-  /**
- * A public method
- * @return Value of the content.
- */
-  Text get_content();
-
-  /**
- * A public method
- * @return The arithmetic mean of all avaliations given the to content in question.
- */
-  Avaliation get_avaliation();
-
-  /**
- * A public method
- * It receives the name of the author of the content and the content and valid them.
- */
-  void set(Name, Text);
-
-  /**
-   * A public method.
-   * Add an avaliation, making sure that no user do more than one avaliation.
-   * It receives a the name of the current user and the avaliation.
+  private:
+    /**
+   * A private method
+   * Checks if any of the value is empty.
    */
-  void add_avaliation(Name, Avaliation) throw(invalid_argument);
+    void valid(Name, Text) throw(invalid_argument);
+
+  protected:
+    /// The author of the Content
+    Name author;
+
+    /// The content of the Content
+    Text content;
+
+    /// The name of every User that avaliated
+    map<Name, bool> has_avaliated;
+
+    /// All the avaliations given to this content
+    vector<Avaliation> avaliations;
+
+  public:
+    /// Create a Content
+    Content();
+
+    /// Destroy a Content
+    ~Content();
+
+    /**
+   * A public method
+   * @return Value of the author of the content.
+   */
+    Name get_author();
+
+    /**
+   * A public method
+   * @return Value of the content.
+   */
+    Text get_content();
+
+    /**
+   * A public method
+   * @return The arithmetic mean of all avaliations given the to content in question.
+   */
+    Avaliation get_avaliation();
+
+    /**
+   * A public method
+   * It receives the name of the author of the content and the content and valid them.
+   */
+    void set(Name, Text);
+
+    /**
+     * A public method.
+     * Add an avaliation, making sure that no user do more than one avaliation.
+     * It receives a the name of the current user and the avaliation.
+     */
+    void add_avaliation(Name, Avaliation) throw(invalid_argument);
+
+    /**
+     * @name    Empty
+     * @brief   Warn if the Name or Text is empty.
+     *
+     * @retval TRUE At least one of the strings is empty
+     * @retval FALSE None of the strings is not empty
+     */
+    bool empty();
 };
 
 //------------------------------------------------
@@ -155,14 +164,22 @@ public:
  *
  * Inherit of class Content. Defines what information a Comment has and how you can access it.
  */
-// TODO: Comment contructor should not receive anything. Create a Set that recieves a Content
+// TODO: validate if the Content is empty.
 class Comment : public Content {
-public:
-  /// Create a Comment
-  Comment(Name,Text);
+  private:
+    /// The content of the Comment
+    Content content;
 
-  /// Destroy a Comment
-  ~Comment();
+  public:
+    /// Create a Comment
+    Comment();
+
+    /// Destroy a Comment
+    ~Comment();
+
+    Content get();
+
+    void set(Content);
 };
 
 //------------------------------------------------
@@ -176,51 +193,58 @@ public:
  *
  * Inherit of class Content. Defines what information a Post has and how you can access it.
  */
-// TODO: Post contructor should not receive anything. Create a Set that recieves a Content
+// TODO: validate if the Content is empty.
 class Post : public Content {
-private:
-  /// Maximum number of times that a person can comment.
-  static const int comments_limit = 5;
+  private:
+    /// The content of the Post
+    Content content;
+      
+    /// Maximum number of times that a person can comment.
+    static const int comments_limit = 5;
 
-  /// The name of every User that has commented
-  map<Name, int> number_comments;
+    /// The name of every User that has commented
+    map<Name, int> number_comments;
 
-  /// All the Comments made for this Post
-  vector<Comment> comments;
+    /// All the Comments made for this Post
+    vector<Comment> comments;
 
-  /// If comments are allowed
-  bool comments_allowed;
+    /// If comments are allowed
+    bool comments_allowed;
 
-public:
-  /// Create a Post
-  Post(Name, Text);
+  public:
+    /// Create a Post
+    Post();
 
-  /// Destroy a Post
-  ~Post();
+    /// Destroy a Post
+    ~Post();
 
-  /**
- * A public method
- * Allow comments to be made by other users.
- */
-  void allow_comments();
+    Content get();
 
-  /**
- * A public method
- * Disallow comments. This excludes all current comments.
- */
-  void disallow_comments();
+    /**
+   * A public method
+   * @return all the comments.
+   */
+    vector<Comment> get_comments();
 
-  /**
- * A public method
- * @return all the comments.
- */
-  vector<Comment> get_comments();
+    void set(Content);
 
-  /**
- * A public method
- * Add a comment if possible (no user can comment more than 5 times and the post has to autorize comments).
- */
-  void add_comment(Comment) throw(invalid_argument);
+    /**
+   * A public method
+   * Allow comments to be made by other users.
+   */
+    void allow_comments();
+
+    /**
+   * A public method
+   * Disallow comments. This excludes all current comments.
+   */
+    void disallow_comments();
+
+    /**
+   * A public method
+   * Add a comment if possible (no user can comment more than 5 times and the post has to autorize comments).
+   */
+    void add_comment(Comment) throw(invalid_argument);
 };
 
 //------------------------------------------------
@@ -237,52 +261,52 @@ public:
  * @note The size is small for some reasons.
  */
 class Blog {
-private:
-  /// The author of the Blog
-  Name author;
+  private:
+    /// The author of the Blog
+    Name author;
 
-  /// The name of the Blog
-  Name blog_name;
+    /// The name of the Blog
+    Name blog_name;
 
-  /// All Posts made in this Blog
-  vector<Post> posts;
+    /// All Posts made in this Blog
+    vector<Post> posts;
 
-public:
-  /// Create a Blog
-  Blog();
+  public:
+    /// Create a Blog
+    Blog();
 
-  /// Destroy a Blog
-  ~Blog();
+    /// Destroy a Blog
+    ~Blog();
 
-  /**
- * A public method
- * Modify the Name of the author and the Name of the blog.
- */
-  void set(Name, Name) throw(invalid_argument);
+    /**
+   * A public method
+   * Modify the Name of the author and the Name of the blog.
+   */
+    void set(Name, Name) throw(invalid_argument);
 
-  /**
- * A public method
- * @return The name of the author of the blog.
- */
-  Name get_author();
+    /**
+   * A public method
+   * @return The name of the author of the blog.
+   */
+    Name get_author();
 
-  /**
- * A public method
- * @return The name of the blog.
- */
-  Name get_blog_name();
+    /**
+   * A public method
+   * @return The name of the blog.
+   */
+    Name get_blog_name();
 
-  /**
- * A public method
- * @return All the posts in this blog.
- */
-  vector<Post> get_posts();
+    /**
+   * A public method
+   * @return All the posts in this blog.
+   */
+    vector<Post> get_posts();
 
-  /**
- * A public method
-   * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
- */
-  void add_post(Post) throw(invalid_argument);
+    /**
+   * A public method
+     * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
+   */
+    void add_post(Post) throw(invalid_argument);
 };
 
 //------------------------------------------------

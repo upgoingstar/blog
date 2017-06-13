@@ -17,7 +17,7 @@ User::User() {
 User::~User() {}
 
 void User::valid(Name name, Email email, Password password) throw(invalid_argument) {
-  if(name.empty() || email.empty() || password.empty()) {
+  if(name.empty() or email.empty() or password.empty()) {
     throw invalid_argument("Invalid informations to compose a user!");
   }
 }
@@ -40,7 +40,7 @@ Name User::get_name() throw(invalid_argument) {
 }
 
 void User::check_user(Email email, Password password) throw(invalid_argument) {
-  if(this->email != email || this->password != password || email.empty() || password.empty()) {
+  if(this->email != email or this->password != password or email.empty() or password.empty()) {
     throw invalid_argument( "That is not your email or password!" );
   }
 }
@@ -54,7 +54,7 @@ Content::Content() {}
 Content::~Content() {}
 
 void Content::valid(Name author, Text content) throw(invalid_argument) {
-  if(author.empty() || content.empty()) {
+  if(author.empty() or content.empty()) {
     throw invalid_argument("Invalid informations to compose a content!");
   }
 }
@@ -104,13 +104,15 @@ Avaliation Content::get_avaliation() {
   return ans;
 }
 
+bool Content::empty() {
+  return this->author.empty() or this->content.empty();
+}
+
 //------------------------------------------------
 // COMMENT CLASS
 //------------------------------------------------
 
-Comment::Comment(Name author, Text comment_content) {
-  Content::set(author, comment_content);
-}
+Comment::Comment() {}
 
 Comment::~Comment() {}
 
@@ -118,10 +120,7 @@ Comment::~Comment() {}
 // POST CLASS
 //------------------------------------------------
 
-Post::Post(Name author, Text post_content) {
-  Content::set(author, post_content);
-  Post::allow_comments();
-}
+Post::Post() {}
 
 Post::~Post() {}
 
@@ -135,7 +134,7 @@ void Post::disallow_comments() {
 }
 
 void Post::add_comment(Comment comment) throw(invalid_argument) {
-  if(comments_allowed && number_comments[comment.get_author()] < comments_limit) {
+  if(comments_allowed and number_comments[comment.get_author()] < comments_limit) {
     number_comments[comment.get_author()]++;
     this->comments.push_back(comment);
   }
@@ -160,7 +159,7 @@ Blog::Blog(){}
 Blog::~Blog() {}
 
 void Blog::set(Name author, Name blog_name) throw(invalid_argument) {
-  if(author.empty() || blog_name.empty())
+  if(author.empty() or blog_name.empty())
     throw invalid_argument("Invalid blog name or author!");
   this->author = author;
   this->blog_name = blog_name;

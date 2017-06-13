@@ -11,7 +11,7 @@ User::User() {
 User::~User() {}
 
 void User::valid(Name name, Email email, Password password) throw(invalid_argument) {
-  if(name.empty() || email.empty() || password.empty()) {
+  if(name.empty() or email.empty() or password.empty()) {
     throw invalid_argument("Invalid informations to compose a user!");
   }
 }
@@ -34,7 +34,7 @@ Name User::get_name() throw(invalid_argument) {
 }
 
 void User::check_user(Email email, Password password) throw(invalid_argument) {
-  if(this->email != email || this->password != password || email.empty() || password.empty()) {
+  if(this->email != email or this->password != password or email.empty() or password.empty()) {
     throw invalid_argument( "That is not your email or password!" );
   }
 }

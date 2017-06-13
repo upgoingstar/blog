@@ -91,7 +91,7 @@ using namespace std;
 	void TestComment::success_scenario(Name name, Text text) throw(invalid_argument) {
 		try {
 			Comment testAuxiliar(name,text);
-			if(name != testAuxiliar.get_author() || text != testAuxiliar.get_content()) {
+			if(name != testAuxiliar.get_author() or text != testAuxiliar.get_content()) {
 				throw invalid_argument("Invalid Class!");
 			}
 		}
@@ -132,7 +132,7 @@ using namespace std;
 	void TestPost::success_scenario(Name name, Text text) throw(invalid_argument) {
 		try {
 			Post testAuxiliar(name,text);
-			if(name != testAuxiliar.get_author() || text != testAuxiliar.get_content()) {
+			if(name != testAuxiliar.get_author() or text != testAuxiliar.get_content()) {
 				throw invalid_argument("Invalid Class!");
 			}
 			Comment testAuxiliar2(name,text);
@@ -207,7 +207,7 @@ using namespace std;
 		Blog testAuxiliar;
 		try {
 			testAuxiliar.set(name,blog_name);
-			if(name != testAuxiliar.get_author() || blog_name != testAuxiliar.get_blog_name())
+			if(name != testAuxiliar.get_author() or blog_name != testAuxiliar.get_blog_name())
 				throw invalid_argument("Invalid Class!");
 				Text text;
 				text.set("Teste");

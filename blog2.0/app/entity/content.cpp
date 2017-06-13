@@ -9,7 +9,7 @@ Content::Content() {}
 Content::~Content() {}
 
 void Content::valid(Name author, Text content) throw(invalid_argument) {
-  if(author.empty() || content.empty()) {
+  if(author.empty() or content.empty()) {
     throw invalid_argument("Invalid informations to compose a content!");
   }
 }

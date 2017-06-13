@@ -16,7 +16,7 @@ bool Stub::userAutenticate(Email toCheckEmail, Password toCheckPassword){
 	Password registredPassword;
 	registredPassword.set("stubp");
 
-	if(toCheckEmail == registredEmail && toCheckPassword == registredPassword){
+	if(toCheckEmail == registredEmail and toCheckPassword == registredPassword){
 		return true;
 	}
 	else{
