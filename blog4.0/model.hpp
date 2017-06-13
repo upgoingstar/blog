@@ -22,7 +22,7 @@ using namespace std;
 * Defines persistence methods
 */
 class BlogModel : public Blog {
-
+  friend class BlogController;
 };
 
 //------------------------------------------------
@@ -34,7 +34,7 @@ class BlogModel : public Blog {
 * Defines persistence methods
 */
 class CommentModel : public Comment {
-
+  friend class CommentController;
 };
 
 //------------------------------------------------
@@ -46,7 +46,7 @@ class CommentModel : public Comment {
 * Defines persistence methods
 */
 class ContentModel : public Content {
-
+  friend class ContentController;
 };
 
 //------------------------------------------------
@@ -58,7 +58,7 @@ class ContentModel : public Content {
 * Defines persistence methods
 */
 class PostModel : public Post {
-
+  friend class PostController;
 };
 
 //------------------------------------------------
@@ -70,7 +70,7 @@ class PostModel : public Post {
 * Defines persistence methods
 */
 class UserModel : public User {
-
+  friend class UserController;
 };
 
 //------------------------------------------------

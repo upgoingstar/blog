@@ -18,43 +18,10 @@
 * A view class that controls interface with blog
 */
 class BlogView {
+
+friend class BlogController;
+
 private:
-<<<<<<< HEAD
-  /*
-   * Render field page
-   * Just print 'Preencha seu nome:' and return
-   */
-  Name field_name_page();
-  /*
-   * Render field page
-   * Just print 'Preencha seu email:' and return
-   */
-  Email field_email_page();
-  
-public:
-  /*
-   * Render create blog page
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */
-  void create_page();
-  /*
-   * Render show page
-   * Receives the id of blog and a boolean (if boolean true, show all blogs)
-   */
-  void show_page(bool, unsigned int);
-  /*
-   * Render edit profile page
-   * Receives the id of blog
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */
-  void edit_page(unsigned int);
-  /*
-   * Render edit profile page
-   * Receives the id of blog
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */
-  void delete_page(unsigned int);
-=======
 	static const int LIST = 1;
 	static const int MYBLOGS = 2;
 	
@@ -94,7 +61,6 @@ public:
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
 	void delete_page(unsigned int);
->>>>>>> b26ef385c3a5df202d1d2597489b6207278522b8
 };
 
 //------------------------------------------------
@@ -105,6 +71,9 @@ public:
 * A view class that controls interface with comment
 */
 class CommentView {
+
+friend class CommentController;
+
 private:
   /*
    * Render field page
@@ -145,6 +114,9 @@ public:
 * A view class that controls interface with post
 */
 class PostView {
+
+friend class PostController;
+
 private:
   /*
    * Render field page
@@ -185,6 +157,9 @@ public:
 * A view class that controls interface with user
 */
 class UserView {
+
+friend class UserController;
+
 private:
   /*
    * Render field page
@@ -203,31 +178,6 @@ private:
   Password field_password_page();
 
 public:
-<<<<<<< HEAD
-  /*
-   * Render sign up page
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */
-  void create_page();
-  /*
-   * Render profile page
-   * Receives the id of user
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */
-  void show_page(bool, unsigned int);
-  /*
-   * Render edit profile page
-   * Receives the id of user
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */
-  void edit_page(unsigned int);
-  /*
-   * Render edit profile page
-   * Receives the id of user
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */
-  void delete_page(unsigned int);
-=======
 	/*
 	 * Render sign up page
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -251,7 +201,6 @@ public:
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
 	 */
 	void delete_page(unsigned int);
->>>>>>> b26ef385c3a5df202d1d2597489b6207278522b8
 };
 
 //------------------------------------------------
@@ -286,28 +235,13 @@ public:
 //------------------------------------------------
 
 class AuthView {
+
+friend class AuthController;
+
 private:
 	const static int SIM = 1;
 	const static int NAO = 2;
 public:
-<<<<<<< HEAD
-  /*
-   * Renderiza tela de login
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */ 
-  static void login_page();
-  /*
-   * Renderiza tela de logout(so uma confimarcao pro usuario)
-   * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
-   */ 
-  static void logout_page();
-};
-
-//------------------------------------------------
-// END GUARD
-//------------------------------------------------
-
-=======
 	/*
 	 * Renderiza tela de login
 	 * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -317,5 +251,8 @@ public:
 	static bool logout_page();
 };
 
->>>>>>> b26ef385c3a5df202d1d2597489b6207278522b8
+//------------------------------------------------
+// END GUARD
+//------------------------------------------------
+
 #endif
