@@ -10,25 +10,42 @@ using namespace std;
 //------------------------------------------------
 // BLOG VIEW CLASS
 //------------------------------------------------
-void BlogView::index_page(vector<Blog> allBlogs){
-  system("clear || cls");    
-  for(auto blog : allBlogs){
-    cout << blog.get_blog_name().get() << endl;
+int BlogView::index_page(vector<Blog> blogs, bool error){
+  system("clear || cls"); 
+  
+  if(error) {
+    cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
   }
-  getchar();
-  getchar();
+  
+  cout << "0 - Sair" << endl;
+  for(int i = 0; i < (int)blogs.size(); i++){
+    cout << i+1 << " - " << blogs[i].get_blog_name().get() << endl;
+  }
+  
+  int option;
+  cout << "Escolha um blog para acessar: ";
+  cin >> option;
+  
+  return option;
 }
 
 void BlogView::create_page() {
   cout << "create Blog page" << endl;
 }
 
-int BlogView::show_page() {
+int BlogView::show_page(bool error) {
   system("clear || cls");
   cout << "Blogs" << endl;
+  
+  if(error) {
+    cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+  }
+  
+  cout << "0 - Sair" << endl;
   cout << "1 - Listar blogs" << endl;
   if(Auth::user_logged()){
     cout << "2 - Meus blogs" << endl;
+    cout << "3 - Criar blog" << endl;
   }
 
   int option;
@@ -37,21 +54,30 @@ int BlogView::show_page() {
   return option;
 }
 
-void BlogView::edit_page(unsigned int) {
-  cout << "edit Blog page" << endl;
+int BlogView::edit_page(Blog blog, bool master, bool error) {
+  system("clear || cls");
+  cout << blog.get_blog_name().get() << endl << endl;
+  
+  if(error){
+  	cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+  }
+  
+  cout << "0 - Sair" << endl;
+  cout << "1 - Acessar post" << endl;
+  if(master){
+  	cout << "2 - Adicionar post" << endl;
+  	cout << "3 - Deletar post" << endl;
+  	cout << "4 - Deletar blog" << endl;
+  }
+  
+  int option;
+  cin >> option;
+  
+  return option;
 }
 
 void BlogView::delete_page(unsigned int) {
   cout << "delete Blog page" << endl;
-}
-
-void BlogView::my_blogs_page(vector<Blog> myBlogsList){
-  system("clear || cls"); 
-  for(auto blog : myBlogsList){
-    cout << blog.get_blog_name().get() << endl;
-  }
-  getchar();
-  getchar();
 }
 
 //------------------------------------------------
@@ -82,8 +108,25 @@ void PostView::create_page() {
   cout << "create Post page" << endl;
 }
 
-void PostView::show_page(bool, unsigned int) {
-  cout << "show Post page" << endl;
+int PostView::show_page(vector<Post> posts, bool error) {
+	
+	system("cls || clear");
+	
+    if(error) {
+      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+    }	
+	
+	cout << "0 - Sair" << endl;
+	for(int i = 0; i < (int)posts.size(); i++){
+		cout << i+1 << " - " << posts[i].get().get_content().get() << endl;
+	}
+	
+	cout << "Escolha o post que deseja acessar: ";
+	int option;
+	cin >> option;
+	
+	return option;
+
 }
 
 void PostView::edit_page(unsigned int) {
@@ -168,9 +211,9 @@ int WelcomeView::home_page(bool error) {
     
     if(error) {
       cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
-      error = false;
 	}
 
+    cout << "0 - Sair" << endl;
     if(Auth::user_logged()){
       cout << "1 - Deslogar" << endl;
       cout << "2 - Gerenciar conta" << endl;
@@ -180,7 +223,6 @@ int WelcomeView::home_page(bool error) {
     }
     
     cout << "3 - Blogs" << endl;
-    cout << "4 - Sair" << endl;
 
     cout << endl << "> ";
     int option;

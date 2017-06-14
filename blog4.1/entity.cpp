@@ -143,6 +143,15 @@ void Post::add_comment(Comment comment) throw(invalid_argument) {
   }
 }
 
+void Post::set(Content post){
+	this->content = post;
+}
+
+
+Content Post::get(){
+	return this->content;
+}
+
 vector<Comment> Post::get_comments() {
   if(this->comments.empty()){
     throw invalid_argument("There is no comments!");

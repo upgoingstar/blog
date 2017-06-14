@@ -12,18 +12,103 @@ using namespace std;
 // BLOG CONTROLLER CLASS
 //------------------------------------------------
 
-void BlogController::index() {
-	vector<Blog> blogs = Stub::get_all_blogs();// get all Blogs from model
-	BlogView::index_page(blogs);
+void BlogController::index() throw(invalid_argument){
+	const int EXIT = 0;
+	bool exit = false;
+	bool error = false;
+	
+	while(!exit){
+		vector<Blog> blogs = Stub::get_all_blogs();// get all Blogs from model
+		int option = BlogView::index_page(blogs, error);
+		error = false;
+		
+		if(option > blogs.size()){
+			error = true;
+			continue;
+		}
+		switch(option){
+			case EXIT:
+				exit = true;
+				break;
+			default:
+				BlogController::edit(blogs[option - 1], false);
+		}
+	}	// render page with all blogs
+	// return to last page
+}
+
+void BlogController::my_blogs() throw(invalid_argument) {
+	const int EXIT = 0;
+	bool exit = false;
+	bool error = false;
+	
+	while(!exit){
+		vector<Blog> blogs = Stub::get_blogs(Auth::get_current_user());// get all Blogs from model
+		int option = BlogView::index_page(blogs, error);
+		error = false;
+		
+		if(option > blogs.size()){
+			error = true;
+			continue;
+		}
+		switch(option){
+			case EXIT:
+				exit = true;
+				break;
+			default:
+				BlogController::edit(blogs[option - 1], true);
+		}
+	}
 	// render page with all blogs
 	// return to last page
 }
 
-void BlogController::my_blogs() {
-	vector<Blog> blogs = Stub::get_blogs(Auth::get_current_user());// get all Blogs from model
-	BlogView::my_blogs_page(blogs);
-	// render page with all blogs
-	// return to last page
+void BlogController::edit(Blog blog, const bool master){
+	const int EXIT = 0;
+	const int VIEWPOST = 1;
+	const int NEWPOST = 2;
+	const int DELETEPOST = 3;
+	const int DELETEBLOG = 4;
+	bool exit = false;
+	bool error = false;
+	
+	while(!exit){
+		int option = BlogView::edit_page(blog, master, error);
+		error = false;
+		
+		if(master){
+			switch(option){
+				case EXIT:
+					exit = true;
+					break;
+				case VIEWPOST:
+					PostController::show(blog);
+					break;
+				case NEWPOST:
+					break;
+				case DELETEPOST:
+					break;
+				case DELETEBLOG:
+					break;
+				default:
+					error = true;
+					break;
+			}
+		}
+		else{
+			switch(option){
+				case EXIT:
+					exit = true;
+					break;
+				case VIEWPOST:
+					PostController::show(blog);
+					break;
+				default:
+					error = true;
+					break;
+			}
+		}
+	}	
 }
 
 Blog BlogController::create() throw(invalid_argument) {
@@ -57,23 +142,38 @@ void BlogController::destroy(Blog blog) throw(invalid_argument) {
 }
 
 void BlogController::show() {
+  const int EXIT = 0;
   const int LIST = 1;
   const int MYBLOGS = 2;
-	
-  int option = BlogView::show_page();;
+  const int CREATEBLOG = 3;	
+  bool error = false;
+  bool exit = false;
   
-  switch(option){
-    case LIST:
-        BlogController::index();
-        break;
-    case MYBLOGS:
-      if(Auth::user_logged()){
-        BlogController::my_blogs();
-        break;
-      }
-    default:
-      throw invalid_argument("Invalid option!");
-      break;
+  while(!exit){
+    int option = BlogView::show_page(error);;
+    error = false;
+  
+    switch(option){
+  		case EXIT:
+  			exit = true;
+  			break;
+	    case LIST:
+	        BlogController::index();
+	        break;
+	    case MYBLOGS:
+	      if(Auth::user_logged()){
+	        BlogController::my_blogs();
+	        break;
+	      }
+	    case CREATEBLOG:
+	      if(Auth::user_logged()){
+	        BlogController::create();
+	        break;
+	      }
+	    default:
+	      error = true;
+	      break;
+	}
   }
 }
 
@@ -88,6 +188,33 @@ void BlogController::show() {
 //------------------------------------------------
 // POST CONTROLLER CLASS
 //------------------------------------------------
+void PostController::show(Blog blog){
+  const int EXIT = 0;
+  const int LIST = 1;
+  const int MYBLOGS = 2;
+  const int CREATEBLOG = 3;	
+  bool error = false;
+  bool exit = false;
+  
+  while(!exit){
+	vector<Post> posts = Stub::get_posts(blog);
+	int option = PostView::show_page(posts, error);
+ 	
+ 	error = false;
+ 	
+ 	if(option > posts.size()){
+ 		error = true;
+ 		continue;
+	 }
+ 	switch(option){
+ 		case EXIT:
+ 			exit = true;
+ 			break;
+ 		default:
+ 			error = true;
+	 }
+  }
+}
 
 //------------------------------------------------
 // USER CONTROLLER CLASS
@@ -119,7 +246,7 @@ void UserController::create() {
   try{
     userEmail.set(newEmail);
     try{
-      if(UserController::find(userEmail)){
+      if(Stub::user_find(userEmail)){
         throw invalid_argument("Email ja em uso.");
       }
     } catch(invalid_argument erro) {
@@ -143,28 +270,31 @@ void UserController::create() {
   if(userAccepted){
     User newUser;
     newUser.set(userName, userEmail, userPassword);
-    UserController::insert_new_user(newUser);
+    UserController::new_user(newUser);
 
   }
 }
 
+void UserController::edit() {
+}
 //------------------------------------------------
 // WELCOME CONTROLLER CLASS
 //------------------------------------------------
 void WelcomeController::home_page() {
+  static const int EXIT = 0;
   static const int LOGIN = 1;
   static const int LOGOUT = 1;
   static const int REGISTER = 2;
   static const int ACCOUNT = 2;
   static const int LISTBLOGS = 3;
-  static const int EXIT = 4;
   
   bool exit = false;
   bool error = false;
 
   while(!exit){
     int option = WelcomeView::home_page(error);
-
+	error = false;
+	
     try{
       if(Auth::user_logged()){
         switch(option){
@@ -172,7 +302,7 @@ void WelcomeController::home_page() {
             AuthController::logout();
             break;
           case ACCOUNT:
-            UserView::show_page();
+            UserController::edit();
             break;
           case LISTBLOGS: 
             BlogController::show();
@@ -231,11 +361,11 @@ void AuthController::login(){
 	error = true;
   }
   
-  error |= !UserController::autenticate(email, password);
+  error |= !Stub::user_autenticate(email, password);;
   
   AuthView::finish_login_page(error);
   if(not error) {
-    Auth::login(UserController::get_user(email)); 
+    Auth::login(Stub::get_user(email)); 
   } 
 }
 

@@ -37,10 +37,12 @@ class BlogController : public Blog {
      *
      * Render a page that show all Blogs. If there is no Blogs to show, it will tell the current user that there is no Blogs
      */
-    static void index();
+    static void index() throw(invalid_argument);
 	
-	static void my_blogs();
-    /**
+	static void my_blogs() throw(invalid_argument);
+    
+	static void edit(Blog, const bool);
+	/**
      * @name    Create
      * @brief   Create a new Blog
      *
@@ -133,7 +135,8 @@ class ContentController : public Content {
  * @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
  */
 class PostController : public Post {
-
+public:
+	static void show(Blog);
 };
 
 //------------------------------------------------
@@ -152,21 +155,11 @@ class PostController : public Post {
 // TODO: 2 users cannot have the same name of email
 class UserController : public User {
   public:
-    static bool autenticate(Email e, Password p){
-      return Stub::userAutenticate(e, p);
-    }
-  
-    static bool find(Email e){
-      return Stub::userFind(e);
-    }
-  
-    static void insert_new_user(User){
+    static void new_user(User){
       return;
     }
-    
-    static User get_user(Email email){
-    	return Stub::get_user(email);
-	}
+	
+	static void edit();
 	
 	static void create();
 };

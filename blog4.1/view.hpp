@@ -28,12 +28,11 @@ class BlogView {
   friend class BlogController;
     
   public:
-    static void my_blogs_page(vector<Blog>);
 		/*
      * Render all blogs names
      * Receives the id of blog and a boolean (if boolean true, show all blogs)
      */
-    static void index_page(vector<Blog>);
+    static int index_page(vector<Blog>, bool);
 		/*
      * Render create blog page
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -43,13 +42,13 @@ class BlogView {
      * Render show page
      * Receives the id of blog and a boolean (if boolean true, show all blogs)
      */
-    static int show_page();
+    static int show_page(bool);
     /*
      * Render edit profile page
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    void edit_page(unsigned int);
+    static int edit_page(Blog, bool, bool);
     /*
      * Render edit profile page
      * Receives the id of blog
@@ -123,7 +122,7 @@ class PostView {
      * Render show page
      * Receives the id of post and a boolean (if boolean true, show all posts)
      */
-    void show_page(bool, unsigned int);
+    static int show_page(vector<Post>, bool);
     /*
      * Render edit profile page
      * Receives the id of post
