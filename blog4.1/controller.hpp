@@ -29,7 +29,9 @@ using namespace std;
  * @note It is aware of both BlogView and BlogModel (but neither of them are aware of BlogController).
  */
 class BlogController : public Blog {
-	friend class BlogView;
+
+  friend class BlogView;
+  
   private:
     /**
      * @name    Index
@@ -38,11 +40,11 @@ class BlogController : public Blog {
      * Render a page that show all Blogs. If there is no Blogs to show, it will tell the current user that there is no Blogs
      */
     static void index() throw(invalid_argument);
-	
-	static void my_blogs() throw(invalid_argument);
-    
-	static void edit(Blog, const bool);
-	/**
+  
+    static void my_blogs() throw(invalid_argument);
+      
+    static void edit(Blog, const bool);
+    /**
      * @name    Create
      * @brief   Create a new Blog
      *
@@ -81,9 +83,9 @@ class BlogController : public Blog {
      * @param blog The Blog that we want to delete.
      */
     static void destroy(Blog blog) throw(invalid_argument);
-	
+  
   public:
-  	static void show();
+    static void show();
 };
 
 
@@ -101,7 +103,7 @@ class BlogController : public Blog {
  * @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
  */
 class CommentController : public Comment {
-
+  friend class CommentView;
 };
 
 //------------------------------------------------
@@ -118,7 +120,7 @@ class CommentController : public Comment {
  * @note It is aware of both ContentView and ContentModel (but neither of them are aware of ContentController).
  */
 class ContentController : public Content {
-
+  friend class ContentsView;
 };
 
 //------------------------------------------------
@@ -135,8 +137,11 @@ class ContentController : public Content {
  * @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
  */
 class PostController : public Post {
-public:
-	static void show(Blog);
+  
+  friend class PostView;
+  
+  public:
+    static void show(Blog);
 };
 
 //------------------------------------------------
@@ -154,14 +159,17 @@ public:
  */
 // TODO: 2 users cannot have the same name of email
 class UserController : public User {
+
+  friend class UserView;
+  
   public:
     static void new_user(User){
       return;
     }
-	
-	static void edit();
-	
-	static void create();
+  
+  static void edit();
+  
+  static void create();
 };
 
 //------------------------------------------------
@@ -178,9 +186,12 @@ class UserController : public User {
  * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
  */
 class AuthController : public Auth {
-public:
-	static void login();
-	static void logout();
+  
+  friend class AuthView;
+  
+  public:
+    static void login();
+    static void logout();
 };
 
 /**
@@ -193,9 +204,12 @@ public:
  * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
  */
 class WelcomeController {
-public:
-	static void home_page();
-	
+
+  friend class WelcomeView;
+  
+  public:
+    static void home_page();
+  
 };
 
 //------------------------------------------------
