@@ -20,7 +20,7 @@ void BlogView::index_page(vector<Blog> blogs){
     
     if(error) {
       error = false;
-      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+      cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
     }
     
     cout << "0 - Sair" << endl;
@@ -37,6 +37,7 @@ void BlogView::index_page(vector<Blog> blogs){
       continue;
     }
 
+    // TODO: put a try catch in here
     switch(option){
       case EXIT:
         exit = true;
@@ -50,6 +51,7 @@ void BlogView::index_page(vector<Blog> blogs){
 
 void BlogView::create_page() {
   cout << "create Blog page" << endl;
+  // 
 }
 
 // TODO: change this to menu (show page is to show a individual blog)
@@ -67,7 +69,7 @@ void BlogView::show_page() {
     
     if(error) {
       error = false;
-      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+      cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
     }
     
     cout << "0 - Sair" << endl;
@@ -119,15 +121,15 @@ void BlogView::edit_page(Blog blog, bool master, bool error) {
     
     if(error){
       error = false;
-    	cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+      cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
     }
     
     cout << "0 - Sair" << endl;
     cout << "1 - Acessar post" << endl;
     if(master){
-    	cout << "2 - Adicionar post" << endl;
-    	cout << "3 - Deletar post" << endl;
-    	cout << "4 - Deletar blog" << endl;
+      cout << "2 - Adicionar post" << endl;
+      cout << "3 - Deletar post" << endl;
+      cout << "4 - Deletar blog" << endl;
     }
     
     int option;
@@ -201,7 +203,7 @@ void PostView::create_page() {
 }
 
 void PostView::show_page(vector<Post> posts, bool error) {
-	const int EXIT = 0;
+  const int EXIT = 0;
   const int LIST = 1;
   const int MYBLOGS = 2;
   const int CREATEBLOG = 3; 
@@ -213,8 +215,8 @@ void PostView::show_page(vector<Post> posts, bool error) {
 
     if(error) {
       error = false;
-      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
-    }	
+      cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
+    } 
 
     cout << "0 - Sair" << endl;
     for(int i = 0; i < (int)posts.size(); i++){
@@ -321,7 +323,7 @@ void UserView::create_page() {
 
 void UserView::finish_create_page(bool userAccepted, bool correctName, bool correctPassword, bool correctEmail, bool registredEmail){
   if(!correctName){
-	cout << "Nome de usuario em formato incorreto." << endl;
+  cout << "Nome de usuario em formato incorreto." << endl;
   }
   
   if(!correctEmail){
@@ -337,24 +339,107 @@ void UserView::finish_create_page(bool userAccepted, bool correctName, bool corr
   }
   
   if(userAccepted){
-	cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
+  cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
     getchar();getchar();
   } else{
-  	cout << "Houve um problema e nao foi possivel criar a conta. Tente novamente mais tarde." << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
+    cout << "Houve um problema e nao foi possivel criar a conta. Tente novamente mais tarde." << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
     getchar();getchar();
   }
 }
 
-void UserView::show_page() {
-  cout << "show user page" << endl;
+void UserView::show_page(User user, Blog blogs) {
+  static const int EXIT = 0;
+  static const int CHANGE_PASSWORD = 1;
+  static const int DELETE_ACCOUNT = 2;
+
+  bool exit = false;
+  bool error = false;
+
+  while(!exit) {
+    system("clear || cls");
+
+    cout << "Perfil" << endl;
+    cout << endl;
+    cout << "Nome: " << user.get_name() << endl;
+    cout << "Numero de blogs: " << blogs.size() << endl;
+    cout << endl;
+
+    if(error) {
+      error = false;
+      cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
+    }
+
+    cout << "0 - Sair" << endl;
+    cout << "1 - Mudar senha" << endl;
+    cout << "2 - Deletar conta" << endl;
+    cout << endl;
+    cout << "> ";
+
+    int option;
+    cin >>  option;
+
+    try {
+      switch(option) {
+        case EXIT:
+          exit = true;
+          break;
+        case CHANGE_PASSWORD:
+          UserController::edit_page(user);
+          break;
+        case DELETE_ACCOUNT:
+          // TODO: make sure he will be back to the home page
+          UserController::delete_page(user);
+          exit = true;
+          break;
+        default:
+          throw invalid_argument("Invalid option!");
+          break;
+      }
+    } catch(invalid_argument erro) {
+      error = true;
+    }
+  }
 }
 
-void UserView::edit_page(unsigned int) {
-  cout << "edit user page" << endl;
+void UserView::edit_page(User user) {
+  Password  newPassword;
+
+  system("clear || cls");
+
+  cout << "Mudando Senha" << endl;
+  cout << endl;
+  cout << "Digite a nova senha: "
+
+  try {
+    cin >> newPassword;
+  } catch(invalid_argument erro) {
+    cout << "Essa senha não pode ser usada!" << endl;
+    cout << "Aperte 'ENTER' para voltar." << endl;
+    getchar(); getchar();
+    return;
+  }
+
+  try {
+    user.setPassword(newPassword);
+    cout << "Senha alterada com sucesso!" << endl;
+    cout << "Aperte 'ENTER' para voltar." << endl;
+    getchar(); getchar();
+    return;
+  } catch(invalid_argument arro) {
+    cout << "Houve um erro no sistema! Tente novamente mais tarde." << endl;
+    cout << "Aperte 'ENTER' para voltar." << endl;
+    getchar(); getchar();
+    return;
+  }
 }
 
-void UserView::delete_page(unsigned int) {
-  cout << "delete user page" << endl;
+// TODO: this should unlog you and make sure you return to home page
+void UserView::delete_page() {
+  system("clear || cls");
+  cout << "Conta deletada com sucesso" << endl;
+  cout << "Aperte 'ENTER' para voltar." << endl;
+  getchar(); getchar();
+  return;
 }
 
 //------------------------------------------------
@@ -378,7 +463,7 @@ void WelcomeView::home_page() {
     
     if(error) {
       error = false;
-      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+      cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
     }
 
     cout << "0 - Sair" << endl;
@@ -435,7 +520,7 @@ void WelcomeView::home_page() {
     } catch(invalid_argument erro) {
       error = true;
     }
-	}
+  }
 }
 
 //------------------------------------------------
@@ -479,16 +564,16 @@ void AuthView::login_page(string &email, string &password) {
 }
 
 void AuthView::finish_login_page(bool error){
-	if(error){
-	  system("clear || cls");
+  if(error){
+    system("clear || cls");
       cout << "E-mail ou senha incorretos!" << endl << "Aperte 'ENTER' para retonar ao menu principal." << endl;
-   	  getchar(); getchar();
-	}
-	else{
-   	  system("clear || cls");
+      getchar(); getchar();
+  }
+  else{
+      system("clear || cls");
       cout << "Log-in realizado com sucesso!" << endl << "Aperte 'ENTER' para continuar." << endl;
-      getchar(); getchar();	
-	}
+      getchar(); getchar(); 
+  }
 }
 
 int AuthView::logout_page() {

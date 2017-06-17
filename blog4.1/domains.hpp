@@ -96,6 +96,14 @@ class Domain {
      * @retval FALSE The other Domain is smaller
      */
     bool operator<(const Domain &other) const;
+
+    /**
+     * @name    Operator<<
+     * @brief   Make it possible print using cout
+     */
+    ostream& operator<<(ostream& os, const Domain &domain) const;
+
+    istream& operator>> (istream& is, Domain &domain) const;
 };
 
 //------------------------------------------------

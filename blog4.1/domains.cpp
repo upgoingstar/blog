@@ -42,6 +42,19 @@ bool Domain::operator<(const Domain &other) const {
   return this->value < other.value;
 }
 
+ostream& operator<<(ostream& os, const Domain &domain) const {  
+    os << domain.get();  
+    return os;  
+}  
+
+istream& operator>> (istream& is, Domain& domain) const {  
+    string str;
+    is >> str;  
+    this->valid(str);
+    this->value = str;
+    return is;  
+}  
+
 //------------------------------------------------
 // NAME CLASS
 //------------------------------------------------

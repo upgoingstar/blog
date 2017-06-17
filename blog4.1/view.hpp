@@ -153,30 +153,30 @@ class UserView {
   friend class UserController;
 
   public:
+    // TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
     /*
      * Render sign up page
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
     static void create_page(string&, string&, string&);
+    /*
+     * Complement of create_page
+     */
     static void finish_create_page(bool, bool, bool, bool, bool);
     /*
      * Render profile page
-     * Receives the id of user
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     * Receives the user
      */
     static void show_page();
     /*
-     * Render edit profile page
-     * Receives the id of user
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     * Render a page to change password
+     * Receives the user
      */
     void edit_page(unsigned int);
     /*
-     * Render edit profile page
-     * Receives the id of user
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     * Render delete page
+     * Receives the id of user?
      */
-    void delete_page(unsigned int);
+    void delete_page();
 };
 
 //------------------------------------------------
