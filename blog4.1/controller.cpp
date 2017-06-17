@@ -13,102 +13,26 @@ using namespace std;
 //------------------------------------------------
 
 void BlogController::index() throw(invalid_argument){
-	const int EXIT = 0;
-	bool exit = false;
-	bool error = false;
-	
-	while(!exit){
-		vector<Blog> blogs = Stub::get_all_blogs();// get all Blogs from model
-		int option = BlogView::index_page(blogs, error);
-		error = false;
-		
-		if(option > blogs.size()){
-			error = true;
-			continue;
-		}
-		switch(option){
-			case EXIT:
-				exit = true;
-				break;
-			default:
-				BlogController::edit(blogs[option - 1], false);
-		}
-	}	// render page with all blogs
-	// return to last page
+  // get all Blogs from model
+  vector<Blog> blogs = Stub::get_all_blogs();
+  // render page with all blogs
+  BlogView::index_page(blogs)
 }
 
+// TODO: change name to user_blogs
 void BlogController::my_blogs() throw(invalid_argument) {
-	const int EXIT = 0;
-	bool exit = false;
-	bool error = false;
-	
-	while(!exit){
-		vector<Blog> blogs = Stub::get_blogs(Auth::get_current_user());// get all Blogs from model
-		int option = BlogView::index_page(blogs, error);
-		error = false;
-		
-		if(option > blogs.size()){
-			error = true;
-			continue;
-		}
-		switch(option){
-			case EXIT:
-				exit = true;
-				break;
-			default:
-				BlogController::edit(blogs[option - 1], true);
-		}
-	}
-	// render page with all blogs
-	// return to last page
+  // get Blogs of the current User from model
+  vector<Blog> user_blogs = Stub::get_blogs(Auth::get_current_user()); 
+  // render page with all blogs
+  BlogView::index_page(blogs);
 }
 
 void BlogController::edit(Blog blog, const bool master){
-	const int EXIT = 0;
-	const int VIEWPOST = 1;
-	const int NEWPOST = 2;
-	const int DELETEPOST = 3;
-	const int DELETEBLOG = 4;
-	bool exit = false;
-	bool error = false;
-	
-	while(!exit){
-		int option = BlogView::edit_page(blog, master, error);
-		error = false;
-		
-		if(master){
-			switch(option){
-				case EXIT:
-					exit = true;
-					break;
-				case VIEWPOST:
-					PostController::show(blog);
-					break;
-				case NEWPOST:
-					break;
-				case DELETEPOST:
-					break;
-				case DELETEBLOG:
-					break;
-				default:
-					error = true;
-					break;
-			}
-		}
-		else{
-			switch(option){
-				case EXIT:
-					exit = true;
-					break;
-				case VIEWPOST:
-					PostController::show(blog);
-					break;
-				default:
-					error = true;
-					break;
-			}
-		}
-	}	
+  // render page of editing
+  // TODO: make this view return the Blog modified
+  BlogView::edit_page(blog, master);
+  // Save in the model
+	// TODO: stub for what is in the line above
 }
 
 Blog BlogController::create() throw(invalid_argument) {
@@ -140,41 +64,11 @@ void BlogController::destroy(Blog blog) throw(invalid_argument) {
 		// delete blog from persistence
 	// return to last page
 }
-
+// TODO: change this to menu (show page is to show a individual blog)
+// TODO: this should recieve an argument (The blog it will show)
 void BlogController::show() {
-  const int EXIT = 0;
-  const int LIST = 1;
-  const int MYBLOGS = 2;
-  const int CREATEBLOG = 3;	
-  bool error = false;
-  bool exit = false;
-  
-  while(!exit){
-    int option = BlogView::show_page(error);;
-    error = false;
-  
-    switch(option){
-  		case EXIT:
-  			exit = true;
-  			break;
-	    case LIST:
-	        BlogController::index();
-	        break;
-	    case MYBLOGS:
-	      if(Auth::user_logged()){
-	        BlogController::my_blogs();
-	        break;
-	      }
-	    case CREATEBLOG:
-	      if(Auth::user_logged()){
-	        BlogController::create();
-	        break;
-	      }
-	    default:
-	      error = true;
-	      break;
-	}
-  }
+  // render page with the info of the Blog (this should also recieve an argument)
+  BlogView::show_page();
 }
 
 //------------------------------------------------
@@ -188,91 +82,23 @@ void BlogController::show() {
 //------------------------------------------------
 // POST CONTROLLER CLASS
 //------------------------------------------------
+// TODO: change this to index
 void PostController::show(Blog blog){
-  const int EXIT = 0;
-  const int LIST = 1;
-  const int MYBLOGS = 2;
-  const int CREATEBLOG = 3;	
-  bool error = false;
-  bool exit = false;
-  
-  while(!exit){
+  // get all post in a blog
 	vector<Post> posts = Stub::get_posts(blog);
-	int option = PostView::show_page(posts, error);
- 	
- 	error = false;
- 	
- 	if(option > posts.size()){
- 		error = true;
- 		continue;
-	 }
- 	switch(option){
- 		case EXIT:
- 			exit = true;
- 			break;
- 		default:
- 			error = true;
-	 }
-  }
+  // render all posts
+	PostView::show_page(posts, error);
 }
 
 //------------------------------------------------
 // USER CONTROLLER CLASS
 //------------------------------------------------
 void UserController::create() {
-  bool userAccepted = true;
-  bool correctName = true;
-  bool correctPassword = true;
-  bool correctEmail = true;
-  bool registredEmail = false;
-  
-  string newName;
-  string newEmail;
-  string newPassword;
-  
+  // render page of create
+  // TODO: make this return something
   UserView::create_page(newName, newEmail, newPassword);
-  
-  Name userName;
-  Email userEmail;
-  Password userPassword;
-  
-  try{
-    userName.set(newName);
-  } catch(invalid_argument erro) {
-    correctName = false;
-    userAccepted = false;
-  }
-  
-  try{
-    userEmail.set(newEmail);
-    try{
-      if(Stub::user_find(userEmail)){
-        throw invalid_argument("Email ja em uso.");
-      }
-    } catch(invalid_argument erro) {
-      registredEmail = true;
-      userAccepted = false;
-    }
-  } catch(invalid_argument erro) {
-    correctEmail = false;
-    userAccepted = false;
-  }
-  
-  try{
-    userPassword.set(newPassword);
-  } catch(invalid_argument erro) {
-    correctPassword = false;
-    userAccepted = false;
-  }
-  
-  UserView::finish_create_page(userAccepted, correctName, correctPassword, correctEmail, registredEmail);
-  
-  if(userAccepted){
-    User newUser;
-    newUser.set(userName, userEmail, userPassword);
-    UserController::new_user(newUser);
-
-  }
+  // Send to model to save it
+  // TODO: make stub for what is in the line above
 }
 
 void UserController::edit() {
@@ -281,107 +107,25 @@ void UserController::edit() {
 // WELCOME CONTROLLER CLASS
 //------------------------------------------------
 void WelcomeController::home_page() {
-  static const int EXIT = 0;
-  static const int LOGIN = 1;
-  static const int LOGOUT = 1;
-  static const int REGISTER = 2;
-  static const int ACCOUNT = 2;
-  static const int LISTBLOGS = 3;
-  
-  bool exit = false;
-  bool error = false;
-
-  while(!exit){
-    int option = WelcomeView::home_page(error);
-	error = false;
-	
-    try{
-      if(Auth::user_logged()){
-        switch(option){
-          case LOGOUT:
-            AuthController::logout();
-            break;
-          case ACCOUNT:
-            UserController::edit();
-            break;
-          case LISTBLOGS: 
-            BlogController::show();
-            break;
-          case EXIT:   
-            exit = true; 
-            break;
-          default:
-            throw invalid_argument("Invalid option!");
-        }
-      } else {
-        switch(option){
-          case LOGIN:
-            AuthController::login();
-            break;
-          case REGISTER:
-            UserController::create();
-            break;
-          case LISTBLOGS: 
-            BlogController::show();
-            break;
-          case EXIT:    
-            exit = true; 
-            break;
-          default:
-            throw invalid_argument("Invalid option!");
-        }
-      }
-    } catch(invalid_argument erro){
-    	error = true;
-    }
-  }
+  // render home page
+  WelcomeView::home_page();
 }
 
 //------------------------------------------------
 // Auth CONTROLLER CLASS
 //------------------------------------------------
 void AuthController::login(){
-  bool error = false;
-	
-  string emailIn, passwordIn;
-  Email email;
-  Password password;
-  
+  // render page of login
   AuthView::login_page(emailIn,passwordIn);
+  // If login succefull, mark in the Auth that user is logged
+  // TODO: exactly what is written above
 
-  try{
-    email.set(emailIn);
-  } catch(invalid_argument erro) {
-	error = true;
-  }
-
-  try{
-    password.set(passwordIn);
-  } catch(invalid_argument erro) {
-	error = true;
-  }
-  
-  error |= !Stub::user_autenticate(email, password);;
-  
-  AuthView::finish_login_page(error);
-  if(not error) {
-    Auth::login(Stub::get_user(email)); 
-  } 
 }
 
 void AuthController::logout(){
-  const static int SIM = 1;
-  const static int NAO = 2;
-  
-  int option = AuthView::logout_page();
-  
-  switch(option){
-    case SIM:
-      Auth::logout();
-    case NAO:
-      return;
-    default:
-	    throw invalid_argument("Invalid option!");
-  }
+  // render page of confirmation of logout
+  AuthView::logout_page();
+  // if the user intends to logout, mark as logout
+  // TODO: exactly what is written above
 }
 
