@@ -104,19 +104,21 @@ class BlogController : public Blog {
  * @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
  */
 class CommentController : public Comment {
-	
+  
   /// Permits CommentView to be aware of this class and use everything.
   friend class CommentView;
   
   public:
-  	
-  	static void create();
-  	
-	static void show(Comment);
-	
-	static void edit(Comment);
-	
-	static void destroy(Comment);
+
+    static void index(Post);
+    
+    static void create();
+    
+    static void show(Comment);
+    
+    static void edit(Comment);
+    
+    static void destroy(Comment);
 };
 
 //------------------------------------------------
@@ -133,7 +135,7 @@ class CommentController : public Comment {
  * @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
  */
 class PostController : public Post {
-	
+  
   /// Permits PostView to be aware of this class and use everything.
   friend class PostView;
   
@@ -160,14 +162,14 @@ class UserController : public User {
   friend class UserView;
   
   public:
-  	
-  	static void create();
-  	
-	static void show();
-	
-	static void edit();
-	
-	static void destroy();
+    
+    static void create();
+    
+  static void show();
+  
+  static void edit();
+  
+  static void destroy();
 };
 
 //------------------------------------------------

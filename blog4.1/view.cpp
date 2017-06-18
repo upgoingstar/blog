@@ -10,6 +10,7 @@ using namespace std;
 //------------------------------------------------
 // BLOG VIEW CLASS
 //------------------------------------------------
+
 int BlogView::index_page(vector<Blog> blogs, bool error){
   system("clear || cls"); 
   
@@ -30,6 +31,7 @@ int BlogView::index_page(vector<Blog> blogs, bool error){
 }
 
 void BlogView::create_page() {
+  cout << "create Blog page" << endl;
   cout << "create Blog page" << endl;
 }
 
@@ -108,6 +110,7 @@ void BlogView::deleted_page() {
 
 void CommentView::create_page() {
   cout << "create Comment page" << endl;
+  cout << "create Comment page" << endl;
 }
 
 int CommentView::show_page(Post post, vector<Comment> comments, bool error) {
@@ -132,9 +135,11 @@ int CommentView::show_page(Post post, vector<Comment> comments, bool error) {
 
 void CommentView::edit_page(unsigned int) {
   cout << "edit Comment page" << endl;
+  cout << "edit Comment page" << endl;
 }
 
 int CommentView::delete_page(bool error) {
+  cout << "delete Comment page" << endl;
   cout << "delete Comment page" << endl;
 }
 
@@ -293,13 +298,16 @@ void UserView::finish_create_page(bool userAccepted, bool correctName, bool corr
 
 void UserView::show_page() {
   cout << "show user page" << endl;
+  cout << "show user page" << endl;
 }
 
 void UserView::edit_page(unsigned int) {
   cout << "edit user page" << endl;
+  cout << "edit user page" << endl;
 }
 
 void UserView::delete_page(unsigned int) {
+  cout << "delete user page" << endl;
   cout << "delete user page" << endl;
 }
 
@@ -308,28 +316,29 @@ void UserView::delete_page(unsigned int) {
 //------------------------------------------------
 
 int WelcomeView::home_page(bool error) {
-    system("clear || cls");
-    cout << "Bem-vindo a Blog - a platarfoma de blogs mais supimpa do mundo!" << endl << endl;
-    
-    if(error) {
-      cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
-	}
+  system("clear || cls");
+  cout << "Bem-vindo a Blog - a platarfoma de blogs mais supimpa do mundo!" << endl << endl;
 
-    cout << "0 - Sair" << endl;
-    if(Auth::user_logged()){
-      cout << "1 - Deslogar" << endl;
-      cout << "2 - Gerenciar conta" << endl;
-    } else {
-      cout << "1 - Logar" << endl;
-      cout << "2 - Registrar" << endl;  
-    }
-    
-    cout << "3 - Blogs" << endl;
+  if(error) {
+    cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+  }
 
-    cout << endl << "> ";
-    int option;
-    cin >>  option;
-	return option;
+  cout << "0 - Sair" << endl;
+  if(Auth::user_logged()){
+    cout << "1 - Deslogar" << endl;
+    cout << "2 - Gerenciar conta" << endl;
+  } else {
+    cout << "1 - Logar" << endl;
+    cout << "2 - Registrar" << endl;  
+  }
+
+  cout << "3 - Blogs" << endl;
+
+  cout << endl << "> ";
+  int option;
+  cin >>  option;
+
+  return option;
 }
 
 //------------------------------------------------

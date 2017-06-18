@@ -179,10 +179,10 @@ class Comment {
 // TODO: validate if the Content is empty.
 class Post {
   protected:
-    /// The author of the Content
+    /// The author of the Post
     Name author;
 
-    /// The content of the Content
+    /// The content of the Post
     Text content;
 
     /// The name of every User that avaliated
