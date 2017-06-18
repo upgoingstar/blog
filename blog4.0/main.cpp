@@ -14,6 +14,6 @@
 // TODO: it does need all this includes?
 
 int main() {
-  WelcomeView::home_page();
+  WelcomeController::home_page();
   return 0;
 }

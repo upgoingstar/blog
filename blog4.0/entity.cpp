@@ -2,6 +2,7 @@
 // INCLUDES
 //------------------------------------------------
 
+#include "domains.hpp"
 #include "entity.hpp"
 #include <bits/stdc++.h>
 using namespace std;
@@ -30,6 +31,11 @@ void User::set(Name name, Email email, Password password) {
   this->anonymous = false;
 }
 
+void User::set_password(Password password) {
+  User::valid(this->name, this->email, password);
+  this->password = password;
+}
+
 Name User::get_name() throw(invalid_argument) {
   if(anonymous) {
     throw invalid_argument("This user is anonymous, doesn't have a name");
@@ -46,26 +52,35 @@ void User::check_user(Email email, Password password) throw(invalid_argument) {
 }
 
 //------------------------------------------------
-// CONTENT CLASS
+// COMMENT CLASS
 //------------------------------------------------
 
-Content::Content() {}
+Comment::Comment() {}
 
-Content::~Content() {}
+Comment::~Comment() {}
 
-void Content::valid(Name author, Text content) throw(invalid_argument) {
-  if(author.empty() or content.empty()) {
+void Comment::valid(Text content) throw(invalid_argument) {
+  if(content.empty()) {
     throw invalid_argument("Invalid informations to compose a content!");
   }
 }
 
-void Content::set(Name author, Text content) {
-  Content::valid(author, content);
+
+bool Comment::empty() {
+  return this->author.empty() or this->content.empty();
+}
+
+
+void Comment::set_author(Name author) {
   this->author = author;
+}
+
+void Comment::set_content(Text content) {
+  Comment::valid(content);
   this->content = content;
 }
 
-void Content::add_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
+void Comment::set_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
   if(has_avaliated[name]) {
     throw invalid_argument("This user has already avaliated!");
   }
@@ -75,21 +90,21 @@ void Content::add_avaliation(Name name, Avaliation avaliation) throw(invalid_arg
   }
 }
 
-Name Content::get_author() {
+Name Comment::get_author() {
   if(this->author.empty()){
     throw invalid_argument("There is no author!");
   }
   return this->author;
 }
 
-Text Content::get_content() {
+Text Comment::get_content() {
   if(this->content.empty()){
     throw invalid_argument("There is no content to show!");
   }
   return this->content;
 }
 
-Avaliation Content::get_avaliation() {
+Avaliation Comment::get_avaliation() {
   int total_sum = 0;
   int total_size = this->avaliations.size();
 
@@ -104,18 +119,6 @@ Avaliation Content::get_avaliation() {
   return ans;
 }
 
-bool Content::empty() {
-  return this->author.empty() or this->content.empty();
-}
-
-//------------------------------------------------
-// COMMENT CLASS
-//------------------------------------------------
-
-Comment::Comment() {}
-
-Comment::~Comment() {}
-
 //------------------------------------------------
 // POST CLASS
 //------------------------------------------------
@@ -123,6 +126,82 @@ Comment::~Comment() {}
 Post::Post() {}
 
 Post::~Post() {}
+
+
+void Post::valid(Text content) throw(invalid_argument) {
+  if(content.empty()) {
+    throw invalid_argument("Invalid informations to compose a content!");
+  }
+}
+
+bool Post::empty() {
+  return this->author.empty() or this->content.empty();
+}
+
+Name Post::get_author() {
+  if(this->author.empty()){
+    throw invalid_argument("There is no author!");
+  }
+  return this->author;
+}
+
+Text Post::get_content() {
+  if(this->content.empty()){
+    throw invalid_argument("There is no content to show!");
+  }
+  return this->content;
+}
+
+Avaliation Post::get_avaliation() {
+  int total_sum = 0;
+  int total_size = this->avaliations.size();
+
+  for(int i = 0; i < (int)avaliations.size(); i++) {
+    Avaliation avaliation = avaliations[i];
+    total_sum += avaliation.get();
+  }
+
+  Avaliation ans;
+  ans.set(total_sum / total_size);
+
+  return ans;
+}
+
+vector<Comment> Post::get_comments() {
+  if(this->comments.empty()){
+    throw invalid_argument("There is no comments!");
+  }
+  return this->comments;
+}
+
+void Post::set_author(Name author) {
+  this->author = author;
+}
+
+void Post::set_content(Text content) {
+  Post::valid(content);
+  this->content = content;
+}
+
+void Post::set_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
+  if(has_avaliated[name]) {
+    throw invalid_argument("This user has already avaliated!");
+  }
+  else {
+    this->avaliations.push_back(avaliation);
+    has_avaliated[name] = true;
+  }
+}
+
+void Post::set_comment(Comment comment) throw(invalid_argument) {
+  if(comments_allowed and number_comments[comment.get_author()] < comments_limit) {
+    number_comments[comment.get_author()]++;
+    this->comments.push_back(comment);
+  }
+  else {
+    throw invalid_argument("This comment is not allowed!");
+  }
+}
 
 void Post::allow_comments() {
   comments_allowed = true;
@@ -133,22 +212,6 @@ void Post::disallow_comments() {
   this->comments.clear();
 }
 
-void Post::add_comment(Comment comment) throw(invalid_argument) {
-  if(comments_allowed and number_comments[comment.get_author()] < comments_limit) {
-    number_comments[comment.get_author()]++;
-    this->comments.push_back(comment);
-  }
-  else {
-    throw invalid_argument("This comment is not allowed!");
-  }
-}
-
-vector<Comment> Post::get_comments() {
-  if(this->comments.empty()){
-    throw invalid_argument("There is no comments!");
-  }
-  return this->comments;
-}
 
 //------------------------------------------------
 // BLOG CLASS
@@ -201,7 +264,6 @@ vector<Post> Blog::get_posts() {
 //------------------------------------------------
 // AUTH CLASS
 //------------------------------------------------
-
 
 bool Auth::userLogged = false;
 User Auth::currentUser;

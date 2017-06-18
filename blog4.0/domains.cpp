@@ -14,7 +14,7 @@ Domain::Domain() {}
 
 Domain::~Domain() {}
 
-string Domain::get() {
+string Domain::get() const {
   if(this->value.empty()) {
     throw invalid_argument( "String is empty!" );
   }
@@ -42,6 +42,18 @@ bool Domain::operator<(const Domain &other) const {
   return this->value < other.value;
 }
 
+ostream& operator<<(ostream& os, const Domain& domain) {  
+    os << domain.get();  
+    return os;  
+}  
+
+istream& operator>>(istream& is, Domain& domain) {  
+    string str;
+    is >> str;  
+    domain.set(str);
+    return is;  
+}  
+
 //------------------------------------------------
 // NAME CLASS
 //------------------------------------------------
@@ -59,7 +71,7 @@ void Name::valid(string n) throw(invalid_argument) {
     throw invalid_argument( "Name is empty!" );
   }
 
-  for(int i = 0; i < n.size(); i++) {
+  for(int i = 0; i < (int)n.size(); i++) {
     char c = n[i];
     if(!isalpha(c) and c != ' ') {
       throw invalid_argument( "There is unpermited caracters!" );
@@ -86,7 +98,7 @@ void Password::valid(string p) throw(invalid_argument) {
 
   map<char,int> repeat;
 
-  for(int i = 0; i < p.size(); i++) {
+  for(int i = 0; i < (int)p.size(); i++) {
     char c = p[i];
     repeat[c]++;
     if(repeat[c] > repetition_limit) {
@@ -121,31 +133,6 @@ void Email::valid(string e) throw(invalid_argument) {
 }
 
 //------------------------------------------------
-// AVALIATION CLASS
-//------------------------------------------------
-
-Avaliation::Avaliation() {
-  this->value = 0;
-}
-
-Avaliation::~Avaliation() {}
-
-int Avaliation::get() {
-  return this->value;
-}
-
-void Avaliation::set(int avaliation) {
-  valid(avaliation);
-  this->value = avaliation;
-}
-
-void Avaliation::valid(int a) throw(invalid_argument) {
-  if(a > 5 or a < 0) {
-    throw invalid_argument( "Invalid number!" );
-  }
-}
-
-//------------------------------------------------
 // TEXT CLASS
 //------------------------------------------------
 
@@ -163,3 +150,39 @@ void Text::valid(string t) throw(invalid_argument) {
   }
 }
 
+//------------------------------------------------
+// AVALIATION CLASS
+//------------------------------------------------
+
+Avaliation::Avaliation() {
+  this->value = 0;
+}
+
+Avaliation::~Avaliation() {}
+
+int Avaliation::get() const {
+  return this->value;
+}
+
+void Avaliation::set(int avaliation) {
+  valid(avaliation);
+  this->value = avaliation;
+}
+
+void Avaliation::valid(int a) throw(invalid_argument) {
+  if(a > 5 or a < 0) {
+    throw invalid_argument( "Invalid number!" );
+  }
+}
+
+ostream& operator<<(ostream& os, const Avaliation& avaliation) {  
+    os << avaliation.get();  
+    return os;  
+}  
+
+istream& operator>>(istream& is, Avaliation& avaliation) {  
+    int n;
+    is >> n;  
+    avaliation.set(n);
+    return is;  
+}  

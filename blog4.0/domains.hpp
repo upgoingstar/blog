@@ -51,7 +51,7 @@ class Domain {
      *
      * @return Value of string "value".
      */
-    string get();
+    string get() const;
 
     /**
      * @name    Set
@@ -72,7 +72,7 @@ class Domain {
 
     /**
      * @name    Operator!=
-     * @brief   Make it possible to compare if one Domain object has different value than other.
+     * @brief   Operator overload to make it possible to compare if one Domain object has different value than other.
      *
      * @retval TRUE The other Domain is different
      * @retval FALSE The other Domain is equal
@@ -81,7 +81,7 @@ class Domain {
 
     /**
      * @name    Operator==
-     * @brief   Make it possible to compare if one Domain object has igual value than other.
+     * @brief   Operator overload to make it possible to compare if one Domain object has igual value than other.
      *
      * @retval TRUE The other Domain is equal
      * @retval FALSE The other Domain is different
@@ -90,12 +90,24 @@ class Domain {
 
     /**
      * @name    Operator<
-     * @brief   Make it possible to compare if one Domain object has better value than other.
+     * @brief   Operator overload to make it possible to compare if one Domain object has better value than other.
      *
      * @retval TRUE The other Domain is bigger
      * @retval FALSE The other Domain is smaller
      */
     bool operator<(const Domain &other) const;
+
+    /**
+     * @name    Operator<<
+     * @brief   Operator overload to make it possible print using cout
+     */
+    friend ostream& operator<<(ostream&, const Domain&);
+
+	/**
+     * @name    Operator<<
+     * @brief   Operator overload to make it possible print using cin
+     */
+    friend istream& operator>>(istream&, Domain&);
 };
 
 //------------------------------------------------
@@ -270,7 +282,7 @@ class Avaliation {
      *
      * @return Value of integer "value".
      */
-    int get();
+    int get() const;
 
     /**
      * @name    Set
@@ -279,6 +291,18 @@ class Avaliation {
      * Set the keeped integer to the new value if is a Valid integer.
      */
     void set(int avaliation);
+    
+    /**
+     * @name    Operator<<
+     * @brief   Operator overload to make it possible print using cout
+     */
+    friend ostream& operator<<(ostream&, const Avaliation&);
+
+	/**
+     * @name    Operator<<
+     * @brief   Operator overload to make it possible print using cin
+     */
+    friend istream& operator>>(istream&, Avaliation&);
 };
 
 //------------------------------------------------
