@@ -1,6 +1,6 @@
 [Project]
-FileName=blog.dev
-Name=blog
+FileName=Blog.dev
+Name=Blog
 Type=1
 Ver=2
 ObjFiles=
@@ -19,7 +19,7 @@ ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
 OverrideOutput=0
-OverrideOutputName=blog.exe
+OverrideOutputName=
 HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
@@ -28,7 +28,7 @@ Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=100000c0g0100000000000000
+CompilerSettings=0000000000000000000000000
 UnitCount=13
 
 [VersionInfo]
@@ -39,38 +39,18 @@ Build=0
 LanguageID=1033
 CharsetID=1252
 CompanyName=
-FileVersion=1.0.0.0
+FileVersion=
 FileDescription=Developed using the Dev-C++ IDE
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=
-ProductVersion=1.0.0.0
+ProductVersion=
 AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit1]
-FileName=model.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit2]
-FileName=model.hpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit3]
 FileName=controller.cpp
 CompileCpp=1
 Folder=
@@ -80,7 +60,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit4]
+[Unit2]
 FileName=controller.hpp
 CompileCpp=1
 Folder=
@@ -90,27 +70,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit5]
-FileName=view.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit6]
-FileName=view.hpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit7]
+[Unit3]
 FileName=domains.cpp
 CompileCpp=1
 Folder=
@@ -120,7 +80,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit8]
+[Unit4]
 FileName=domains.hpp
 CompileCpp=1
 Folder=
@@ -130,7 +90,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit9]
+[Unit5]
 FileName=entity.cpp
 CompileCpp=1
 Folder=
@@ -140,7 +100,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit10]
+[Unit6]
 FileName=entity.hpp
 CompileCpp=1
 Folder=
@@ -150,7 +110,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit11]
+[Unit7]
 FileName=main.cpp
 CompileCpp=1
 Folder=
@@ -160,7 +120,37 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit13]
+[Unit8]
+FileName=model.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit9]
+FileName=model.hpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit10]
+FileName=stubs.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit11]
 FileName=stubs.hpp
 CompileCpp=1
 Folder=
@@ -170,8 +160,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit14]
-FileName=old_ui.hpp
+[Unit12]
+FileName=view.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -180,8 +170,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit12]
-FileName=stubs.cpp
+[Unit13]
+FileName=view.hpp
 CompileCpp=1
 Folder=
 Compile=1
