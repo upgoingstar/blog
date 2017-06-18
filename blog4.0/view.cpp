@@ -60,7 +60,7 @@ Blog BlogView::create_page() throw(invalid_argument) {
 	return newBlog;
 }
 
-int BlogView::show_page(Blog blog, bool master, bool error) {
+int BlogView::show_page(Blog blog, bool error) {
   system("clear || cls");
   cout << blog.get_name() << endl << endl;
   
@@ -70,10 +70,12 @@ int BlogView::show_page(Blog blog, bool master, bool error) {
   
   cout << "0 - Sair" << endl;
   cout << "1 - Acessar post" << endl;
-  if(master){
+  if(Auth::user_logged() && Auth::get_current_user().get_name() == blog.get_author()){
     cout << "2 - Adicionar post" << endl;
     cout << "3 - Deletar blog" << endl;
   }
+  cout << endl;
+  cout << " > ";
   
   int option;
   cin >> option;
@@ -113,19 +115,24 @@ Blog BlogView::edit_page(Blog blog) throw(invalid_argument) {
   }
 }
 
-bool BlogView::delete_page() {
+bool BlogView::delete_page(bool error) {
   const static int SIM = 1;
   const static int NAO = 2;
 
   system("clear || cls");
-  cout << "Tem certeza que deseja deletar seu post?" << endl;
+  
+	if(error){
+		cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
+	}
+
+  cout << "Tem certeza que deseja deletar seu blog?" << endl;
   cout << "1 - Sim" << endl;
   cout << "2 - Nao" << endl;
+  cout << " > ";
   
   int option;
   cin >> option;
   
-  cout << " > ";
   
   switch(option) {
     case SIM:
@@ -135,6 +142,13 @@ bool BlogView::delete_page() {
     default:
       throw invalid_argument("Opcao invalida, escolha uma das opcoes listadas na tela!");
   }
+}
+
+void BlogView::deleted_page() {
+	system("clear || cls");
+	
+	cout << "O blog foi excluido com sucesso, aperte ENTER para retornar a lista de blogs." << endl;
+	getchar();getchar();
 }
 
 int BlogView::menu_page(bool error) {
@@ -228,8 +242,10 @@ int CommentView::show_page(Comment comment, bool error) {
   }
 
   cout << "0 - Sair" << endl;
-  cout << "1 - Editar" << endl;
-  cout << "2 - Deletar" << endl;
+  if(Auth::user_logged() && comment.get_author() == Auth::get_current_user().get_name()){
+  	cout << "1 - Editar" << endl;
+  	cout << "2 - Deletar" << endl;
+	}
   cout << endl;
   cout << "> ";
 
@@ -271,21 +287,26 @@ Comment CommentView::edit_page(Comment comment) throw(invalid_argument) {
   }
 }
 
-bool CommentView::delete_page() {
+bool CommentView::delete_page(bool error) {
   const static int SIM = 1;
   const static int NAO = 2;
 
   system("clear || cls");
+  
+	if(error){
+		cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
+	}
+
   cout << "Tem certeza que deseja deletar seu comentario?" << endl;
   cout << "1 - Sim" << endl;
   cout << "2 - Nao" << endl;
+  cout << " > ";
   
   int option;
   cin >> option;
   
-  cout << " > ";
   
-  switch(option){
+  switch(option) {
     case SIM:
       return true;
     case NAO:
@@ -293,6 +314,13 @@ bool CommentView::delete_page() {
     default:
       throw invalid_argument("Opcao invalida, escolha uma das opcoes listadas na tela!");
   }
+}
+
+void CommentView::deleted_page() {
+	system("clear || cls");
+	
+	cout << "O post foi excluido com sucesso, aperte ENTER para retornar a lista de comentarios." << endl;
+	getchar();getchar();
 }
 
 //------------------------------------------------
@@ -393,9 +421,11 @@ int PostView::show_page(Post post, bool error) {
 
   cout << "0 - Sair" << endl;
   cout << "1 - Comentarios" << endl;
-  cout << "2 - Editar" << endl;
-  cout << "3 - Desativar Comentarios" << endl;
-  cout << "4 - Deletar" << endl;
+  if(Auth::user_logged() && post.get_author() == Auth::get_current_user().get_name()) {
+	  cout << "2 - Editar" << endl;
+	  cout << "3 - Desativar Comentarios" << endl;
+	  cout << "4 - Deletar" << endl;
+	}
   cout << endl;
   cout << "> ";
 
@@ -437,21 +467,26 @@ Post PostView::edit_page(Post post) throw(invalid_argument) {
   }
 }
 
-bool PostView::delete_page() {
+bool PostView::delete_page(bool error) {
   const static int SIM = 1;
   const static int NAO = 2;
 
   system("clear || cls");
+  
+	if(error){
+		cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
+	}
+
   cout << "Tem certeza que deseja deletar seu post?" << endl;
   cout << "1 - Sim" << endl;
   cout << "2 - Nao" << endl;
+  cout << " > ";
   
   int option;
   cin >> option;
   
-  cout << " > ";
   
-  switch(option){
+  switch(option) {
     case SIM:
       return true;
     case NAO:
@@ -459,6 +494,13 @@ bool PostView::delete_page() {
     default:
       throw invalid_argument("Opcao invalida, escolha uma das opcoes listadas na tela!");
   }
+}
+
+void PostView::deleted_page() {
+	system("clear || cls");
+	
+	cout << "O post foi excluido com sucesso, aperte ENTER para retornar a lista de posts." << endl;
+	getchar();getchar();
 }
 
 //------------------------------------------------
@@ -583,21 +625,26 @@ User UserView::edit_page(User user) throw(invalid_argument) {
   }
 }
 
-bool UserView::delete_page() {
+bool UserView::delete_page(bool error) {
   const static int SIM = 1;
   const static int NAO = 2;
 
   system("clear || cls");
+  
+	if(error){
+		cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl;
+	}
+
   cout << "Tem certeza que deseja deletar seu usuario?" << endl;
   cout << "1 - Sim" << endl;
   cout << "2 - Nao" << endl;
+  cout << " > ";
   
   int option;
   cin >> option;
   
-  cout << " > ";
   
-  switch(option){
+  switch(option) {
     case SIM:
       return true;
     case NAO:
@@ -605,6 +652,13 @@ bool UserView::delete_page() {
     default:
       throw invalid_argument("Opcao invalida, escolha uma das opcoes listadas na tela!");
   }
+}
+
+void UserView::deleted_page() {
+	system("clear || cls");
+	
+	cout << "O usuario foi excluido com sucesso, aperte ENTER para retornar ao menu principal." << endl;
+	getchar();getchar();
 }
 
 //------------------------------------------------
@@ -630,7 +684,7 @@ int WelcomeView::home_page(bool error) {
     
   cout << "3 - Blogs" << endl;
 
-  cout << "> ";
+  cout << " > ";
   int option;
 
   cin >>  option;

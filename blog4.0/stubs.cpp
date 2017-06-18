@@ -42,7 +42,7 @@ vector<Blog> Stub::get_blogs(User stubUser){
   Blog stubBlog1,stubBlog2;
   Name stubBlogName;
   
-  stubBlogName.set("Caludino Adventure");
+  stubBlogName.set("Claudino Adventure");
   stubBlog1.set(stubUser.get_name(),stubBlogName);
     
   stubBlogName.set("A batata");
@@ -78,6 +78,8 @@ vector<Blog> Stub::get_all_blogs(){
   stubBlogName.set("A batata");
   stubBlog2.set(stubUser.get_name(),stubBlogName);
   
+  registredName.set("Gabierl");
+  stubUser.set(registredName, registredEmail, registredPassword);
   stubBlogName.set("Outra coisa");
   stubBlog3.set(stubUser.get_name(),stubBlogName);
   
@@ -178,6 +180,15 @@ vector<Comment> Stub::get_comments(Post post){
     
     aux3.set("Aff, que virjao, sai do computador e vai comer uma");
     aux4.set("Jyubertw");
+    aux.set_author(aux4);
+    aux.set_content(aux3);
+    comments.push_back(aux);
+    
+  }
+  
+  if(post.get_content() == "Como faz pra excluir o blog?"){
+    aux3.set("Vai na pagina de deletar o blog");
+    aux4.set("stub");
     aux.set_author(aux4);
     aux.set_content(aux3);
     comments.push_back(aux);

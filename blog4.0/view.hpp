@@ -44,7 +44,7 @@ class BlogView {
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    static int show_page(Blog, bool, bool);
+    static int show_page(Blog, bool);
     /*
      * Render a page to change password
      * Receives the Comment
@@ -56,7 +56,9 @@ class BlogView {
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    static bool delete_page();
+    static bool delete_page(bool);
+    
+    static void deleted_page();
     /*
      * Render menu page
      * Receives a boolean for error
@@ -106,7 +108,9 @@ class CommentView {
     /*
      * Render delete page to confirm the Comment intention to delete his account
      */
-    static bool delete_page();
+    static bool delete_page(bool);
+    
+    static void deleted_page();
 };
 
 //------------------------------------------------
@@ -152,7 +156,9 @@ class PostView {
      * Receives the id of post
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    static bool delete_page();
+    static bool delete_page(bool);
+    
+    static void deleted_page();
 };
 
 //------------------------------------------------
@@ -192,7 +198,9 @@ class UserView {
     /*
      * Render delete page to confirm the user intention to delete his account
      */
-    static bool delete_page();
+    static bool delete_page(bool);
+    
+    static void deleted_page();
 };
 
 //------------------------------------------------

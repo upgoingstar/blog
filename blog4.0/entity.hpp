@@ -376,7 +376,7 @@ class Auth {
 		static bool user_logged();
 		static User get_current_user() throw(invalid_argument);
 		static void login(User);
-	    static void logout();
+	  static void logout();
 };
 
 //------------------------------------------------

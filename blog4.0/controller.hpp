@@ -56,7 +56,7 @@ class BlogController : public Blog {
      *
      * Render a page to fill the information needed to create a new Blog and then save in the persistence.
      */
-    static Blog create() throw(invalid_argument);
+    static void create() throw(invalid_argument);
     
     /**
      * @name    Show
@@ -64,7 +64,7 @@ class BlogController : public Blog {
      *
      * Render a page with information of the blog
      */
-    static void show(Blog, const bool);
+    static void show(Blog);
     
     /**
      * @name    Edit
@@ -85,7 +85,7 @@ class BlogController : public Blog {
      * @param blog The Blog that we want to delete.
      * @param master If the current user is the owner
      */
-    static void destroy(Blog, const bool) throw(invalid_argument);
+    static bool destroy(Blog) throw(invalid_argument);
     
 	/**
      * @name    Menu
@@ -128,7 +128,7 @@ class CommentController : public Comment {
     
     static void edit(Comment);
     
-    static void destroy(Comment);
+    static bool destroy(Comment);
 };
 
 //------------------------------------------------
@@ -159,7 +159,7 @@ class PostController : public Post {
   
     static void edit(Post);
   
-    static void destroy(Post);
+    static bool destroy(Post);
 };
 
 //------------------------------------------------
@@ -188,7 +188,7 @@ class UserController : public User {
   
     static void edit();
   
-    static void destroy();
+    static bool destroy(User);
 };
 
 //------------------------------------------------
