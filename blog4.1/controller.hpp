@@ -29,10 +29,7 @@ using namespace std;
  * @note It is aware of both BlogView and BlogModel (but neither of them are aware of BlogController).
  */
 class BlogController : public Blog {
-
-  /// Permits BlogView to be aware of this class and use everything.
-  friend class BlogView;
-  
+	friend class BlogView;
   private:
     /**
      * @name    Index
@@ -41,11 +38,11 @@ class BlogController : public Blog {
      * Render a page that show all Blogs. If there is no Blogs to show, it will tell the current user that there is no Blogs
      */
     static void index() throw(invalid_argument);
-  
-    static void user_blogs() throw(invalid_argument);
-      
-    static void edit(Blog, const bool);
-    /**
+	
+	static void my_blogs() throw(invalid_argument);
+    
+	static void edit(Blog, const bool);
+	/**
      * @name    Create
      * @brief   Create a new Blog
      *
@@ -83,10 +80,10 @@ class BlogController : public Blog {
      *
      * @param blog The Blog that we want to delete.
      */
-    static void destroy(Blog blog) throw(invalid_argument);
-  
+    static bool destroy(Blog blog) throw(invalid_argument);
+	
   public:
-    static void show();
+  	static void show();
 };
 
 
@@ -104,19 +101,8 @@ class BlogController : public Blog {
  * @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
  */
 class CommentController : public Comment {
-	
-  /// Permits CommentView to be aware of this class and use everything.
-  friend class CommentView;
-  
-  public:
-  	
-  	static void create();
-  	
-	static void show(Comment);
-	
-	static void edit(Comment);
-	
-	static void destroy(Comment);
+public:
+	static void show(Post);
 };
 
 //------------------------------------------------
@@ -133,12 +119,13 @@ class CommentController : public Comment {
  * @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
  */
 class PostController : public Post {
+private:
+	static void edit(Post, bool);
 	
-  /// Permits PostView to be aware of this class and use everything.
-  friend class PostView;
-  
-  public:
-    static void show(Blog);
+public:
+	static void show(Blog, bool);
+	
+	static void create(Blog);
 };
 
 //------------------------------------------------
@@ -154,43 +141,16 @@ class PostController : public Post {
  *
  * @note It is aware of both UserView and UserModel (but neither of them are aware of UserController).
  */
+// TODO: 2 users cannot have the same name of email
 class UserController : public User {
-
-  /// Permits UserView to be aware of this class and use everything.
-  friend class UserView;
-  
   public:
-  	
-  	static void create();
-  	
-	static void show();
+    static void new_user(User){
+      return;
+    }
 	
 	static void edit();
 	
-	static void destroy();
-};
-
-//------------------------------------------------
-// WELCOME CONTROLLER CLASS
-//------------------------------------------------
-
-/**
- * @class WelcomeController
- *
- * @brief Authenticate the User
- *
- * This class is responsible for verifying if the User exists.
- *
- * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
- */
-class WelcomeController {
-
-  /// Permits WelcomeView to be aware of this class and use everything.
-  friend class WelcomeView;
-  
-  public:
-    static void home_page();
-  
+	static void create();
 };
 
 //------------------------------------------------
@@ -207,13 +167,24 @@ class WelcomeController {
  * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
  */
 class AuthController : public Auth {
+public:
+	static void login();
+	static void logout();
+};
 
-  /// Permits AuthView to be aware of this class and use everything.
-  friend class AuthView;
-  
-  public:
-    static void login();
-    static void logout();
+/**
+ * @class WelcomeController
+ *
+ * @brief Authenticate the User
+ *
+ * This class is responsible for verifying if the User exists.
+ *
+ * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
+ */
+class WelcomeController {
+public:
+	static void home_page();
+	
 };
 
 //------------------------------------------------

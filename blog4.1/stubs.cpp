@@ -42,7 +42,7 @@ vector<Blog> Stub::get_blogs(User stubUser){
 	Blog stubBlog1,stubBlog2;
 	Name stubBlogName;
 	
-	stubBlogName.set("Caludino Adventure");
+	stubBlogName.set("Claudino Adventure");
 	stubBlog1.set(stubUser.get_name(),stubBlogName);
 		
 	stubBlogName.set("A batata");
@@ -110,7 +110,7 @@ vector<Post> Stub::get_posts(Blog blog){
 	Text aux3;
 	
 	if(blog.get_blog_name().get() == "A batata"){
-		aux3.set("Era uma vez uma batata que queria uma calca");
+		aux3.set("Uma batata queria uma calca muito chique");
 		aux.set_author(blog.get_author());
 		aux.set_content(aux3);
 		posts.push_back(aux);
@@ -141,4 +141,54 @@ vector<Post> Stub::get_posts(Blog blog){
 	}
 	
 	return posts;
+}
+
+vector<Comment> Stub::get_comments(Post post){
+	vector<Comment> comments;
+	Comment aux;
+	Text aux3;
+	Name aux4;
+	
+	if(post.get_content().get() == "Uma batata queria uma calca muito chique"){
+		aux3.set("Que emocionante, mal posso esperar a continuacao");
+		aux4.set("Carinha");
+		aux.set_author(aux4);
+		aux.set_content(aux3);
+		comments.push_back(aux);
+		
+		aux3.set("A historia mais empolgante que ja li!");
+		aux4.set("Fildosve");
+		aux.set_author(aux4);
+		aux.set_content(aux3);
+		comments.push_back(aux);
+	}
+	
+	if(post.get_content().get() == "Mas ai deu um bug e veio uma bermuda"){
+		aux3.set("Final triste ;(");
+		aux4.set("Carinha");
+		aux.set_author(aux4);
+		aux.set_content(aux3);
+		comments.push_back(aux);
+		
+		aux3.set("A batata vai aprender a amar sua bermuda!");
+		aux4.set("Genoscla");
+		aux.set_author(aux4);
+		aux.set_content(aux3);
+		comments.push_back(aux);
+		
+		aux3.set("Aff, que virjao, sai do computador e vai comer uma");
+		aux4.set("Jyubertw");
+		aux.set_author(aux4);
+		aux.set_content(aux3);
+		comments.push_back(aux);
+		
+	}
+	
+	aux3.set("Bolsonaro 2018!");
+	aux4.set("Pedrinho");
+	aux.set_author(aux4);
+	aux.set_content(aux3);
+	comments.push_back(aux);
+	
+	return comments;
 }
