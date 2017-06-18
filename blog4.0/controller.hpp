@@ -140,7 +140,16 @@ class PostController : public Post {
   friend class PostView;
   
   public:
-    static void show(Blog);
+  	
+  	static void index(Blog);
+  	
+    static void create();
+    
+    static void show(Post);
+  
+    static void edit(Post);
+  
+    static void destroy(Post);
 };
 
 //------------------------------------------------
@@ -165,11 +174,11 @@ class UserController : public User {
     
     static void create();
     
-  static void show();
+    static void show();
   
-  static void edit();
+    static void edit();
   
-  static void destroy();
+    static void destroy();
 };
 
 //------------------------------------------------

@@ -87,6 +87,15 @@ class Domain {
      * @retval FALSE The other Domain is different
      */
     bool operator==(const Domain &other) const;
+    
+    /**
+     * @name    Operator==
+     * @brief   Operator overload to make it possible to compare if one Domain object has igual value than other.
+     *
+     * @retval TRUE The other Domain is equal
+     * @retval FALSE The other Domain is different
+     */
+    bool operator==(const string &other) const;
 
     /**
      * @name    Operator<

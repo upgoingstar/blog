@@ -38,6 +38,10 @@ bool Domain::operator==(const Domain &other) const {
   return this->value == other.value;
 }
 
+bool Domain::operator==(const string &other) const {
+  return this->value == other;
+}
+
 bool Domain::operator<(const Domain &other) const {
   return this->value < other.value;
 }

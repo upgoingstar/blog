@@ -33,7 +33,7 @@ class BlogView {
      * Render all blogs names
      * Receives the all the blogs
      */
-    static void index_page(vector<Blog>);
+    static int index_page(vector<Blog>, bool);
 		/*
      * Render create blog page
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -43,19 +43,19 @@ class BlogView {
      * Render show page
      * Receives the id of blog and a boolean (if boolean true, show all blogs)
      */
-    static void show_page();
+    static int show_page(bool);
     /*
      * Render edit profile page
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    static void edit_page(Blog, bool);
+    static int edit_page(Blog, bool, bool);
     /*
      * Render edit profile page
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    void delete_page(unsigned int);
+    static bool delete_page();
 };
 
 //------------------------------------------------
@@ -80,12 +80,17 @@ class CommentView {
      * Render create page to serve as a sign up page
      * Return the new Comment 
      */
+    static int index_page(vector<Comment>, bool) throw(invalid_argument);
+    /*
+     * Render create page to serve as a sign up page
+     * Return the new Comment 
+     */
     static Comment create_page() throw(invalid_argument);
     /*
      * Render profile page
      * Receives the Comment
      */
-    static void show_page(Comment);
+    static int show_page(Comment, bool);
     /*
      * Render a page to change password
      * Receives the Comment
@@ -115,28 +120,33 @@ class PostView {
   friend class PostController;
 
   public:
+  	/*
+     * Render create page to serve as a sign up page
+     * Return the new Comment 
+     */
+    static int index_page(vector<Post>, bool) throw(invalid_argument);
     /*
      * Render create post page
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    void create_page();
+    static Post create_page() throw(invalid_argument);
     /*
      * Render show page
      * Receives the id of post and a boolean (if boolean true, show all posts)
      */
-    static void show_page(vector<Post>);
+    static int show_page(Post, bool);
     /*
      * Render edit profile page
      * Receives the id of post
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    void edit_page(unsigned int);
+    static Post edit_page(Post) throw(invalid_argument);
     /*
      * Render edit profile page
      * Receives the id of post
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    void delete_page(unsigned int);
+    static bool delete_page();
 };
 
 //------------------------------------------------
@@ -166,7 +176,7 @@ class UserView {
      * Render profile page
      * Receives the user
      */
-    static void show_page(User);
+    static int show_page(User, bool);
     /*
      * Render a page to change password
      * Receives the user
@@ -199,7 +209,7 @@ class WelcomeView {
     /*
      * Render home page
      */
-    static void home_page(); 
+    static int home_page(bool); 
 };
 
 //------------------------------------------------
@@ -223,12 +233,12 @@ class AuthView : public Auth {
     /*
      * Renderiza tela de login
      */ 
-    static void login_page();
+    static void login_page(Email&, Password&);
     static void finish_login_page(bool);
     /*
      * Renderiza tela de logout (so uma confimarcao pro usuario)
      */
-    static void logout_page();
+    static int logout_page();
 };
 
 //------------------------------------------------
