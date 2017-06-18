@@ -40,22 +40,28 @@ class BlogView {
      */
     static Blog create_page() throw(invalid_argument);
     /*
-     * Render show page
-     * Receives the id of blog and a boolean (if boolean true, show all blogs)
-     */
-    static int show_page(bool);
-    /*
      * Render edit profile page
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    static int edit_page(Blog, bool, bool);
+    static int show_page(Blog, bool, bool);
+    /*
+     * Render a page to change password
+     * Receives the Comment
+     * Return the updated Comment
+     */
+    static Blog edit_page(Blog) throw(invalid_argument);
     /*
      * Render edit profile page
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
     static bool delete_page();
+    /*
+     * Render menu page
+     * Receives a boolean for error
+     */
+    static int menu_page(bool);
 };
 
 //------------------------------------------------

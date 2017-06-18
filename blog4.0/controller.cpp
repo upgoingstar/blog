@@ -34,47 +34,47 @@ void BlogController::index() throw(invalid_argument){
         exit = true;
         break;
       default:
-        // TODO: this wasn't suppose to be a show?
-        BlogController::edit(blogs[option - 1], false);
+        BlogController::show(blogs[option - 1], false);
+        break;
     }
   }
-}
-
-Blog BlogController::create() throw(invalid_argument) {
-  try {
-    Blog blog = BlogView::create_page();            // render create page and receive a new blog
-    // BlogModel::save(user);                 // Send to model to save it             // TODO: put a stub in here (later implement)
-  } catch(invalid_argument erro) {}
 }
 
 void BlogController::user_blogs() throw(invalid_argument) {
-  const int EXIT = 0;
-  
-  bool exit = false;
-  bool error = false;
-
-  // TODO: this should not be here
-  vector<Blog> blogs = Stub::get_blogs(Auth::get_current_user());// get all Blogs from model
-
-  while(!exit){
-    int option = BlogView::index_page(blogs, error);
-    error = false;
-    
-    if(option > blogs.size()){
-      error = true;
-      continue;
-    }
-    switch(option){
-      case EXIT:
-        exit = true;
-        break;
-      default:
-        BlogController::edit(blogs[option - 1], true);
-    }
-  }
+	const int EXIT = 0;
+	
+	bool exit = false;
+	bool error = false;
+	
+	vector<Blog> blogs = Stub::get_blogs(Auth::get_current_user());  // get all Blogs from model
+	
+	while(!exit){
+		int option = BlogView::index_page(blogs, error);
+		error = false;
+		
+		if(option > blogs.size()){
+			error = true;
+			continue;
+		}
+		switch(option){
+			case EXIT:
+				exit = true;
+				break;
+			default:
+				BlogController::show(blogs[option - 1], true);
+				break;
+		}
+	}
 }
 
-void BlogController::edit(Blog blog, const bool master){
+Blog BlogController::create() throw(invalid_argument) {
+	try {
+		Blog blog = BlogView::create_page();                           // render create page and receive a new blog
+		// BlogModel::save(user);                                      // Send to model to save it             // TODO: put a stub in here (later implement)
+	} catch(invalid_argument erro) {}
+}
+
+void BlogController::show(Blog blog, const bool master){
   const int EXIT = 0;
   const int VIEWPOST = 1;
   const int NEWPOST = 2;
@@ -84,9 +84,7 @@ void BlogController::edit(Blog blog, const bool master){
   bool error = false;
   
   while(!exit){
-  	// TODO: fix this
-  	int option = 69;
-    //int option = BlogView::edit_page(blog, master, error);
+    int option = BlogView::show_page(blog, master, error);
     error = false;
     
     if(master){
@@ -101,7 +99,7 @@ void BlogController::edit(Blog blog, const bool master){
           PostController::create();
           break;
         case DELETEBLOG:
-          BlogController::destroy(blog);
+          BlogController::destroy(blog, false);
           break;
         default:
           error = true;
@@ -114,8 +112,7 @@ void BlogController::edit(Blog blog, const bool master){
           exit = true;
           break;
         case VIEWPOST:
-          // TODO: fix this
-		  //PostController::show(blog);
+		  PostController::index(blog);
           break;
         default:
           error = true;
@@ -125,31 +122,23 @@ void BlogController::edit(Blog blog, const bool master){
   } 
 }
 
-void BlogController::read(Blog blog) throw(invalid_argument) {
-  cout << "Blog Read Page" << endl;
-  // get all info from this blog from model
-  // render a page all the info of blog
+void BlogController::edit(Blog blog) {
+  try{
+    blog = BlogView::edit_page(blog);                             // render edit page and get new blog
+    // BlogModel::update(blog);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
+  } catch(invalid_argument erro) {}
 }
 
-void BlogController::update(Blog blog) throw(invalid_argument) {
-  cout << "Blog Update Page" << endl;
-  // render a menu with information that can be edited and get the new info
-  // merge the blog returned with the blog recieved in the params
-  // use the model to update
-  // return to last page
-}
-
-void BlogController::destroy(Blog blog) throw(invalid_argument) {
+void BlogController::destroy(Blog blog, const bool master) throw(invalid_argument) {
   try {
-    bool decision = BlogView::delete_page();                    // render delete page and get confirmation
+    bool decision = BlogView::delete_page();                      // render delete page and get confirmation
     if(decision == true) {
-      // BlogModel::delete(comment)                // safe using the model                 // TODO: put a stub in here (later implement) 
+      // BlogModel::delete(blog)                                  // safe using the model                 // TODO: put a stub in here (later implement) 
     }
   } catch(invalid_argument erro) {}
 }
-// TODO: change this to menu (show page is to show a individual blog)
-// TODO: this should recieve an argument (The blog it will show)
-void BlogController::show() {
+
+void BlogController::menu() {
   const int EXIT = 0;
   const int LIST = 1;
   const int MYBLOGS = 2;
@@ -159,7 +148,7 @@ void BlogController::show() {
   bool exit = false;
   
   while(!exit){
-    int option = BlogView::show_page(error);
+    int option = BlogView::menu_page(error);
     error = false;
   
     switch(option){
@@ -172,13 +161,13 @@ void BlogController::show() {
       case MYBLOGS:
         if(Auth::user_logged()){
           BlogController::user_blogs();
-          break;
         }
+        break;
       case CREATEBLOG:
         if(Auth::user_logged()){
           BlogController::create();
-          break;
         }
+        break;
       default:
         error = true;
         break;
@@ -471,8 +460,7 @@ void WelcomeController::home_page() {
             UserController::show();
             break;
           case LISTBLOGS: 
-            // TODO: mudar para index
-            BlogController::show();
+            BlogController::menu();
             break;
           case EXIT:   
             exit = true; 
@@ -490,7 +478,7 @@ void WelcomeController::home_page() {
             UserController::create();
             break;
           case LISTBLOGS: 
-            BlogController::show();
+            BlogController::menu();
             break;
           case EXIT:    
             exit = true; 

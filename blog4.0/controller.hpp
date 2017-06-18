@@ -33,7 +33,7 @@ class BlogController : public Blog {
   /// Permits BlogView to be aware of this class and use everything.
   friend class BlogView;
   
-  private:
+  public:
     /**
      * @name    Index
      * @brief   Show to User all Blogs.
@@ -42,38 +42,39 @@ class BlogController : public Blog {
      */
     static void index() throw(invalid_argument);
   
+    /**
+     * @name    User Blogs
+     * @brief   Show to current user all Blogs he created.
+     *
+     * Render a page that show all Blogs current user created. If there is no Blogs to show, it will tell the current user that there is no Blogs
+     */
     static void user_blogs() throw(invalid_argument);
       
-    static void edit(Blog, const bool);
     /**
      * @name    Create
      * @brief   Create a new Blog
      *
      * Render a page to fill the information needed to create a new Blog and then save in the persistence.
-     *
-     * @return The blog created
      */
     static Blog create() throw(invalid_argument);
-
+    
     /**
-     * @name    Create
-     * @brief   Show a specific Blog
+     * @name    Show
+     * @brief   Show a Blog
      *
-     * Render a page with the Blog we want to read.
-     *
-     * @param blog The Blog that we want to read.
+     * Render a page with information of the blog
      */
-    static void read(Blog blog) throw(invalid_argument);
-
+    static void show(Blog, const bool);
+    
     /**
-     * @name    Update
-     * @brief   Permit edit a Blog
+     * @name    Edit
+     * @brief   Edit a Blog if you are the owner
      *
-     * Render a page with the information it can edit.
-     *
-     * @param blog The Blog that we want to update.
+     * Render a page to fill the information needed to update the blog
+     * @param blog The Blog that we want to edit.
+     * @param master If the current user is the owner
      */
-    static void update(Blog blog) throw(invalid_argument);
+    static void edit(Blog);
 
     /**
      * @name    Destroy
@@ -82,11 +83,20 @@ class BlogController : public Blog {
      * Render a page of confirmation for erasing from persistence a specif Blog.
      *
      * @param blog The Blog that we want to delete.
+     * @param master If the current user is the owner
      */
-    static void destroy(Blog blog) throw(invalid_argument);
-  
-  public:
-    static void show();
+    static void destroy(Blog, const bool) throw(invalid_argument);
+    
+	/**
+     * @name    Menu
+     * @brief   Simple menu for Blogs
+     *
+     * Render a page of menu for blogs
+     *
+     * @param blog The Blog that we want to delete.
+     * @param master If the current user is the owner
+     */
+    static void menu();
 };
 
 

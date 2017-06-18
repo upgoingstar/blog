@@ -20,8 +20,8 @@ int BlogView::index_page(vector<Blog> blogs, bool error) {
     }
     
     cout << "0 - Sair" << endl;
-    for(int i = 1; i <= (int)blogs.size(); i++){
-      cout << i << " - " << blogs[i].get_blog_name() << endl;
+    for(int i = 0; i < (int)blogs.size(); i++){
+      cout << i+1 << " - " << blogs[i].get_name() << endl;
     }
     
     cout << " > ";
@@ -60,8 +60,84 @@ Blog BlogView::create_page() throw(invalid_argument) {
 	return newBlog;
 }
 
-// TODO: change this to menu (show page is to show a individual blog)
-int BlogView::show_page(bool error) {
+int BlogView::show_page(Blog blog, bool master, bool error) {
+  system("clear || cls");
+  cout << blog.get_name() << endl << endl;
+  
+  if(error){
+    cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+  }
+  
+  cout << "0 - Sair" << endl;
+  cout << "1 - Acessar post" << endl;
+  if(master){
+    cout << "2 - Adicionar post" << endl;
+    cout << "3 - Deletar blog" << endl;
+  }
+  
+  int option;
+  cin >> option;
+  
+  return option;
+}
+
+Blog BlogView::edit_page(Blog blog) throw(invalid_argument) {
+  Name newName;
+
+  system("clear || cls");
+
+  cout << "Mudando Nome do Blog" << endl;
+  cout << endl;
+  cout << "Digite o novo nome: ";
+
+  try {
+    cin >> newName;
+  } catch(invalid_argument erro) {
+    cout << "Esse nome e invalido!" << endl;
+    cout << "Aperte 'ENTER' para voltar." << endl;
+    getchar(); getchar();
+    throw invalid_argument("Essa nome nao pode ser usado!");
+  }
+
+  try {
+    blog.set_name(newName);
+    cout << "Nome alterado com sucesso!" << endl;
+    cout << "Aperte 'ENTER' para voltar." << endl;
+    getchar(); getchar();
+    return blog;
+  } catch(invalid_argument arro) {
+    cout << "Houve um erro no sistema! Tente novamente mais tarde." << endl;
+    cout << "Aperte 'ENTER' para voltar." << endl;
+    getchar(); getchar();
+    throw invalid_argument("Houve um erro no sistema! Tente novamente mais tarde.");
+  }
+}
+
+bool BlogView::delete_page() {
+  const static int SIM = 1;
+  const static int NAO = 2;
+
+  system("clear || cls");
+  cout << "Tem certeza que deseja deletar seu post?" << endl;
+  cout << "1 - Sim" << endl;
+  cout << "2 - Nao" << endl;
+  
+  int option;
+  cin >> option;
+  
+  cout << " > ";
+  
+  switch(option) {
+    case SIM:
+      return true;
+    case NAO:
+      return false;
+    default:
+      throw invalid_argument("Opcao invalida, escolha uma das opcoes listadas na tela!");
+  }
+}
+
+int BlogView::menu_page(bool error) {
   system("clear || cls");
   cout << "Blogs" << endl;
   
@@ -83,49 +159,6 @@ int BlogView::show_page(bool error) {
   cin >> option;
 
   return option;
-}
-
-int BlogView::edit_page(Blog blog, bool master, bool error) {
-  system("clear || cls");
-  cout << blog.get_blog_name() << endl << endl;
-  
-  if(error){
-    cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
-  }
-  
-  cout << "0 - Sair" << endl;
-  cout << "1 - Acessar post" << endl;
-  if(master){
-    cout << "2 - Adicionar post" << endl;
-    cout << "3 - Deletar blog" << endl;
-  }
-  
-  int option;
-  cin >> option;
-  
-  return option;
-}
-
-bool BlogView::delete_page() {
-  const static int SIM = 1;
-  const static int NAO = 2;
-
-  system("clear || cls");
-  cout << "Tem certeza que deseja deletar seu post?" << endl;
-  cout << "1 - Sim" << endl;
-  cout << "2 - Nao" << endl;
-  
-  int option;
-  cin >> option;
-  
-  switch(option) {
-    case SIM:
-      return true;
-    case NAO:
-      return false;
-    default:
-      throw invalid_argument("Opcao invalida, escolha uma das opcoes listadas na tela!");
-  }
 }
 
 //------------------------------------------------
@@ -221,7 +254,7 @@ Comment CommentView::edit_page(Comment comment) throw(invalid_argument) {
     cout << "Esse comentario e invalido!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
     getchar(); getchar();
-    throw invalid_argument("Essa senha nao pode ser usada!");
+    throw invalid_argument("Esse comentario nao pode ser usado!");
   }
 
   try {
@@ -249,6 +282,8 @@ bool CommentView::delete_page() {
   
   int option;
   cin >> option;
+  
+  cout << " > ";
   
   switch(option){
     case SIM:
@@ -414,6 +449,8 @@ bool PostView::delete_page() {
   int option;
   cin >> option;
   
+  cout << " > ";
+  
   switch(option){
     case SIM:
       return true;
@@ -557,6 +594,8 @@ bool UserView::delete_page() {
   
   int option;
   cin >> option;
+  
+  cout << " > ";
   
   switch(option){
     case SIM:

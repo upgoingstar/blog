@@ -109,7 +109,7 @@ vector<Post> Stub::get_posts(Blog blog){
   Post aux;
   Text aux3;
   
-  if(blog.get_blog_name().get() == "A batata"){
+  if(blog.get_name().get() == "A batata"){
     aux3.set("Uma batata queria uma calca muito chique");
     aux.set_author(blog.get_author());
     aux.set_content(aux3);
@@ -121,7 +121,7 @@ vector<Post> Stub::get_posts(Blog blog){
     posts.push_back(aux);
   }
   
-  if(blog.get_blog_name() == "Claudino Adventure"){
+  if(blog.get_name() == "Claudino Adventure"){
     aux3.set("Claudino saiu em uma aventura cheia de perigos");
     aux.set_author(blog.get_author());
     aux.set_content(aux3);
@@ -133,7 +133,7 @@ vector<Post> Stub::get_posts(Blog blog){
     posts.push_back(aux);
   }
   
-  if(blog.get_blog_name() == "Outra coisa"){
+  if(blog.get_name() == "Outra coisa"){
     aux3.set("Como faz pra excluir o blog?");
     aux.set_author(blog.get_author());
     aux.set_content(aux3);

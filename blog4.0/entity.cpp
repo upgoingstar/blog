@@ -235,17 +235,24 @@ Name Blog::get_author() {
   return this->author;
 }
 
-Name Blog::get_blog_name() {
+Name Blog::get_name() {
   if(this->blog_name.empty()){
     throw invalid_argument("This blog has no name!");
   }
   return this->blog_name;
 }
 
+void Blog::set_name(Name blog_name) throw(invalid_argument) {
+  if(blog_name.empty()) {
+    throw invalid_argument("Invalid blog name!");	
+  }
+  this->blog_name = blog_name;
+}
+
 /*
   Add a post in the blog if you are the creator for the blog.
 */
-void Blog::add_post(Post post) throw(invalid_argument) {
+void Blog::set_post(Post post) throw(invalid_argument) {
   if(this->author != post.get_author()) {
     throw invalid_argument("You are not allowed to post in this blog!");
   }

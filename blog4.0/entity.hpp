@@ -335,7 +335,7 @@ class Blog {
    * A public method
    * @return The name of the blog.
    */
-    Name get_blog_name();
+    Name get_name();
 
     /**
    * A public method
@@ -343,11 +343,17 @@ class Blog {
    */
     vector<Post> get_posts();
 
+	 /**
+   * A public method
+     * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
+   */
+    void set_name(Name) throw(invalid_argument);
+    
     /**
    * A public method
      * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
    */
-    void add_post(Post) throw(invalid_argument);
+    void set_post(Post) throw(invalid_argument);
 };
 
 //------------------------------------------------
