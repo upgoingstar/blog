@@ -4,8 +4,8 @@
 // GUARDS
 //------------------------------------------------
 
-#ifndef __ENTITIES_H_INCLUDED__
-#define __ENTITIES_H_INCLUDED__
+#ifndef __ENTITY_H_INCLUDED__
+#define __ENTITY_H_INCLUDED__
 
 //------------------------------------------------
 // INCLUDES
@@ -59,6 +59,11 @@ class User{
    */
     void set(Name, Email, Password);
 
+	/**
+     * Modify the value of the Password of this User.
+     */
+    void set_password(Password);
+
     /**
    * A public method
    * @return Value of the Name of the User.
@@ -73,85 +78,6 @@ class User{
     void check_user(Email, Password) throw(invalid_argument);
 };
 
-//------------------------------------------------
-// CONTENT CLASS
-//------------------------------------------------
-
-/**
- * @class Content
- *
- * @brief Defines the Content of Post and Comment
- *
- * Defines what information a Content has and how you can access it.
- */
-class Content {
-  private:
-    /**
-   * A private method
-   * Checks if any of the value is empty.
-   */
-    void valid(Name, Text) throw(invalid_argument);
-
-  protected:
-    /// The author of the Content
-    Name author;
-
-    /// The content of the Content
-    Text content;
-
-    /// The name of every User that avaliated
-    map<Name, bool> has_avaliated;
-
-    /// All the avaliations given to this content
-    vector<Avaliation> avaliations;
-
-  public:
-    /// Create a Content
-    Content();
-
-    /// Destroy a Content
-    ~Content();
-
-    /**
-   * A public method
-   * @return Value of the author of the content.
-   */
-    Name get_author();
-
-    /**
-   * A public method
-   * @return Value of the content.
-   */
-    Text get_content();
-
-    /**
-   * A public method
-   * @return The arithmetic mean of all avaliations given the to content in question.
-   */
-    Avaliation get_avaliation();
-
-    /**
-   * A public method
-   * It receives the name of the author of the content and the content and valid them.
-   */
-    void set(Name, Text);
-
-    /**
-     * A public method.
-     * Add an avaliation, making sure that no user do more than one avaliation.
-     * It receives a the name of the current user and the avaliation.
-     */
-    void add_avaliation(Name, Avaliation) throw(invalid_argument);
-
-    /**
-     * @name    Empty
-     * @brief   Warn if the Name or Text is empty.
-     *
-     * @retval TRUE At least one of the strings is empty
-     * @retval FALSE None of the strings is not empty
-     */
-    bool empty();
-};
 
 //------------------------------------------------
 // COMMENT CLASS
@@ -164,11 +90,35 @@ class Content {
  *
  * Inherit of class Content. Defines what information a Comment has and how you can access it.
  */
-// TODO: validate if the Content is empty.
-class Comment : public Content {
-  private:
+class Comment {
+  protected:
+    /// The author of the Comment
+    Name author;
+
     /// The content of the Comment
-    Content content;
+    Text content;
+
+    /// The name of every User that avaliated
+    map<Name, bool> has_avaliated;
+
+    /// All the avaliations given to this content
+    vector<Avaliation> avaliations;
+
+  private:
+  	/**
+     * A private method
+     * Checks if any of the value is empty.
+     */
+    void valid(Text) throw(invalid_argument);
+    
+    /**
+     * @name    Empty
+     * @brief   Warn if the Name or Text is empty.
+     *
+     * @retval TRUE At least one of the strings is empty
+     * @retval FALSE None of the strings is not empty
+     */
+    bool empty();
 
   public:
     /// Create a Comment
@@ -177,9 +127,42 @@ class Comment : public Content {
     /// Destroy a Comment
     ~Comment();
 
-    Content get();
+    /**
+     * A public method
+     * @return Value of the author of the content.
+     */
+    Name get_author();
 
-    void set(Content);
+    /**
+     * A public method
+     * @return Value of the content.
+     */
+    Text get_content();
+
+    /**
+     * A public method
+     * @return The arithmetic mean of all avaliations given the to content in question.
+     */
+    Avaliation get_avaliation();
+
+    /**
+     * A public method
+     * It receives the name of the author of the content and the content and valid them.
+     */
+    void set_author(Name);
+
+	/**
+     * A public method
+     * It receives the name of the author of the content and the content and valid them.
+     */
+    void set_content(Text);
+
+    /**
+     * A public method.
+     * Add an avaliation, making sure that no user do more than one avaliation.
+     * It receives a the name of the current user and the avaliation.
+     */
+    void set_avaliation(Name, Avaliation) throw(invalid_argument);
 };
 
 //------------------------------------------------
@@ -194,10 +177,19 @@ class Comment : public Content {
  * Inherit of class Content. Defines what information a Post has and how you can access it.
  */
 // TODO: validate if the Content is empty.
-class Post : public Content {
-  private:
-    /// The content of the Post
-    Content content;
+class Post {
+  protected:
+    /// The author of the Content
+    Name author;
+
+    /// The content of the Content
+    Text content;
+
+    /// The name of every User that avaliated
+    map<Name, bool> has_avaliated;
+
+    /// All the avaliations given to this content
+    vector<Avaliation> avaliations;
       
     /// Maximum number of times that a person can comment.
     static const int comments_limit = 5;
@@ -210,6 +202,22 @@ class Post : public Content {
 
     /// If comments are allowed
     bool comments_allowed;
+    
+  private:    
+	/**
+	 * A private method
+	 * Checks if any of the value is empty.
+	 */
+    void valid(Text) throw(invalid_argument);	
+    
+    /**
+     * @name    Empty
+     * @brief   Warn if the Name or Text is empty.
+     *
+     * @retval TRUE At least one of the strings is empty
+     * @retval FALSE None of the strings is not empty
+     */
+    bool empty();
 
   public:
     /// Create a Post
@@ -218,33 +226,66 @@ class Post : public Content {
     /// Destroy a Post
     ~Post();
 
-    Content get();
+    /**
+     * A public method
+     * @return Value of the author of the content.
+     */
+    Name get_author();
 
     /**
-   * A public method
-   * @return all the comments.
-   */
+     * A public method
+     * @return Value of the content.
+     */
+    Text get_content();
+
+    /**
+     * A public method
+     * @return The arithmetic mean of all avaliations given the to content in question.
+     */
+    Avaliation get_avaliation();
+
+    /**
+     * A public method
+     * @return all the comments.
+     */
     vector<Comment> get_comments();
 
-    void set(Content);
+    /**
+     * A public method
+     * It receives the name of the author of the content and the content and valid them.
+     */
+    void set_author(Name);
+
+	/**
+     * A public method
+     * It receives the name of the author of the content and the content and valid them.
+     */
+    void set_content(Text);
 
     /**
-   * A public method
-   * Allow comments to be made by other users.
-   */
+     * A public method.
+     * Add an avaliation, making sure that no user do more than one avaliation.
+     * It receives a the name of the current user and the avaliation.
+     */
+    void set_avaliation(Name, Avaliation) throw(invalid_argument);
+
+	/**
+     * A public method
+     * Add a comment if possible (no user can comment more than 5 times and the post has to autorize comments).
+     */
+    void set_comment(Comment) throw(invalid_argument);
+
+    /**
+     * A public method
+     * Allow comments to be made by other users.
+     */
     void allow_comments();
 
     /**
-   * A public method
-   * Disallow comments. This excludes all current comments.
-   */
+     * A public method
+     * Disallow comments. This excludes all current comments.
+     */
     void disallow_comments();
-
-    /**
-   * A public method
-   * Add a comment if possible (no user can comment more than 5 times and the post has to autorize comments).
-   */
-    void add_comment(Comment) throw(invalid_argument);
 };
 
 //------------------------------------------------

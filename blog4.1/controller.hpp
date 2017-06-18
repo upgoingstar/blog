@@ -30,6 +30,7 @@ using namespace std;
  */
 class BlogController : public Blog {
 
+  /// Permits BlogView to be aware of this class and use everything.
   friend class BlogView;
   
   private:
@@ -41,7 +42,7 @@ class BlogController : public Blog {
      */
     static void index() throw(invalid_argument);
   
-    static void my_blogs() throw(invalid_argument);
+    static void user_blogs() throw(invalid_argument);
       
     static void edit(Blog, const bool);
     /**
@@ -103,24 +104,19 @@ class BlogController : public Blog {
  * @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
  */
 class CommentController : public Comment {
+	
+  /// Permits CommentView to be aware of this class and use everything.
   friend class CommentView;
-};
-
-//------------------------------------------------
-// CONTENT CONTROLLER CLASS
-//------------------------------------------------
-
-/**
- * @class ContentController
- *
- * @brief Defines the CRUD (Create, Read, Update, Destroy)
- *
- * This class defines the logic necessary for CRUD to work properly in the system.
- *
- * @note It is aware of both ContentView and ContentModel (but neither of them are aware of ContentController).
- */
-class ContentController : public Content {
-  friend class ContentsView;
+  
+  public:
+  	
+  	static void create();
+  	
+	static void show(Comment);
+	
+	static void edit(Comment);
+	
+	static void destroy(Comment);
 };
 
 //------------------------------------------------
@@ -137,7 +133,8 @@ class ContentController : public Content {
  * @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
  */
 class PostController : public Post {
-  
+	
+  /// Permits PostView to be aware of this class and use everything.
   friend class PostView;
   
   public:
@@ -157,19 +154,43 @@ class PostController : public Post {
  *
  * @note It is aware of both UserView and UserModel (but neither of them are aware of UserController).
  */
-// TODO: 2 users cannot have the same name of email
 class UserController : public User {
 
+  /// Permits UserView to be aware of this class and use everything.
   friend class UserView;
   
   public:
-    static void new_user(User){
-      return;
-    }
+  	
+  	static void create();
+  	
+	static void show();
+	
+	static void edit();
+	
+	static void destroy();
+};
+
+//------------------------------------------------
+// WELCOME CONTROLLER CLASS
+//------------------------------------------------
+
+/**
+ * @class WelcomeController
+ *
+ * @brief Authenticate the User
+ *
+ * This class is responsible for verifying if the User exists.
+ *
+ * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
+ */
+class WelcomeController {
+
+  /// Permits WelcomeView to be aware of this class and use everything.
+  friend class WelcomeView;
   
-  static void edit();
+  public:
+    static void home_page();
   
-  static void create();
 };
 
 //------------------------------------------------
@@ -186,30 +207,13 @@ class UserController : public User {
  * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
  */
 class AuthController : public Auth {
-  
+
+  /// Permits AuthView to be aware of this class and use everything.
   friend class AuthView;
   
   public:
     static void login();
     static void logout();
-};
-
-/**
- * @class WelcomeController
- *
- * @brief Authenticate the User
- *
- * This class is responsible for verifying if the User exists.
- *
- * @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
- */
-class WelcomeController {
-
-  friend class WelcomeView;
-  
-  public:
-    static void home_page();
-  
 };
 
 //------------------------------------------------

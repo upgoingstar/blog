@@ -55,7 +55,7 @@ vector<Blog> Stub::get_blogs(User stubUser){
 }
 
 vector<Blog> Stub::get_all_blogs(){
-		Email registredEmail;
+	Email registredEmail;
 	registredEmail.set("stub@stub.stub");
 	
 	Password registredPassword;
@@ -107,37 +107,36 @@ User Stub::get_user(Email email){
 vector<Post> Stub::get_posts(Blog blog){
 	vector<Post> posts;
 	Post aux;
-	Content aux2;
 	Text aux3;
 	
 	if(blog.get_blog_name().get() == "A batata"){
 		aux3.set("Era uma vez uma batata que queria uma calca");
-		aux2.set(blog.get_author(),aux3);
-		aux.set(aux2);
+		aux.set_author(blog.get_author());
+		aux.set_content(aux3);
 		posts.push_back(aux);
 		
 		aux3.set("Mas ai deu um bug e veio uma bermuda");
-		aux2.set(blog.get_author(),aux3);
-		aux.set(aux2);
+		aux.set_author(blog.get_author());
+		aux.set_content(aux3);
 		posts.push_back(aux);
 	}
 	
 	if(blog.get_blog_name().get() == "Claudino Adventure"){
 		aux3.set("Claudino saiu em uma aventura cheia de perigos");
-		aux2.set(blog.get_author(),aux3);
-		aux.set(aux2);
+		aux.set_author(blog.get_author());
+		aux.set_content(aux3);
 		posts.push_back(aux);
 		
 		aux3.set("Claudino terminou sua aventura");
-		aux2.set(blog.get_author(),aux3);
-		aux.set(aux2);
+		aux.set_author(blog.get_author());
+		aux.set_content(aux3);
 		posts.push_back(aux);
 	}
 	
 	if(blog.get_blog_name().get() == "Outra coisa"){
 		aux3.set("Como faz pra excluir o blog?");
-		aux2.set(blog.get_author(),aux3);
-		aux.set(aux2);
+		aux.set_author(blog.get_author());
+		aux.set_content(aux3);
 		posts.push_back(aux);
 	}
 	

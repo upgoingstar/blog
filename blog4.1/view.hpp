@@ -25,30 +25,31 @@
  */
 class BlogView {
 
+  /// Permits CommentController to be aware of this class and use everything.
   friend class BlogController;
     
   public:
-		/*
+	/*
      * Render all blogs names
-     * Receives the id of blog and a boolean (if boolean true, show all blogs)
+     * Receives the all the blogs
      */
-    static int index_page(vector<Blog>, bool);
+    static void index_page(vector<Blog>);
 		/*
      * Render create blog page
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    void create_page();
+    static Blog create_page() throw(invalid_argument);
     /*
      * Render show page
      * Receives the id of blog and a boolean (if boolean true, show all blogs)
      */
-    static int show_page(bool);
+    static void show_page();
     /*
      * Render edit profile page
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    static int edit_page(Blog, bool, bool);
+    static void edit_page(Blog, bool);
     /*
      * Render edit profile page
      * Receives the id of blog
@@ -70,31 +71,31 @@ class BlogView {
  */
 class CommentView {
 
+  /// Permits CommentController to be aware of this class and use everything.
   friend class CommentController;
 
   public:
+    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
-     * Render create comment page
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     * Render create page to serve as a sign up page
+     * Return the new Comment 
      */
-    void create_page();
+    static Comment create_page() throw(invalid_argument);
     /*
-     * Render show page
-     * Receives the id of comment and a boolean (if boolean true, show all comments)
+     * Render profile page
+     * Receives the Comment
      */
-    void show_page(bool, unsigned int);
+    static void show_page(Comment);
     /*
-     * Render edit profile page
-     * Receives the id of comment
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     * Render a page to change password
+     * Receives the Comment
+     * Return the updated Comment
      */
-    void edit_page(unsigned int);
+    static Comment edit_page(Comment) throw(invalid_argument);
     /*
-     * Render edit profile page
-     * Receives the id of comment
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     * Render delete page to confirm the Comment intention to delete his account
      */
-    void delete_page(unsigned int);
+    static bool delete_page();
 };
 
 //------------------------------------------------
@@ -110,6 +111,7 @@ class CommentView {
  */
 class PostView {
 
+  /// Permits PostController to be aware of this class and use everything.
   friend class PostController;
 
   public:
@@ -122,7 +124,7 @@ class PostView {
      * Render show page
      * Receives the id of post and a boolean (if boolean true, show all posts)
      */
-    static int show_page(vector<Post>, bool);
+    static void show_page(vector<Post>);
     /*
      * Render edit profile page
      * Receives the id of post
@@ -150,33 +152,31 @@ class PostView {
  */
 class UserView {
 
+  /// Permits UserController to be aware of this class and use everything.
   friend class UserController;
 
   public:
-    // TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
-     * Render sign up page
+     * Render create page to serve as a sign up page
+     * Return the new user 
      */
-    static void create_page(string&, string&, string&);
-    /*
-     * Complement of create_page
-     */
-    static void finish_create_page(bool, bool, bool, bool, bool);
+    static User create_page() throw(invalid_argument);
     /*
      * Render profile page
      * Receives the user
      */
-    static void show_page();
+    static void show_page(User);
     /*
      * Render a page to change password
      * Receives the user
+     * Return the updated user
      */
-    void edit_page(unsigned int);
+    static User edit_page(User) throw(invalid_argument);
     /*
-     * Render delete page
-     * Receives the id of user?
+     * Render delete page to confirm the user intention to delete his account
      */
-    void delete_page();
+    static bool delete_page();
 };
 
 //------------------------------------------------
@@ -190,13 +190,16 @@ class UserView {
  *
  * Includes Home Page with menu for the program
  */
-// TODO: put all this static const int inside the function where it is needed.
-class WelcomeView {	
+class WelcomeView {
+  
+  /// Permits WelcomeController to be aware of this class and use everything.
+  friend class WelcomeController;
+  	
   public:
     /*
      * Render home page
      */
-    static int home_page(bool); 
+    static void home_page(); 
 };
 
 //------------------------------------------------
@@ -216,17 +219,16 @@ class AuthView : public Auth {
   friend class AuthController;
 
   public:
+    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
      * Renderiza tela de login
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */ 
-    static void login_page(string&, string&);
+    static void login_page();
     static void finish_login_page(bool);
     /*
-     * Renderiza tela de logout(so uma confimarcao pro usuario)
-     * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
+     * Renderiza tela de logout (so uma confimarcao pro usuario)
      */
-    static int logout_page();
+    static void logout_page();
 };
 
 //------------------------------------------------

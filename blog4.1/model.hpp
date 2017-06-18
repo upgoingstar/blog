@@ -29,6 +29,7 @@ using namespace std;
  */
 class BlogModel : public Blog {
 
+  /// Permits BlogController to be aware of this class and use everything.
   friend class BlogController;
 
   private:
@@ -66,7 +67,8 @@ class BlogModel : public Blog {
  * @note General functions are static, a more specific one is not. All of them are private
  */
 class CommentModel : public Comment {
-
+	
+  /// Permits CommentController to be aware of this class and use everything.
   friend class CommentController;
 
   private:
@@ -91,23 +93,6 @@ class CommentModel : public Comment {
 };
 
 //------------------------------------------------
-// CONTENT MODEL CLASS
-//------------------------------------------------
-
-/**
- * @class ContentModel
- *
- * @brief Defines interface with persistence.
- *
- * This class get data from the persistence module. It selects the data that will be returned. 
- *
- * @note General functions are static, a more specific one is not. All of them are private
- */
-class ContentModel : public Content {
-  friend class ContentController;
-};
-
-//------------------------------------------------
 // POST MODEL CLASS
 //------------------------------------------------
 
@@ -122,6 +107,7 @@ class ContentModel : public Content {
  */
 class PostModel : public Post {
 
+  /// Permits PostController to be aware of this class and use everything.
   friend class PostController;
 
   private:
@@ -160,6 +146,7 @@ class PostModel : public Post {
  */
 class UserModel : public User {
 
+  /// Permits UserController to be aware of this class and use everything.
   friend class UserController;
 
   private:
