@@ -24,11 +24,14 @@
  * Has all the pages of CRUD
  */
 class BlogView {
-
   /// Permits CommentController to be aware of this class and use everything.
   friend class BlogController;
-    
-  public:
+  
+  private:
+    BlogView();  
+
+    ~BlogView();  
+
 	/*
      * Render all blogs names
      * Receives the all the blogs
@@ -81,8 +84,12 @@ class CommentView {
 
   /// Permits CommentController to be aware of this class and use everything.
   friend class CommentController;
+  
+  private:
+    CommentView();
 
-  public:
+    ~CommentView();
+
     // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
      * Render create page to serve as a sign up page
@@ -128,8 +135,12 @@ class PostView {
 
   /// Permits PostController to be aware of this class and use everything.
   friend class PostController;
+  
+  private:
+    PostView();
 
-  public:
+    ~PostView();
+
   	/*
      * Render create page to serve as a sign up page
      * Return the new Comment 
@@ -176,8 +187,12 @@ class UserView {
 
   /// Permits UserController to be aware of this class and use everything.
   friend class UserController;
+  
+  private:
+    UserView();
 
-  public:
+    ~UserView();
+
     // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
      * Render create page to serve as a sign up page
@@ -218,8 +233,11 @@ class WelcomeView {
   
   /// Permits WelcomeController to be aware of this class and use everything.
   friend class WelcomeController;
-  	
-  public:
+  
+  private:
+    WelcomeView(); 
+
+    ~WelcomeView();
     /*
      * Render home page
      */
@@ -241,13 +259,17 @@ class AuthView : public Auth {
 
   /// Permits AuthController to be aware of this class and use everything.
   friend class AuthController;
+  
+  private:
+    AuthView();
 
-  public:
+    ~AuthView();
     // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
      * Renderiza tela de login
      */ 
     static void login_page(Email&, Password&);
+
     static void finish_login_page(bool);
     /*
      * Renderiza tela de logout (so uma confimarcao pro usuario)

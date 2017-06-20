@@ -421,11 +421,17 @@ int PostView::show_page(Post post, bool error) {
 
   cout << "0 - Sair" << endl;
   cout << "1 - Comentarios" << endl;
-  if(Auth::user_logged() && post.get_author() == Auth::get_current_user().get_name()) {
-	  cout << "2 - Editar" << endl;
-	  cout << "3 - Desativar Comentarios" << endl;
-	  cout << "4 - Deletar" << endl;
-	}
+  
+  if(Auth::user_logged()) {
+    cout << "2 - Adicionar comentario" << endl;
+
+    if(post.get_author() == Auth::get_current_user().get_name()) {
+      cout << "3 - Editar" << endl;
+      cout << "4 - Desativar Comentarios" << endl;
+      cout << "5 - Deletar" << endl;
+    }
+  }
+
   cout << endl;
   cout << "> ";
 

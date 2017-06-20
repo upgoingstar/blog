@@ -374,9 +374,10 @@ void PostController::create() {
 void PostController::show(Post post) {
   static const int EXIT = 0;
   static const int COMMENTS = 1;
-  static const int EDIT = 2;
-  static const int DISALLOW = 3;
-  static const int DELETE = 4;
+  static const int NEWCOMMENT = 2;
+  static const int EDIT = 3;
+  static const int DISALLOW = 4;
+  static const int DELETE = 5;
 
   bool exit = false;
   bool error = false;
@@ -394,6 +395,9 @@ void PostController::show(Post post) {
           case COMMENTS:
             CommentController::index(post);
             break;
+          case NEWCOMMENT:
+            CommentController::create();
+            break;  
           case EDIT:
             PostController::edit(post);
             break;
@@ -403,6 +407,22 @@ void PostController::show(Post post) {
           case DELETE:
              exit = PostController::destroy(post);
             break;
+          default:
+            throw invalid_argument("Invalid option!");
+            break;
+        }
+      }
+      else if(Auth::user_logged()){
+        switch(option) {
+          case EXIT:
+              exit = true;
+              break;
+          case COMMENTS:
+            CommentController::index(post);
+            break;
+          case NEWCOMMENT:
+            CommentController::create();
+            break;  
           default:
             throw invalid_argument("Invalid option!");
             break;
@@ -507,7 +527,6 @@ void UserController::show() {
     }
   }
 }
-
 
 void UserController::edit() {
   try{

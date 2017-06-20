@@ -33,7 +33,11 @@ class BlogController : public Blog {
   /// Permits BlogView to be aware of this class and use everything.
   friend class BlogView;
   
-  public:
+  private:
+    BlogController();
+
+    ~BlogController();
+
     /**
      * @name    Index
      * @brief   Show to User all Blogs.
@@ -86,7 +90,8 @@ class BlogController : public Blog {
      * @param master If the current user is the owner
      */
     static bool destroy(Blog) throw(invalid_argument);
-    
+
+  public:
   /**
      * @name    Menu
      * @brief   Simple menu for Blogs
@@ -118,17 +123,21 @@ class CommentController : public Comment {
   /// Permits CommentView to be aware of this class and use everything.
   friend class CommentView;
   
-  public:
+  private:
+    CommentController();
 
-    static void index(Post);
-    
-    static void create();
-    
+    ~CommentController();
+
     static void show(Comment);
     
     static void edit(Comment);
     
     static bool destroy(Comment);
+
+  public:
+    static void index(Post);
+    
+    static void create();
 };
 
 //------------------------------------------------
@@ -149,17 +158,21 @@ class PostController : public Post {
   /// Permits PostView to be aware of this class and use everything.
   friend class PostView;
   
-  public:
+  private:
+    PostController();
     
-    static void index(Blog);
-    
-    static void create();
-    
+    ~PostController();
+
     static void show(Post);
   
     static void edit(Post);
   
     static bool destroy(Post);
+
+  public:
+    static void index(Blog);
+    
+    static void create();
 };
 
 //------------------------------------------------
@@ -180,15 +193,20 @@ class UserController : public User {
   /// Permits UserView to be aware of this class and use everything.
   friend class UserView;
   
+  private:
+    UserController();
+    
+    ~UserController();
+    
+    static void edit();
+  
+    static bool destroy(User);
+
   public:
     
     static void create();
     
     static void show();
-  
-    static void edit();
-  
-    static bool destroy(User);
 };
 
 //------------------------------------------------
@@ -209,6 +227,10 @@ class WelcomeController {
   /// Permits WelcomeView to be aware of this class and use everything.
   friend class WelcomeView;
   
+  private:
+    WelcomeController();
+    ~WelcomeController();
+
   public:
     static void home_page();
   
@@ -232,6 +254,10 @@ class AuthController : public Auth {
   /// Permits AuthView to be aware of this class and use everything.
   friend class AuthView;
   
+  private:
+    AuthController();
+    ~AuthController();
+
   public:
     static void login();
     static void logout();

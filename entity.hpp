@@ -369,6 +369,9 @@ class Blog {
  */
 class Auth {
 	private:
+        Auth();
+        ~Auth();
+
 		static bool userLogged;
 		static User currentUser;
 		

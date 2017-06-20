@@ -53,7 +53,7 @@ ostream& operator<<(ostream& os, const Domain& domain) {
 
 istream& operator>>(istream& is, Domain& domain) {  
     string str;
-    is >> str;  
+    getline(is, str); 
     domain.set(str);
     return is;  
 }  
