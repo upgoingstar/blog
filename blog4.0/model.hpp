@@ -11,6 +11,7 @@
 
 #include "domains.hpp"
 #include "entity.hpp"
+#include "sqlite3.h"
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -157,6 +158,30 @@ class UserModel : public User {
      * Return all Users saved in persistence
      */
     static vector<User> all();
+
+    /**
+     * @name    Save
+     * @brief   Put User in database
+     *
+     * Put a new User in the table Users
+     */
+    static void save(User);
+
+    /**
+     * @name    Update
+     * @brief   Update User in database
+     *
+     * Update the columns of a specific User
+     */
+    static void update(User);
+
+    /**
+     * @name    Destroy
+     * @brief   Remove User from database
+     *
+     * Remove from the table a specific User
+     */
+    static void destroy(User);
 };
 
 //------------------------------------------------

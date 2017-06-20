@@ -87,7 +87,7 @@ class BlogController : public Blog {
      */
     static bool destroy(Blog) throw(invalid_argument);
     
-	/**
+  /**
      * @name    Menu
      * @brief   Simple menu for Blogs
      *
@@ -150,9 +150,9 @@ class PostController : public Post {
   friend class PostView;
   
   public:
-  	
-  	static void index(Blog);
-  	
+    
+    static void index(Blog);
+    
     static void create();
     
     static void show(Post);
