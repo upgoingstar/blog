@@ -22,19 +22,24 @@ void BlogController::index() throw(invalid_argument){
   vector<Blog> blogs = Stub::get_all_blogs();                  // get all Blogs from model
 
   while(!exit){
-    int option = BlogView::index_page(blogs, error);           // render page with all blogs
+    string option = BlogView::index_page(blogs, error);           // render page with all blogs
     
-    if(option > blogs.size()){
+    int id;
+    try{
+    	id = stoi(option);
+    	if(id > blogs.size()) throw invalid_argument("Invalid id");
+    }
+    catch(invalid_argument erro){
       error = true;
       continue;
     }
 
-    switch(option){
+    switch(id){
       case EXIT:
         exit = true;
         break;
       default:
-        BlogController::show(blogs[option - 1]);
+        BlogController::show(blogs[id - 1]);
         break;
     }
   }
@@ -46,22 +51,28 @@ void BlogController::user_blogs() throw(invalid_argument) {
   bool exit = false;
   bool error = false;
   
-  vector<Blog> blogs = Stub::get_blogs(Auth::get_current_user());  // get all Blogs from model
   
   while(!exit){
-    int option = BlogView::index_page(blogs, error);
+  	vector<Blog> blogs = Stub::get_blogs(Auth::get_current_user());  // get all Blogs from model
+    string option = BlogView::index_page(blogs, error);
     error = false;
     
-    if(option > blogs.size()){
+    int id;
+    try{
+    	id = stoi(option);
+    	if(id > blogs.size()) throw invalid_argument("Invalid id");
+    }
+    catch(invalid_argument erro){
       error = true;
       continue;
     }
-    switch(option){
+
+    switch(id){
       case EXIT:
         exit = true;
         break;
       default:
-        BlogController::show(blogs[option - 1]);
+        BlogController::show(blogs[id - 1]);
         break;
     }
   }
@@ -85,11 +96,20 @@ void BlogController::show(Blog blog){
   bool error = false;
   
   while(!exit){
-    int option = BlogView::show_page(blog, error);
+    string option = BlogView::show_page(blog, error);
     error = false;
     
-      if(Auth::user_logged() && Auth::get_current_user().get_name() == blog.get_author()){
-        switch(option){
+    int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
+    if(Auth::user_logged() && Auth::get_current_user().get_name() == blog.get_author()){
+        switch(op){
           case EXIT:
             exit = true;
             break;
@@ -108,7 +128,7 @@ void BlogController::show(Blog blog){
         }
       }
       else{
-        switch(option){
+        switch(op){
           case EXIT:
             exit = true;
             break;
@@ -137,7 +157,7 @@ bool BlogController::destroy(Blog blog) throw(invalid_argument) {
   const int NAO = 0;
   
   while(true){
-    int option;
+    string option;
     try{
       option = BlogView::delete_page(error);
       error = false;
@@ -146,8 +166,17 @@ bool BlogController::destroy(Blog blog) throw(invalid_argument) {
       error = true;
       continue;
     }
+
+    int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
     
-    switch(option){
+    switch(op){
       case SIM:
         Stub::destroy_blog(blog);
         BlogView::deleted_page();
@@ -168,11 +197,20 @@ void BlogController::menu() {
   bool exit = false;
   
   while(!exit){
-    int option = BlogView::menu_page(error);
+    string option = BlogView::menu_page(error);
     error = false;
-  
+    
+    int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
     if(Auth::user_logged()){
-      switch(option){
+      switch(op){
         case EXIT:
           exit = true;
           break;
@@ -191,7 +229,7 @@ void BlogController::menu() {
       }
     }
     else{
-      switch(option){
+      switch(op){
         case EXIT:
           exit = true;
           break;
@@ -219,23 +257,28 @@ void CommentController::index(Post post){
   bool error = false;
   bool exit = false;
   
-  vector<Comment> comments = Stub::get_comments(post);
 
   while(!exit){
-    int option = CommentView::index_page(comments, error);
+  	vector<Comment> comments = Stub::get_comments(post);
+    string option = CommentView::index_page(comments, error);
 
     error = false;
 
-    if(option > comments.size()){
+    int id;
+    try{
+    	id = stoi(option);
+    	if(id > comments.size()) throw invalid_argument("Invalid id");
+    }
+    catch(invalid_argument erro){
       error = true;
       continue;
     }
-    switch(option){
+    switch(id){
       case EXIT:
         exit = true;
         break;
       default:
-        CommentController::show(comments[option - 1]);
+        CommentController::show(comments[id - 1]);
         break;
     }
   }
@@ -250,19 +293,28 @@ void CommentController::create() {
 }
 
 void CommentController::show(Comment comment) {
-  static const int EXIT = 0;
-  static const int EDIT = 1;
-  static const int DELETE = 2;
+  const int EXIT = 0;
+  const int EDIT = 1;
+  const int DELETE = 2;
 
   bool exit = false;
   bool error = false;
 
   while(!exit) {
-    int option = CommentView::show_page(comment, error);          // render show page
+    string option = CommentView::show_page(comment, error);          // render show page
+
+    int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
 
     try {
       if(Auth::user_logged() && comment.get_author() == Auth::get_current_user().get_name()){
-        switch(option) {
+        switch(op) {
           case EXIT:
             exit = true;
             break;
@@ -278,7 +330,7 @@ void CommentController::show(Comment comment) {
         }
       }
       else{
-        switch(option) {
+        switch(op) {
           case EXIT:
             exit = true;
             break;
@@ -307,7 +359,7 @@ bool CommentController::destroy(Comment comment) {
   const int NAO = 0;
   
   while(true){
-    int option;
+    string option;
     try{
       option = CommentView::delete_page(error);
       error = false;
@@ -317,7 +369,16 @@ bool CommentController::destroy(Comment comment) {
       continue;
     }
     
-    switch(option){
+	int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
+    switch(op){
       case SIM:
         Stub::destroy_comment(comment);
         CommentView::deleted_page();
@@ -341,23 +402,28 @@ void PostController::index(Blog blog){
   bool error = false;
   bool exit = false;
   
-  vector<Post> posts = Stub::get_posts(blog);
 
   while(!exit){
-    int option = PostView::index_page(posts, error);
+	vector<Post> posts = Stub::get_posts(blog);
+    string option = PostView::index_page(posts, error);
 
     error = false;
 
-    if(option > posts.size()){
+    int id;
+    try{
+    	id = stoi(option);
+    	if(id > posts.size()) throw invalid_argument("Invalid id");
+    }
+    catch(invalid_argument erro){
       error = true;
       continue;
     }
-    switch(option){
+    switch(id){
       case EXIT:
         exit = true;
         break;
       default:
-        PostController::show(posts[option - 1]);
+        PostController::show(posts[id - 1]);
         break;
     }
   }
@@ -372,23 +438,32 @@ void PostController::create() {
 }
 
 void PostController::show(Post post) {
-  static const int EXIT = 0;
-  static const int COMMENTS = 1;
-  static const int NEWCOMMENT = 2;
-  static const int EDIT = 3;
-  static const int DISALLOW = 4;
-  static const int DELETE = 5;
+  const int EXIT = 0;
+  const int COMMENTS = 1;
+  const int NEWCOMMENT = 2;
+  const int EDIT = 3;
+  const int DISALLOW = 4;
+  const int DELETE = 5;
 
   bool exit = false;
   bool error = false;
 
   while(!exit) {
-    int option = PostView::show_page(post, error);                // render show page
+    string option = PostView::show_page(post, error);                // render show page
     error = false;
     
+	int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
     try {
       if(Auth::user_logged() && post.get_author() == Auth::get_current_user().get_name()){
-        switch(option) {
+        switch(op) {
           case EXIT:
             exit = true;
             break;
@@ -413,7 +488,7 @@ void PostController::show(Post post) {
         }
       }
       else if(Auth::user_logged()){
-        switch(option) {
+        switch(op) {
           case EXIT:
               exit = true;
               break;
@@ -429,7 +504,7 @@ void PostController::show(Post post) {
         }
       }
       else{
-        switch(option) {
+        switch(op) {
           case EXIT:
               exit = true;
               break;
@@ -461,7 +536,7 @@ bool PostController::destroy(Post post) {
   const int NAO = 0;
   
   while(true){
-    int option;
+    string option;
     try{
       option = PostView::delete_page(error);
       error = false;
@@ -471,7 +546,16 @@ bool PostController::destroy(Post post) {
       continue;
     }
     
-    switch(option){
+	int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
+    switch(op){
       case SIM:
         Stub::destroy_post(post);
         PostView::deleted_page();
@@ -495,9 +579,9 @@ void UserController::create() {
 }
 
 void UserController::show() {
-  static const int EXIT = 0;
-  static const int CHANGE_PASSWORD = 1;
-  static const int DELETE_ACCOUNT = 2;
+  const int EXIT = 0;
+  const int CHANGE_PASSWORD = 1;
+  const int DELETE_ACCOUNT = 2;
 
   bool exit = false;
   bool error = false;
@@ -505,10 +589,19 @@ void UserController::show() {
   User user = Auth::get_current_user();                           // get the current user
 
   while(!exit) {
-    int option = UserView::show_page(user, error);                // render show page
+    string option = UserView::show_page(user, error);                // render show page
+
+    int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
 
     try {
-      switch(option) {
+      switch(op) {
         case EXIT:
           exit = true;
           break;
@@ -542,7 +635,7 @@ bool UserController::destroy(User user) {
   const int NAO = 0;
   
   while(true){
-    int option;
+    string option;
     try{
       option = UserView::delete_page(error);
       error = false;
@@ -552,7 +645,16 @@ bool UserController::destroy(User user) {
       continue;
     }
     
-    switch(option){
+    int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
+    switch(op){
       case SIM:
         Stub::destroy_user(user);
         UserView::deleted_page();
@@ -569,23 +671,32 @@ bool UserController::destroy(User user) {
 //------------------------------------------------
 
 void WelcomeController::home_page() {
-  static const int EXIT = 0;
-  static const int LOGIN = 1;
-  static const int LOGOUT = 1;
-  static const int REGISTER = 2;
-  static const int ACCOUNT = 2;
-  static const int LISTBLOGS = 3;
+  const int EXIT = 0;
+  const int LOGIN = 1;
+  const int LOGOUT = 1;
+  const int REGISTER = 2;
+  const int ACCOUNT = 2;
+  const int LISTBLOGS = 3;
   
   bool exit = false;
   bool error = false;
 
   while(!exit){
-    int option = WelcomeView::home_page(error);
+    string option = WelcomeView::home_page(error);
     error = false;
     
+    int op;
+    try{
+    	op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
     try{
       if(Auth::user_logged()) {
-        switch(option){
+        switch(op){
           case LOGOUT:
             AuthController::logout();
             break;
@@ -603,7 +714,7 @@ void WelcomeController::home_page() {
             break;
         }
       } else {
-        switch(option) {
+        switch(op) {
           case LOGIN:
             AuthController::login();
             break;
@@ -654,12 +765,20 @@ void AuthController::login() {
 }
 
 void AuthController::logout() {
-  const static int SIM = 1;
-  const static int NAO = 2;
+  const int SIM = 1;
+  const int NAO = 2;
   
-  int option = AuthView::logout_page();
+  string option = AuthView::logout_page();
   
-  switch(option){
+  int op;
+    try{
+    op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      throw invalid_argument("Invalid option!");
+    }
+
+  switch(op){
     case SIM:
       // TODO: verify implementation to see if can be used like that
       Auth::logout();

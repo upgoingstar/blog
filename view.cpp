@@ -12,7 +12,7 @@ using namespace std;
 // BLOG VIEW CLASS
 //------------------------------------------------
 
-int BlogView::index_page(vector<Blog> blogs, bool error) {
+string BlogView::index_page(vector<Blog> blogs, bool error) {
     system("clear || cls"); 
     
     if(error) {
@@ -26,8 +26,8 @@ int BlogView::index_page(vector<Blog> blogs, bool error) {
     
     cout << " > ";
     
-    int option;
-    cin >> option;
+    string option;
+    getline(cin,option);
     
     return option;
 }
@@ -46,7 +46,8 @@ Blog BlogView::create_page() throw(invalid_argument) {
 	} catch(invalid_argument erro) {
 		cout << "Nome em formato incorreto." << endl;
 		cout << "Aperte 'ENTER' para retornar" << endl;
-		getchar();getchar();
+		getchar();
+		
 		throw invalid_argument("Nome em formato incorreto.");
 	}
 	
@@ -55,12 +56,13 @@ Blog BlogView::create_page() throw(invalid_argument) {
 	
 	cout << "Novo blog criada com sucesso!" << endl;
 	cout << "Aperte 'ENTER' para retornar ao menu principal" << endl;
-	getchar();getchar();
+	getchar();
+	
 	
 	return newBlog;
 }
 
-int BlogView::show_page(Blog blog, bool error) {
+string BlogView::show_page(Blog blog, bool error) {
   system("clear || cls");
   cout << blog.get_name() << endl << endl;
   
@@ -77,8 +79,9 @@ int BlogView::show_page(Blog blog, bool error) {
   cout << endl;
   cout << " > ";
   
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
+  
   
   return option;
 }
@@ -97,7 +100,8 @@ Blog BlogView::edit_page(Blog blog) throw(invalid_argument) {
   } catch(invalid_argument erro) {
     cout << "Esse nome e invalido!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Essa nome nao pode ser usado!");
   }
 
@@ -105,12 +109,14 @@ Blog BlogView::edit_page(Blog blog) throw(invalid_argument) {
     blog.set_name(newName);
     cout << "Nome alterado com sucesso!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     return blog;
   } catch(invalid_argument arro) {
     cout << "Houve um erro no sistema! Tente novamente mais tarde." << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Houve um erro no sistema! Tente novamente mais tarde.");
   }
 }
@@ -130,11 +136,18 @@ bool BlogView::delete_page(bool error) {
   cout << "2 - Nao" << endl;
   cout << " > ";
   
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
   
+  int op;
+    try{
+      op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      throw invalid_argument("Invalid option!");
+    }
   
-  switch(option) {
+  switch(op) {
     case SIM:
       return true;
     case NAO:
@@ -148,10 +161,11 @@ void BlogView::deleted_page() {
 	system("clear || cls");
 	
 	cout << "O blog foi excluido com sucesso, aperte ENTER para retornar a lista de blogs." << endl;
-	getchar();getchar();
+	getchar();
+	
 }
 
-int BlogView::menu_page(bool error) {
+string BlogView::menu_page(bool error) {
   system("clear || cls");
   cout << "Blogs" << endl;
   
@@ -169,9 +183,10 @@ int BlogView::menu_page(bool error) {
   
   cout << " > ";
 
-  int option;
-  cin >> option;
-
+  string option;
+  getline(cin,option);
+  
+ 
   return option;
 }
 
@@ -179,7 +194,7 @@ int BlogView::menu_page(bool error) {
 // COMMENT VIEW CLASS
 //------------------------------------------------
 
-int CommentView::index_page(vector<Comment> comments, bool error) throw(invalid_argument) {
+string CommentView::index_page(vector<Comment> comments, bool error) throw(invalid_argument) {
   system("cls || clear");
   
     if(error) {
@@ -192,8 +207,9 @@ int CommentView::index_page(vector<Comment> comments, bool error) throw(invalid_
   }
   
   cout << " > ";
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
+  
   
   return option;
 }
@@ -212,7 +228,8 @@ Comment CommentView::create_page() throw(invalid_argument) {
   } catch(invalid_argument erro) {
   	cout << "Comentario invalido." << endl;
   	cout << "Aperte 'ENTER' para retornar" << endl;
-    getchar();getchar();
+  	getchar();
+    
     throw invalid_argument("Comentario invalido.");
   }
   
@@ -222,12 +239,13 @@ Comment CommentView::create_page() throw(invalid_argument) {
 
   cout << "Novo comentario criado com sucesso!" << endl;
   cout << "Aperte 'ENTER' para retornar ao menu principal" << endl;
-  getchar(); getchar();
+  getchar();
+  
   
   return newComment;
 }
 
-int CommentView::show_page(Comment comment, bool error) {
+string CommentView::show_page(Comment comment, bool error) {
   system("clear || cls");
 
   cout << "Comentario" << endl;
@@ -249,8 +267,9 @@ int CommentView::show_page(Comment comment, bool error) {
   cout << endl;
   cout << "> ";
 
-  int option;
-  cin >>  option;
+  string option;
+  getline(cin, option);
+  
 
   return option;
 }
@@ -269,7 +288,8 @@ Comment CommentView::edit_page(Comment comment) throw(invalid_argument) {
   } catch(invalid_argument erro) {
     cout << "Esse comentario e invalido!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Esse comentario nao pode ser usado!");
   }
 
@@ -277,12 +297,14 @@ Comment CommentView::edit_page(Comment comment) throw(invalid_argument) {
     comment.set_content(newContent);
     cout << "Comentario alterado com sucesso!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     return comment;
   } catch(invalid_argument arro) {
     cout << "Houve um erro no sistema! Tente novamente mais tarde." << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Houve um erro no sistema! Tente novamente mais tarde.");
   }
 }
@@ -302,11 +324,18 @@ bool CommentView::delete_page(bool error) {
   cout << "2 - Nao" << endl;
   cout << " > ";
   
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
   
+  int op;
+    try{
+      op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      throw invalid_argument("Invalid option!");
+    }
   
-  switch(option) {
+  switch(op) {
     case SIM:
       return true;
     case NAO:
@@ -320,14 +349,15 @@ void CommentView::deleted_page() {
 	system("clear || cls");
 	
 	cout << "O post foi excluido com sucesso, aperte ENTER para retornar a lista de comentarios." << endl;
-	getchar();getchar();
+	getchar();
+	
 }
 
 //------------------------------------------------
 // POST VIEW CLASS
 //------------------------------------------------
 
-int PostView::index_page(vector<Post> posts, bool error) throw(invalid_argument) {
+string PostView::index_page(vector<Post> posts, bool error) throw(invalid_argument) {
   system("cls || clear");
   
     if(error) {
@@ -340,8 +370,9 @@ int PostView::index_page(vector<Post> posts, bool error) throw(invalid_argument)
   }
   
   cout << " > ";
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
+  
   
   return option;
 }
@@ -363,7 +394,8 @@ Post PostView::create_page() throw(invalid_argument) {
   } catch(invalid_argument erro) {
     cout << "Post invalido." << endl;
     cout << "Aperte 'ENTER' para retornar" << endl;
-    getchar();getchar();
+    getchar();
+    
     throw invalid_argument("Post invalido.");
   }
   
@@ -377,10 +409,18 @@ Post PostView::create_page() throw(invalid_argument) {
   cout << "1 - Sim" << endl;
 
   try {
-    int option;
-    cin >> option;
-
-    switch(option) {
+    string option;
+    getline(cin,option);
+	
+	int op;
+    try{
+      op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      throw invalid_argument("Invalid option!");
+    }
+	
+    switch(op) {
       case NAO:
         newPost.disallow_comments();
         break;
@@ -394,18 +434,20 @@ Post PostView::create_page() throw(invalid_argument) {
   } catch(invalid_argument erro) {
     cout << "Opcao invalida" << endl;
     cout << "Aperte 'ENTER' para retornar" << endl;
-    getchar();getchar();
+    getchar();
+    
     throw invalid_argument("Opcao invalida");
   }
 
   cout << "Novo post criado com sucesso!" << endl;
   cout << "Aperte 'ENTER' para retornar ao menu principal" << endl;
-  getchar(); getchar();
+  getchar();
+  
   
   return newPost;
 }
 
-int PostView::show_page(Post post, bool error) {
+string PostView::show_page(Post post, bool error) {
   system("clear || cls");
 
   cout << "Post" << endl;
@@ -435,8 +477,9 @@ int PostView::show_page(Post post, bool error) {
   cout << endl;
   cout << "> ";
 
-  int option;
-  cin >>  option;
+  string option;
+  getline(cin, option);
+  
 
   return option;
 }
@@ -455,7 +498,8 @@ Post PostView::edit_page(Post post) throw(invalid_argument) {
   } catch(invalid_argument erro) {
     cout << "Esse post e invalido!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Essa senha nao pode ser usada!");
   }
 
@@ -463,12 +507,14 @@ Post PostView::edit_page(Post post) throw(invalid_argument) {
     post.set_content(newContent);
     cout << "Post alterado com sucesso!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     return post;
   } catch(invalid_argument arro) {
     cout << "Houve um erro no sistema! Tente novamente mais tarde." << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Houve um erro no sistema! Tente novamente mais tarde.");
   }
 }
@@ -488,11 +534,18 @@ bool PostView::delete_page(bool error) {
   cout << "2 - Nao" << endl;
   cout << " > ";
   
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
   
+  int op;
+    try{
+      op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      throw invalid_argument("Invalid option!");
+    }
   
-  switch(option) {
+  switch(op) {
     case SIM:
       return true;
     case NAO:
@@ -506,7 +559,8 @@ void PostView::deleted_page() {
 	system("clear || cls");
 	
 	cout << "O post foi excluido com sucesso, aperte ENTER para retornar a lista de posts." << endl;
-	getchar();getchar();
+	getchar();
+	
 }
 
 //------------------------------------------------
@@ -527,7 +581,8 @@ User UserView::create_page() throw(invalid_argument) {
   } catch(invalid_argument erro) {
   	cout << "Nome em formato incorreto." << endl;
   	cout << "Aperte 'ENTER' para retornar" << endl;
-    getchar();getchar();
+  	getchar();
+    
     throw invalid_argument("Nome em formato incorreto.");
   }
   
@@ -538,7 +593,8 @@ User UserView::create_page() throw(invalid_argument) {
   } catch(invalid_argument erro) {
   	cout << "Email em formato incorreto." << endl;
   	cout << "Aperte 'ENTER' para retornar" << endl;
-    getchar();getchar();
+  	getchar();
+    
     throw invalid_argument("Email em formato incorreto.");
   }
   
@@ -549,7 +605,8 @@ User UserView::create_page() throw(invalid_argument) {
   } catch(invalid_argument erro) {
   	cout << "Senha em formato incorreto." << endl;
   	cout << "Aperte 'ENTER' para retornar" << endl;
-    getchar();getchar();
+  	getchar();
+    
     throw invalid_argument("Senha em formato incorreto.");
   }
   
@@ -560,7 +617,8 @@ User UserView::create_page() throw(invalid_argument) {
   } catch(invalid_argument erro) {
     cout << "Email ja em uso." << endl;
   	cout << "Aperte 'ENTER' para retornar" << endl;
-    getchar();getchar();
+  	getchar();
+    
     throw invalid_argument("Email ja em uso.");
   }
   
@@ -568,12 +626,13 @@ User UserView::create_page() throw(invalid_argument) {
   newUser.set(userName, userEmail, userPassword);
 
   cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
-  getchar();getchar();
+  getchar();
+  
   
   return newUser;
 }
 
-int UserView::show_page(User user, bool error) {
+string UserView::show_page(User user, bool error) {
 
     system("clear || cls");
 
@@ -593,8 +652,9 @@ int UserView::show_page(User user, bool error) {
     cout << endl;
     cout << "> ";
 
-    int option;
-    cin >>  option;
+    string option;
+    getline(cin, option);
+	
 
     return option;
 }
@@ -613,7 +673,8 @@ User UserView::edit_page(User user) throw(invalid_argument) {
   } catch(invalid_argument erro) {
     cout << "Essa senha nao pode ser usada!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Essa senha nao pode ser usada!");
   }
 
@@ -621,12 +682,14 @@ User UserView::edit_page(User user) throw(invalid_argument) {
     user.set_password(newPassword);
     cout << "Senha alterada com sucesso!" << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     return user;
   } catch(invalid_argument arro) {
     cout << "Houve um erro no sistema! Tente novamente mais tarde." << endl;
     cout << "Aperte 'ENTER' para voltar." << endl;
-    getchar(); getchar();
+    getchar();
+    
     throw invalid_argument("Houve um erro no sistema! Tente novamente mais tarde.");
   }
 }
@@ -646,11 +709,18 @@ bool UserView::delete_page(bool error) {
   cout << "2 - Nao" << endl;
   cout << " > ";
   
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
   
+  int op;
+    try{
+      op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      throw invalid_argument("Invalid option!");
+    }
   
-  switch(option) {
+  switch(op) {
     case SIM:
       return true;
     case NAO:
@@ -664,14 +734,15 @@ void UserView::deleted_page() {
 	system("clear || cls");
 	
 	cout << "O usuario foi excluido com sucesso, aperte ENTER para retornar ao menu principal." << endl;
-	getchar();getchar();
+	getchar();
+	
 }
 
 //------------------------------------------------
 // WELCOME VIEW CLASS
 //------------------------------------------------
 
-int WelcomeView::home_page(bool error) {
+string WelcomeView::home_page(bool error) {
   system("clear || cls"); 
   cout << "Bem-vindo a Blog - a platarfoma de blogs mais supimpa do mundo!" << endl << endl;
     
@@ -691,10 +762,11 @@ int WelcomeView::home_page(bool error) {
   cout << "3 - Blogs" << endl;
 
   cout << " > ";
-  int option;
+  string option;
 
-  cin >>  option;
-
+  getline(cin, option);
+  
+  
   return option;
 }
 
@@ -709,6 +781,7 @@ void AuthView::login_page(Email& email, Password& password) {
   try{
     cout << "E-mail: ";
     cin >> email;
+    
   } catch(invalid_argument erro) {
     throw invalid_argument("Email incorreto.");
   }
@@ -716,6 +789,7 @@ void AuthView::login_page(Email& email, Password& password) {
   try{
     cout << "Senha: ";
     cin >> password;
+    
   } catch(invalid_argument erro) {
     throw invalid_argument("Senha incorreta.");
   }
@@ -725,22 +799,24 @@ void AuthView::finish_login_page(bool error){
   if(error) {
 	system("clear || cls");
 	cout << "E-mail ou senha incorretos!" << endl << "Aperte 'ENTER' para retonar ao menu principal." << endl;
-	getchar(); getchar();
+	getchar();
+	
   } else {
 	system("clear || cls");
 	cout << "Log-in realizado com sucesso!" << endl << "Aperte 'ENTER' para continuar." << endl;
-	getchar(); getchar(); 
+	getchar();
+	 
   }
 }
 
-int AuthView::logout_page() {
+string AuthView::logout_page() {
   system("clear || cls");
   cout << "Tem certeza que deseja deslogar de sua conta?" << endl;
   cout << "1 - Sim" << endl;
   cout << "2 - Nao" << endl;
   
-  int option;
-  cin >> option;
+  string option;
+  getline(cin,option);
   
   return option;
 }

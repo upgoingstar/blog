@@ -36,7 +36,7 @@ class BlogView {
      * Render all blogs names
      * Receives the all the blogs
      */
-    static int index_page(vector<Blog>, bool);
+    static string index_page(vector<Blog>, bool);
 		/*
      * Render create blog page
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -47,7 +47,7 @@ class BlogView {
      * Receives the id of blog
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
      */
-    static int show_page(Blog, bool);
+    static string show_page(Blog, bool);
     /*
      * Render a page to change password
      * Receives the Comment
@@ -66,7 +66,7 @@ class BlogView {
      * Render menu page
      * Receives a boolean for error
      */
-    static int menu_page(bool);
+    static string menu_page(bool);
 };
 
 //------------------------------------------------
@@ -95,7 +95,7 @@ class CommentView {
      * Render create page to serve as a sign up page
      * Return the new Comment 
      */
-    static int index_page(vector<Comment>, bool) throw(invalid_argument);
+    static string index_page(vector<Comment>, bool) throw(invalid_argument);
     /*
      * Render create page to serve as a sign up page
      * Return the new Comment 
@@ -105,7 +105,7 @@ class CommentView {
      * Render profile page
      * Receives the Comment
      */
-    static int show_page(Comment, bool);
+    static string show_page(Comment, bool);
     /*
      * Render a page to change password
      * Receives the Comment
@@ -145,7 +145,7 @@ class PostView {
      * Render create page to serve as a sign up page
      * Return the new Comment 
      */
-    static int index_page(vector<Post>, bool) throw(invalid_argument);
+    static string index_page(vector<Post>, bool) throw(invalid_argument);
     /*
      * Render create post page
      * TODO: Existe um espaço entre as opções onde virão as mensagens de erro em vermelho.
@@ -155,7 +155,7 @@ class PostView {
      * Render show page
      * Receives the id of post and a boolean (if boolean true, show all posts)
      */
-    static int show_page(Post, bool);
+    static string show_page(Post, bool);
     /*
      * Render edit profile page
      * Receives the id of post
@@ -203,7 +203,7 @@ class UserView {
      * Render profile page
      * Receives the user
      */
-    static int show_page(User, bool);
+    static string show_page(User, bool);
     /*
      * Render a page to change password
      * Receives the user
@@ -241,7 +241,7 @@ class WelcomeView {
     /*
      * Render home page
      */
-    static int home_page(bool); 
+    static string home_page(bool); 
 };
 
 //------------------------------------------------
@@ -274,7 +274,7 @@ class AuthView : public Auth {
     /*
      * Renderiza tela de logout (so uma confimarcao pro usuario)
      */
-    static int logout_page();
+    static string logout_page();
 };
 
 //------------------------------------------------
