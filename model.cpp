@@ -7,52 +7,9 @@
 using namespace std;
 
 //------------------------------------------------
-// BLOG MODEL CLASS
-//------------------------------------------------
-
-// TODO: put stub in here
-vector<Blog> BlogModel::all() {
-
-}
-
-// TODO: put stub in here
-vector<Blog> BlogModel::from_user(User user) {
-
-}
-
-//------------------------------------------------
-// COMMENT MODEL CLASS
-//------------------------------------------------
-
-// TODO: put stub in here
-vector<Comment> CommentModel::all() {
-
-}
-
-// TODO: put stub in here
-vector<Comment> CommentModel::from_user(User user) {
-
-}
-
-//------------------------------------------------
-// POST MODEL CLASS
-//------------------------------------------------
-
-// TODO: put stub in here
-vector<Post> PostModel::all() {
-
-}
-
-// TODO: put stub in here
-vector<Post> PostModel::from_user(User user) {
-
-}
-
-//------------------------------------------------
 // USER MODEL CLASS
 //------------------------------------------------
 
-// TODO: put stub in here
 vector<User> UserModel::all() {
 
 }
@@ -65,13 +22,49 @@ void UserModel::save(User user) {
 }
 
 void UserModel::update(User user) {
-	commandSQL = "UPDATE users ";
+  commandSQL = "UPDATE users ";
   commandSQL += "SET name = '" + user.get_name().get();
   commandSQL += "', password = '" + user.get_password().get();
   commandSQL += "' WHERE email = " + user.get_email().get();
 }
 
 void UserModel::destroy(User user) {
-	comandoSQL = "DELETE FROM users WHERE email = ";
-	comandoSQL += user.get_email().get();
+  comandoSQL = "DELETE FROM users WHERE email = ";
+  comandoSQL += user.get_email().get();
+}
+
+//------------------------------------------------
+// BLOG MODEL CLASS
+//------------------------------------------------
+
+vector<Blog> BlogModel::all() {
+
+}
+
+vector<Blog> BlogModel::from_user(User user) {
+
+}
+
+//------------------------------------------------
+// POST MODEL CLASS
+//------------------------------------------------
+
+vector<Post> PostModel::all() {
+
+}
+
+vector<Post> PostModel::from_user(User user) {
+
+}
+
+//------------------------------------------------
+// COMMENT MODEL CLASS
+//------------------------------------------------
+
+vector<Comment> CommentModel::all() {
+
+}
+
+vector<Comment> CommentModel::from_user(User user) {
+
 }
