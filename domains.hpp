@@ -27,6 +27,7 @@ using namespace std;
  */
 class Domain {
   protected:
+
     /// Keep a value for all classes that inherit this one.
     string value;
 
@@ -39,10 +40,17 @@ class Domain {
     virtual void valid(string) throw(invalid_argument) = 0;
 
   public:
-    /// Create a Domain
+
+    /**
+     * @name    Constructor
+     * @brief   Inicialize an object of the Class
+     */
     Domain();
 
-    /// Destroy a Domain
+    /**
+     * @name    Destructor
+     * @brief   Destroy an object of the Class
+     */
     ~Domain();
 
     /**
@@ -134,6 +142,7 @@ class Domain {
  */
 class Name : public Domain {
   private:
+
     /// Maximum size of the name
     static const int size_limit = 20;
 
@@ -146,10 +155,17 @@ class Name : public Domain {
     void valid(string) throw(invalid_argument);
 
   public:
-    /// Create a Name
+
+    /**
+     * @name    Constructor
+     * @brief   Inicialize an object of the Class
+     */
     Name();
 
-    /// Destroy a Name
+    /**
+     * @name    Destructor
+     * @brief   Destroy an object of the Class
+     */
     ~Name();
 };
 
@@ -168,6 +184,7 @@ class Name : public Domain {
  */
 class Password : public Domain {
   private:
+
     /// Maximum size of the password
     static const int allowed_size = 5;
 
@@ -183,10 +200,17 @@ class Password : public Domain {
     void valid(string) throw(invalid_argument);
 
   public:
-    /// Create a Password
+
+    /**
+     * @name    Constructor
+     * @brief   Inicialize an object of the Class
+     */
     Password();
 
-    /// Destroy a Password
+    /**
+     * @name    Destructor
+     * @brief   Destroy an object of the Class
+     */
     ~Password();
 };
 
@@ -205,6 +229,7 @@ class Password : public Domain {
  */
 class Email : public Domain {
   private:
+
     /**
      * @name    Valid
      * @brief   Validate the Email
@@ -214,10 +239,17 @@ class Email : public Domain {
     void valid(string) throw(invalid_argument);
 
   public:
-    /// Create a Email
+
+    /**
+     * @name    Constructor
+     * @brief   Inicialize an object of the Class
+     */
     Email();
 
-    /// Destroy a Email
+    /**
+     * @name    Destructor
+     * @brief   Destroy an object of the Class
+     */
     ~Email();
 };
 
@@ -236,6 +268,7 @@ class Email : public Domain {
  */
 class Text : public Domain {
   private:
+
     /**
      * @name    Valid
      * @brief   Validate the Text
@@ -245,10 +278,17 @@ class Text : public Domain {
     void valid(string) throw(invalid_argument);
 
   public:
-    /// Create a Text
+
+    /**
+     * @name    Constructor
+     * @brief   Inicialize an object of the Class
+     */
     Text();
 
-    /// Destroy a Text
+    /**
+     * @name    Destructor
+     * @brief   Destroy an object of the Class
+     */
     ~Text();
 };
 
@@ -257,16 +297,15 @@ class Text : public Domain {
 //------------------------------------------------
 
 /**
- * @class Text
+ * @class Avaliation
  *
- * @brief Defines how a text should be.
+ * @brief Defines how a avaliation should be.
  *
- * Restrict the string to have size less than 50 caracters.
- *
- * @note Avaliation should be integer from 0 to 5, inclusive (There will be no 4.5 or anything like that)
+ * Restrict the int to be between 0 and 5 inclusive.
  */
 class Avaliation {
   private:
+
     /// Keep the value of the avaliation.
     int value;
 
@@ -279,10 +318,17 @@ class Avaliation {
     void valid(int) throw(invalid_argument);
 
   public:
-    /// Create a Avaliation
+    
+    /**
+     * @name    Constructor
+     * @brief   Inicialize an object of the Class
+     */
     Avaliation();
 
-    /// Destroy a Avaliation
+    /**
+     * @name    Destructor
+     * @brief   Destroy an object of the Class
+     */
     ~Avaliation();
 
     /**
