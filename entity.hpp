@@ -86,89 +86,109 @@ class User{
 };
 
 //------------------------------------------------
-// BLOG CLASS
+// COMMENT CLASS
 //------------------------------------------------
 
 /**
- * @class Blog
+ * @class Comment
  *
- * @brief Defines how a Blog should be.
+ * @brief Defines how a Comment should be.
  *
- * Inherit of class Domain. Defines what information a Blog has and how you can access it.
- *
- * @note The size is small for some reasons.
+ * Inherit of class Content. Defines what information a Comment has and how you can access it.
  */
-class Blog {
+class Comment {
   private:
-    /// The author of the Blog
+    /// The author of the Comment
     Name author;
 
-    /// The name of the Blog
-    Name blog_name;
+    /// The content of the Comment
+    Text content;
 
-    /// All Posts made in this Blog
-    vector<Post> posts;
+    /// The name of every User that avaliated
+    map<Name, bool> has_avaliated;
+
+    /// All the avaliations given to this content
+    vector<Avaliation> avaliations;
+
+    /**
+     * @name    Valid
+     * @brief   Validate the Comment
+     *
+     * Validate Comment by verifying if the text is empty. If it is, it will not create.
+     */
+    void valid(Text) throw(invalid_argument);
+    
+    /**
+     * @name    Empty
+     * @brief   Warn if the Name or Text is empty.
+     *
+     * @retval TRUE At least one of the strings is empty
+     * @retval FALSE None of the strings is not empty
+     */
+    bool empty();
 
   public:
+    
     /**
      * @name    Constructor
      * @brief   Inicialize an object of the Class
      */
-    Blog();
+    Comment();
 
     /**
      * @name    Destructor
      * @brief   Destroy an object of the Class
      */
-    ~Blog();
+    ~Comment();
 
     /**
      * @name    Get Author
-     * @brief   Get the name of the author of the blog
+     * @brief   Get the name of the author of the comment
      *
-     * Get the name of the author of the blog if it is not empty.
+     * Get the name of the author of the comment if it is not empty.
      *
-     * @return Name The name the author of the blog
+     * @return Name The name the author of the comment
      */
-    Name get_author() throw(invalid_argument);
+    Name get_author();
 
     /**
-     * @name    Get Name
-     * @brief   Get the name of the blog
+     * @name    Get Content
+     * @brief   Get the content of the post
      *
-     * Get the name of the blog if it is not empty.
+     * Get the content of the post if it is not empty.
      *
-     * @return Name The name of the blog
+     * @return Text The content of the post
      */
-    Name get_name() throw(invalid_argument);
+    Text get_content();
 
     /**
-     * @name    Get Posts
-     * @brief   Get the posts of the blog
+     * @name    Get Avaliation
+     * @brief   Get the avaliation of the comment
      *
-     * Get the posts of the blog if it is not empty.
+     * Get the avaliation of the comment if it is not empty.
      *
-     * @return vector<Post> the posts of the blog
+     * @return Avaliation The avaliation of the comment
      */
-    vector<Post> get_posts() throw(invalid_argument);
+    Avaliation get_avaliation();
 
-     /**
-   * A public method
-   * Modify the Name of the author and the Name of the blog.
-   */
-    void set(Name, Name) throw(invalid_argument);
-
-   /**
-   * A public method
-     * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
-   */
-    void set_name(Name) throw(invalid_argument);
-    
     /**
-   * A public method
-     * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
-   */
-    void set_post(Post) throw(invalid_argument);
+     * A public method
+     * It receives the name of the author of the content and the content and valid them.
+     */
+    void set_author(Name);
+
+  /**
+     * A public method
+     * It receives the name of the author of the content and the content and valid them.
+     */
+    void set_content(Text);
+
+    /**
+     * A public method.
+     * Add an avaliation, making sure that no user do more than one avaliation.
+     * It receives a the name of the current user and the avaliation.
+     */
+    void set_avaliation(Name, Avaliation) throw(invalid_argument);
 };
 
 //------------------------------------------------
@@ -322,109 +342,89 @@ class Post {
 };
 
 //------------------------------------------------
-// COMMENT CLASS
+// BLOG CLASS
 //------------------------------------------------
 
 /**
- * @class Comment
+ * @class Blog
  *
- * @brief Defines how a Comment should be.
+ * @brief Defines how a Blog should be.
  *
- * Inherit of class Content. Defines what information a Comment has and how you can access it.
+ * Inherit of class Domain. Defines what information a Blog has and how you can access it.
+ *
+ * @note The size is small for some reasons.
  */
-class Comment {
+class Blog {
   private:
-    /// The author of the Comment
+    /// The author of the Blog
     Name author;
 
-    /// The content of the Comment
-    Text content;
+    /// The name of the Blog
+    Name blog_name;
 
-    /// The name of every User that avaliated
-    map<Name, bool> has_avaliated;
-
-    /// All the avaliations given to this content
-    vector<Avaliation> avaliations;
-
-    /**
-     * @name    Valid
-     * @brief   Validate the Comment
-     *
-     * Validate Comment by verifying if the text is empty. If it is, it will not create.
-     */
-    void valid(Text) throw(invalid_argument);
-    
-    /**
-     * @name    Empty
-     * @brief   Warn if the Name or Text is empty.
-     *
-     * @retval TRUE At least one of the strings is empty
-     * @retval FALSE None of the strings is not empty
-     */
-    bool empty();
+    /// All Posts made in this Blog
+    vector<Post> posts;
 
   public:
-    
     /**
      * @name    Constructor
      * @brief   Inicialize an object of the Class
      */
-    Comment();
+    Blog();
 
     /**
      * @name    Destructor
      * @brief   Destroy an object of the Class
      */
-    ~Comment();
+    ~Blog();
 
     /**
      * @name    Get Author
-     * @brief   Get the name of the author of the comment
+     * @brief   Get the name of the author of the blog
      *
-     * Get the name of the author of the comment if it is not empty.
+     * Get the name of the author of the blog if it is not empty.
      *
-     * @return Name The name the author of the comment
+     * @return Name The name the author of the blog
      */
-    Name get_author();
+    Name get_author() throw(invalid_argument);
 
     /**
-     * @name    Get Content
-     * @brief   Get the content of the post
+     * @name    Get Name
+     * @brief   Get the name of the blog
      *
-     * Get the content of the post if it is not empty.
+     * Get the name of the blog if it is not empty.
      *
-     * @return Text The content of the post
+     * @return Name The name of the blog
      */
-    Text get_content();
+    Name get_name() throw(invalid_argument);
 
     /**
-     * @name    Get Avaliation
-     * @brief   Get the avaliation of the comment
+     * @name    Get Posts
+     * @brief   Get the posts of the blog
      *
-     * Get the avaliation of the comment if it is not empty.
+     * Get the posts of the blog if it is not empty.
      *
-     * @return Avaliation The avaliation of the comment
+     * @return vector<Post> the posts of the blog
      */
-    Avaliation get_avaliation();
+    vector<Post> get_posts() throw(invalid_argument);
 
+     /**
+   * A public method
+   * Modify the Name of the author and the Name of the blog.
+   */
+    void set(Name, Name) throw(invalid_argument);
+
+   /**
+   * A public method
+     * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
+   */
+    void set_name(Name) throw(invalid_argument);
+    
     /**
-     * A public method
-     * It receives the name of the author of the content and the content and valid them.
-     */
-    void set_author(Name);
-
-  /**
-     * A public method
-     * It receives the name of the author of the content and the content and valid them.
-     */
-    void set_content(Text);
-
-    /**
-     * A public method.
-     * Add an avaliation, making sure that no user do more than one avaliation.
-     * It receives a the name of the current user and the avaliation.
-     */
-    void set_avaliation(Name, Avaliation) throw(invalid_argument);
+   * A public method
+     * Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
+   */
+    void set_post(Post) throw(invalid_argument);
 };
 
 //------------------------------------------------

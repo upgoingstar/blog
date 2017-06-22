@@ -287,64 +287,6 @@ bool BlogController::destroy(Blog blog) throw(invalid_argument) {
   }
 }
 
-// TODO: merge this with welcome controller
-void BlogController::menu() {
-  const int EXIT = 0;
-  const int LIST = 1;
-  const int MYBLOGS = 2;
-  const int CREATEBLOG = 3; 
-
-  bool error = false;
-  bool exit = false;
-  
-  while(!exit){
-    string option = BlogView::menu_page(error);
-    error = false;
-    
-    int op;
-    try{
-    	op = stoi(option);
-    }
-    catch(invalid_argument erro){
-      error = true;
-      continue;
-    }
-
-    if(Auth::user_logged()){
-      switch(op){
-        case EXIT:
-          exit = true;
-          break;
-        case LIST:
-            BlogController::index();
-            break;
-        case MYBLOGS:
-            BlogController::user_blogs();
-            break;
-        case CREATEBLOG:
-            BlogController::create();
-            break;
-        default:
-          error = true;
-          break;
-      }
-    }
-    else{
-      switch(op){
-        case EXIT:
-          exit = true;
-          break;
-        case LIST:
-            BlogController::index();
-            break;
-        default:
-          error = true;
-          break;
-      }
-    }
-  }
-}
-
 //------------------------------------------------
 // POST CONTROLLER CLASS
 //------------------------------------------------
@@ -678,6 +620,8 @@ void WelcomeController::home_page() {
   const int REGISTER = 2;
   const int ACCOUNT = 2;
   const int LISTBLOGS = 3;
+  const int MYBLOGS = 4;
+  const int CREATEBLOG = 5;
   
   bool exit = false;
   bool error = false;
@@ -704,9 +648,15 @@ void WelcomeController::home_page() {
           case ACCOUNT:
             UserController::show();
             break;
-          case LISTBLOGS: 
-            BlogController::menu();
+          case LISTBLOGS:
+            BlogController::index();
             break;
+	      case MYBLOGS:
+	        BlogController::user_blogs();
+	        break;
+	      case CREATEBLOG:
+	        BlogController::create();
+	        break;
           case EXIT:   
             exit = true; 
             break;
@@ -723,7 +673,7 @@ void WelcomeController::home_page() {
             UserController::create();
             break;
           case LISTBLOGS: 
-            BlogController::menu();
+            BlogController::index();
             break;
           case EXIT:    
             exit = true; 

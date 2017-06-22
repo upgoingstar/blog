@@ -743,19 +743,22 @@ string WelcomeView::home_page(bool error) {
   cout << "Bem-vindo a Blog - a platarfoma de blogs mais supimpa do mundo!" << endl << endl;
     
   if(error) {
-  cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl; 
+  	cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl; 
   }
 
   cout << "0 - Sair" << endl;
   if(Auth::user_logged()) {
-  cout << "1 - Deslogar" << endl;
-  cout << "2 - Perfil" << endl;
+    cout << "1 - Deslogar" << endl;
+    cout << "2 - Perfil" << endl;
+	cout << "3 - Listar blogs" << endl;
+    cout << "4 - Listar meus blogs" << endl;
+	cout << "5 - Criar um novo blog" << endl; 
   } else {
-  cout << "1 - Logar" << endl;
-  cout << "2 - Registrar" << endl;  
+	cout << "1 - Logar" << endl;
+	cout << "2 - Registrar" << endl; 
+	cout << "3 - Listar blogs" << endl;
   }
     
-  cout << "3 - Blogs" << endl;
 
   cout << " > ";
   string option;

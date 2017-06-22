@@ -102,8 +102,8 @@ class UserController : public User {
  */
 class BlogController : public Blog {
 
-  /// Permits BlogView to be aware of this class and use everything.
-  friend class BlogView;
+  /// Permits WelcomeController to be aware of this class and use everything.
+  friend class WelcomeController;
   
   private:
 
@@ -173,16 +173,6 @@ class BlogController : public Blog {
      * @return bool If the blog was deleted or not
      */
     static bool destroy(Blog) throw(invalid_argument);
-
-  public:
-
-    /**
-     * @name    Menu
-     * @brief   Controls the logic of a menu for blogs
-     *
-     * Render a page of menu for blogs
-     */
-    static void menu();
 };
 
 //------------------------------------------------
