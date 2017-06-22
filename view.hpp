@@ -9,8 +9,55 @@
 //------------------------------------------------
 // INCLUDES
 //------------------------------------------------
+
 #include "domains.hpp"
 #include "entity.hpp"
+
+//------------------------------------------------
+// USER VIEW CLASS
+//------------------------------------------------
+
+/**
+ * @class UserView
+ *
+ * @brief Controls interface for User with the user of the system 
+ *
+ * Has all the pages of CRUD
+ */
+class UserView {
+
+  /// Permits UserController to be aware of this class and use everything.
+  friend class UserController;
+  
+  private:
+    UserView();
+
+    ~UserView();
+
+    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
+    /*
+     * Render create page to serve as a sign up page
+     * Return the new user 
+     */
+    static User create_page() throw(invalid_argument);
+    /*
+     * Render profile page
+     * Receives the user
+     */
+    static string show_page(User, bool);
+    /*
+     * Render a page to change password
+     * Receives the user
+     * Return the updated user
+     */
+    static User edit_page(User) throw(invalid_argument);
+    /*
+     * Render delete page to confirm the user intention to delete his account
+     */
+    static bool delete_page(bool);
+    
+    static void deleted_page();
+};
 
 //------------------------------------------------
 // BLOG VIEW CLASS
@@ -70,57 +117,6 @@ class BlogView {
 };
 
 //------------------------------------------------
-// COMMENT VIEW CLASS
-//------------------------------------------------
-
-/**
- * @class CommentView
- *
- * @brief Controls interface for Comment with the user of the system 
- *
- * Has all the pages of CRUD
- */
-class CommentView {
-
-  /// Permits CommentController to be aware of this class and use everything.
-  friend class CommentController;
-  
-  private:
-    CommentView();
-
-    ~CommentView();
-
-    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
-    /*
-     * Render create page to serve as a sign up page
-     * Return the new Comment 
-     */
-    static string index_page(vector<Comment>, bool) throw(invalid_argument);
-    /*
-     * Render create page to serve as a sign up page
-     * Return the new Comment 
-     */
-    static Comment create_page() throw(invalid_argument);
-    /*
-     * Render profile page
-     * Receives the Comment
-     */
-    static string show_page(Comment, bool);
-    /*
-     * Render a page to change password
-     * Receives the Comment
-     * Return the updated Comment
-     */
-    static Comment edit_page(Comment) throw(invalid_argument);
-    /*
-     * Render delete page to confirm the Comment intention to delete his account
-     */
-    static bool delete_page(bool);
-    
-    static void deleted_page();
-};
-
-//------------------------------------------------
 // POST VIEW CLASS
 //------------------------------------------------
 
@@ -173,45 +169,50 @@ class PostView {
 };
 
 //------------------------------------------------
-// USER VIEW CLASS
+// COMMENT VIEW CLASS
 //------------------------------------------------
 
 /**
- * @class UserView
+ * @class CommentView
  *
- * @brief Controls interface for User with the user of the system 
+ * @brief Controls interface for Comment with the user of the system 
  *
  * Has all the pages of CRUD
  */
-class UserView {
+class CommentView {
 
-  /// Permits UserController to be aware of this class and use everything.
-  friend class UserController;
+  /// Permits CommentController to be aware of this class and use everything.
+  friend class CommentController;
   
   private:
-    UserView();
+    CommentView();
 
-    ~UserView();
+    ~CommentView();
 
     // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
      * Render create page to serve as a sign up page
-     * Return the new user 
+     * Return the new Comment 
      */
-    static User create_page() throw(invalid_argument);
+    static string index_page(vector<Comment>, bool) throw(invalid_argument);
+    /*
+     * Render create page to serve as a sign up page
+     * Return the new Comment 
+     */
+    static Comment create_page() throw(invalid_argument);
     /*
      * Render profile page
-     * Receives the user
+     * Receives the Comment
      */
-    static string show_page(User, bool);
+    static string show_page(Comment, bool);
     /*
      * Render a page to change password
-     * Receives the user
-     * Return the updated user
+     * Receives the Comment
+     * Return the updated Comment
      */
-    static User edit_page(User) throw(invalid_argument);
+    static Comment edit_page(Comment) throw(invalid_argument);
     /*
-     * Render delete page to confirm the user intention to delete his account
+     * Render delete page to confirm the Comment intention to delete his account
      */
     static bool delete_page(bool);
     
