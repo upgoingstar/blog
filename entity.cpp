@@ -45,78 +45,56 @@ Name User::get_name() throw(invalid_argument) {
   }
 }
 
-void User::check_user(Email email, Password password) throw(invalid_argument) {
-  if(this->email != email or this->password != password or email.empty() or password.empty()) {
-    throw invalid_argument( "That is not your email or password!" );
-  }
-}
-
 //------------------------------------------------
-// COMMENT CLASS
+// BLOG CLASS
 //------------------------------------------------
 
-Comment::Comment() {}
+Blog::Blog(){}
 
-Comment::~Comment() {}
+Blog::~Blog() {}
 
-void Comment::valid(Text content) throw(invalid_argument) {
-  if(content.empty()) {
-    throw invalid_argument("Invalid informations to compose a content!");
-  }
-}
-
-
-bool Comment::empty() {
-  return this->author.empty() or this->content.empty();
-}
-
-
-void Comment::set_author(Name author) {
-  this->author = author;
-}
-
-void Comment::set_content(Text content) {
-  Comment::valid(content);
-  this->content = content;
-}
-
-void Comment::set_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
-  if(has_avaliated[name]) {
-    throw invalid_argument("This user has already avaliated!");
-  }
-  else {
-    this->avaliations.push_back(avaliation);
-    has_avaliated[name] = true;
-  }
-}
-
-Name Comment::get_author() {
+Name Blog::get_author() throw(invalid_argument) {
   if(this->author.empty()){
     throw invalid_argument("There is no author!");
   }
   return this->author;
 }
 
-Text Comment::get_content() {
-  if(this->content.empty()){
-    throw invalid_argument("There is no content to show!");
+Name Blog::get_name() throw(invalid_argument) {
+  if(this->blog_name.empty()){
+    throw invalid_argument("This blog has no name!");
   }
-  return this->content;
+  return this->blog_name;
 }
 
-Avaliation Comment::get_avaliation() {
-  int total_sum = 0;
-  int total_size = this->avaliations.size();
-
-  for(int i = 0; i < (int)avaliations.size(); i++) {
-    Avaliation avaliation = avaliations[i];
-    total_sum += avaliation.get();
+vector<Post> Blog::get_posts() throw(invalid_argument) {
+  if(this->posts.empty()){
+    throw invalid_argument("There is no posts in this Blog!");
   }
+  return this->posts;
+}
 
-  Avaliation ans;
-  ans.set(total_sum / total_size);
+void Blog::set(Name author, Name blog_name) throw(invalid_argument) {
+  if(author.empty() or blog_name.empty())
+    throw invalid_argument("Invalid blog name or author!");
+  this->author = author;
+  this->blog_name = blog_name;
+}
 
-  return ans;
+void Blog::set_name(Name blog_name) throw(invalid_argument) {
+  if(blog_name.empty()) {
+    throw invalid_argument("Invalid blog name!");	
+  }
+  this->blog_name = blog_name;
+}
+
+void Blog::set_post(Post post) throw(invalid_argument) {
+  if(this->author != post.get_author()) {
+    throw invalid_argument("You are not allowed to post in this blog!");
+  }
+  else {
+    this->posts.push_back(post);
+  }
 }
 
 //------------------------------------------------
@@ -212,60 +190,72 @@ void Post::disallow_comments() {
   this->comments.clear();
 }
 
-
 //------------------------------------------------
-// BLOG CLASS
+// COMMENT CLASS
 //------------------------------------------------
 
-Blog::Blog(){}
+Comment::Comment() {}
 
-Blog::~Blog() {}
+Comment::~Comment() {}
 
-void Blog::set(Name author, Name blog_name) throw(invalid_argument) {
-  if(author.empty() or blog_name.empty())
-    throw invalid_argument("Invalid blog name or author!");
-  this->author = author;
-  this->blog_name = blog_name;
+void Comment::valid(Text content) throw(invalid_argument) {
+  if(content.empty()) {
+    throw invalid_argument("Invalid informations to compose a content!");
+  }
 }
 
-Name Blog::get_author() {
+
+bool Comment::empty() {
+  return this->author.empty() or this->content.empty();
+}
+
+
+void Comment::set_author(Name author) {
+  this->author = author;
+}
+
+void Comment::set_content(Text content) {
+  Comment::valid(content);
+  this->content = content;
+}
+
+void Comment::set_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
+  if(has_avaliated[name]) {
+    throw invalid_argument("This user has already avaliated!");
+  }
+  else {
+    this->avaliations.push_back(avaliation);
+    has_avaliated[name] = true;
+  }
+}
+
+Name Comment::get_author() {
   if(this->author.empty()){
     throw invalid_argument("There is no author!");
   }
   return this->author;
 }
 
-Name Blog::get_name() {
-  if(this->blog_name.empty()){
-    throw invalid_argument("This blog has no name!");
+Text Comment::get_content() {
+  if(this->content.empty()){
+    throw invalid_argument("There is no content to show!");
   }
-  return this->blog_name;
+  return this->content;
 }
 
-void Blog::set_name(Name blog_name) throw(invalid_argument) {
-  if(blog_name.empty()) {
-    throw invalid_argument("Invalid blog name!");	
-  }
-  this->blog_name = blog_name;
-}
+Avaliation Comment::get_avaliation() {
+  int total_sum = 0;
+  int total_size = this->avaliations.size();
 
-/*
-  Add a post in the blog if you are the creator for the blog.
-*/
-void Blog::set_post(Post post) throw(invalid_argument) {
-  if(this->author != post.get_author()) {
-    throw invalid_argument("You are not allowed to post in this blog!");
+  for(int i = 0; i < (int)avaliations.size(); i++) {
+    Avaliation avaliation = avaliations[i];
+    total_sum += avaliation.get();
   }
-  else {
-    this->posts.push_back(post);
-  }
-}
 
-vector<Post> Blog::get_posts() {
-  if(this->posts.empty()){
-    throw invalid_argument("There is no posts in this Blog!");
-  }
-  return this->posts;
+  Avaliation ans;
+  ans.set(total_sum / total_size);
+
+  return ans;
 }
 
 //------------------------------------------------
