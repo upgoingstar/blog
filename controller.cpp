@@ -10,6 +10,106 @@
 using namespace std;
 
 //------------------------------------------------
+// USER CONTROLLER CLASS
+//------------------------------------------------
+
+void UserController::create() {
+  try {
+  User user = UserView::create_page();                            // render create page and receive a new user
+  // UserModel::save(user);                                       // Send to model to save it             // TODO: put a stub in here (later implement)
+  }
+  catch(invalid_argument erro) {}
+}
+
+void UserController::show() {
+  const int EXIT = 0;
+  const int CHANGE_PASSWORD = 1;
+  const int DELETE_ACCOUNT = 2;
+
+  bool exit = false;
+  bool error = false;
+
+  User user = Auth::get_current_user();                           // get the current user
+
+  while(!exit) {
+    string option = UserView::show_page(user, error);                // render show page
+
+    int op;
+    try{
+      op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
+    try {
+      switch(op) {
+        case EXIT:
+          exit = true;
+          break;
+        case CHANGE_PASSWORD:
+          UserController::edit();
+          break;
+        case DELETE_ACCOUNT:
+          exit = UserController::destroy(user);
+          break;
+        default:
+          throw invalid_argument("Invalid option!");
+          break;
+      }
+    } catch(invalid_argument erro) {
+      error = true;
+    }
+  }
+}
+
+void UserController::edit() {
+  try{
+    User user = Auth::get_current_user();                         // get the current user           
+    user = UserView::edit_page(user);                             // render edit page and get new user
+    // UserModel::update(user);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
+  } catch(invalid_argument erro) {}
+}
+
+bool UserController::destroy(User user) {
+  bool error = false;
+  const int SIM = 1;
+  const int NAO = 0;
+  
+  while(true){
+    string option;
+    try{
+      option = UserView::delete_page(error);
+      error = false;
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+    
+    int op;
+    try{
+      op = stoi(option);
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+
+    switch(op){
+      case SIM:
+        Stub::destroy_user(user);
+        UserView::deleted_page();
+        Auth::logout();
+        return true;
+      case NAO:
+        return false;
+    }
+  }
+}
+
+//------------------------------------------------
 // BLOG CONTROLLER CLASS
 //------------------------------------------------
 
@@ -86,6 +186,14 @@ void BlogController::create() throw(invalid_argument) {
   catch(invalid_argument erro) {}
 }
 
+void BlogController::edit(Blog blog) {
+  try{
+    blog = BlogView::edit_page(blog);                             // render edit page and get new blog
+    // BlogModel::update(blog);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
+  }
+  catch(invalid_argument erro) {}
+}
+
 void BlogController::show(Blog blog){
   const int EXIT = 0;
   const int VIEWPOST = 1;
@@ -143,14 +251,6 @@ void BlogController::show(Blog blog){
   } 
 }
 
-void BlogController::edit(Blog blog) {
-  try{
-    blog = BlogView::edit_page(blog);                             // render edit page and get new blog
-    // BlogModel::update(blog);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
-  }
-  catch(invalid_argument erro) {}
-}
-
 bool BlogController::destroy(Blog blog) throw(invalid_argument) {
   bool error = false;
   const int SIM = 1;
@@ -187,6 +287,7 @@ bool BlogController::destroy(Blog blog) throw(invalid_argument) {
   }
 }
 
+// TODO: merge this with welcome controller
 void BlogController::menu() {
   const int EXIT = 0;
   const int LIST = 1;
@@ -245,151 +346,6 @@ void BlogController::menu() {
 }
 
 //------------------------------------------------
-// COMMENT CONTROLLER CLASS
-//------------------------------------------------
-
-// TODO: IMPORTANT! add to the Comment an id to identify to which post is he refering to
-
-// TODO: make Post show call this funtion, but in a form CommentController::index(vector<Comment> comments)
-void CommentController::index(Post post){
-  const int EXIT = 0;
-
-  bool error = false;
-  bool exit = false;
-  
-
-  while(!exit){
-  	vector<Comment> comments = Stub::get_comments(post);
-    string option = CommentView::index_page(comments, error);
-
-    error = false;
-
-    int id;
-    try{
-    	id = stoi(option);
-    	if(id > comments.size()) throw invalid_argument("Invalid id");
-    }
-    catch(invalid_argument erro){
-      error = true;
-      continue;
-    }
-    switch(id){
-      case EXIT:
-        exit = true;
-        break;
-      default:
-        CommentController::show(comments[id - 1]);
-        break;
-    }
-  }
-}
-
-void CommentController::create() {
-  try {
-    Comment comment = CommentView::create_page();                 // render create page and receive a new comment
-    // CommentModel::save(Comment);                               // Send to model to save it             // TODO: put a stub in here (later implement)
-  } 
-  catch(invalid_argument erro) {}
-}
-
-void CommentController::show(Comment comment) {
-  const int EXIT = 0;
-  const int EDIT = 1;
-  const int DELETE = 2;
-
-  bool exit = false;
-  bool error = false;
-
-  while(!exit) {
-    string option = CommentView::show_page(comment, error);          // render show page
-
-    int op;
-    try{
-    	op = stoi(option);
-    }
-    catch(invalid_argument erro){
-      error = true;
-      continue;
-    }
-
-    try {
-      if(Auth::user_logged() && comment.get_author() == Auth::get_current_user().get_name()){
-        switch(op) {
-          case EXIT:
-            exit = true;
-            break;
-          case EDIT:
-            CommentController::edit(comment);
-            break;
-          case DELETE:
-            exit = CommentController::destroy(comment);
-            break;
-          default:
-            throw invalid_argument("Invalid option!");
-            break;
-        }
-      }
-      else{
-        switch(op) {
-          case EXIT:
-            exit = true;
-            break;
-          default:
-            throw invalid_argument("Invalid option!");
-            break;
-        }
-      }
-    } catch(invalid_argument erro) {
-      error = true;
-    }
-  }
-}
-
-void CommentController::edit(Comment comment) {
-  try{
-    comment = CommentView::edit_page(comment);                    // render edit page and get new comment
-    // CommentModel::update(comment);                             // safe using the model                 // TODO: put a stub in here (later implement) 
-  } 
-  catch(invalid_argument erro) {}
-}
-
-bool CommentController::destroy(Comment comment) {
-  bool error = false;
-  const int SIM = 1;
-  const int NAO = 0;
-  
-  while(true){
-    string option;
-    try{
-      option = CommentView::delete_page(error);
-      error = false;
-    }
-    catch(invalid_argument erro){
-      error = true;
-      continue;
-    }
-    
-	int op;
-    try{
-    	op = stoi(option);
-    }
-    catch(invalid_argument erro){
-      error = true;
-      continue;
-    }
-
-    switch(op){
-      case SIM:
-        Stub::destroy_comment(comment);
-        CommentView::deleted_page();
-        return true;
-      case NAO:
-        return false;
-    }
-  }
-}
-
-//------------------------------------------------
 // POST CONTROLLER CLASS
 //------------------------------------------------
 
@@ -404,15 +360,15 @@ void PostController::index(Blog blog){
   
 
   while(!exit){
-	vector<Post> posts = Stub::get_posts(blog);
+  vector<Post> posts = Stub::get_posts(blog);
     string option = PostView::index_page(posts, error);
 
     error = false;
 
     int id;
     try{
-    	id = stoi(option);
-    	if(id > posts.size()) throw invalid_argument("Invalid id");
+      id = stoi(option);
+      if(id > posts.size()) throw invalid_argument("Invalid id");
     }
     catch(invalid_argument erro){
       error = true;
@@ -437,6 +393,14 @@ void PostController::create() {
   catch(invalid_argument erro) {}
 }
 
+void PostController::edit(Post post) {
+  try{
+    post = PostView::edit_page(post);                             // render edit page and get new post
+    // PostModel::update(post);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
+  }
+  catch(invalid_argument erro) {}
+}
+
 void PostController::show(Post post) {
   const int EXIT = 0;
   const int COMMENTS = 1;
@@ -452,9 +416,9 @@ void PostController::show(Post post) {
     string option = PostView::show_page(post, error);                // render show page
     error = false;
     
-	int op;
+  int op;
     try{
-    	op = stoi(option);
+      op = stoi(option);
     }
     catch(invalid_argument erro){
       error = true;
@@ -522,14 +486,6 @@ void PostController::show(Post post) {
   }
 }
 
-void PostController::edit(Post post) {
-  try{
-    post = PostView::edit_page(post);                             // render edit page and get new post
-    // PostModel::update(post);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
-  }
-  catch(invalid_argument erro) {}
-}
-
 bool PostController::destroy(Post post) {
   bool error = false;
   const int SIM = 1;
@@ -546,9 +502,9 @@ bool PostController::destroy(Post post) {
       continue;
     }
     
-	int op;
+  int op;
     try{
-    	op = stoi(option);
+      op = stoi(option);
     }
     catch(invalid_argument erro){
       error = true;
@@ -567,29 +523,71 @@ bool PostController::destroy(Post post) {
 }
 
 //------------------------------------------------
-// USER CONTROLLER CLASS
+// COMMENT CONTROLLER CLASS
 //------------------------------------------------
 
-void UserController::create() {
-  try {
-  User user = UserView::create_page();                            // render create page and receive a new user
-  // UserModel::save(user);                                       // Send to model to save it             // TODO: put a stub in here (later implement)
+// TODO: IMPORTANT! add to the Comment an id to identify to which post is he refering to
+// TODO: make Post show call this funtion, but in a form CommentController::index(vector<Comment> comments)
+
+void CommentController::index(Post post){
+  const int EXIT = 0;
+
+  bool error = false;
+  bool exit = false;
+  
+
+  while(!exit){
+  	vector<Comment> comments = Stub::get_comments(post);
+    string option = CommentView::index_page(comments, error);
+
+    error = false;
+
+    int id;
+    try{
+    	id = stoi(option);
+    	if(id > comments.size()) throw invalid_argument("Invalid id");
+    }
+    catch(invalid_argument erro){
+      error = true;
+      continue;
+    }
+    switch(id){
+      case EXIT:
+        exit = true;
+        break;
+      default:
+        CommentController::show(comments[id - 1]);
+        break;
+    }
   }
+}
+
+void CommentController::create() {
+  try {
+    Comment comment = CommentView::create_page();                 // render create page and receive a new comment
+    // CommentModel::save(Comment);                               // Send to model to save it             // TODO: put a stub in here (later implement)
+  } 
   catch(invalid_argument erro) {}
 }
 
-void UserController::show() {
+void CommentController::edit(Comment comment) {
+  try{
+    comment = CommentView::edit_page(comment);                    // render edit page and get new comment
+    // CommentModel::update(comment);                             // safe using the model                 // TODO: put a stub in here (later implement) 
+  } 
+  catch(invalid_argument erro) {}
+}
+
+void CommentController::show(Comment comment) {
   const int EXIT = 0;
-  const int CHANGE_PASSWORD = 1;
-  const int DELETE_ACCOUNT = 2;
+  const int EDIT = 1;
+  const int DELETE = 2;
 
   bool exit = false;
   bool error = false;
 
-  User user = Auth::get_current_user();                           // get the current user
-
   while(!exit) {
-    string option = UserView::show_page(user, error);                // render show page
+    string option = CommentView::show_page(comment, error);          // render show page
 
     int op;
     try{
@@ -601,19 +599,31 @@ void UserController::show() {
     }
 
     try {
-      switch(op) {
-        case EXIT:
-          exit = true;
-          break;
-        case CHANGE_PASSWORD:
-          UserController::edit();
-          break;
-        case DELETE_ACCOUNT:
-          exit = UserController::destroy(user);
-          break;
-        default:
-          throw invalid_argument("Invalid option!");
-          break;
+      if(Auth::user_logged() && comment.get_author() == Auth::get_current_user().get_name()){
+        switch(op) {
+          case EXIT:
+            exit = true;
+            break;
+          case EDIT:
+            CommentController::edit(comment);
+            break;
+          case DELETE:
+            exit = CommentController::destroy(comment);
+            break;
+          default:
+            throw invalid_argument("Invalid option!");
+            break;
+        }
+      }
+      else{
+        switch(op) {
+          case EXIT:
+            exit = true;
+            break;
+          default:
+            throw invalid_argument("Invalid option!");
+            break;
+        }
       }
     } catch(invalid_argument erro) {
       error = true;
@@ -621,15 +631,7 @@ void UserController::show() {
   }
 }
 
-void UserController::edit() {
-  try{
-    User user = Auth::get_current_user();                         // get the current user           
-    user = UserView::edit_page(user);                             // render edit page and get new user
-    // UserModel::update(user);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
-  } catch(invalid_argument erro) {}
-}
-
-bool UserController::destroy(User user) {
+bool CommentController::destroy(Comment comment) {
   bool error = false;
   const int SIM = 1;
   const int NAO = 0;
@@ -637,7 +639,7 @@ bool UserController::destroy(User user) {
   while(true){
     string option;
     try{
-      option = UserView::delete_page(error);
+      option = CommentView::delete_page(error);
       error = false;
     }
     catch(invalid_argument erro){
@@ -645,7 +647,7 @@ bool UserController::destroy(User user) {
       continue;
     }
     
-    int op;
+	int op;
     try{
     	op = stoi(option);
     }
@@ -656,9 +658,8 @@ bool UserController::destroy(User user) {
 
     switch(op){
       case SIM:
-        Stub::destroy_user(user);
-        UserView::deleted_page();
-        Auth::logout();
+        Stub::destroy_comment(comment);
+        CommentView::deleted_page();
         return true;
       case NAO:
         return false;
