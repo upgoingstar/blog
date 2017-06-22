@@ -186,14 +186,6 @@ void BlogController::create() throw(invalid_argument) {
   catch(invalid_argument erro) {}
 }
 
-void BlogController::edit(Blog blog) {
-  try{
-    blog = BlogView::edit_page(blog);                             // render edit page and get new blog
-    // BlogModel::update(blog);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
-  }
-  catch(invalid_argument erro) {}
-}
-
 void BlogController::show(Blog blog){
   const int EXIT = 0;
   const int VIEWPOST = 1;
@@ -249,6 +241,14 @@ void BlogController::show(Blog blog){
         }
       }
   } 
+}
+
+void BlogController::edit(Blog blog) {
+  try{
+    blog = BlogView::edit_page(blog);                             // render edit page and get new blog
+    // BlogModel::update(blog);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
+  }
+  catch(invalid_argument erro) {}
 }
 
 bool BlogController::destroy(Blog blog) throw(invalid_argument) {
@@ -393,14 +393,6 @@ void PostController::create() {
   catch(invalid_argument erro) {}
 }
 
-void PostController::edit(Post post) {
-  try{
-    post = PostView::edit_page(post);                             // render edit page and get new post
-    // PostModel::update(post);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
-  }
-  catch(invalid_argument erro) {}
-}
-
 void PostController::show(Post post) {
   const int EXIT = 0;
   const int COMMENTS = 1;
@@ -484,6 +476,14 @@ void PostController::show(Post post) {
       error = true;
     }
   }
+}
+
+void PostController::edit(Post post) {
+  try{
+    post = PostView::edit_page(post);                             // render edit page and get new post
+    // PostModel::update(post);                                   // safe using the model                 // TODO: put a stub in here (later implement) 
+  }
+  catch(invalid_argument erro) {}
 }
 
 bool PostController::destroy(Post post) {
@@ -570,14 +570,6 @@ void CommentController::create() {
   catch(invalid_argument erro) {}
 }
 
-void CommentController::edit(Comment comment) {
-  try{
-    comment = CommentView::edit_page(comment);                    // render edit page and get new comment
-    // CommentModel::update(comment);                             // safe using the model                 // TODO: put a stub in here (later implement) 
-  } 
-  catch(invalid_argument erro) {}
-}
-
 void CommentController::show(Comment comment) {
   const int EXIT = 0;
   const int EDIT = 1;
@@ -629,6 +621,14 @@ void CommentController::show(Comment comment) {
       error = true;
     }
   }
+}
+
+void CommentController::edit(Comment comment) {
+  try{
+    comment = CommentView::edit_page(comment);                    // render edit page and get new comment
+    // CommentModel::update(comment);                             // safe using the model                 // TODO: put a stub in here (later implement) 
+  } 
+  catch(invalid_argument erro) {}
 }
 
 bool CommentController::destroy(Comment comment) {
