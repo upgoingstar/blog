@@ -8,4 +8,4 @@ make && ./blog
 ```
 
 ## Documentation
-The documentation was done using Doxygen and all headers files are commented to deliver a better documentation.
+The documentation was done using Doxygen and all headers files are commented to deliver a better documentation. The style of documentation is specified in this [link](http://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/doxygen-howto.html)

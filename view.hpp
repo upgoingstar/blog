@@ -1,4 +1,5 @@
 // TODO: finish the new style of documentation
+// TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
 
 //------------------------------------------------
 // GUARDS
@@ -34,7 +35,6 @@ class UserView {
 
     ~UserView();
 
-    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
     /*
      * Render create page to serve as a sign up page
      * Return the new user 
@@ -189,7 +189,7 @@ class CommentView {
 
     ~CommentView();
 
-    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
+    
     /*
      * Render create page to serve as a sign up page
      * Return the new Comment 
@@ -265,7 +265,7 @@ class AuthView : public Auth {
     AuthView();
 
     ~AuthView();
-    // TODO: Existe um espaco entre as opcoes onde virao as mensagens de erro em vermelho.
+    
     /*
      * Renderiza tela de login
      */ 
