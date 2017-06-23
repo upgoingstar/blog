@@ -6,31 +6,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//TODO: See if the class model is really necessary
-
-/**
-* @class Model
-* @brief Create and connect the files
-* This class connect with the files .txt that contain the information needed.
-*/
-class Model {
-	private:
-		/**
-		* Still have to figure it out how I am gonna do this
-		*/
-		static void create_tables();
-
-	public:
-		/**
-		* Trie to connect with the files .txt and create the tables
-		*/
-		static void connect(string);
-		/**
-		* Trie to disconnect with the files .txt
-		*/
-		static void disconnect(string);
-};
-
 /**
 * @class UserModel
 * @brief Defines interface with persistence.
@@ -43,6 +18,8 @@ class UserModel : public User {
 	friend class UserController;
 
 	private:
+		const string userFilename = "users.txt"; ///< The name of the file that contains the data
+
 		/**
 		* @brief  Get all users
 		* @return All Users in the system
@@ -56,12 +33,6 @@ class UserModel : public User {
 		* This function add to the end of users.txt the information of the User object given
 		*/
 		static void add(User);
-		/**
-		* @brief  Find a user
-		* @param  user The User object to find
-		* This function find the user given (through userId) in users.txt and return it
-		*/
-		static User find(User);
 		/**
 		* @brief  Update a user
 		* @param  user The User object to update
