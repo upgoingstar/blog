@@ -726,7 +726,7 @@ void CommentView::deleted_page() {
 
 string WelcomeView::home_page(bool error) {
 	system("clear || cls"); 
-	cout << "Bem-vindo a Blog - a platarfoma de blogs mais supimpa do mundo!" << endl << endl;
+	cout << "Bem-vindo a Blog - a plataforma de blogs mais supimpa do mundo!" << endl << endl;
 		
 	if(error) {
 		cout << "Opcao invalida, escolha uma das opcoes listadas na tela!" << endl << endl; 

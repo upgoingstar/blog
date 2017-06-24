@@ -10,96 +10,68 @@ using namespace std;
 // TODO: make Auth::logout set currentUser to an empty User
 
 /**
-* @class User
-* @brief Defines the User
-* Defines what information User has and how you can access it.
+* @class Comment
+* @brief Defines how a Comment should be.
+* Inherit of class Content. Defines what information a Comment has and how you can access it.
 */
-class User{
+class Comment {
 	private:
-		Name name; ///< The name of the User
+		Name author; ///< The author of the Comment
 
-		Password password; ///< The password of the User
+		Text content; ///< The content of the Comment
 
-		Email email; ///< The email of the User
+		map<Name, bool> has_avaliated; ///< The name of every User that avaliated
 
-		bool anonymous; ///< If the current user is anonymous
+		vector<Avaliation> avaliations; ///< All the avaliations given to this content
 
 		/**
-		* @brief   Validate the User
-		* Validate User by verifying if the name, email or password are empty. If any of them are empty, it will not create.
+		* @brief   Validate the Comment
+		* Validate Comment by verifying if the text is empty. If it is, it will not create.
 		*/
-		void valid(Name, Email, Password) throw(invalid_argument);
+		void valid(Text) throw(invalid_argument);
+		/**
+		* @brief  Warn if the Name or Text is empty.
+		* @retval TRUE At least one of the strings is empty
+		* @retval FALSE None of the strings is not empty
+		*/
+		bool empty();
 
 	public:
-		User();  ///< Constructor
+		Comment(); ///< Constructor
 
-		~User();  ///< Destructor
-
-		/**
-		* @brief   Get the name of the user
-		* @return Name The name of the user
-		* Get the name of the user if it is not empty.
-		*/
-		Name get_name() throw(invalid_argument);
-		/**
-		* Modify the value of the Name, Email and Password of this User.
-		*/
-		void set(Name, Email, Password);
-		/**
-		* Modify the value of the Password of this User.
-		*/
-		void set_password(Password);
-};
-
-/**
-* @class Blog
-* @brief Defines how a Blog should be.
-* @note The size is small for some reasons.
-* Inherit of class Domain. Defines what information a Blog has and how you can access it.
-*/
-class Blog {
-	private:
-		Name author; ///< The author of the Blog
-
-		Name blog_name; ///< The name of the Blog
-
-		vector<Post> posts; ///< All Posts made in this Blog
-
-	public:
-		Blog(); ///< Constructor
-
-		~Blog(); ///< Destructor
+		~Comment(); ///< Destructor
 
 		/**
-		* @brief  Get the name of the author of the blog
-		* @return Name The name the author of the blog
-		* Get the name of the author of the blog if it is not empty.
+		* @brief   Get the name of the author of the comment
+		* @return Name The name the author of the comment
+		* Get the name of the author of the comment if it is not empty.
 		*/
-		Name get_author() throw(invalid_argument);
+		Name get_author();
 		/**
-		* @brief  Get the name of the blog
-		* @return Name The name of the blog
-		* Get the name of the blog if it is not empty.
+		* @brief   Get the content of the post
+		* @return Text The content of the post
+		* Get the content of the post if it is not empty.
 		*/
-		Name get_name() throw(invalid_argument);
+		Text get_content();
 		/**
-		* @brief  Get the posts of the blog
-		* @return A vector with Posts of the blog
-		* Get the posts of the blog if it is not empty.
+		* @brief   Get the avaliation of the comment
+		* @return Avaliation The avaliation of the comment
+		* Get the avaliation of the comment if it is not empty.
 		*/
-		vector<Post> get_posts() throw(invalid_argument);
+		Avaliation get_avaliation();
 		/**
-		* Modify the Name of the author and the Name of the blog.
+		* It receives the name of the author of the content and the content and valid them.
 		*/
-		void set(Name, Name) throw(invalid_argument);
+		void set_author(Name);
 		/**
-		* Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
+		* It receives the name of the author of the content and the content and valid them.
 		*/
-		void set_name(Name) throw(invalid_argument);
-		/**
-		* Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
+		void set_content(Text);
+		/**.
+		* Add an avaliation, making sure that no user do more than one avaliation.
+		* It receives a the name of the current user and the avaliation.
 		*/
-		void set_post(Post) throw(invalid_argument);
+		void set_avaliation(Name, Avaliation) throw(invalid_argument);
 };
 
 /**
@@ -197,68 +169,96 @@ class Post {
 };
 
 /**
-* @class Comment
-* @brief Defines how a Comment should be.
-* Inherit of class Content. Defines what information a Comment has and how you can access it.
+* @class Blog
+* @brief Defines how a Blog should be.
+* @note The size is small for some reasons.
+* Inherit of class Domain. Defines what information a Blog has and how you can access it.
 */
-class Comment {
+class Blog {
 	private:
-		Name author; ///< The author of the Comment
+		Name author; ///< The author of the Blog
 
-		Text content; ///< The content of the Comment
+		Name blog_name; ///< The name of the Blog
 
-		map<Name, bool> has_avaliated; ///< The name of every User that avaliated
-
-		vector<Avaliation> avaliations; ///< All the avaliations given to this content
-
-		/**
-		* @brief   Validate the Comment
-		* Validate Comment by verifying if the text is empty. If it is, it will not create.
-		*/
-		void valid(Text) throw(invalid_argument);
-		/**
-		* @brief  Warn if the Name or Text is empty.
-		* @retval TRUE At least one of the strings is empty
-		* @retval FALSE None of the strings is not empty
-		*/
-		bool empty();
+		vector<Post> posts; ///< All Posts made in this Blog
 
 	public:
-		Comment(); ///< Constructor
+		Blog(); ///< Constructor
 
-		~Comment(); ///< Destructor
+		~Blog(); ///< Destructor
 
 		/**
-		* @brief   Get the name of the author of the comment
-		* @return Name The name the author of the comment
-		* Get the name of the author of the comment if it is not empty.
+		* @brief  Get the name of the author of the blog
+		* @return Name The name the author of the blog
+		* Get the name of the author of the blog if it is not empty.
 		*/
-		Name get_author();
+		Name get_author() throw(invalid_argument);
 		/**
-		* @brief   Get the content of the post
-		* @return Text The content of the post
-		* Get the content of the post if it is not empty.
+		* @brief  Get the name of the blog
+		* @return Name The name of the blog
+		* Get the name of the blog if it is not empty.
 		*/
-		Text get_content();
+		Name get_name() throw(invalid_argument);
 		/**
-		* @brief   Get the avaliation of the comment
-		* @return Avaliation The avaliation of the comment
-		* Get the avaliation of the comment if it is not empty.
+		* @brief  Get the posts of the blog
+		* @return A vector with Posts of the blog
+		* Get the posts of the blog if it is not empty.
 		*/
-		Avaliation get_avaliation();
+		vector<Post> get_posts() throw(invalid_argument);
 		/**
-		* It receives the name of the author of the content and the content and valid them.
+		* Modify the Name of the author and the Name of the blog.
 		*/
-		void set_author(Name);
+		void set(Name, Name) throw(invalid_argument);
 		/**
-		* It receives the name of the author of the content and the content and valid them.
+		* Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
 		*/
-		void set_content(Text);
-		/**.
-		* Add an avaliation, making sure that no user do more than one avaliation.
-		* It receives a the name of the current user and the avaliation.
+		void set_name(Name) throw(invalid_argument);
+		/**
+		* Add a new post to this blog. Does not add a post of a person different than the one who created the blog be added.
 		*/
-		void set_avaliation(Name, Avaliation) throw(invalid_argument);
+		void set_post(Post) throw(invalid_argument);
+};
+
+/**
+* @class User
+* @brief Defines the User
+* Defines what information User has and how you can access it.
+*/
+class User{
+	private:
+		Name name; ///< The name of the User
+
+		Password password; ///< The password of the User
+
+		Email email; ///< The email of the User
+
+		bool anonymous; ///< If the current user is anonymous
+
+		/**
+		* @brief   Validate the User
+		* Validate User by verifying if the name, email or password are empty. If any of them are empty, it will not create.
+		*/
+		void valid(Name, Email, Password) throw(invalid_argument);
+
+	public:
+		User();  ///< Constructor
+
+		~User();  ///< Destructor
+
+		/**
+		* @brief   Get the name of the user
+		* @return Name The name of the user
+		* Get the name of the user if it is not empty.
+		*/
+		Name get_name() throw(invalid_argument);
+		/**
+		* Modify the value of the Name, Email and Password of this User.
+		*/
+		void set(Name, Email, Password);
+		/**
+		* Modify the value of the Password of this User.
+		*/
+		void set_password(Password);
 };
 
 /**
