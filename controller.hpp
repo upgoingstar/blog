@@ -7,6 +7,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// TODO: remove this public functions -> make them friends or something like that
+
 /**
 * @class CommentController
 * @brief Responsible for manipulating the logic around Comment, including create, showing, updating and destroying
@@ -124,35 +126,35 @@ class BlogController : public Blog {
 		~BlogController(); ///< Destructor
 
 		/**
-		* @brief   Controls the logic of showing all blogs
+		* @brief  Controls the logic of showing all blogs
 		* Render a page that show all blogs. If there is no blogs to show, it will tell the current user that there are no blogs.
 		*/
 		static void index() throw(invalid_argument);
 		/**
-		* @brief   Controls the logic of showing to the current user all blogs he created.
+		* @brief  Controls the logic of showing to the current user all blogs he created.
 		* Render a page that show all blogs current user created. If there is no blogs to show, it will tell the current user that there is no Blogs
 		*/
 		static void user_blogs() throw(invalid_argument);
 		/**
-		* @brief   Controls the logic for creating a new Blog
+		* @brief  Controls the logic for creating a new Blog
 		* Render a page to fill the information needed to create a new Blog and then save in the persistence.
 		*/
 		static void create() throw(invalid_argument);
 		/**
-		* @brief   Controls the logic of showing a Blog
-		* @param blog This blog this controller will show
+		* @brief  Controls the logic of showing a Blog
+		* @param  blog This blog this controller will show
 		* Render a page with information of a blog. This page is used to see a blog.
 		*/
 		static void show(Blog);
 		/**
-		* @brief   Controls the logic of editing a blog
-		* @param blog The blog that we want to edit.
+		* @brief  Controls the logic of editing a blog
+		* @param  blog The blog that we want to edit.
 		* Render a page to fill the information needed to update the blog if you are the owner of the blog
 		*/
 		static void edit(Blog);
 		/**
-		* @brief   Controls the logic of deleting a blog
-		* @param blog The blog that the owner wants to delete.
+		* @brief  Controls the logic of deleting a blog
+		* @param  blog The blog that the owner wants to delete.
 		* @return bool If the blog was deleted or not
 		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific blog.
 		*/
@@ -175,14 +177,14 @@ class UserController : public User {
 		~UserController(); ///< Destructor
 
 		/**
-		* @brief   Controls the logic of editing a user
-		* @param user The user that we want to edit.
+		* @brief  Controls the logic of editing a user
+		* @param  user The user that we want to edit.
 		* Render a page to fill the information needed to update the user if you are the owner of the user
 		*/
 		static void edit();
 		/**
-		* @brief   Controls the logic of deleting a user
-		* @param user The user that the owner wants to delete.
+		* @brief  Controls the logic of deleting a user
+		* @param  user The user that the owner wants to delete.
 		* @return bool If the user was deleted or not
 		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific user.
 		*/
@@ -190,12 +192,12 @@ class UserController : public User {
 
 	public:
 		/**
-		* @brief   Controls the logic for creating a new User
+		* @brief  Controls the logic for creating a new User
 		* Render a page to fill the information needed to create a new User and then save in the persistence.
 		*/
 		static void create();
 		/**
-		* @brief   Controls the logic of showing the current user
+		* @brief  Controls the logic of showing the current user
 		* Render a page with information of the current user. This page is used as a profile page.
 		*/
 		static void show();
@@ -218,12 +220,12 @@ class AuthController : public Auth {
 
 	public:
 		/**
-		* @brief   Control the logic of login
+		* @brief  Control the logic of login
 		* Render the page of login and verify if the user typed is real. If it is, the user is now logged.
 		*/
 		static void login();
 		/**
-		* @brief   Control the logic of logout
+		* @brief  Control the logic of logout
 		* Render the page of logout to verify if the current user really wants to logout. If the current user really wants it, the user is logged out.
 		*/
 		static void logout();
@@ -245,7 +247,7 @@ class WelcomeController {
 
 	public:
 		/**
-		* @brief   Controls the logic of the home page
+		* @brief  Controls the logic of the home page
 		* Render the home page of the application that changes if the user is logged and take the user to different parts of the application.
 		*/
 		static void home_page();
