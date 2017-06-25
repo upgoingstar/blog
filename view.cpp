@@ -61,8 +61,18 @@ User UserView::create_page() throw(invalid_argument) {
 		throw invalid_argument("Email ja em uso.");
 	}
 	
+	stringstream ss;
+	time_t seconds = time(0);
+
+	ss << seconds;
+
+	string s = ss.str();
+
+	Id id;
+	id.set(s);
+
 	User newUser;
-	newUser.set(userName, userEmail, userPassword);
+	newUser.set(id, userName, userEmail, userPassword);
 
 	cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
 	getchar();

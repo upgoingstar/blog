@@ -240,7 +240,7 @@ class User{
 		* @brief   Validate the User
 		* Validate User by verifying if the name, email or password are empty. If any of them are empty, it will not create.
 		*/
-		void valid(Name, Email, Password) throw(invalid_argument);
+		void valid(Id, Name, Email, Password) throw(invalid_argument);
 
 	public:
 		User();  ///< Constructor
@@ -248,23 +248,37 @@ class User{
 		~User();  ///< Destructor
 
 		/**
+		* @brief   Get the id of the user
+		* @return Id The id of the user
+		* Get the id of the user if it is not empty.
+		*/
+		Id get_id() throw(invalid_argument);
+		/**
 		* @brief   Get the name of the user
 		* @return Name The name of the user
 		* Get the name of the user if it is not empty.
 		*/
 		Name get_name() throw(invalid_argument);
 		/**
+		* @brief   Get the email of the user
+		* @return Email The email of the user
+		* Get the email of the user if it is not empty.
+		*/
+		Email get_email() throw(invalid_argument);
+		/**
+		* @brief   Get the password of the user
+		* @return Password The password of the user
+		* Get the password of the user if it is not empty.
+		*/
+		Password get_password() throw(invalid_argument);
+		/**
 		* Modify the value of the Name, Email and Password of this User.
 		*/
-		void set(Name, Email, Password);
+		void set(Id, Name, Email, Password);
 		/**
 		* Modify the value of the Password of this User.
 		*/
 		void set_password(Password);
-		/**
-		* Modify the value of the Password of this User.
-		*/
-		void set_id(Id);
 };
 
 /**

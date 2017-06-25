@@ -15,11 +15,9 @@
 		}
 	}
 
-
 	bool Comment::empty() {
 		return this->author.empty() or this->content.empty();
 	}
-
 
 	void Comment::set_author(Name author) {
 		this->author = author;
@@ -33,8 +31,7 @@
 	void Comment::set_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
 		if(has_avaliated[name]) {
 			throw invalid_argument("This user has already avaliated!");
-		}
-		else {
+		} else {
 			this->avaliations.push_back(avaliation);
 			has_avaliated[name] = true;
 		}
@@ -74,7 +71,6 @@
 	Post::Post() {}
 
 	Post::~Post() {}
-
 
 	void Post::valid(Text content) throw(invalid_argument) {
 		if(content.empty()) {
@@ -134,8 +130,7 @@
 	void Post::set_avaliation(Name name, Avaliation avaliation) throw(invalid_argument) {
 		if(has_avaliated[name]) {
 			throw invalid_argument("This user has already avaliated!");
-		}
-		else {
+		} else {
 			this->avaliations.push_back(avaliation);
 			has_avaliated[name] = true;
 		}
@@ -145,8 +140,7 @@
 		if(comments_allowed and number_comments[comment.get_author()] < comments_limit) {
 			number_comments[comment.get_author()]++;
 			this->comments.push_back(comment);
-		}
-		else {
+		} else {
 			throw invalid_argument("This comment is not allowed!");
 		}
 	}
@@ -204,8 +198,7 @@
 	void Blog::set_post(Post post) throw(invalid_argument) {
 		if(this->author != post.get_author()) {
 			throw invalid_argument("You are not allowed to post in this blog!");
-		}
-		else {
+		} else {
 			this->posts.push_back(post);
 		}
 	}
@@ -218,37 +211,64 @@
 
 	User::~User() {}
 
-	void User::valid(Name name, Email email, Password password) throw(invalid_argument) {
-		if(name.empty() or email.empty() or password.empty()) {
+	void User::valid(Id id, Name name, Email email, Password password) throw(invalid_argument) {
+		if(id.empty() or name.empty() or email.empty() or password.empty()) {
 			throw invalid_argument("Invalid informations to compose a user!");
 		}
 	}
 
-	void User::set(Name name, Email email, Password password) {
-		User::valid(name, email,password);
+	Id User::get_id() throw(invalid_argument) {
+		if(anonymous) {
+			throw invalid_argument("This user is anonymous, doesn't have a id");
+		} else if(this->id.empty()) {
+			throw invalid_argument("This user doesn't have a id");
+		} else {
+			return this->id;
+		}
+	}
+
+	Name User::get_name() throw(invalid_argument) {
+		if(anonymous) {
+			throw invalid_argument("This user is anonymous, doesn't have a name");
+		} else if(this->name.empty()) {
+			throw invalid_argument("This user doesn't have a name");
+		} else {
+			return this->name;
+		}
+	}
+
+	Email User::get_email() throw(invalid_argument) {
+		if(anonymous) {
+			throw invalid_argument("This user is anonymous, doesn't have a email");
+		} else if(this->email.empty()) {
+			throw invalid_argument("This user doesn't have a email");
+		} else {
+			return this->email;
+		}
+	}
+
+	Password User::get_password() throw(invalid_argument) {
+		if(anonymous) {
+			throw invalid_argument("This user is anonymous, doesn't have a password");
+		} else if(this->password.empty()) {
+			throw invalid_argument("This user doesn't have a password");
+		} else {
+			return this->password;
+		}
+	}
+
+	void User::set(Id id, Name name, Email email, Password password) {
+		User::valid(id, name, email,password);
+		this->id = id;
 		this->name = name;
 		this->password = password;
 		this->email = email;
 		this->anonymous = false;
 	}
 
-	Name User::get_name() throw(invalid_argument) {
-		if(anonymous) {
-			throw invalid_argument("This user is anonymous, doesn't have a name");
-		}
-		else {
-			return this->name;
-		}
-	}
-
 	void User::set_password(Password password) {
-		User::valid(this->name, this->email, password);
+		User::valid(this->id, this->name, this->email, password);
 		this->password = password;
-	}
-
-	// // TODO: only this?
-	void User::set_id(Id id) {
-		this->id = id;
 	}
 
 // AUTH CLASS -----------------------------------------------------------------------------------------------

@@ -18,7 +18,6 @@ class UserModel : public User {
 	friend class UserController;
 
 	private:
-		// TODO: verify why this do not work
 		static const string FILENAME; ///< The name of the file that contains the data
 
 		/**
