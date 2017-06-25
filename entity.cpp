@@ -232,11 +232,6 @@
 		this->anonymous = false;
 	}
 
-	void User::set_password(Password password) {
-		User::valid(this->name, this->email, password);
-		this->password = password;
-	}
-
 	Name User::get_name() throw(invalid_argument) {
 		if(anonymous) {
 			throw invalid_argument("This user is anonymous, doesn't have a name");
@@ -244,6 +239,16 @@
 		else {
 			return this->name;
 		}
+	}
+
+	void User::set_password(Password password) {
+		User::valid(this->name, this->email, password);
+		this->password = password;
+	}
+
+	// // TODO: only this?
+	void User::set_id(Id id) {
+		this->id = id;
 	}
 
 // AUTH CLASS -----------------------------------------------------------------------------------------------

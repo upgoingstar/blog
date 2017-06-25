@@ -174,3 +174,19 @@ istream& operator>>(istream& is, Avaliation& avaliation) {
 		avaliation.set(n);
 		return is;  
 }  
+
+// ID CLASS ---------------------------------------------------------------------------------------------
+
+Id::Id() {}
+
+Id::~Id() {}
+
+void Id::valid(string id) throw(invalid_argument) {
+	if(id.empty()) {
+		throw invalid_argument( "There is no id!" );
+	}
+	// TODO: verify if there is a non digit caracter
+	// if(find_if(s.begin(), s.end(), [](char c) { return !std::isdigit(c); }) == s.end()) {
+	// 	throw invalid_argument( "There is a non digit caracter here!" );
+	// }
+}

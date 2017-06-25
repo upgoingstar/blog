@@ -7,27 +7,29 @@ using namespace std;
 
 // USER MODEL CLASS ------------------------------------------------------------------------------------------ 
 
+const string UserModel::FILENAME = ".users.txt";
+
 vector<User> UserModel::all() {
-	// Id id;
-	// Name name;
-	// Email email;
-	// Password password;
-	// User user;
-	// vector<User> users;
-	// ofstream file(userFilename);
-	// while(file.eof()) {
-	// 	User user;
-	// 	file >> id >> name >> email >> password;
-	// 	user.set_id(id);
-	// 	user.set(name, email, password);
-	// 	users.push_back(user);
-	// }
-	// file.close();
-	// return users;
+	Id id;
+	Name name;
+	Email email;
+	Password password;
+	User user;
+	vector<User> users;
+	ofstream file(FILENAME);
+	while(file.eof()) {
+		User user;
+		file << id << name << email << password;
+		user.set_id(id);
+		user.set(name, email, password);
+		users.push_back(user);
+	}
+	file.close();
+	return users;
 }
 
 void UserModel::add(User user) {
-	// ofstream file(userFilename);
+	// ofstream file(FILENAME);
 	// file << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << endl;
 	// file.close();
 }
@@ -37,8 +39,8 @@ void UserModel::update(User user) {
 	// Name name;
 	// Email email;
 	// Password password;
-	// ofstream file(userFilename);
-	// ofstream file_aux(userFilename + "_copy");
+	// ofstream file(FILENAME);
+	// ofstream file_aux(FILENAME + "_copy");
 	// while(file.eof()) {
 	// 	file >> id >> name >> email >> password;
 	// 	if(user.get_id() != id) {
@@ -49,10 +51,10 @@ void UserModel::update(User user) {
 	// }
 	// file.close();
 	// file_aux.close();
-	// if(not remove(userFilename)) {
+	// if(not remove(FILENAME)) {
 	// 	throw invalid_argument("Não foi possível excluir o arquivo");
 	// }
-	// if(not rename(userFilename + "_copy", userFilename)) {
+	// if(not rename(FILENAME + "_copy", FILENAME)) {
 	// 	throw invalid_argument("Não foi possível renomear o arquivo");
 	// }
 }
@@ -62,8 +64,8 @@ void UserModel::destroy(User user) {
 	// Name name;
 	// Email email;
 	// Password password;
-	// ofstream file(userFilename);
-	// ofstream file_aux(userFilename + "_copy");
+	// ofstream file(FILENAME);
+	// ofstream file_aux(FILENAME + "_copy");
 	// while(file.eof()) {
 	// 	file >> id >> name >> email >> password;
 	// 	if(user.get_id() != id) {
@@ -72,8 +74,8 @@ void UserModel::destroy(User user) {
 	// }
 	// file.close();
 	// file_aux.close();
-	// remove(userFilename);
-	// rename(userFilename + "_copy", userFilename);
+	// remove(FILENAME);
+	// rename(FILENAME + "_copy", FILENAME);
 }
 
 // BLOG MODEL CLASS ------------------------------------------------------------------------------------------

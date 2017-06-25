@@ -226,6 +226,8 @@ class Blog {
 */
 class User{
 	private:
+		Id id; ///< The Id of the User
+
 		Name name; ///< The name of the User
 
 		Password password; ///< The password of the User
@@ -259,6 +261,10 @@ class User{
 		* Modify the value of the Password of this User.
 		*/
 		void set_password(Password);
+		/**
+		* Modify the value of the Password of this User.
+		*/
+		void set_id(Id);
 };
 
 /**

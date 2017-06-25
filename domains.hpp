@@ -199,4 +199,23 @@ class Avaliation {
 		friend istream& operator>>(istream&, Avaliation&);
 };
 
+/**
+* @class Id
+* @brief Defines how a Id should be.
+* Restrict the string should represent the quantity of seconds since 1/1/1970
+*/
+class Id : public Domain {
+	private:
+		/**
+		* @brief   Validate the Id
+		* Implementation of the virtaul function valid in Domain. Validate Id by verifying if not empty or ...
+		*/
+		void valid(string) throw(invalid_argument);
+
+	public:
+		Id(); ///< Constructor
+
+		~Id(); ///< Destructor
+};
+
 #endif

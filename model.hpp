@@ -18,7 +18,8 @@ class UserModel : public User {
 	friend class UserController;
 
 	private:
-		const string userFilename = "users.txt"; ///< The name of the file that contains the data
+		// TODO: verify why this do not work
+		static const string FILENAME; ///< The name of the file that contains the data
 
 		/**
 		* @brief  Get all users
