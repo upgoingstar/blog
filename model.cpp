@@ -9,7 +9,7 @@ using namespace std;
 
 	const string UserModel::FILENAME = ".users.txt";
 
-		vector<User> UserModel::all() {
+	vector<User> UserModel::all() {
 		vector<User> users;
 
 		ifstream file(FILENAME);
@@ -22,36 +22,25 @@ using namespace std;
 			Password password;
 			
 			string aux;
-			getline(file, aux);
+			
+			getline(file,aux);
 			if(file.eof()) break;
-			cout << aux << endl;			
-			int x = 1;
-
-			string aux2;
-			for(int i = 0; i < (int)aux.size(); i++){
-				if(aux[i] == '#'){
-					switch(x){
-						case 1:
-							id.set(aux2);
-							break;
-						case 2:
-							name.set(aux2);
-							break;
-						case 3:
-							email.set(aux2);
-							break;
-						case 4:
-							password.set(aux2);
-							break;
-					}
-					cout << aux2 << endl;
-					x++;
-					aux2.clear();
-				}
-				else{
-					aux2 += aux[i];
-				}
-			}
+			
+			int pos;
+			pos = aux.find('#');
+			id.set(aux.substr(0, pos));
+			aux.erase(0,pos+1);
+			
+			pos = aux.find('#');
+			name.set(aux.substr(0, pos));
+			aux.erase(0,pos+1);
+			
+			pos = aux.find('#');
+			email.set(aux.substr(0, pos));
+			aux.erase(0,pos+1);
+			
+			pos = aux.find('#');
+			password.set(aux.substr(0, pos));
 			
 			user.set(id, name, email, password);
 			users.push_back(user);
