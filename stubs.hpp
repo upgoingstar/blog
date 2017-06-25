@@ -32,6 +32,10 @@ class Stub{
 		static void new_post(Blog, Post){ return; }
 		  
 		static vector<Comment> get_comments(Post);
+		
+		static void update_post(Post){ return; }
+		
+		static void update_comment(Comment){ return; }
 };
 
 #endif

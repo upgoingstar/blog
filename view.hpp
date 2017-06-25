@@ -135,6 +135,10 @@ class PostView {
 		static bool delete_page(bool);
 
 		static void deleted_page();
+		
+		static string avaliation_page(Post, bool);
+		
+		static void finish_avaliation_page(bool); 
 };
 
 /**
@@ -178,6 +182,10 @@ class CommentView {
 		static bool delete_page(bool);
 
 		static void deleted_page();
+		
+		static string avaliation_page(Comment, bool);
+		
+		static void finish_avaliation_page(bool); 
 };
 
 /**
