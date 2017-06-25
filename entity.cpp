@@ -53,9 +53,9 @@
 
 	Avaliation Comment::get_avaliation() {
 		int total_sum = 0;
-		int total_size = this->avaliations.size();
+		int total_size = int(this->avaliations.size());
 
-		for(int i = 0; i < (int)avaliations.size(); i++) {
+		for(int i = 0; i < int(avaliations.size()); i++) {
 			Avaliation avaliation = avaliations[i];
 			total_sum += avaliation.get();
 		}
@@ -98,9 +98,9 @@
 
 	Avaliation Post::get_avaliation() {
 		int total_sum = 0;
-		int total_size = this->avaliations.size();
+		int total_size = int(this->avaliations.size());
 
-		for(int i = 0; i < (int)avaliations.size(); i++) {
+		for(int i = 0; i < int(avaliations.size()); i++) {
 			Avaliation avaliation = avaliations[i];
 			total_sum += avaliation.get();
 		}

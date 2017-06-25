@@ -12,8 +12,8 @@ using namespace std;
 
 void UserController::create() {
 	try {
-	User user = UserView::create_page();                            // render create page and receive a new user
-	// UserModel::save(user);                                       // Send to model to save it             // TODO: put a stub in here (later implement)
+		User user = UserView::create_page();                            // render create page and receive a new user
+		// UserModel::save(user);                                       // Send to model to save it             // TODO: put a stub in here (later implement)
 	}
 	catch(invalid_argument erro) {}
 }
@@ -122,7 +122,7 @@ void BlogController::index() throw(invalid_argument){
 		int id;
 		try{
 			id = stoi(option);
-			if(id > blogs.size()) throw invalid_argument("Invalid id");
+			if(id > int(blogs.size())) throw invalid_argument("Invalid id");
 		}
 		catch(invalid_argument erro){
 			error = true;
@@ -134,7 +134,7 @@ void BlogController::index() throw(invalid_argument){
 				exit = true;
 				break;
 			default:
-				BlogController::show(blogs[id - 1]);
+				BlogController::show(blogs[(unsigned long)(id - 1)]);
 				break;
 		}
 	}
@@ -155,7 +155,7 @@ void BlogController::user_blogs() throw(invalid_argument) {
 		int id;
 		try{
 			id = stoi(option);
-			if(id > blogs.size()) throw invalid_argument("Invalid id");
+			if(id > int(blogs.size())) throw invalid_argument("Invalid id");
 		}
 		catch(invalid_argument erro){
 			error = true;
@@ -167,7 +167,7 @@ void BlogController::user_blogs() throw(invalid_argument) {
 				exit = true;
 				break;
 			default:
-				BlogController::show(blogs[id - 1]);
+				BlogController::show(blogs[(unsigned long)(id - 1)]);
 				break;
 		}
 	}
@@ -300,7 +300,7 @@ void PostController::index(Blog blog){
 		int id;
 		try{
 			id = stoi(option);
-			if(id > posts.size()) throw invalid_argument("Invalid id");
+			if(id > int(posts.size())) throw invalid_argument("Invalid id");
 		}
 		catch(invalid_argument erro){
 			error = true;
@@ -311,7 +311,7 @@ void PostController::index(Blog blog){
 				exit = true;
 				break;
 			default:
-				PostController::show(posts[id - 1]);
+				PostController::show(posts[(unsigned long)(id - 1)]);
 				break;
 		}
 	}
@@ -472,7 +472,7 @@ void CommentController::index(Post post){
 		int id;
 		try{
 			id = stoi(option);
-			if(id > comments.size()) throw invalid_argument("Invalid id");
+			if(id > int(comments.size())) throw invalid_argument("Invalid id");
 		}
 		catch(invalid_argument erro){
 			error = true;
@@ -483,7 +483,7 @@ void CommentController::index(Post post){
 				exit = true;
 				break;
 			default:
-				CommentController::show(comments[id - 1]);
+				CommentController::show(comments[(unsigned long)(id - 1)]);
 				break;
 		}
 	}

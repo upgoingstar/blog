@@ -196,7 +196,7 @@ string BlogView::index_page(vector<Blog> blogs, bool error) {
 		}
 		
 		cout << "0 - Sair" << endl;
-		for(int i = 0; i < (int)blogs.size(); i++){
+		for(int i = 0; i < int(blogs.size()); i++){
 			cout << i+1 << " - " << blogs[i].get_name() << endl;
 		}
 		
@@ -375,7 +375,7 @@ string PostView::index_page(vector<Post> posts, bool error) throw(invalid_argume
 		} 
 	
 	cout << "0 - Sair" << endl;
-	for(int i = 0; i < (int)posts.size(); i++){
+	for(int i = 0; i < int(posts.size()); i++){
 		cout << i+1 << " - " << posts[i].get_author() << ": " << posts[i].get_content() << endl;
 	}
 	
@@ -582,7 +582,7 @@ string CommentView::index_page(vector<Comment> comments, bool error) throw(inval
 		} 
 	
 	cout << "0 - Sair" << endl;
-	for(int i = 0; i < (int)comments.size(); i++){
+	for(int i = 0; i < int(comments.size()); i++){
 		cout << i+1 << " - " << comments[i].get_author() << ": " << comments[i].get_content() << endl;
 	}
 	

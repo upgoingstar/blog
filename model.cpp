@@ -7,117 +7,117 @@ using namespace std;
 
 // USER MODEL CLASS ------------------------------------------------------------------------------------------ 
 
-const string UserModel::FILENAME = ".users.txt";
+	const string UserModel::FILENAME = ".users.txt";
 
-vector<User> UserModel::all() {
-	vector<User> users;
+	vector<User> UserModel::all() {
+		vector<User> users;
 
-	ofstream file(FILENAME);
+		ifstream file(FILENAME);
 
-	while(file.eof()) {
-		User user;
-		Id id;
-		Name name;
-		Email email;
-		Password password;
+		while(file.eof()) {
+			User user;
+			Id id;
+			Name name;
+			Email email;
+			Password password;
 
-		file << id << name << email << password;
+			file >> id >> name >> email >> password;
 
-		user.set(id, name, email, password);
-		users.push_back(user);
+			user.set(id, name, email, password);
+			users.push_back(user);
+		}
+
+		file.close();
+
+		return users;
 	}
 
-	file.close();
+	void UserModel::add(User user) {
+		ofstream file(FILENAME);
+		file << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << "\n";
+		file.close();
+	}
 
-	return users;
-}
+	void UserModel::update(User user) {
+		ifstream file(FILENAME);
+		ofstream file_aux(FILENAME + "_copy");
 
-void UserModel::add(User user) {
-	ofstream file(FILENAME);
-	file << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << endl;
-	file.close();
-}
+		while(file.eof()) {
+			Id id;
+			Name name;
+			Email email;
+			Password password;
 
-void UserModel::update(User user) {
-	ifstream file(FILENAME);
-	ofstream file_aux(FILENAME + "_copy");
+			file >> id >> name >> email >> password;
+			
+			if(user.get_id() != id) {
+				file_aux << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << "\n";
+			} else {
+				file_aux << id << " " << name << " " << email << " " << password << "\n";
+			}
+		}
 
-	while(file.eof()) {
-		Id id;
-		Name name;
-		Email email;
-		Password password;
+		file.close();
+		file_aux.close();
 
-		file >> id >> name >> email >> password;
-		
-		if(user.get_id() != id) {
-			file_aux << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << endl;
-		} else {
-			file_aux << id << " " << name << " " << email << " " << password << endl;
+		if(not remove(FILENAME.c_str())) {
+			throw invalid_argument("Não foi possível excluir o arquivo");
+		}
+		if(not rename((FILENAME + "_copy").c_str(), FILENAME.c_str())) {
+			throw invalid_argument("Não foi possível renomear o arquivo");
 		}
 	}
 
-	file.close();
-	file_aux.close();
+	void UserModel::destroy(User user) {
+		ifstream file(FILENAME);
+		ofstream file_aux(FILENAME + "_copy");
 
-	if(not remove(FILENAME.c_str())) {
-		throw invalid_argument("Não foi possível excluir o arquivo");
-	}
-	if(not rename((FILENAME + "_copy").c_str(), FILENAME.c_str())) {
-		throw invalid_argument("Não foi possível renomear o arquivo");
-	}
-}
+		while(file.eof()) {
+			Id id;
+			Name name;
+			Email email;
+			Password password;
 
-void UserModel::destroy(User user) {
-	ifstream file(FILENAME);
-	ofstream file_aux(FILENAME + "_copy");
+			file >> id >> name >> email >> password;
 
-	while(file.eof()) {
-		Id id;
-		Name name;
-		Email email;
-		Password password;
-
-		file >> id >> name >> email >> password;
-
-		if(user.get_id() != id) {
-			file_aux << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << endl;
+			if(user.get_id() != id) {
+				file_aux << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << "\n";
+			}
 		}
+
+		file.close();
+		file_aux.close();
+
+		remove(FILENAME.c_str());
+		rename((FILENAME + "_copy").c_str(), FILENAME.c_str());
 	}
-
-	file.close();
-	file_aux.close();
-
-	remove(FILENAME.c_str());
-	rename((FILENAME + "_copy").c_str(), FILENAME.c_str());
-}
 
 // BLOG MODEL CLASS ------------------------------------------------------------------------------------------
 
-vector<Blog> BlogModel::all() {
+	// vector<Blog> BlogModel::all() {
 
-}
+	// }
 
-vector<Blog> BlogModel::from_user(User user) {
+	// vector<Blog> BlogModel::from_user(User user) {
 
-}
+	// }
 
 // POST MODEL CLASS ------------------------------------------------------------------------------------------
 
-vector<Post> PostModel::all_from(Blog blog) {
+	// vector<Post> PostModel::all_from(Blog blog) {
 
-}
+	// }
 
-vector<Post> PostModel::from_user(Blog blog, User user) {
+	// vector<Post> PostModel::from_user(Blog blog, User user) {
 
-}
+	// }
 
 // COMMENT MODEL CLASS ---------------------------------------------------------------------------------------
 
-vector<Comment> CommentModel::all_from(Post post) {
+	// vector<Comment> CommentModel::all_from(Post post) {
 
-}
+	// }
 
-vector<Comment> CommentModel::from_user(Post post, User user) {
+	// vector<Comment> CommentModel::from_user(Post post, User user) {
 
-}
+	// }

@@ -1,5 +1,5 @@
 CC = g++
-CPPFLAGS = -std=c++11 -O2 -Wall -g
+CPPFLAGS = -std=c++11 -O2 -Wall -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -pedantic -Wconversion -Wsign-conversion -Wmissing-declarations -g
 LIBS=-lm
 
 %.o: %.cpp domains.hpp entity.hpp model.hpp view.hpp stubs.hpp controller.hpp

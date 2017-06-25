@@ -23,7 +23,7 @@ class Domain {
 	public:
 		Domain(); ///< Constructor
 
-		~Domain(); ///< Destructor
+		virtual ~Domain() = 0; ///< Destructor
 
 		/**
 		* @brief   Get the value of the string
@@ -90,11 +90,6 @@ class Name : public Domain {
 		* Implementation of the virtaul function valid in Domain. Validate Name by verifying if the name is not bigger than the limit and see if all caracters are alphabetic or spaces.
 		*/
 		void valid(string) throw(invalid_argument);
-
-	public:
-		Name(); ///< Constructor
-
-		~Name(); ///< Destructor
 };
 
 /**
@@ -113,11 +108,6 @@ class Password : public Domain {
 		* Implementation of the virtaul function valid in Domain. Validate Password by verifying if the password is the determined size and if there are no repeated caracters.
 		*/
 		void valid(string) throw(invalid_argument);
-
-	public:
-		Password(); ///< Constructor
-
-		~Password(); ///< Destructor
 };
 
 /**
@@ -133,11 +123,6 @@ class Email : public Domain {
 		* Implementation of the virtaul function valid in Domain. Validate Email by verifying if the email follow the pattern l@l.l (being l any string with only alphabetic caracters).
 		*/
 		void valid(string) throw(invalid_argument);
-
-	public:
-		Email(); ///< Constructor
-
-		~Email();///< Destructor
 };
 
 /**
@@ -152,11 +137,20 @@ class Text : public Domain {
 		* Implementation of the virtaul function valid in Domain. Validate Text by verifying if the text has a size less than 50 caracters.
 		*/
 		void valid(string) throw(invalid_argument);
+};
 
-	public:
-		Text(); ///< Constructor
-
-		~Text(); ///< Destructor
+/**
+* @class Id
+* @brief Defines how a Id should be.
+* Restrict the string should represent the quantity of seconds since 1/1/1970
+*/
+class Id : public Domain {
+	private:
+		/**
+		* @brief   Validate the Id
+		* Implementation of the virtaul function valid in Domain. Validate Id by verifying if not empty or ...
+		*/
+		void valid(string) throw(invalid_argument);
 };
 
 /**
@@ -197,25 +191,6 @@ class Avaliation {
 		* @brief   Operator overload to make it possible print using cin
 		*/
 		friend istream& operator>>(istream&, Avaliation&);
-};
-
-/**
-* @class Id
-* @brief Defines how a Id should be.
-* Restrict the string should represent the quantity of seconds since 1/1/1970
-*/
-class Id : public Domain {
-	private:
-		/**
-		* @brief   Validate the Id
-		* Implementation of the virtaul function valid in Domain. Validate Id by verifying if not empty or ...
-		*/
-		void valid(string) throw(invalid_argument);
-
-	public:
-		Id(); ///< Constructor
-
-		~Id(); ///< Destructor
 };
 
 #endif
