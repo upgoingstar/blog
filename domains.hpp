@@ -26,52 +26,53 @@ class Domain {
 		virtual ~Domain() = 0; ///< Destructor
 
 		/**
-		* @brief   Get the value of the string
+		* @brief  Get the value of the string
 		* @return Value of string "value".
 		*/
 		string get() const;
 		/**
-		* @brief   Modify the value of the keeped string.
-		* 
+		* @brief  Modify the value of the keeped string.
 		* Set the keeped string to the new value if is a Valid string.
 		*/
 		void set(string);
 		/**
-		* @brief   Warn if the string is empty.
+		* @brief  Warn if the string is empty.
 		* @retval TRUE The string is empty
 		* @retval FALSE The string is not empty
 		*/
 		bool empty();
 		/**
-		* @brief   Operator overload to make it possible to compare if one Domain object has different value than other.
+		* @brief  Operator overload to make it possible to compare if one Domain object has different value than other.
 		* @retval TRUE The other Domain is different
 		* @retval FALSE The other Domain is equal
 		*/
 		bool operator!=(const Domain &other) const;
 		/**
-		* @brief   Operator overload to make it possible to compare if one Domain object has igual value than other.
+		* @brief  Operator overload to make it possible to compare if one Domain object has igual value than other.
 		* @retval TRUE The other Domain is equal
 		* @retval FALSE The other Domain is different
 		*/
 		bool operator==(const Domain &other) const;
 		/**
-		* @brief   Operator overload to make it possible to compare if one Domain object has igual value than other.
+		* @brief  Operator overload to make it possible to compare if one Domain object has igual value than other.
 		* @retval TRUE The other Domain is equal
 		* @retval FALSE The other Domain is different
 		*/
 		bool operator==(const string &other) const;
 		/**
-		* @brief   Operator overload to make it possible to compare if one Domain object has better value than other.
+		* @brief  Operator overload to make it possible to compare if one Domain object has better value than other.
 		* @retval TRUE The other Domain is bigger
 		* @retval FALSE The other Domain is smaller
 		*/
 		bool operator<(const Domain &other) const;
 		/**
-		* @brief   Operator overload to make it possible print using cout
+		* @brief  Operator overload to make it possible print using cout
+		* @return The output stream generated 
 		*/
 		friend ostream& operator<<(ostream&, const Domain&);
 		/**
-		* @brief   Operator overload to make it possible print using cin
+		* @brief  Operator overload to make it possible print using cin
+		* @return The input stream generated
 		*/
 		friend istream& operator>>(istream&, Domain&);
 };
@@ -148,7 +149,7 @@ class Id : public Domain {
 	private:
 		/**
 		* @brief   Validate the Id
-		* Implementation of the virtaul function valid in Domain. Validate Id by verifying if not empty or ...
+		* Implementation of the virtaul function valid in Domain. Validate Id by verifying if not empty and has only digits.
 		*/
 		void valid(string) throw(invalid_argument);
 };
@@ -174,21 +175,23 @@ class Avaliation {
 		~Avaliation(); ///< Destructor
 
 		/**
-		* @brief   Get the value of the integer
+		* @brief  Get the value of the integer
 		* @return Value of integer "value".
 		*/
 		int get() const;
 		/**
-		* @brief   Modify the value of the keeped integer.
+		* @brief  Modify the value of the keeped integer.
 		* Set the keeped integer to the new value if is a Valid integer.
 		*/
 		void set(int avaliation);
 		/**
-		* @brief   Operator overload to make it possible print using cout
+		* @brief  Operator overload to make it possible print using cout
+		* @return The output stream generated 
 		*/
 		friend ostream& operator<<(ostream&, const Avaliation&);
 		/**
-		* @brief   Operator overload to make it possible print using cin
+		* @brief  Operator overload to make it possible print using cin
+		* @return The input stream generated
 		*/
 		friend istream& operator>>(istream&, Avaliation&);
 };
