@@ -8,8 +8,7 @@
 
 /**
 * @class UserView
-* @brief Controls interface for User with the user of the system 
-* Has all the pages of CRUD
+* @brief Controls all the visual interfaces for User
 */
 class UserView {
 
@@ -47,8 +46,7 @@ class UserView {
 
 /**
 * @class BlogView
-* @brief Controls interface for blog with the user of the system 
-* Has all the pages of CRUD
+* @brief Controls all the visual interfaces for blogs
 */
 class BlogView {
 
@@ -96,8 +94,7 @@ class BlogView {
 
 /**
 * @class PostView
-* @brief Controls interface for Post with the user of the system 
-* Has all the pages of CRUD
+* @brief Controls all the visual interfaces for posts
 */
 class PostView {
 
@@ -143,8 +140,7 @@ class PostView {
 
 /**
 * @class CommentView
-* @brief Controls interface for Comment with the user of the system 
-* Has all the pages of CRUD
+* @brief Controls all the visual interfaces for comments
 */
 class CommentView {
 
@@ -190,8 +186,7 @@ class CommentView {
 
 /**
 * @class WelcomeView
-* @brief Controles the home page
-* Includes Home Page with menu for the program
+* @brief The interface of home page
 */
 class WelcomeView {
 
@@ -210,8 +205,7 @@ class WelcomeView {
 
 /**
 * @class AuthView
-* @brief Controls the interface of authentication
-* Includes Login Page and Logout Page
+* @brief The interface of authentication (log in and log out)
 */
 class AuthView : public Auth {
 

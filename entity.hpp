@@ -5,14 +5,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// TODO: finish the new style of documentation (only methods set missing)
 // TODO: implement the validation of blog
 // TODO: make Auth::logout set currentUser to an empty User
 
 /**
 * @class Comment
 * @brief Defines how a Comment should be.
-* Inherit of class Content. Defines what information a Comment has and how you can access it.
+* Defines what information a Comment has and how you can access it.
 */
 class Comment {
 	private:
@@ -77,7 +76,7 @@ class Comment {
 /**
 * @class Post
 * @brief Defines how a Post should be.
-* Inherit of class Content. Defines what information a Post has and how you can access it.
+* Defines what information a Post has and how you can access it.
 */
 class Post {
 	private:
@@ -172,7 +171,7 @@ class Post {
 * @class Blog
 * @brief Defines how a Blog should be.
 * @note The size is small for some reasons.
-* Inherit of class Domain. Defines what information a Blog has and how you can access it.
+* Defines what information a Blog has and how you can access it.
 */
 class Blog {
 	private:

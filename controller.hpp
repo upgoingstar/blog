@@ -9,9 +9,8 @@ using namespace std;
 
 /**
 * @class CommentController
-* @brief Defines the CRUD (Create, Read, Update, Destroy)
-* @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
-* This class defines the logic necessary for CRUD to work properly in the system.
+* @brief Responsible for manipulating the logic around Comment, including create, showing, updating and destroying
+* @note It is aware of both CommentView and CommentModel 
 */
 class CommentController : public Comment {
 
@@ -61,9 +60,8 @@ class CommentController : public Comment {
 
 /**
 * @class PostController
-* @brief Defines the CRUD (Create, Read, Update, Destroy)
-* @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
-* This class defines the logic necessary for CRUD to work properly in the system.
+* @brief Responsible for manipulating the logic around Post, including create, showing, updating and destroying
+* @note It is aware of both PostView and PostModel 
 */
 class PostController : public Post {
 
@@ -112,9 +110,8 @@ class PostController : public Post {
 
 /**
 * @class BlogController
-* @brief Defines the CRUD (Create, Read, Update, Destroy)
-* This class defines the logic necessary for CRUD to work properly in the system.
-* @note It is aware of both BlogView and BlogModel (but neither of them are aware of BlogController).
+* @brief Responsible for manipulating the logic around Blog, including create, showing, updating and destroying
+* @note It is aware of both BlogView and BlogModel 
 */
 class BlogController : public Blog {
 
@@ -164,9 +161,8 @@ class BlogController : public Blog {
 
 /**
 * @class UserController
-* @brief Defines the CRUD (Create, Read, Update, Destroy)
-* @note It is aware of both UserView and UserModel (but neither of them are aware of UserController).
-* This class defines the logic necessary for CRUD to work properly in the system.
+* @brief Responsible for manipulating the logic around User, including create, showing, updating and destroying
+* @note It is aware of both UserView and UserModel 
 */
 class UserController : public User {
 
@@ -207,9 +203,8 @@ class UserController : public User {
 
 /**
 * @class AuthController
-* @brief Authenticate the User
-* @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
-* This class is responsible for verifying if the User exists.
+* @brief Responsible for the login and logout of users
+* @note It is aware of both AuthView and AuthModel 
 */
 class AuthController : public Auth {
 
@@ -236,9 +231,7 @@ class AuthController : public Auth {
 
 /**
 * @class WelcomeController
-* @brief Authenticate the User
-* @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
-* This class is responsible for verifying if the User exists.
+* @brief Responsible for the home page
 */
 class WelcomeController {
 

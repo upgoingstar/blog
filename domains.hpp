@@ -142,7 +142,7 @@ class Text : public Domain {
 /**
 * @class Id
 * @brief Defines how a Id should be.
-* Restrict the string should represent the quantity of seconds since 1/1/1970
+* Restrict the string should be only numbers.
 */
 class Id : public Domain {
 	private:
