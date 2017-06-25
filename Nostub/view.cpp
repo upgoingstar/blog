@@ -61,9 +61,6 @@ User UserView::create_page() throw(invalid_argument) {
   
   User newUser;
   newUser.set(id, userName, userEmail, userPassword);
-
-	cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
-	getchar();
 	
 	
 	return newUser;

@@ -605,24 +605,19 @@ using namespace std;
 // USER CONTROLLER CLASS ---------------------------------------------------------------------------------
 
 	void UserController::create() {
-		try {
-			User user = UserView::create_page();                            // render create page and receive a new user
+		User user = UserView::create_page();                            // render create page and receive a new user
 			
-		try{
-			if(UserModel::find(user.get_email())){
-				throw invalid_argument("Email ja em uso.");
-			}
-		} catch(invalid_argument erro) {
+		if(UserModel::find(user.get_email())){
 			cout << "Email ja em uso." << endl;
 			cout << "Aperte 'ENTER' para retornar" << endl;
 			getchar();
-		
-			throw invalid_argument("Email ja em uso.");
+		}
+		else{
+			cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
+			getchar();
+			UserModel::add(user);         
 		}
 			
-			UserModel::add(user);                                       // Send to model to save it             // TODO: put a stub in here (later implement)
-		}
-		catch(invalid_argument erro) {}
 	}
 
 	void UserController::show() {

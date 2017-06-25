@@ -13,8 +13,9 @@ using namespace std;
 		vector<User> users;
 
 		ifstream file(FILENAME);
-
+		
 		while(!file.eof()) {
+		
 			User user;
 			Id id;
 			Name name;
@@ -24,7 +25,7 @@ using namespace std;
 			string aux;
 			
 			getline(file,aux);
-			if(file.eof()) break;
+			if(file.eof() || aux.size() == 0) break;
 			
 			int pos;
 			pos = aux.find('#');
