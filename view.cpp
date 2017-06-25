@@ -68,11 +68,11 @@ User UserView::create_page() throw(invalid_argument) {
   
   string s = ss.str();
  
-  Id id;
-  id.set(s);
+  Id userId;
+  userId.set(s);
   
   User newUser;
-  newUser.set(id, userName, userEmail, userPassword);
+  newUser.set(userId, userName, userEmail, userPassword);
 
 	cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
 	getchar();
@@ -227,9 +227,19 @@ Blog BlogView::create_page() throw(invalid_argument) {
 		
 		throw invalid_argument("Nome em formato incorreto.");
 	}
+
+	stringstream ss;
+	time_t seconds = time(0);
+
+	ss << seconds;
+
+	string s = ss.str();
+
+	Id blogId;
+	blogId.set(s);
 	
 	Blog newBlog;
-	newBlog.set(blogAuthor, blogName);
+	newBlog.set(blogId, blogAuthor, blogName);
 	
 	cout << "Novo blog criada com sucesso!" << endl;
 	cout << "Aperte 'ENTER' para retornar ao menu principal" << endl;
@@ -411,10 +421,20 @@ Post PostView::create_page() throw(invalid_argument) {
 		
 		throw invalid_argument("Post invalido.");
 	}
+
+	stringstream ss;
+	time_t seconds = time(0);
+
+	ss << seconds;
+
+	string s = ss.str();
+
+	// TODO: blogId get this from its parent
+	Id postId, blogId;
+	postId.set(s);
 	
 	Post newPost;
-	newPost.set_author(postAuthor);
-	newPost.set_content(postContent);
+	newPost.set(postId, blogId, postAuthor, postContent);
 
 	system("clear || cls");
 	cout << "Autoriza comentarios na postagem?" << endl;
@@ -649,10 +669,20 @@ Comment CommentView::create_page() throw(invalid_argument) {
 		
 		throw invalid_argument("Comentario invalido.");
 	}
+
+	stringstream ss;
+	time_t seconds = time(0);
+
+	ss << seconds;
+
+	string s = ss.str();
+
+	// TODO: pass post as an argument to here
+	Id commentId, postId;
+	commentId.set(s);
 	
 	Comment newComment;
-	newComment.set_author(commentAuthor);
-	newComment.set_content(commentContent);
+	newComment.set(commentId, postId, commentAuthor, commentContent);
 
 	cout << "Novo comentario criado com sucesso!" << endl;
 	cout << "Aperte 'ENTER' para retornar ao menu principal" << endl;
