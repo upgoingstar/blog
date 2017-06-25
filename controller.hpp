@@ -137,7 +137,8 @@ class PostController : public Post {
 		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific post.
 		*/
 		static bool destroy(Post);
-
+	
+		static void avaliation(Post);
 	public:
 		/**
 		* @brief   Controls the logic of showing all posts
@@ -188,6 +189,8 @@ class CommentController : public Comment {
 		* @return bool If the comment was deleted of not
 		*/
 		static bool destroy(Comment);
+		
+		static void avaliation(Comment);
 
 	public:
 		/**

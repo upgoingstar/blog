@@ -61,7 +61,12 @@
 		}
 
 		Avaliation ans;
-		ans.set(total_sum / total_size);
+		if(total_size != 0){
+			ans.set(total_sum / total_size);
+		}
+		else{
+			ans.set(0);
+		}
 
 		return ans;
 	}
@@ -104,10 +109,15 @@
 			Avaliation avaliation = avaliations[i];
 			total_sum += avaliation.get();
 		}
-
+	
 		Avaliation ans;
-		ans.set(total_sum / total_size);
-
+		if(total_size != 0){
+			ans.set(total_sum / total_size);
+		}
+		else{
+			ans.set(0);
+		}
+	
 		return ans;
 	}
 

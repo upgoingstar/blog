@@ -61,18 +61,18 @@ User UserView::create_page() throw(invalid_argument) {
 		throw invalid_argument("Email ja em uso.");
 	}
 	
-	stringstream ss;
-	time_t seconds = time(0);
-
-	ss << seconds;
-
-	string s = ss.str();
-
-	Id id;
-	id.set(s);
-
-	User newUser;
-	newUser.set(id, userName, userEmail, userPassword);
+  stringstream ss;
+  time_t seconds = time(0);
+  
+  ss << seconds;
+  
+  string s = ss.str();
+ 
+  Id id;
+  id.set(s);
+  
+  User newUser;
+  newUser.set(id, userName, userEmail, userPassword);
 
 	cout << "Nova conta criada com sucesso!" << endl << "Aperte 'ENTER' para retornar ao menu principal" << endl;
 	getchar();
@@ -156,7 +156,7 @@ bool UserView::delete_page(bool error) {
 	cout << "Tem certeza que deseja deletar seu usuario?" << endl;
 	cout << "1 - Sim" << endl;
 	cout << "2 - Nao" << endl;
-	cout << " > ";
+	cout << "> ";
 	
 	string option;
 	getline(cin,option);
@@ -196,11 +196,12 @@ string BlogView::index_page(vector<Blog> blogs, bool error) {
 		}
 		
 		cout << "0 - Sair" << endl;
-		for(int i = 0; i < int(blogs.size()); i++){
+		for(int i = 0; i < int(blogs.size()); ++i){
 			cout << i+1 << " - " << blogs[i].get_name() << endl;
 		}
 		
-		cout << " > ";
+		cout << endl;
+		cout << "> ";
 		
 		string option;
 		getline(cin,option);
@@ -253,7 +254,7 @@ string BlogView::show_page(Blog blog, bool error) {
 		cout << "3 - Deletar blog" << endl;
 	}
 	cout << endl;
-	cout << " > ";
+	cout << "> ";
 	
 	string option;
 	getline(cin,option);
@@ -310,7 +311,7 @@ bool BlogView::delete_page(bool error) {
 	cout << "Tem certeza que deseja deletar seu blog?" << endl;
 	cout << "1 - Sim" << endl;
 	cout << "2 - Nao" << endl;
-	cout << " > ";
+	cout << "> ";
 	
 	string option;
 	getline(cin,option);
@@ -356,7 +357,7 @@ string BlogView::menu_page(bool error) {
 		cout << "3 - Criar blog" << endl;
 	}
 	
-	cout << " > ";
+	cout << "> ";
 
 	string option;
 	getline(cin,option);
@@ -370,16 +371,18 @@ string BlogView::menu_page(bool error) {
 string PostView::index_page(vector<Post> posts, bool error) throw(invalid_argument) {
 	system("cls || clear");
 	
-		if(error) {
-			cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
-		} 
+	if(error) {
+		cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
+	} 
 	
-	cout << "0 - Sair" << endl;
-	for(int i = 0; i < int(posts.size()); i++){
+	cout << "0 - Sair" << endl << endl;
+	for(int i = 0; i < int(posts.size()); ++i){
 		cout << i+1 << " - " << posts[i].get_author() << ": " << posts[i].get_content() << endl;
+		cout << "Avaliacao: " << posts[i].get_avaliation().get() << endl << endl;
 	}
 	
-	cout << " > ";
+	cout << endl;
+	cout << "> ";
 	string option;
 	getline(cin,option);
 	
@@ -476,11 +479,12 @@ string PostView::show_page(Post post, bool error) {
 	
 	if(Auth::user_logged()) {
 		cout << "2 - Adicionar comentario" << endl;
-
+		cout << "3 - Avaliar" << endl;
+		
 		if(post.get_author() == Auth::get_current_user().get_name()) {
-			cout << "3 - Editar" << endl;
-			cout << "4 - Desativar Comentarios" << endl;
-			cout << "5 - Deletar" << endl;
+			cout << "4 - Editar" << endl;
+			cout << "5 - Desativar Comentarios" << endl;
+			cout << "6 - Deletar" << endl;
 		}
 	}
 
@@ -542,7 +546,7 @@ bool PostView::delete_page(bool error) {
 	cout << "Tem certeza que deseja deletar seu post?" << endl;
 	cout << "1 - Sim" << endl;
 	cout << "2 - Nao" << endl;
-	cout << " > ";
+	cout << "> ";
 	
 	string option;
 	getline(cin,option);
@@ -572,6 +576,37 @@ void PostView::deleted_page() {
 	getchar();
 }
 
+string PostView::avaliation_page(Post post, bool error){
+	system("clear || cls");
+	cout << post.get_content() << endl;
+	cout << "Avaliacao: " << post.get_avaliation().get() << endl << endl;
+	
+	if(error){
+		cout << "Valor para avaliacao incorreto!" << endl << endl;
+	}
+	
+	cout << "Digite um valor entre 0 e 5 para avaliar o post." << endl;
+	
+	cout << endl;
+	string value;
+	getline(cin,value);
+	
+	return value;
+}
+
+void PostView::finish_avaliation_page(bool evaluated){
+	cout << endl;
+	
+	if(evaluated){
+		cout << "Sua avaliacao foi registrada com sucesso, aperte ENTER para retornar a pagina de comentario" << endl;
+	}	
+	else{
+		cout << "Voce ja avaliou este post, aperte ENTER para retornar a pagina de post" << endl;
+	}
+	
+	getchar();
+}
+
 // COMMENT VIEW CLASS ----------------------------------------------------------------------------------------
 
 string CommentView::index_page(vector<Comment> comments, bool error) throw(invalid_argument) {
@@ -581,12 +616,14 @@ string CommentView::index_page(vector<Comment> comments, bool error) throw(inval
 			cout << "Opcao invalida, ecolha uma das opcoes listadas na tela!" << endl << endl;
 		} 
 	
-	cout << "0 - Sair" << endl;
-	for(int i = 0; i < int(comments.size()); i++){
+	cout << "0 - Sair" << endl << endl;
+	for(int i = 0; i < int(comments.size()); ++i){
 		cout << i+1 << " - " << comments[i].get_author() << ": " << comments[i].get_content() << endl;
+		cout << "Avaliacao: " << comments[i].get_avaliation().get() << endl << endl;
 	}
 	
-	cout << " > ";
+	cout << endl;
+	cout << "> ";
 	string option;
 	getline(cin,option);
 	
@@ -641,9 +678,14 @@ string CommentView::show_page(Comment comment, bool error) {
 
 	cout << "0 - Sair" << endl;
 	if(Auth::user_logged() && comment.get_author() == Auth::get_current_user().get_name()){
-		cout << "1 - Editar" << endl;
-		cout << "2 - Deletar" << endl;
+		cout << "1 - Avaliar" << endl;
+		
+		if(comment.get_author() == Auth::get_current_user().get_name()){
+			cout << "2 - Editar" << endl;
+			cout << "3 - Deletar" << endl;
+		}
 	}
+	
 	cout << endl;
 	cout << "> ";
 
@@ -702,7 +744,7 @@ bool CommentView::delete_page(bool error) {
 	cout << "Tem certeza que deseja deletar seu comentario?" << endl;
 	cout << "1 - Sim" << endl;
 	cout << "2 - Nao" << endl;
-	cout << " > ";
+	cout << "> ";
 	
 	string option;
 	getline(cin,option);
@@ -732,6 +774,37 @@ void CommentView::deleted_page() {
 	getchar();
 }
 
+string CommentView::avaliation_page(Comment comment, bool error){
+	system("clear || cls");
+	cout << comment.get_content() << endl << endl;
+	cout << "Avaliacao: " << comment.get_avaliation().get() << endl << endl;
+	
+	if(error){
+		cout << "Valor para avaliacao incorreto!" << endl << endl;
+	}
+	
+	cout << "Digite um valor entre 0 e 5 para avaliar o comentario." << endl;
+	
+	cout << endl;
+	string value;
+	getline(cin,value);
+	
+	return value;
+}
+
+void CommentView::finish_avaliation_page(bool evaluated){
+	cout << endl;
+	
+	if(evaluated){
+		cout << "Sua avaliacao foi registrada com sucesso, aperte ENTER para retornar a pagina de comentario" << endl;
+	}	
+	else{
+		cout << "Voce ja avaliou este post, aperte ENTER para retornar a pagina de comentario" << endl;
+	}
+	
+	getchar();
+}
+
 // WELCOME VIEW CLASS ----------------------------------------------------------------------------------------
 
 string WelcomeView::home_page(bool error) {
@@ -755,8 +828,8 @@ string WelcomeView::home_page(bool error) {
 	cout << "3 - Listar blogs" << endl;
 	}
 		
-
-	cout << " > ";
+	cout << endl;
+	cout << "> ";
 	string option;
 
 	getline(cin, option);
