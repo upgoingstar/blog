@@ -1,7 +1,7 @@
-	#include "domains.hpp"
-	#include "entity.hpp"
-	#include <bits/stdc++.h>
-	using namespace std;
+#include "domains.hpp"
+#include "entity.hpp"
+#include <bits/stdc++.h>
+using namespace std;
 
 // COMMENT CLASS --------------------------------------------------------------------------------------------
 

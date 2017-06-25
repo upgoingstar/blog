@@ -8,46 +8,106 @@
 using namespace std;
 
 /**
-* @class UserController
+* @class CommentController
 * @brief Defines the CRUD (Create, Read, Update, Destroy)
-* @note It is aware of both UserView and UserModel (but neither of them are aware of UserController).
+* @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
 * This class defines the logic necessary for CRUD to work properly in the system.
 */
-class UserController : public User {
+class CommentController : public Comment {
 
-	/// Permits UserView to be aware of this class and use everything.
-	friend class UserView;
+	/// Permits CommentView to be aware of this class and use everything.
+	friend class CommentView;
 
 	private:
-		UserController(); ///< Constructor
+		CommentController(); ///< Constructor
 
-		~UserController(); ///< Destructor
+		~CommentController(); ///< Destructor
 
 		/**
-		* @brief   Controls the logic of editing a user
-		* @param user The user that we want to edit.
-		* Render a page to fill the information needed to update the user if you are the owner of the user
+		* @brief   Controls the logic of showing a comment
+		* @param comment This comment this controller will show
+		* Render a page with information of a comment. This page is used to see a comment.
 		*/
-		static void edit();
+		static void show(Comment);
 		/**
-		* @brief   Controls the logic of deleting a user
-		* @param user The user that the owner wants to delete.
-		* @return bool If the user was deleted or not
-		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific user.
+		* @brief   Controls the logic of editing a comment
+		* @param comment The comment that we want to edit.
+		* Render a page to fill the information needed to update the comment if you are the owner of the comment
 		*/
-		static bool destroy(User);
+		static void edit(Comment);
+		/**
+		* @brief   Controls the logic of deleting a comment
+		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific comment.
+		* @param comment The comment that the owner wants to delete.
+		* @return bool If the comment was deleted of not
+		*/
+		static bool destroy(Comment);
+		
+		static void avaliation(Comment);
 
 	public:
 		/**
-		* @brief   Controls the logic for creating a new User
-		* Render a page to fill the information needed to create a new User and then save in the persistence.
+		* @brief   Controls the logic of showing all comments
+		* @param post The post from where to extract the comments.
+		* Render a page that show all comments. If there is no comments to show, it will tell the current user that there are no blogs.
+		*/
+		static void index(Post);
+		/**
+		* @brief   Controls the logic for creating a new Comment
+		* Render a page to fill the information needed to create a new Comment and then save in the persistence.
 		*/
 		static void create();
+};
+
+/**
+* @class PostController
+* @brief Defines the CRUD (Create, Read, Update, Destroy)
+* @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
+* This class defines the logic necessary for CRUD to work properly in the system.
+*/
+class PostController : public Post {
+
+	/// Permits PostView to be aware of this class and use everything.
+	friend class PostView;
+
+	private:
+		PostController(); ///< Constructor
+
+		~PostController(); ///< Destructor
+
 		/**
-		* @brief   Controls the logic of showing the current user
-		* Render a page with information of the current user. This page is used as a profile page.
+		* @brief   Controls the logic of showing a Post
+		* @param post This post this controller will show
+		* Render a page with information of a post. This page is used to see a post.
 		*/
-		static void show();
+		static void show(Post);
+		/**
+		* @brief   Controls the logic of editing a post
+		* @param post The post that we want to edit.
+		* Render a page to fill the information needed to update the post if you are the owner of the post
+		*/
+		static void edit(Post);
+		/**
+		* @brief   Controls the logic of deleting a post
+		* @param post The post that the owner wants to delete.
+		* @return bool If the post was deleted or not
+		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific post.
+		*/
+		static bool destroy(Post);
+	
+		static void avaliation(Post);
+	public:
+		/**
+		* @brief   Controls the logic of showing all posts
+		* @param blog The blog from where to extract the posts.
+		* Render a page that show all posts. If there is no posts to show, it will tell the current user that there are no blogs
+		*/
+		static void index(Blog);
+		/**
+		* @brief   Controls the logic for creating a new Post
+		* Render a page to fill the information needed to create a new Post and then save in the persistence.
+		*/
+		static void create();
 };
 
 /**
@@ -103,131 +163,46 @@ class BlogController : public Blog {
 };
 
 /**
-* @class PostController
+* @class UserController
 * @brief Defines the CRUD (Create, Read, Update, Destroy)
-* @note It is aware of both PostView and PostModel (but neither of them are aware of PostController).
+* @note It is aware of both UserView and UserModel (but neither of them are aware of UserController).
 * This class defines the logic necessary for CRUD to work properly in the system.
 */
-class PostController : public Post {
+class UserController : public User {
 
-	/// Permits PostView to be aware of this class and use everything.
-	friend class PostView;
+	/// Permits UserView to be aware of this class and use everything.
+	friend class UserView;
 
 	private:
-		PostController(); ///< Constructor
+		UserController(); ///< Constructor
 
-		~PostController(); ///< Destructor
+		~UserController(); ///< Destructor
 
 		/**
-		* @brief   Controls the logic of showing a Post
-		* @param post This post this controller will show
-		* Render a page with information of a post. This page is used to see a post.
+		* @brief   Controls the logic of editing a user
+		* @param user The user that we want to edit.
+		* Render a page to fill the information needed to update the user if you are the owner of the user
 		*/
-		static void show(Post);
+		static void edit();
 		/**
-		* @brief   Controls the logic of editing a post
-		* @param post The post that we want to edit.
-		* Render a page to fill the information needed to update the post if you are the owner of the post
+		* @brief   Controls the logic of deleting a user
+		* @param user The user that the owner wants to delete.
+		* @return bool If the user was deleted or not
+		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific user.
 		*/
-		static void edit(Post);
-		/**
-		* @brief   Controls the logic of deleting a post
-		* @param post The post that the owner wants to delete.
-		* @return bool If the post was deleted or not
-		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific post.
-		*/
-		static bool destroy(Post);
-	
-		static void avaliation(Post);
+		static bool destroy(User);
+
 	public:
 		/**
-		* @brief   Controls the logic of showing all posts
-		* @param blog The blog from where to extract the posts.
-		* Render a page that show all posts. If there is no posts to show, it will tell the current user that there are no blogs
-		*/
-		static void index(Blog);
-		/**
-		* @brief   Controls the logic for creating a new Post
-		* Render a page to fill the information needed to create a new Post and then save in the persistence.
+		* @brief   Controls the logic for creating a new User
+		* Render a page to fill the information needed to create a new User and then save in the persistence.
 		*/
 		static void create();
-};
-
-
-/**
-* @class CommentController
-* @brief Defines the CRUD (Create, Read, Update, Destroy)
-* @note It is aware of both CommentView and CommentModel (but neither of them are aware of CommentController).
-* This class defines the logic necessary for CRUD to work properly in the system.
-*/
-class CommentController : public Comment {
-
-	/// Permits CommentView to be aware of this class and use everything.
-	friend class CommentView;
-
-	private:
-		CommentController(); ///< Constructor
-
-		~CommentController(); ///< Destructor
-
 		/**
-		* @brief   Controls the logic of showing a comment
-		* @param comment This comment this controller will show
-		* Render a page with information of a comment. This page is used to see a comment.
+		* @brief   Controls the logic of showing the current user
+		* Render a page with information of the current user. This page is used as a profile page.
 		*/
-		static void show(Comment);
-		/**
-		* @brief   Controls the logic of editing a comment
-		* @param comment The comment that we want to edit.
-		* Render a page to fill the information needed to update the comment if you are the owner of the comment
-		*/
-		static void edit(Comment);
-		/**
-		* @brief   Controls the logic of deleting a comment
-		* Render a page of confirmation to confirm if that is what the owner wants. Then erase from persistence this specific comment.
-		* @param comment The comment that the owner wants to delete.
-		* @return bool If the comment was deleted of not
-		*/
-		static bool destroy(Comment);
-		
-		static void avaliation(Comment);
-
-	public:
-		/**
-		* @brief   Controls the logic of showing all comments
-		* @param post The post from where to extract the comments.
-		* Render a page that show all comments. If there is no comments to show, it will tell the current user that there are no blogs.
-		*/
-		static void index(Post);
-		/**
-		* @brief   Controls the logic for creating a new Comment
-		* Render a page to fill the information needed to create a new Comment and then save in the persistence.
-		*/
-		static void create();
-};
-
-/**
-* @class WelcomeController
-* @brief Authenticate the User
-* @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
-* This class is responsible for verifying if the User exists.
-*/
-class WelcomeController {
-
-	/// Permits WelcomeView to be aware of this class and use everything.
-	friend class WelcomeView;
-
-	private:
-		WelcomeController(); ///< Constructor
-
-		~WelcomeController(); ///< Destructor
-
-	public:
-		/**
-		* @brief   Controls the logic of the home page
-		* Render the home page of the application that changes if the user is logged and take the user to different parts of the application.
-		*/
-		static void home_page();
+		static void show();
 };
 
 /**
@@ -257,6 +232,30 @@ class AuthController : public Auth {
 		* Render the page of logout to verify if the current user really wants to logout. If the current user really wants it, the user is logged out.
 		*/
 		static void logout();
+};
+
+/**
+* @class WelcomeController
+* @brief Authenticate the User
+* @note It is aware of both AuthView and AuthModel (but neither of them are aware of AuthController).
+* This class is responsible for verifying if the User exists.
+*/
+class WelcomeController {
+
+	/// Permits WelcomeView to be aware of this class and use everything.
+	friend class WelcomeView;
+
+	private:
+		WelcomeController(); ///< Constructor
+
+		~WelcomeController(); ///< Destructor
+
+	public:
+		/**
+		* @brief   Controls the logic of the home page
+		* Render the home page of the application that changes if the user is logged and take the user to different parts of the application.
+		*/
+		static void home_page();
 };
 
 #endif
