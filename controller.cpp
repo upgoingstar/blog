@@ -329,9 +329,10 @@ void PostController::show(Post post) {
 	const int EXIT = 0;
 	const int COMMENTS = 1;
 	const int NEWCOMMENT = 2;
-	const int EDIT = 3;
-	const int DISALLOW = 4;
-	const int DELETE = 5;
+	const int EVALUATE = 3;
+	const int EDIT = 4;
+	const int DISALLOW = 5;
+	const int DELETE = 6;
 
 	bool exit = false;
 	bool error = false;
@@ -370,6 +371,9 @@ void PostController::show(Post post) {
 					case DELETE:
 						 exit = PostController::destroy(post);
 						break;
+					case EVALUATE:
+						PostController::avaliation(post);
+						break;
 					default:
 						throw invalid_argument("Invalid option!");
 						break;
@@ -386,6 +390,9 @@ void PostController::show(Post post) {
 					case NEWCOMMENT:
 						CommentController::create();
 						break;  
+					case EVALUATE:
+						PostController::avaliation(post);
+						break;
 					default:
 						throw invalid_argument("Invalid option!");
 						break;
@@ -406,6 +413,46 @@ void PostController::show(Post post) {
 			}
 		} catch(invalid_argument erro) {
 			error = true;
+		}
+	}
+}
+
+void PostController::avaliation(Post post) {
+	bool exit = false;
+	bool error = false;
+
+	while(!exit){
+		string option = PostView::avaliation_page(post, error);
+		error = false;
+
+		int value;
+		try{
+			value = stoi(option);
+		}
+		catch(invalid_argument erro){
+			error = true;
+			continue;
+		}
+
+		Avaliation avaliation;
+
+		try{
+			avaliation.set(value);
+		}
+		catch(invalid_argument erro){
+			error = true;
+			continue;
+		}
+
+		try{
+			post.set_avaliation(Auth::get_current_user().get_name(), avaliation);
+			PostView::finish_avaliation_page(true);
+			Stub::update_post(post);
+			break;
+		}
+		catch(invalid_argument erro){
+			PostView::finish_avaliation_page(false);
+			break;
 		}
 	}
 }
@@ -499,8 +546,9 @@ void CommentController::create() {
 
 void CommentController::show(Comment comment) {
 	const int EXIT = 0;
-	const int EDIT = 1;
-	const int DELETE = 2;
+	const int EVALUATE = 1;
+	const int EDIT = 2;
+	const int DELETE = 3;
 
 	bool exit = false;
 	bool error = false;
@@ -518,16 +566,32 @@ void CommentController::show(Comment comment) {
 		}
 
 		try {
-			if(Auth::user_logged() && comment.get_author() == Auth::get_current_user().get_name()){
+			if(Auth::user_logged() && comment.get_author() == Auth::get_current_user().get_name()) {
 				switch(op) {
 					case EXIT:
 						exit = true;
+						break;
+					case EVALUATE:
+						CommentController::avaliation(comment);
 						break;
 					case EDIT:
 						CommentController::edit(comment);
 						break;
 					case DELETE:
 						exit = CommentController::destroy(comment);
+						break;
+					default:
+						throw invalid_argument("Invalid option!");
+						break;
+				}
+			}
+			else if(Auth::user_logged()) {
+				switch(op) {
+					case EXIT:
+						exit = true;
+						break;
+					case EVALUATE:
+						CommentController::avaliation(comment);
 						break;
 					default:
 						throw invalid_argument("Invalid option!");
@@ -557,6 +621,47 @@ void CommentController::edit(Comment comment) {
 	} 
 	catch(invalid_argument erro) {}
 }
+
+void CommentController::avaliation(Comment comment) {
+	bool exit = false;
+	bool error = false;
+
+	while(!exit){
+		string option = CommentView::avaliation_page(comment, error);
+		error = false;
+
+		int value;
+		try{
+			value = stoi(option);
+		}
+		catch(invalid_argument erro){
+			error = true;
+			continue;
+		}
+
+		Avaliation avaliation;
+
+		try{
+			avaliation.set(value);
+		}
+		catch(invalid_argument erro){
+			error = true;
+			continue;
+		}
+
+		try{
+			comment.set_avaliation(Auth::get_current_user().get_name(), avaliation);
+			CommentView::finish_avaliation_page(true);
+			Stub::update_comment(comment);
+			break;
+		}
+		catch(invalid_argument erro){
+			CommentView::finish_avaliation_page(false);
+			break;
+		}
+	}
+}
+
 
 bool CommentController::destroy(Comment comment) {
 	bool error = false;
@@ -634,18 +739,18 @@ void WelcomeController::home_page() {
 					case LISTBLOGS:
 						BlogController::index();
 						break;
-				case MYBLOGS:
-					BlogController::user_blogs();
-					break;
-				case CREATEBLOG:
-					BlogController::create();
-					break;
+					case MYBLOGS:
+						BlogController::user_blogs();
+						break;
+					case CREATEBLOG:
+						BlogController::create();
+						break;
 					case EXIT:   
-						exit = true; 
-						break;
+							exit = true; 
+							break;
 					default:
-						throw invalid_argument("Invalid option!");
-						break;
+							throw invalid_argument("Invalid option!");
+							break;
 				}
 			} else {
 				switch(op) {
