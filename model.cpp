@@ -9,20 +9,50 @@ using namespace std;
 
 	const string UserModel::FILENAME = ".users.txt";
 
-	vector<User> UserModel::all() {
+		vector<User> UserModel::all() {
 		vector<User> users;
 
 		ifstream file(FILENAME);
 
-		while(file.eof()) {
+		while(!file.eof()) {
 			User user;
 			Id id;
 			Name name;
 			Email email;
 			Password password;
+			
+			string aux;
+			getline(file, aux);
+			if(file.eof()) break;
+			cout << aux << endl;			
+			int x = 1;
 
-			file >> id >> name >> email >> password;
-
+			string aux2;
+			for(int i = 0; i < (int)aux.size(); i++){
+				if(aux[i] == '#'){
+					switch(x){
+						case 1:
+							id.set(aux2);
+							break;
+						case 2:
+							name.set(aux2);
+							break;
+						case 3:
+							email.set(aux2);
+							break;
+						case 4:
+							password.set(aux2);
+							break;
+					}
+					cout << aux2 << endl;
+					x++;
+					aux2.clear();
+				}
+				else{
+					aux2 += aux[i];
+				}
+			}
+			
 			user.set(id, name, email, password);
 			users.push_back(user);
 		}
@@ -33,8 +63,8 @@ using namespace std;
 	}
 
 	void UserModel::add(User user) {
-		ofstream file(FILENAME);
-		file << user.get_id() << " " << user.get_name() << " " << user.get_email() << " " << user.get_password() << "\n";
+		ofstream file(FILENAME, ios::app);
+		file << user.get_id() << "#" << user.get_name() << "#" << user.get_email() << "#" << user.get_password() << "#\n";
 		file.close();
 	}
 
